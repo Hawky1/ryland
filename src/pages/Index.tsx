@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import logoWhite from "@/assets/logo-white.png";
 
 const Index = () => {
   useEffect(() => {
@@ -412,8 +413,7 @@ const Index = () => {
       <header className="sticky z-20 top-0">
         <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-6 pb-4 pl-6 items-center justify-between">
           <div className="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-white"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-            <span className="font-bold text-lg tracking-tight">Canvas</span>
+            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
           </div>
           <nav className="hidden gap-6 md:flex gap-x-6 gap-y-6 items-center">
             <a href="#features" className="nav-link hover:text-white text-sm text-slate-300 relative">Features</a>
