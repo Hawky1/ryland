@@ -394,13 +394,16 @@ const Index = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
-      {/* Background */}
-      <div className="aura-background-component top-0 w-full -z-10 absolute h-[840px]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)' }}>
-        <div data-us-project="1bY8o6HVTI1oxJxuCJEG" className="absolute w-full h-full left-0 top-0 -z-10"></div>
+      {/* Animated Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      {/* Gradient blur */}
-      <div className="gradient-blur">
+      {/* Gradient blur - top navigation fade */}
+      <div className="gradient-blur pointer-events-none">
         <div></div>
         <div></div>
         <div></div>
