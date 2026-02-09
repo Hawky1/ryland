@@ -1,35 +1,42 @@
 
 
-# Fix White-Washed Hero Video Background
+# Add Infinite Scrolling Grid Background to Entire Site
 
-## The Problem
-Two things are making the dark video appear white:
+## Overview
+Add the InfiniteGrid component as a fixed, full-screen background behind the entire site, creating an animated grid effect with a mouse-tracking reveal. The hero video will layer on top of this grid within its section.
 
-1. **Gradient overlay uses light-mode CSS variable** -- `from-[hsl(var(--background))]/60` resolves to white at 60% opacity, painting a white wash over the video.
-2. **Video opacity is too low** -- `opacity-30` dims the video to 30%, letting the page background dominate.
+## Steps
 
-## The Fix (in `src/pages/Index.tsx`, lines 459-470)
+### 1. Install framer-motion
+The InfiniteGrid component requires `framer-motion` as a dependency.
 
-**Remove** the gradient overlay div entirely, and **increase** the video opacity from `opacity-30` to `opacity-50` so the dark video is clearly visible.
+### 2. Create the InfiniteGrid component
+Create `src/components/ui/infinite-grid.tsx` with the provided component code (SVG pattern grid with mouse-tracking radial reveal and animated pulsing orbs).
 
-Replace the current video block:
+### 3. Add InfiniteGrid as full-site background in Index.tsx
+- Wrap the outermost `<div>` content with the grid behind everything
+- Place `<InfiniteGrid />` as the first child of the root div, with dark-tuned props:
+  - `baseGridColor="rgba(148, 163, 184, 0.08)"` (subtle slate lines)
+  - `activeGridColor="rgba(6, 182, 212, 0.6)"` (bright cyan on hover)
+- The grid will sit at `z-0` with `position: fixed` so it stays visible as the user scrolls
+- All existing page content remains at higher z-index layers
 
-```tsx
-<div className="absolute inset-0 z-0">
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-full object-cover opacity-50"
-  >
-    <source src="/videos/hero-bg.mp4" type="video/mp4" />
-  </video>
-</div>
-```
+### 4. Layering order
+- **Layer 0 (fixed):** InfiniteGrid -- always visible behind everything
+- **Layer 1 (hero only):** Video background -- plays within the hero section
+- **Layer 2+:** All page content (text, cards, sections)
 
-### What changes
-- Video opacity: `opacity-30` changed to `opacity-50` (more visible, still doesn't overpower text)
-- Gradient overlay div: removed completely (no more white wash)
-- Everything else stays the same -- text, portrait, layout, z-indexing
+## Technical Details
+
+### Files created
+- `src/components/ui/infinite-grid.tsx` -- the grid component exactly as provided
+
+### Files modified
+- `src/pages/Index.tsx` -- import InfiniteGrid and add it as a fixed background element inside the root div
+- `package.json` -- framer-motion added as dependency
+
+### What stays unchanged
+- Hero video background (still plays in hero section on top of the grid)
+- All existing animations, content, and styling
+- All other sections and their backgrounds
 
