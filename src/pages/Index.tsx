@@ -478,21 +478,27 @@ const Index = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
-            <h1 className="text-[52px] leading-[0.95] sm:text-7xl lg:text-[90px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-8" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Fund your dream business.</h1>
+            <h1 className="text-[44px] leading-[0.95] sm:text-6xl lg:text-[72px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-8">
+              Unlock the Capital, Credit, and Community to Build Your Empire.
+            </h1>
             
             <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
-              Get <span className="text-white font-semibold">$150K+</span> in business funding, fix your credit, and master the digital economy—all in one place.
+              We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in business funding, repair their credit, and master the digital economy.
             </p>
 
-            <div className="flex flex-wrap xl:mt-10 mt-8 gap-x-3 gap-y-3 justify-start">
+            <div className="flex flex-col xl:mt-10 mt-8 gap-4 items-start">
               <div className="inline-block bg-transparent">
                 <button className="shiny-cta focus:outline-none">
-                  <span>Get Started</span>
+                  <span>Take the Free Funding Assessment</span>
                 </button>
               </div>
-              <a href="#showcase" className="inline-flex items-center gap-2 hover:bg-white/10 transition-colors text-sm text-white bg-white/5 ring-white/10 ring-1 rounded-full px-6 py-4 font-medium">
-                Watch Success Stories
-              </a>
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-zinc-500">
+                <span>Results in 2 minutes</span>
+                <span className="text-zinc-600">•</span>
+                <span>No hard credit pull</span>
+                <span className="text-zinc-600">•</span>
+                <span>100% Secure</span>
+              </div>
             </div>
           </div>
           {/* Right - video showcase */}
@@ -504,14 +510,14 @@ const Index = () => {
                 loop
                 muted
                 playsInline
-                className="relative z-10 w-full max-w-lg rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
+                className="relative z-10 w-full max-w-xl rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
               >
                 <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
               </video>
               <img
                 src={asSeenOn}
                 alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
-                className="relative z-10 w-full max-w-lg brightness-0 invert opacity-60"
+                className="relative z-10 w-full max-w-xl brightness-0 invert opacity-60"
               />
             </div>
           </div>
