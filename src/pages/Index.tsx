@@ -469,11 +469,13 @@ const Index = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-40"
           >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+            <source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" />
           </video>
         </div>
+        {/* Gradient overlay for text readability */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
 
         <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
           {/* Left - text + CTAs */}
