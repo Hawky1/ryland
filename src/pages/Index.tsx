@@ -494,19 +494,23 @@ const Index = () => {
               </a>
             </div>
           </div>
-          {/* Right - portrait */}
+          {/* Right - video showcase */}
           <div className="relative lg:flex-1 flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
-              <img
-                src={heroPortrait}
-                alt="Portrait"
-                className="relative z-10 w-full max-w-md object-contain"
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="relative z-10 w-full max-w-md rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
                 style={{
-                  maskImage: 'linear-gradient(to bottom, black 70%, transparent)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent)'
+                  maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)'
                 }}
-              />
+              >
+                <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </div>
