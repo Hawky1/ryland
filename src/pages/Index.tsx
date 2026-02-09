@@ -455,9 +455,9 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-3xl">
+      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
         {/* Background Video */}
-        <div className="absolute inset-0 z-0 rounded-3xl overflow-hidden">
+        <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
             autoPlay
             loop
