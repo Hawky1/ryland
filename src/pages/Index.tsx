@@ -100,7 +100,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-white bg-slate-950">
+    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-white">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
