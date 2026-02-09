@@ -479,7 +479,7 @@ const Index = () => {
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
             <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
-              Unlock the Capital, Credit, and Community to Build Your Empire.
+              Unlock the Capital, Credit, and Community to Build Your Empire
             </h1>
             
             <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
