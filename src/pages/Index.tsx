@@ -454,8 +454,22 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 relative">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-30"
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/60 via-transparent to-[hsl(var(--background))]" />
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
             <h1 className="text-[52px] leading-[0.95] sm:text-7xl lg:text-[90px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Fund and build your dream business.</h1>
