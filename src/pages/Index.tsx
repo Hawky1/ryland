@@ -431,8 +431,8 @@ const Index = () => {
             <a href="#services" className="nav-link relative text-sm text-slate-300 hover:text-white">Services</a>
             <a href="#showcase" className="nav-link relative text-sm text-slate-300 hover:text-white">Results</a>
             <a href="#pricing" className="nav-link relative text-sm text-slate-300 hover:text-white">Pricing</a>
-            <a href="#cta" className="inline-flex items-center gap-2 hover:bg-white/10 transition-colors text-sm text-white bg-white/5 ring-white/10 ring-1 rounded-full pt-2 pr-4 pb-2 pl-4">
-              Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm focus:outline-none">
+              <span className="flex items-center gap-2">Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
             </a>
           </nav>
           <button id="menuBtn" className="md:hidden rounded-lg p-2 text-slate-200 hover:bg-white/5 transition-colors" aria-label="Open menu">
