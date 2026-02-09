@@ -1,24 +1,25 @@
 
 
-## Use New Video as Hero Background
+## Consolidate Gene Ryland Title to 1-2 Lines
 
-### Overview
-Replace the current local hero background video (`/videos/hero-bg.mp4`) with the new external video URL, keeping the right-side showcase video as-is.
+### What changes
+Collapse the three-line block (Gene Ryland / CEO & Founder / Business Funding Expert) into a compact two-line layout:
 
-### Changes (single file: `src/pages/Index.tsx`)
+- **Line 1:** Gene Ryland
+- **Line 2:** CEO & Founder | Business Funding Expert
 
-**1. Swap background video source (line 474)**
-- Change the `<source>` from `/videos/hero-bg.mp4` to the new URL: `https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4`
-- Slightly increase opacity from `opacity-50` to `opacity-40` so the new video adds atmosphere without overpowering the text -- can be fine-tuned after preview
+### Technical details
 
-**2. Add a darker gradient overlay on the background (new element after the video div, line ~476)**
-- Add a `div` with `absolute inset-0` and a gradient (`bg-gradient-to-r from-black/70 via-black/40 to-transparent`) layered on top of the background video
-- This ensures the left-side text remains crisp and readable while the right side lets the background video show through more, creating depth
+**File:** `src/pages/Index.tsx`, lines 519-530
 
-### Technical Details
+Replace the current `flex-col` block (with the divider line and three separate elements) with:
 
-- **File:** `src/pages/Index.tsx`, lines 466-476
-- The background video element keeps `autoPlay loop muted playsInline` and `object-cover` for full bleed
-- The gradient overlay sits between the background video (z-0) and the content (z-10)
-- No new dependencies or files needed
+```
+Line 1: "Gene Ryland" — white, slightly larger, with elegant letter-spacing
+Line 2: "CEO & Founder  |  Business Funding Expert" — smaller, subtle blue/white tone, separated by a thin pipe character
+```
+
+- Remove the gradient divider `div` entirely
+- Merge the two `<p>` tags into one line with a styled separator
+- Keep `mt-2` spacing below the video unchanged
 
