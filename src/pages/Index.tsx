@@ -458,18 +458,28 @@ const Index = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
-            <h1 className="text-[44px] leading-[0.9] sm:text-6xl lg:text-8xl font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Design and publish your dream site.</h1>
+            <h1 className="text-[44px] leading-[0.95] sm:text-6xl lg:text-[80px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Unlock the Capital, Credit, and Community to Build Your Empire.</h1>
             
-            <div className="flex flex-wrap xl:mt-10 mt-12 gap-x-3 gap-y-3 justify-start">
+            <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
+              We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in business funding, repair their credit, and master the digital economy.
+            </p>
+
+            <div className="flex flex-wrap xl:mt-10 mt-8 gap-x-3 gap-y-3 justify-start">
               <div className="inline-block bg-transparent">
                 <button className="shiny-cta focus:outline-none">
-                  <span>Start for free</span>
+                  <span>Take the Free Funding Assessment</span>
                 </button>
               </div>
-              <a href="#showcase" className="inline-flex items-center gap-2 hover:bg-white/5 transition-colors text-sm text-white border-white/10 border rounded-full pt-3 pr-5 pb-3 pl-5 backdrop-blur-2xl">
-                Watch Video <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
-              </a>
             </div>
+
+            <p className="text-sm text-zinc-500 mt-4 flex items-center gap-2 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-zinc-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              Results in 2 minutes
+              <span className="text-zinc-700">·</span>
+              No hard credit pull
+              <span className="text-zinc-700">·</span>
+              100% Secure
+            </p>
           </div>
           {/* Right - portrait */}
           <div className="relative lg:flex-1 flex justify-center">
