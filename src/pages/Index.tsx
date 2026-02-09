@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import logoWhite from "@/assets/logo-white.png";
+import heroPortrait from "@/assets/hero-portrait.png";
 
 const Index = () => {
   useEffect(() => {
@@ -453,19 +454,37 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="text-left max-w-7xl mr-auto ml-auto pt-16 pb-36 pl-20 relative">
-        <div className="text-center max-w-3xl mr-auto ml-0">
-          <h1 className="text-[44px] leading-[0.9] sm:text-6xl lg:text-8xl font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Design and publish your dream site.</h1>
-          
-          <div className="flex flex-wrap xl:mt-10 mt-12 gap-x-3 gap-y-3 justify-start">
-            <div className="inline-block bg-transparent">
-              <button className="shiny-cta focus:outline-none">
-                <span>Start for free</span>
-              </button>
+      <section className="max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 relative">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Left - text + CTAs */}
+          <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
+            <h1 className="text-[44px] leading-[0.9] sm:text-6xl lg:text-8xl font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Design and publish your dream site.</h1>
+            
+            <div className="flex flex-wrap xl:mt-10 mt-12 gap-x-3 gap-y-3 justify-start">
+              <div className="inline-block bg-transparent">
+                <button className="shiny-cta focus:outline-none">
+                  <span>Start for free</span>
+                </button>
+              </div>
+              <a href="#showcase" className="inline-flex items-center gap-2 hover:bg-white/5 transition-colors text-sm text-white border-white/10 border rounded-full pt-3 pr-5 pb-3 pl-5 backdrop-blur-2xl">
+                Watch Video <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+              </a>
             </div>
-            <a href="#showcase" className="inline-flex items-center gap-2 hover:bg-white/5 transition-colors text-sm text-white border-white/10 border rounded-full pt-3 pr-5 pb-3 pl-5 backdrop-blur-2xl">
-              Watch Video <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
-            </a>
+          </div>
+          {/* Right - portrait */}
+          <div className="relative lg:flex-1 flex justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
+              <img
+                src={heroPortrait}
+                alt="Portrait"
+                className="relative z-10 w-full max-w-md object-contain"
+                style={{
+                  maskImage: 'linear-gradient(to bottom, black 70%, transparent)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent)'
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>
