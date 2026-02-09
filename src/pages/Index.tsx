@@ -478,7 +478,7 @@ const Index = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
-            <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-8" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>
+            <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
               Unlock the Capital, Credit, and Community to Build Your Empire.
             </h1>
             
