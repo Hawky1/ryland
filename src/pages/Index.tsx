@@ -462,11 +462,10 @@ const Index = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-50"
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/60 via-transparent to-[hsl(var(--background))]" />
         </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
