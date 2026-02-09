@@ -1,36 +1,24 @@
 
 
-## Revamp Hero Section Copy and Enlarge Video
+## Use New Video as Hero Background
 
 ### Overview
-Replace the existing hero text, subheadline, and CTA buttons with the new copy provided, and increase the video size for a more impactful, balanced hero section.
+Replace the current local hero background video (`/videos/hero-bg.mp4`) with the new external video URL, keeping the right-side showcase video as-is.
 
 ### Changes (single file: `src/pages/Index.tsx`)
 
-**1. Replace the headline (line 481)**
-- Remove the current "Fund your dream business." text and its mask gradient style
-- Replace with new headline: "Unlock the Capital, Credit, and Community to Build Your Empire."
-- Adjust font size slightly (e.g. `text-[44px] sm:text-6xl lg:text-[72px]`) so it fits well in ~3 lines without overwhelming the layout
-- Keep the tight leading and tracking for the premium look
+**1. Swap background video source (line 474)**
+- Change the `<source>` from `/videos/hero-bg.mp4` to the new URL: `https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4`
+- Slightly increase opacity from `opacity-50` to `opacity-40` so the new video adds atmosphere without overpowering the text -- can be fine-tuned after preview
 
-**2. Update the subheadline (lines 483-485)**
-- Replace current text with: "We help entrepreneurs secure $150K+ in business funding, repair their credit, and master the digital economy."
-- Keep the `$150K+` styled with `text-white font-semibold` for emphasis
-
-**3. Replace the CTA buttons (lines 487-496)**
-- Replace "Get Started" with "Take the Free Funding Assessment" -- keep the existing `shiny-cta` style
-- Replace "Watch Success Stories" with a trust line underneath: "Results in 2 minutes - No hard credit pull - 100% Secure" as small muted text with checkmark or dot separators
-- This creates a single strong CTA with trust signals below it, which is a proven high-conversion pattern
-
-**4. Enlarge the video (line 507)**
-- Increase from `max-w-lg` to `max-w-xl` on the video element
-- Also increase the "As Seen On" image width to `max-w-xl` to match (line 514)
+**2. Add a darker gradient overlay on the background (new element after the video div, line ~476)**
+- Add a `div` with `absolute inset-0` and a gradient (`bg-gradient-to-r from-black/70 via-black/40 to-transparent`) layered on top of the background video
+- This ensures the left-side text remains crisp and readable while the right side lets the background video show through more, creating depth
 
 ### Technical Details
 
-- **File:** `src/pages/Index.tsx`, lines 478-517
-- Headline class adjusted to `text-[44px] sm:text-6xl lg:text-[72px]` to fit the longer copy in a balanced way
-- The mask gradient on the headline will be removed for cleaner readability with the new longer text
-- Trust signals rendered as a flex row of small items with dot separators and a subtle shield/check icon
-- No new files or dependencies needed
+- **File:** `src/pages/Index.tsx`, lines 466-476
+- The background video element keeps `autoPlay loop muted playsInline` and `object-cover` for full bleed
+- The gradient overlay sits between the background video (z-0) and the content (z-10)
+- No new dependencies or files needed
 
