@@ -461,7 +461,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
+      <section className="relative max-w-7xl mx-auto pt-10 pb-16 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
@@ -477,7 +477,7 @@ const Index = () => {
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
 
-        <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+        <div className="flex flex-col lg:flex-row items-start gap-12 relative z-10">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
             <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
@@ -505,7 +505,7 @@ const Index = () => {
           </div>
           {/* Right - video showcase */}
           <div className="relative lg:flex-1 flex justify-center">
-            <div className="relative flex flex-col items-center gap-6">
+            <div className="relative flex flex-col items-center gap-3">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
               <video
                 autoPlay
@@ -516,7 +516,7 @@ const Index = () => {
               >
                 <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
               </video>
-              <p className="relative z-10 text-center text-sm text-zinc-400 mt-3 tracking-wide">Gene Ryland – Business Funding Expert</p>
+              <p className="relative z-10 text-center text-[13px] font-semibold uppercase tracking-[0.2em] text-white/80">Gene Ryland <span className="text-white/40 font-normal">|</span> <span className="font-normal normal-case tracking-wide text-zinc-400">Business Funding Expert</span></p>
               <img
                 src={asSeenOn}
                 alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
