@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import logoWhite from "@/assets/logo-white.png";
 import heroPortrait from "@/assets/hero-portrait.png";
+import asSeenOn from "@/assets/as-seen-on.png";
 import logoUsBank from "@/assets/logo-usbank.png";
 import logoBoa from "@/assets/logo-boa.png";
 import logoNavyFed from "@/assets/logo-navyfed.png";
@@ -496,21 +497,22 @@ const Index = () => {
           </div>
           {/* Right - video showcase */}
           <div className="relative lg:flex-1 flex justify-center">
-            <div className="relative">
+            <div className="relative flex flex-col items-center gap-6">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="relative z-10 w-full max-w-md rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
-                style={{
-                  maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)'
-                }}
+                className="relative z-10 w-full max-w-lg rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
               >
                 <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
               </video>
+              <img
+                src={asSeenOn}
+                alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
+                className="relative z-10 w-full max-w-lg brightness-0 invert opacity-60"
+              />
             </div>
           </div>
         </div>
