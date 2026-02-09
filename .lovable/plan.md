@@ -1,62 +1,66 @@
 
 
-# Add Portrait Image to Hero Section
+# Update Hero Section Copy and CTA
 
 ## Overview
-Place the uploaded professional portrait on the right-hand side of the hero section, creating a split layout with the existing headline and CTAs on the left and the portrait on the right.
+Replace the generic "Design and publish your dream site" headline with the new Ryland Partners messaging, add a supporting subheadline, and update the CTA to a funding assessment button with trust signals beneath it.
 
 ## Changes
 
-### 1. Copy the uploaded image to project assets
-- Copy `user-uploads://365a554d-94ea-4ff5-9c1a-10a4275e3cc2.png` to `src/assets/hero-portrait.png`
+### Update `src/pages/Index.tsx` (lines 460-472)
 
-### 2. Update `src/pages/Index.tsx`
+**Current:**
+- H1: "Design and publish your dream site."
+- CTAs: "Start for free" + "Watch Video"
 
-**Import the image:**
-```tsx
-import heroPortrait from "@/assets/hero-portrait.png";
-```
-
-**Restructure the hero section (lines 455-471):**
-
-Current: Single column, text aligned left with `max-w-3xl`.
-
-Proposed: Two-column flex layout:
-- **Left column (~55%):** Keep existing headline + CTA buttons exactly as they are.
-- **Right column (~45%):** The portrait image with a subtle gradient mask at the bottom to blend into the dark background, plus a soft glow effect behind the subject for depth.
+**Proposed:**
 
 ```tsx
-<section className="max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 relative">
-  <div className="flex flex-col lg:flex-row items-center gap-12">
-    {/* Left - existing text + CTAs */}
-    <div className="text-center max-w-3xl lg:text-left lg:flex-1">
-      <h1 ...>Design and publish your dream site.</h1>
-      <div className="flex flex-wrap ...">
-        {/* existing buttons */}
-      </div>
-    </div>
-    {/* Right - portrait */}
-    <div className="relative lg:flex-1 flex justify-center">
-      <div className="relative">
-        <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
-        <img
-          src={heroPortrait}
-          alt="Portrait"
-          className="relative z-10 w-full max-w-md object-contain"
-          style={{
-            maskImage: 'linear-gradient(to bottom, black 70%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent)'
-          }}
-        />
-      </div>
+{/* Left - text + CTAs */}
+<div className="text-center lg:text-left lg:flex-1 max-w-3xl">
+  <h1
+    className="text-[44px] leading-[0.95] sm:text-6xl lg:text-[80px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20"
+    style={{
+      maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)',
+      WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)'
+    }}
+  >
+    Unlock the Capital, Credit, and Community to Build Your Empire.
+  </h1>
+
+  <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
+    We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in
+    business funding, repair their credit, and master the digital economy.
+  </p>
+
+  <div className="flex flex-wrap xl:mt-10 mt-8 gap-x-3 gap-y-3 justify-start">
+    <div className="inline-block bg-transparent">
+      <button className="shiny-cta focus:outline-none">
+        <span>Take the Free Funding Assessment</span>
+      </button>
     </div>
   </div>
-</section>
+
+  <p className="text-sm text-zinc-500 mt-4 flex items-center gap-2 text-left">
+    <svg ...checkmark icon... />
+    Results in 2 minutes
+    <span className="text-zinc-700">·</span>
+    No hard credit pull
+    <span className="text-zinc-700">·</span>
+    100% Secure
+  </p>
+</div>
 ```
 
-Key visual details:
-- Bottom gradient mask on the image fades the figure naturally into the dark background
-- A soft blue glow behind the portrait adds depth and ties into the animated background orbs
-- Responsive: stacks vertically on mobile, side-by-side on `lg` breakpoint
-- The white-background portrait blends seamlessly since the mask fades it out before the edges
+### What changes and why
+
+1. **Headline** -- Swapped to "Unlock the Capital, Credit, and Community to Build Your Empire." with the same typography classes and mask gradient. The `lg:text-[80px]` is slightly reduced from `lg:text-8xl` (96px) to accommodate the longer copy while maintaining visual weight.
+
+2. **Subheadline** -- New `<p>` in `text-zinc-400` with the "$150K+" figure highlighted in white (`text-white font-semibold`) to draw the eye to the key value proposition.
+
+3. **Primary CTA** -- "Start for free" becomes "Take the Free Funding Assessment" inside the existing `shiny-cta` button. The "Watch Video" secondary CTA is removed.
+
+4. **Trust signals** -- A new line of micro-copy beneath the CTA: "Results in 2 minutes · No hard credit pull · 100% Secure" in `text-zinc-500` with a small shield/check icon. These reduce friction at the moment of decision.
+
+5. **No other changes** -- Portrait, layout structure, glow effect, and all other sections remain untouched.
 
