@@ -458,7 +458,7 @@ const Index = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
-            <h1 className="text-[44px] leading-[0.95] sm:text-6xl lg:text-[80px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Unlock the Capital, Credit, and Community to Build Your Empire.</h1>
+            <h1 className="text-[36px] leading-[1] sm:text-5xl lg:text-[56px] font-medium text-zinc-100 tracking-tighter font-geist text-left mt-20" style={{ maskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)', WebkitMaskImage: 'linear-gradient(290deg, transparent, black 0%, black 40%, transparent)' }}>Unlock the Capital, Credit, and Community to Build Your Empire.</h1>
             
             <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
               We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in business funding, repair their credit, and master the digital economy.
