@@ -516,6 +516,18 @@ const Index = () => {
               >
                 <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
               </video>
+              <div className="relative z-10 flex flex-col items-center gap-1 mt-2">
+                <h3 className="text-lg font-semibold tracking-wide text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>
+                  Gene Ryland
+                </h3>
+                <p className="text-xs uppercase tracking-[0.25em] text-blue-300/70 font-medium">
+                  CEO &amp; Founder
+                </p>
+                <div className="w-12 h-px bg-gradient-to-r from-transparent via-blue-400/50 to-transparent mt-1 mb-1" />
+                <p className="text-[11px] uppercase tracking-[0.3em] text-white/40 font-light">
+                  Business Funding Expert
+                </p>
+              </div>
               <img
                 src={asSeenOn}
                 alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
