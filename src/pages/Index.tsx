@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import logoWhite from "@/assets/logo-white.png";
 import heroPortrait from "@/assets/hero-portrait.png";
+import logoUsBank from "@/assets/logo-usbank.png";
+import logoBoa from "@/assets/logo-boa.png";
+import logoNavyFed from "@/assets/logo-navyfed.png";
+import logoChase from "@/assets/logo-chase.png";
+import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 
 const Index = () => {
@@ -511,27 +516,25 @@ const Index = () => {
       <section className="sm:px-6 lg:px-8 lg:pt-6 max-w-7xl z-10 mt-8 mr-auto mb-16 ml-auto pt-16 pr-4 pb-6 pl-4 relative">
         <div className="text-center">
           <p className="uppercase text-sm font-medium text-slate-400 tracking-wide">
-            EMPOWERING ENTREPRENEURS AT
+            TRUSTED BANKING PARTNERS
           </p>
         </div>
         <div className="overflow-hidden mt-6 relative">
           <div style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
-            <div className="flex carousel-wrapper gap-x-6 lg:gap-x-20">
-              <div className="flex gap-6 shrink-0 gap-x-6 lg:gap-x-20">
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e5f2922d-4fb6-4f7c-8795-cd9ba63105a4_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92287bc0-bc70-4864-bf05-a89c1b99a218_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8284c62f-bfed-4d35-aaa2-956d0a8969b3_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[120px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3764a6eb-78e1-495f-9143-c85a648446c4_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[120px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/dea31d52-7076-423f-bace-53eeec3014d3_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b16a9cf6-6be1-4d0d-bc63-07a471092998_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
+            <div className="flex carousel-wrapper gap-x-10 lg:gap-x-20">
+              <div className="flex gap-10 shrink-0 lg:gap-x-20 items-center">
+                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
               </div>
-              <div className="flex shrink-0 gap-x-6 lg:gap-x-20">
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e5f2922d-4fb6-4f7c-8795-cd9ba63105a4_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92287bc0-bc70-4864-bf05-a89c1b99a218_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8284c62f-bfed-4d35-aaa2-956d0a8969b3_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[100px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3764a6eb-78e1-495f-9143-c85a648446c4_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[100px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/dea31d52-7076-423f-bace-53eeec3014d3_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
-                <a href="#" className="inline-flex items-center justify-center bg-center mix-blend-screen w-[150px] h-[40px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b16a9cf6-6be1-4d0d-bc63-07a471092998_1600w.png)] bg-cover rounded-lg transition-transform hover:scale-110"></a>
+              <div className="flex shrink-0 gap-10 lg:gap-x-20 items-center">
+                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
