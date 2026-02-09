@@ -516,6 +516,7 @@ const Index = () => {
               >
                 <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
               </video>
+              <p className="relative z-10 text-center text-sm text-zinc-400 mt-3 tracking-wide">Gene Ryland – Business Funding Expert</p>
               <img
                 src={asSeenOn}
                 alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
