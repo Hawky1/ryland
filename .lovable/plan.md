@@ -1,32 +1,29 @@
 
-## Replace Wealth Ecosystem Card Buttons with Blue Gradient Style
+
+## Update Wealth Ecosystem Service Cards
 
 ### What Changes
-Replace all five `shiny-cta` buttons in the "Complete Wealth Ecosystem" section with the blue gradient rounded-full button style you provided.
+Replace the current 5 service cards in the "Complete Wealth Ecosystem" section with 6 new services. The grid layout already supports this perfectly (3 columns, now filling 2 full rows).
+
+### The 6 New Services
+
+| # | Badge | Title | Button Text | Description |
+|---|-------|-------|-------------|-------------|
+| 1 | Funding | Get Business Funding | Get Business Funding | Access capital for your business through our network of alternative lenders -- funding solutions tailored to entrepreneurs at every stage. |
+| 2 | Credit | Repair My Credit | Repair My Credit | Restore and optimize your personal and business credit profile to unlock better rates, higher limits, and more funding power. |
+| 3 | Community | Join The Community | Join The Community | Connect with funded founders, attend live trainings, and tap into deal flow inside our exclusive entrepreneur community. |
+| 4 | Products | Shop Digital Products | Shop Digital Products | Browse DIY kits, automation tools, and scaling blueprints designed to help you build and grow your digital empire. |
+| 5 | Partner | Become A Partner | Become A Partner | Earn by referring others to Ryland Partners -- join our partner program and build a revenue stream alongside your business. |
+| 6 | Strategy | Schedule A Consultation | Schedule A Consultation | Book a 1-on-1 session with a funding strategist to map out your personalized path to capital and growth. |
 
 ### Technical Details
 
 **File:** `src/pages/Index.tsx`
 
-Replace each of the 5 card buttons (lines 704, 728, 752, 776, 800) from:
-```html
-<a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-  <span>Button Text</span>
-</a>
-```
+- Replace the 5 existing card blocks (lines 654-772) with 6 new cards following the exact same card template (video background, badge, icon, title, description, blue gradient CTA button)
+- Each card keeps the same structure: video bg, gradient overlay, badge pill, icon box, heading, description, and the blue gradient button
+- Appropriate `lucide-react` style SVG icons will be used for each card (DollarSign for funding, ShieldCheck for credit, Users for community, ShoppingBag for products, Handshake for partner, Calendar for consultation)
+- All buttons link to `#cta` as before
 
-To:
-```html
-<a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-  Button Text
-</a>
-```
+No other sections are affected.
 
-The five buttons and their text:
-1. "Optimize Your Credit" (The Vault)
-2. "Access The Network" (The Network)
-3. "Join The Academy" (The Academy)
-4. "Get The Tools" (Digital Assets)
-5. "Talk To An Expert" (Expert Support)
-
-No other sections or buttons are affected.
