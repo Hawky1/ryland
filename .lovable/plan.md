@@ -1,37 +1,31 @@
 
 
-## Replace Wealth Ecosystem Cards with Image Backgrounds
+## Transform "Capital On Your Terms" into an Interactive Funding Journey App
 
-Redesign the six service cards in the Wealth Ecosystem section on the homepage to use the uploaded images as full-bleed backgrounds, replacing the current video backgrounds. The section title will also be removed for a cleaner look.
+Replace the current 3-card layout with an immersive, app-style step-by-step process map that walks visitors through the entire funding journey -- from initial assessment to getting funded. This will use Framer Motion animations to create a polished, interactive experience.
 
 ---
 
-### What Changes
+### What It Will Look Like
 
-**1. Add 6 new images to the project**
+The section becomes a simulated "app interface" with a dark glass-morphism phone/tablet mockup in the center, surrounded by a visual step timeline. Users scroll through the section and each step animates into view.
 
-Copy the uploaded images into `src/assets/`:
-- `service-funding.png` (Get Business Funding)
-- `service-credit.png` (Repair My Credit)
-- `service-community.png` (Join The Community)
-- `service-products.png` (Shop Digital Products)
-- `service-partner.png` (Become A Partner)
-- `service-consultation.png` (Schedule A Consultation)
+**Layout:**
+- Left side: Vertical step indicator (numbered dots connected by an animated line)
+- Right side: A "device frame" showing the current step's content with smooth transitions
+- Each step slides/fades in as the user scrolls or clicks through
 
-**2. Redesign each card (in `src/pages/Index.tsx`)**
+**The 5 Steps:**
 
-For each of the 6 cards:
-- Remove the video element and its gradient overlay
-- Replace with the corresponding image as a full-cover background (`object-cover`)
-- Remove the badge (pulse dot + label), the icon box, the description paragraph
-- Keep only a bold, centered title text (matching the style in the images -- large, white, italic/bold, with a subtle cyan text-shadow/glow)
-- Keep the CTA button at the bottom
-- Add a dark gradient overlay (`bg-gradient-to-t from-black/60 via-black/20 to-black/10`) for text legibility over the image
-- Set a fixed aspect ratio so the cards display as squares (matching the uploaded image proportions)
+| Step | Title | Description | Visual in "App" |
+|------|-------|-------------|-----------------|
+| 1 | Take Your Assessment | Answer a few quick questions about your business and goals | Animated form UI with progress bar |
+| 2 | Credit Analysis | We pull and analyze your credit profile to build a strategy | Animated credit score gauge rising |
+| 3 | Credit Restoration | Our team removes negatives and boosts your score | Checklist items checking off one by one |
+| 4 | Lender Matching | Our system matches you with the best 0% APR credit lines | Cards fanning out with bank logos |
+| 5 | Get Funded | Receive $50k-$250k in business funding | Celebration animation with funding amount counter |
 
-**3. Remove the section title**
-
-Delete the "A Complete Wealth Ecosystem" heading (`h2`) so the grid of image cards stands on its own.
+**Interaction:** Users click step indicators or use prev/next arrows to navigate between steps. Each transition uses Framer Motion `AnimatePresence` for smooth crossfades.
 
 ---
 
@@ -39,36 +33,59 @@ Delete the "A Complete Wealth Ecosystem" heading (`h2`) so the grid of image car
 
 **File modified:** `src/pages/Index.tsx`
 
-**New card structure (each card):**
+**New component:** `src/components/FundingJourney.tsx`
+- Extracted into its own component to keep Index.tsx clean
+- Uses Framer Motion (`motion`, `AnimatePresence`) for step transitions
+- Self-contained state management with `useState` for active step
+
+**Component structure:**
+
+```text
++--------------------------------------------------+
+|  Section Header: "Your Path To Funding"           |
++--------------------------------------------------+
+|                                                    |
+|  [1]----[2]----[3]----[4]----[5]  (step bar)      |
+|                                                    |
+|  +--------------------------------------------+   |
+|  |  "Device Frame" (rounded, glass border)     |   |
+|  |                                             |   |
+|  |   Step Title                                |   |
+|  |   Step Description                          |   |
+|  |                                             |   |
+|  |   +----------------------------------+      |   |
+|  |   |  Animated Visual for this step   |      |   |
+|  |   |  (gauge, checklist, cards, etc.) |      |   |
+|  |   +----------------------------------+      |   |
+|  |                                             |   |
+|  +--------------------------------------------+   |
+|                                                    |
+|         [ <  Previous ]  [ Next  > ]               |
++--------------------------------------------------+
 ```
-<div class="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 aspect-square">
-  <img src={serviceImage} class="absolute inset-0 w-full h-full object-cover" />
-  <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-  <div class="relative z-10 flex flex-col items-center justify-center h-full p-6">
-    <h3 class="text-3xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-      GET BUSINESS FUNDING
-    </h3>
-  </div>
-  <a href="#cta" class="absolute bottom-6 left-6 right-6 z-10 ...blue gradient button...">
-    Get Business Funding
-  </a>
-</div>
-```
 
-**Card-to-image mapping:**
-1. Get Business Funding -- `service-funding.png`
-2. Repair My Credit -- `service-credit.png`
-3. Join The Community -- `service-community.png`
-4. Shop Digital Products -- `service-products.png`
-5. Become A Partner -- `service-partner.png`
-6. Schedule A Consultation -- `service-consultation.png`
+**Animations (Framer Motion):**
+- Step bar: Active dot scales up + glows cyan; connecting line fills with gradient as you progress
+- Content transitions: `AnimatePresence` with `mode="wait"`, slides in from right on next / left on previous
+- Each step's visual has its own micro-animation (e.g., score gauge animating up, checkmarks appearing sequentially)
+- Auto-play option: Steps advance every 4 seconds with a progress indicator, pauses on hover
 
-**Styling approach:**
-- Cards use `aspect-square` to maintain the 1:1 ratio from the images
-- Title text uses `font-black italic uppercase` with a subtle cyan drop-shadow to match the uploaded image style
-- The existing blue gradient CTA button is preserved at the bottom of each card
-- Hover state: slight scale-up on the image (`group-hover:scale-105 transition-transform duration-500`)
-- Grid remains `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5`
+**Step visuals (built with Tailwind + Framer Motion, no external images):**
+1. Assessment: Animated form fields appearing one by one with a progress bar filling
+2. Credit Analysis: A circular gauge that animates from 0 to a score with a glowing arc
+3. Credit Restoration: A list of negative items with strikethrough animations + green checkmarks
+4. Lender Matching: Cards with bank-style logos sliding in and stacking
+5. Get Funded: A counter animating from $0 to $250,000 with confetti-style particles
 
-No new dependencies are needed.
+**Styling:**
+- Device frame: `rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/90 to-neutral-950 backdrop-blur-xl shadow-2xl`
+- Step indicator uses cyan/blue gradient for active state
+- Consistent with the existing dark premium aesthetic
+- Responsive: On mobile, the step bar becomes horizontal and scrollable; the device frame takes full width
+
+**What gets removed:**
+- The entire "Capital On Your Terms" section (lines 552-654) -- all 3 current cards (Business Funding, Credit Restoration, Rapid Execution)
+- Replaced with a single `<FundingJourney />` component call
+
+**Dependencies:** None new -- already has `framer-motion` installed.
 
