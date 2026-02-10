@@ -10,6 +10,7 @@ import logoNavyFed from "@/assets/logo-navyfed.png";
 import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import FundingJourney from "@/components/FundingJourney";
 import serviceFunding from "@/assets/service-funding.png";
 import serviceCredit from "@/assets/service-credit.png";
 import serviceCommunity from "@/assets/service-community.png";
@@ -548,110 +549,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Capital on your terms section */}
-      <section className="sm:pt-24 md:pt-10 max-w-7xl mr-auto ml-auto pt-24 pb-20 relative" id="services">
-        <div className="max-w-7xl mr-auto ml-auto pr-6 pl-6">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}>Capital On Your Terms</h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            
-            {/* Card 1: Business Funding */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-blue-500/30 hover:ring-blue-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-blue-500/30 via-indigo-500/20 to-cyan-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-blue-500/25 via-cyan-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
-
-              <div className="pt-6 pr-6 pb-6 pl-6 relative z-10">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg pt-1 pr-2.5 pb-1 pl-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-blue-400 rounded-full"></div>
-                    Funding
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Business Funding</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6">Secure $50k–$250k in 0% interest credit lines. No tax returns or revenue history required for startups.</p>
-
-                <div className="relative overflow-hidden bg-gradient-to-b from-white/5 via-white/5 to-transparent h-44 ring-white/5 ring-1 rounded-xl flex items-center justify-center">
-                  <div className="relative w-32 h-24 border border-dashed border-neutral-700 rounded bg-neutral-900/50 flex flex-col p-2 gap-2 shadow-2xl backdrop-blur-sm">
-                    <div className="w-full h-2 bg-neutral-800 rounded-full"></div>
-                    <div className="flex gap-2 h-full">
-                      <div className="w-1/3 h-full bg-neutral-800/50 rounded"></div>
-                      <div className="w-2/3 h-full bg-neutral-800/50 rounded border border-blue-500/50 relative">
-                        <div className="absolute -top-1 -left-1 w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-blue-500 rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">0% APR</span></div>
-                  <div className="absolute bottom-4 left-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">$250k Max</span></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Credit Restoration */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-indigo-500/30 hover:ring-indigo-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-indigo-500/30 via-violet-500/20 to-blue-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-indigo-500/25 via-blue-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
-
-              <div className="pt-6 pr-6 pb-6 pl-6 relative z-10">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg pt-1 pr-2.5 pb-1 pl-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-indigo-400 rounded-full"></div>
-                    Credit
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Credit Restoration</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6">Our "Done-For-You" credit sweeps remove negatives and boost scores by 100+ points in record time.</p>
-
-                <div className="relative overflow-hidden bg-gradient-to-b from-white/5 via-white/5 to-transparent h-44 ring-white/5 ring-1 rounded-xl flex items-center justify-center">
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/40 to-indigo-600/10 border border-indigo-500/50 animate-bounce shadow-lg shadow-indigo-500/20"></div>
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/40 to-indigo-600/10 border border-indigo-500/50 animate-bounce shadow-lg shadow-indigo-500/20" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/40 to-indigo-600/10 border border-indigo-500/50 animate-bounce shadow-lg shadow-indigo-500/20" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
-                  
-                  <div className="absolute top-3 left-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">Score +100</span></div>
-                  <div className="absolute bottom-3 right-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">Done-For-You</span></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: Rapid Execution */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-emerald-500/30 hover:ring-emerald-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-500/20 to-cyan-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-emerald-500/25 via-teal-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
-
-              <div className="pt-6 pr-6 pb-6 pl-6 relative z-10">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg pt-1 pr-2.5 pb-1 pl-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-emerald-400 rounded-full"></div>
-                    Growth
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Rapid Execution</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6">Move from "Denied" to "Funded" in as little as 30 days with our proprietary lender matching system.</p>
-
-                <div className="relative overflow-hidden bg-gradient-to-b from-white/5 via-white/5 to-transparent h-44 ring-white/5 ring-1 rounded-xl flex items-center justify-center">
-                  <div className="relative w-[150px] h-[150px] rounded-full border border-white/5 shadow-2xl flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 rounded-full border border-dashed border-white/10"></div>
-                    <div className="absolute inset-8 rounded-full border border-dashed border-white/10"></div>
-                    
-                    <span className="absolute top-1/2 left-1/2 origin-top-left border-dashed w-1/2 h-full bg-gradient-to-r from-emerald-500/20 to-transparent border-t border-emerald-500/50" style={{ marginTop: '-1px', maskImage: 'linear-gradient(to right, black, transparent)', animation: 'radar81 4s linear infinite' }}></span>
-                  </div>
-                  
-                  <div className="absolute top-4 left-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">30 Days</span></div>
-                  <div className="absolute bottom-4 right-4"><span className="inline-flex items-center ring-1 ring-white/10 text-[10px] font-medium text-neutral-300 bg-neutral-900/80 rounded-full py-0.5 px-2 backdrop-blur-sm">Lender Match</span></div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      {/* Funding Journey */}
+      <FundingJourney />
 
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
