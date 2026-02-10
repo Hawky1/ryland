@@ -130,17 +130,17 @@ const Partners = () => {
         {/* Gradient overlay */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
 
-        <div className="relative z-10 max-w-3xl">
-          <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
             Get Paid To Help Business Owners Access The Capital They Need To Scale
           </h1>
-          <p className="mt-5 text-lg md:text-xl text-blue-300/90 font-medium italic text-left animate-fade-in-up animate-delay-200">
+          <p className="mt-5 text-lg md:text-xl text-blue-300/90 font-medium italic animate-fade-in-up animate-delay-200">
             even if they don't take the funding
           </p>
-          <p className="mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl text-left leading-relaxed animate-fade-in-up animate-delay-200">
+          <p className="mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto leading-relaxed animate-fade-in-up animate-delay-200">
             Welcome to the Ryland Partners Program. Ready to start earning?
           </p>
-          <div className="flex flex-col sm:flex-row items-start gap-4 mt-10 animate-fade-in-up animate-delay-300">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up animate-delay-300">
             <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
               Become A Partner Now
             </a>
@@ -152,7 +152,7 @@ const Partners = () => {
       </section>
 
       {/* ===================== VALUE PILLARS ===================== */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="max-w-6xl mx-auto px-6 pt-20 pb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { icon: DollarSign, title: "Get Paid For Introductions", desc: "You don't need to close the deal. Just refer a business that qualifies for funding — and you get paid. It's fast, easy, and completely hands-off." },
