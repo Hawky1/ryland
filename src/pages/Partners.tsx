@@ -120,24 +120,27 @@ const Partners = () => {
       </header>
 
       {/* ===================== HERO ===================== */}
-      <section className="relative pt-20 pb-24 md:pt-32 md:pb-36 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-30">
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-40">
+            <source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="font-manrope text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.95] bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent animate-fade-in-up">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
+
+        <div className="relative z-10 max-w-3xl">
+          <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
             Get Paid To Help Business Owners Access The Capital They Need To Scale
           </h1>
-          <p className="mt-5 text-lg md:text-xl text-blue-300/90 font-medium italic animate-fade-in-up animate-delay-200">
+          <p className="mt-5 text-lg md:text-xl text-blue-300/90 font-medium italic text-left animate-fade-in-up animate-delay-200">
             even if they don't take the funding
           </p>
-          <p className="mt-6 text-base md:text-lg text-slate-300 max-w-2xl mx-auto animate-fade-in-up animate-delay-200">
+          <p className="mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl text-left leading-relaxed animate-fade-in-up animate-delay-200">
             Welcome to the Ryland Partners Program. Ready to start earning?
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animate-delay-300">
+          <div className="flex flex-col sm:flex-row items-start gap-4 mt-10 animate-fade-in-up animate-delay-300">
             <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
               Become A Partner Now
             </a>
