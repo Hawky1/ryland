@@ -672,13 +672,15 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
 
             {/* Card 1: The Vault */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-amber-500/30 hover:ring-amber-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-amber-500/30 via-yellow-500/20 to-orange-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-amber-500/25 via-yellow-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://cdn.prod.website-files.com/6721e220b3b398a6e4414094/67547a21698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex mb-4 items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-amber-400 rounded-full"></div>
+                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
                     Credit
                   </span>
                 </div>
@@ -694,13 +696,15 @@ const Index = () => {
             </div>
 
             {/* Card 2: The Network */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-cyan-500/30 hover:ring-cyan-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-cyan-500/30 via-teal-500/20 to-blue-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-cyan-500/25 via-teal-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://cdn.prod.website-files.com/6721e220b3b398a6e4414094/67547a21698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex mb-4 items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-cyan-400 rounded-full"></div>
+                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
                     Lenders
                   </span>
                 </div>
@@ -716,13 +720,15 @@ const Index = () => {
             </div>
 
             {/* Card 3: The Academy */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-violet-500/30 hover:ring-violet-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-violet-500/30 via-purple-500/20 to-indigo-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-violet-500/25 via-purple-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://cdn.prod.website-files.com/6721e220b3b398a6e4414094/67547a21698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex mb-4 items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-violet-400 rounded-full"></div>
+                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
                     Community
                   </span>
                 </div>
@@ -738,13 +744,15 @@ const Index = () => {
             </div>
 
             {/* Card 4: Digital Assets */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-rose-500/30 hover:ring-rose-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-rose-500/30 via-pink-500/20 to-red-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-rose-500/25 via-pink-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://cdn.prod.website-files.com/6721e220b3b398a6e4414094/67547a21698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex mb-4 items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-rose-400 rounded-full"></div>
+                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
                     Tools
                   </span>
                 </div>
@@ -760,13 +768,15 @@ const Index = () => {
             </div>
 
             {/* Card 5: Expert Support */}
-            <div className="group relative overflow-hidden transition-all duration-500 hover:border-emerald-500/30 hover:ring-emerald-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-500/20 to-green-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-emerald-500/25 via-teal-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://cdn.prod.website-files.com/6721e220b3b398a6e4414094/67547a21698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex mb-4 items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-emerald-400 rounded-full"></div>
+                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
                     Strategy
                   </span>
                 </div>
