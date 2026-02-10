@@ -1,105 +1,74 @@
 
 
-## Create Legal & Compliance Pages (CCPA + TSR)
+## Replace Wealth Ecosystem Cards with Image Backgrounds
 
-Build a full suite of legal and compliance pages to make the Ryland Partners site compliant with the California Consumer Privacy Act (CCPA) and the FTC Telemarketing Sales Rule (TSR). All pages will use the same dark premium aesthetic as the existing site.
+Redesign the six service cards in the Wealth Ecosystem section on the homepage to use the uploaded images as full-bleed backgrounds, replacing the current video backgrounds. The section title will also be removed for a cleaner look.
 
 ---
 
-### Pages to Create
+### What Changes
 
-**1. Privacy Policy** (`/privacy-policy`)
-- Data collection practices (personal info, cookies, analytics, GTM)
-- How data is used, shared, and stored
-- CCPA-specific disclosures: categories of personal information collected, right to know, right to delete, right to opt-out of sale, right to non-discrimination
-- "Do Not Sell My Personal Information" section
-- Cookie policy details
-- Third-party services (Google Tag Manager, analytics)
-- Data retention and security measures
-- Contact information for privacy inquiries
+**1. Add 6 new images to the project**
 
-**2. Terms of Service** (`/terms-of-service`)
-- Acceptance of terms
-- Description of services (funding referrals, credit restoration, partner program)
-- User responsibilities and eligibility
-- Intellectual property rights
-- Limitation of liability and disclaimers
-- TSR compliance disclosures for any telemarketing activities
-- Dispute resolution and governing law
-- Modification and termination clauses
+Copy the uploaded images into `src/assets/`:
+- `service-funding.png` (Get Business Funding)
+- `service-credit.png` (Repair My Credit)
+- `service-community.png` (Join The Community)
+- `service-products.png` (Shop Digital Products)
+- `service-partner.png` (Become A Partner)
+- `service-consultation.png` (Schedule A Consultation)
 
-**3. CCPA Notice / Do Not Sell** (`/ccpa`)
-- Dedicated CCPA rights page
-- Categories of personal information collected in the last 12 months
-- Business purpose for collection
-- Categories of third parties with whom data is shared
-- "Do Not Sell My Personal Information" opt-out instructions
-- How to submit a verifiable consumer request (know, delete, opt-out)
-- Response timeframe (45 days per CCPA)
-- Authorized agent instructions
+**2. Redesign each card (in `src/pages/Index.tsx`)**
 
-**4. TSR Compliance / Telemarketing Disclosures** (`/tsr-compliance`)
-- Seller and telemarketer identification
-- Material terms of the offer disclosed before payment
-- Refund/cancellation policy
-- Calling time restrictions (8am-9pm local)
-- Do Not Call list compliance
-- Prohibition on deceptive and abusive practices
-- Fee disclosures (no advance fees for credit repair per TSR)
-- Recording and consent disclosures
+For each of the 6 cards:
+- Remove the video element and its gradient overlay
+- Replace with the corresponding image as a full-cover background (`object-cover`)
+- Remove the badge (pulse dot + label), the icon box, the description paragraph
+- Keep only a bold, centered title text (matching the style in the images -- large, white, italic/bold, with a subtle cyan text-shadow/glow)
+- Keep the CTA button at the bottom
+- Add a dark gradient overlay (`bg-gradient-to-t from-black/60 via-black/20 to-black/10`) for text legibility over the image
+- Set a fixed aspect ratio so the cards display as squares (matching the uploaded image proportions)
 
-**5. Disclaimers** (`/disclaimers`)
-- Earnings disclaimer (partner/affiliate program -- no guaranteed income)
-- Funding disclaimer (approval not guaranteed, terms vary)
-- Credit restoration disclaimer (results vary, no guarantee of specific outcomes)
-- Not legal/financial advice disclaimer
-- Third-party links disclaimer
-- Testimonials disclaimer (results not typical)
+**3. Remove the section title**
 
-**6. Cookie Policy** (`/cookie-policy`)
-- Types of cookies used (essential, analytics, marketing)
-- Google Tag Manager / GA4 cookies
-- How to manage cookie preferences
-- Third-party cookies
-- Cookie retention periods
+Delete the "A Complete Wealth Ecosystem" heading (`h2`) so the grid of image cards stands on its own.
 
 ---
 
 ### Technical Details
 
-**New Files (6):**
-- `src/pages/PrivacyPolicy.tsx`
-- `src/pages/TermsOfService.tsx`
-- `src/pages/CCPA.tsx`
-- `src/pages/TSRCompliance.tsx`
-- `src/pages/Disclaimers.tsx`
-- `src/pages/CookiePolicy.tsx`
+**File modified:** `src/pages/Index.tsx`
 
-**Modified Files (2):**
-- `src/App.tsx` -- Add 6 new routes
-- `src/pages/Index.tsx` -- Update footer links (Privacy Policy, Terms of Service) to point to real routes; add links for CCPA, TSR, Disclaimers, Cookie Policy in a new "Legal" footer column
+**New card structure (each card):**
+```
+<div class="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 aspect-square">
+  <img src={serviceImage} class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+  <div class="relative z-10 flex flex-col items-center justify-center h-full p-6">
+    <h3 class="text-3xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+      GET BUSINESS FUNDING
+    </h3>
+  </div>
+  <a href="#cta" class="absolute bottom-6 left-6 right-6 z-10 ...blue gradient button...">
+    Get Business Funding
+  </a>
+</div>
+```
 
-**Page Template:**
-Each legal page will follow the same structure:
-- Same dark background with InfiniteGrid
-- Simplified nav header (logo + Home link) matching the Partners page
-- Clean, readable content area: max-w-4xl centered container with white text, proper heading hierarchy (h1, h2, h3), and comfortable line-height/spacing
-- Prose-style layout optimized for long-form legal text
-- "Last Updated" date at the top
-- Footer matching the home page
+**Card-to-image mapping:**
+1. Get Business Funding -- `service-funding.png`
+2. Repair My Credit -- `service-credit.png`
+3. Join The Community -- `service-community.png`
+4. Shop Digital Products -- `service-products.png`
+5. Become A Partner -- `service-partner.png`
+6. Schedule A Consultation -- `service-consultation.png`
 
-**Styling:**
-- Reuses the same InfiniteGrid background, gradient-blur header, fonts, and dark color palette
-- Legal text uses `text-slate-300` for body, `text-white` for headings
-- Sections separated by `border-white/10` dividers
-- No new dependencies required
+**Styling approach:**
+- Cards use `aspect-square` to maintain the 1:1 ratio from the images
+- Title text uses `font-black italic uppercase` with a subtle cyan drop-shadow to match the uploaded image style
+- The existing blue gradient CTA button is preserved at the bottom of each card
+- Hover state: slight scale-up on the image (`group-hover:scale-105 transition-transform duration-500`)
+- Grid remains `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5`
 
-**Footer Update:**
-The footer on the home page will be updated to include a "Legal" column with links to all 6 pages, replacing the current placeholder `#` links for Privacy Policy and Terms of Service.
-
----
-
-### Important Note
-
-These pages provide a strong compliance framework but should be reviewed by a qualified attorney before going live. The content will be written as accurately as possible for a business offering funding referrals, credit restoration services, and a partner/affiliate program, but legal counsel should verify everything matches the specific business practices.
+No new dependencies are needed.
 
