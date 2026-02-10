@@ -75,8 +75,8 @@ const Partners = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
 
       {/* Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff, #f8fafc, #ffffff)' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.15)" activeGridColor="rgba(6, 182, 212, 0.5)" />
+      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a, #1e293b, #0f172a)' }}>
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.08)" activeGridColor="rgba(6, 182, 212, 0.6)" />
       </div>
 
       {/* Gradient blur */}
