@@ -10,6 +10,12 @@ import logoNavyFed from "@/assets/logo-navyfed.png";
 import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import serviceFunding from "@/assets/service-funding.png";
+import serviceCredit from "@/assets/service-credit.png";
+import serviceCommunity from "@/assets/service-community.png";
+import serviceProducts from "@/assets/service-products.png";
+import servicePartner from "@/assets/service-partner.png";
+import serviceConsultation from "@/assets/service-consultation.png";
 import successFunding from "@/assets/success-funding.jpg";
 import successCredit from "@/assets/success-credit.webp";
 import successEmpire from "@/assets/success-empire.webp";
@@ -650,153 +656,36 @@ const Index = () => {
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
         <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
-          <h2 className="text-2xl font-medium text-white tracking-tighter text-left mb-0 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}>A Complete Wealth Ecosystem</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-
-            {/* Card 1: Get Business Funding */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Funding
-                  </span>
+            {[
+              { img: serviceFunding, title: "GET BUSINESS\nFUNDING", cta: "Get Business Funding" },
+              { img: serviceCredit, title: "REPAIR\nMY CREDIT", cta: "Repair My Credit" },
+              { img: serviceCommunity, title: "JOIN THE\nCOMMUNITY", cta: "Join The Community" },
+              { img: serviceProducts, title: "SHOP DIGITAL\nPRODUCTS", cta: "Shop Digital Products" },
+              { img: servicePartner, title: "BECOME\nA PARTNER", cta: "Become A Partner" },
+              { img: serviceConsultation, title: "SCHEDULE A\nCONSULTATION", cta: "Schedule A Consultation" },
+            ].map((card, i) => (
+              <div key={i} className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 aspect-square">
+                <img
+                  src={card.img}
+                  alt={card.cta}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10" />
+                <div className="relative z-10 flex flex-col items-center justify-center h-full p-6">
+                  <h3 className="text-3xl sm:text-4xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-pre-line leading-tight">
+                    {card.title}
+                  </h3>
                 </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Get Business Funding</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Access capital for your business through our network of alternative lenders — funding solutions tailored to entrepreneurs at every stage.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Get Business Funding
+                <a
+                  href="#cta"
+                  className="absolute bottom-6 left-6 right-6 z-10 inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center"
+                >
+                  {card.cta}
                 </a>
               </div>
-            </div>
-
-            {/* Card 2: Repair My Credit */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Credit
-                  </span>
-                </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Repair My Credit</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Restore and optimize your personal and business credit profile to unlock better rates, higher limits, and more funding power.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Repair My Credit
-                </a>
-              </div>
-            </div>
-
-            {/* Card 3: Join The Community */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Community
-                  </span>
-                </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Join The Community</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Connect with funded founders, attend live trainings, and tap into deal flow inside our exclusive entrepreneur community.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Join The Community
-                </a>
-              </div>
-            </div>
-
-            {/* Card 4: Shop Digital Products */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Products
-                  </span>
-                </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Shop Digital Products</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Browse DIY kits, automation tools, and scaling blueprints designed to help you build and grow your digital empire.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Shop Digital Products
-                </a>
-              </div>
-            </div>
-
-            {/* Card 5: Become A Partner */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Partner
-                  </span>
-                </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Become A Partner</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Earn by referring others to Ryland Partners — join our partner program and build a revenue stream alongside your business.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Become A Partner
-                </a>
-              </div>
-            </div>
-
-            {/* Card 6: Schedule A Consultation */}
-            <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
-              <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-              </div>
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex mb-4 items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
-                    <div className="h-1.5 w-1.5 animate-pulse bg-white/80 rounded-full"></div>
-                    Strategy
-                  </span>
-                </div>
-                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Schedule A Consultation</h3>
-                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Book a 1-on-1 session with a funding strategist to map out your personalized path to capital and growth.</p>
-                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Schedule A Consultation
-                </a>
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>
