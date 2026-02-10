@@ -669,53 +669,71 @@ const Index = () => {
         <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
           <h2 className="text-2xl font-medium text-white tracking-tighter text-left mb-0 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}>A complete wealth ecosystem</h2>
 
-          <section className="mt-10 mb-20 pt-0 pb-0 relative">
-            <div className="sm:px-6 lg:px-8 lg:pt-8 max-w-full pt-16 pr-4 pb-16 pl-4">
-              
-              <div className="rounded-2xl mt-10 backdrop-blur" style={{ maskImage: 'linear-gradient(90deg, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 20%, black 80%, transparent)' }}>
-                <div className="grid grid-cols-1 md:grid-cols-3 border-white/10 border-b" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 100%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 100%, transparent)' }}>
-                  <div className="hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-                    </div>
-                    <h3 className="text-lg text-white">The Vault</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Personal & Business Credit Optimization</p>
-                  </div>
-                  <div className="md:border-l md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">The Network</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Direct access to alternative high-limit lenders</p>
-                  </div>
-                  <div className="md:border-l md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M3 3v18h18"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">The Academy</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Exclusive Skool community for digital entrepreneurs</p>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+            {/* Business Funding */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 bg-gradient-to-b from-white/[0.07] to-transparent p-6 hover:border-emerald-400/30 hover:bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] hover:from-emerald-500/15 hover:to-transparent transition-all duration-500 cursor-pointer">
+              <div className="opacity-[0.04] absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/20 mb-5 group-hover:bg-emerald-500/20 group-hover:ring-emerald-400/30 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-emerald-400"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                  <div className="md:border-r md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)', WebkitMaskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">Digital Assets</h3>
-                    <p className="text-sm text-zinc-400 mt-1">DIY kits, automation tools, and scaling blueprints</p>
-                  </div>
-                  <div className="hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)', WebkitMaskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">Expert Support</h3>
-                    <p className="text-sm text-zinc-400 mt-1">1-on-1 guidance from funding strategists</p>
-                  </div>
+                <h3 className="text-lg font-semibold text-white tracking-tight">Business Funding</h3>
+                <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Access $50K–$500K+ in capital with 0% intro APR business credit lines tailored to your goals.</p>
+                <div className="mt-5 flex items-center gap-1.5 text-emerald-400 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>Get Started</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </div>
               </div>
             </div>
-          </section>
+
+            {/* Credit Restoration */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 bg-gradient-to-b from-white/[0.07] to-transparent p-6 hover:border-blue-400/30 hover:bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] hover:from-blue-500/15 hover:to-transparent transition-all duration-500 cursor-pointer">
+              <div className="opacity-[0.04] absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/10 ring-1 ring-blue-500/20 mb-5 group-hover:bg-blue-500/20 group-hover:ring-blue-400/30 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-blue-400"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white tracking-tight">Credit Restoration</h3>
+                <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Rebuild and optimize your personal & business credit with expert-guided strategies and dispute systems.</p>
+                <div className="mt-5 flex items-center gap-1.5 text-blue-400 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>Fix My Credit</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Join the Community */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 bg-gradient-to-b from-white/[0.07] to-transparent p-6 hover:border-purple-400/30 hover:bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] hover:from-purple-500/15 hover:to-transparent transition-all duration-500 cursor-pointer">
+              <div className="opacity-[0.04] absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-500/10 ring-1 ring-purple-500/20 mb-5 group-hover:bg-purple-500/20 group-hover:ring-purple-400/30 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-purple-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white tracking-tight">Join the Community</h3>
+                <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Connect with entrepreneurs in our exclusive Skool community for mentorship, networking, and growth.</p>
+                <div className="mt-5 flex items-center gap-1.5 text-purple-400 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>Join Now</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Become a Partner */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 bg-gradient-to-b from-white/[0.07] to-transparent p-6 hover:border-amber-400/30 hover:bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] hover:from-amber-500/15 hover:to-transparent transition-all duration-500 cursor-pointer">
+              <div className="opacity-[0.04] absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20 mb-5 group-hover:bg-amber-500/20 group-hover:ring-amber-400/30 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-400"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white tracking-tight">Become a Partner</h3>
+                <p className="text-sm text-zinc-400 mt-2 leading-relaxed">Earn recurring revenue by referring clients to our funding and credit ecosystem as an affiliate partner.</p>
+                <div className="mt-5 flex items-center gap-1.5 text-amber-400 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>Partner Up</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
