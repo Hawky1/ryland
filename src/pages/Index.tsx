@@ -10,6 +10,9 @@ import logoNavyFed from "@/assets/logo-navyfed.png";
 import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import successFunding from "@/assets/success-funding.jpg";
+import successCredit from "@/assets/success-credit.webp";
+import successEmpire from "@/assets/success-empire.webp";
 
 const Index = () => {
   const [isMuted, setIsMuted] = useState(true);
@@ -827,7 +830,7 @@ const Index = () => {
             <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
               <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
                 <div className="relative">
-                  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/286dcc4a-3b11-43d3-af80-a7b1c3aaaad1_800w.webp" alt="The Startup Launch" className="group-hover:grayscale-0 transition-all duration-300 w-full h-[224px] object-cover grayscale" />
+                  <img src={successFunding} alt="The Startup Launch" className="transition-all duration-300 w-full h-[224px] object-cover" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
                     <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
                   </div>
@@ -839,7 +842,7 @@ const Index = () => {
               </div>
               <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
                 <div className="relative">
-                  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/bb9b217e-05c2-4e6e-8f35-3fcb7f5b5e0c_800w.webp" alt="The Credit Pivot" className="w-full h-[224px] object-cover grayscale group-hover:grayscale-0 transition-all duration-300" />
+                  <img src={successCredit} alt="The Credit Pivot" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
                     <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
                   </div>
@@ -851,7 +854,7 @@ const Index = () => {
               </div>
               <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
                 <div className="relative">
-                  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a59cef23-182d-4015-9d64-9748fcf818c3_800w.webp" alt="The Digital Empire" className="w-full h-[224px] object-cover grayscale group-hover:grayscale-0 transition-all duration-300" />
+                  <img src={successEmpire} alt="The Digital Empire" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
                     <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
                   </div>
