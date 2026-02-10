@@ -667,55 +667,121 @@ const Index = () => {
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
         <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
-          <h2 className="text-2xl font-medium text-white tracking-tighter text-left mb-0 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}><h2 className="text-2xl font-medium text-white tracking-tighter text-left mb-0 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}>A Complete Wealth Ecosystem</h2></h2>
+          <h2 className="text-2xl font-medium text-white tracking-tighter text-left mb-0 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 10%, transparent)' }}>A Complete Wealth Ecosystem</h2>
 
-          <section className="mt-10 mb-20 pt-0 pb-0 relative">
-            <div className="sm:px-6 lg:px-8 lg:pt-8 max-w-full pt-16 pr-4 pb-16 pl-4">
-              
-              <div className="rounded-2xl mt-10 backdrop-blur" style={{ maskImage: 'linear-gradient(90deg, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 20%, black 80%, transparent)' }}>
-                <div className="grid grid-cols-1 md:grid-cols-3 border-white/10 border-b" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 100%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 100%, transparent)' }}>
-                  <div className="hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-                    </div>
-                    <h3 className="text-lg text-white">The Vault</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Personal & Business Credit Optimization</p>
-                  </div>
-                  <div className="md:border-l md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">The Network</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Direct access to alternative high-limit lenders</p>
-                  </div>
-                  <div className="md:border-l md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)', WebkitMaskImage: 'linear-gradient(0deg, transparent, black 0%, black 10%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M3 3v18h18"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">The Academy</h3>
-                    <p className="text-sm text-zinc-400 mt-1">Exclusive Skool community for digital entrepreneurs</p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
 
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                  <div className="md:border-r md:border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)', WebkitMaskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">Digital Assets</h3>
-                    <p className="text-sm text-zinc-400 mt-1">DIY kits, automation tools, and scaling blueprints</p>
-                  </div>
-                  <div className="hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden group text-center pt-8 pr-8 pb-8 pl-8 relative" style={{ maskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)', WebkitMaskImage: 'linear-gradient(180deg, transparent, black 0%, black 20%, transparent)' }}>
-                    <div className="inline-flex group-hover:bg-white/10 transition-colors duration-300 text-slate-200 bg-white/5 w-10 h-10 ring-white/10 ring-1 rounded-lg mr-auto mb-4 ml-auto items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight">Expert Support</h3>
-                    <p className="text-sm text-zinc-400 mt-1">1-on-1 guidance from funding strategists</p>
-                  </div>
+            {/* Card 1: The Vault */}
+            <div className="group relative overflow-hidden transition-all duration-500 hover:border-amber-500/30 hover:ring-amber-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-amber-500/30 via-yellow-500/20 to-orange-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-amber-500/25 via-yellow-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+              <div className="p-6 relative z-10 flex flex-col h-full">
+                <div className="flex mb-4 items-start justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
+                    <div className="h-1.5 w-1.5 animate-pulse bg-amber-400 rounded-full"></div>
+                    Credit
+                  </span>
                 </div>
+                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Vault</h3>
+                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Personal & Business Credit Optimization — build, protect, and leverage your credit profile for maximum funding power.</p>
+                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
+                  <span>Optimize Your Credit</span>
+                </a>
               </div>
             </div>
-          </section>
+
+            {/* Card 2: The Network */}
+            <div className="group relative overflow-hidden transition-all duration-500 hover:border-cyan-500/30 hover:ring-cyan-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-cyan-500/30 via-teal-500/20 to-blue-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-cyan-500/25 via-teal-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+              <div className="p-6 relative z-10 flex flex-col h-full">
+                <div className="flex mb-4 items-start justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
+                    <div className="h-1.5 w-1.5 animate-pulse bg-cyan-400 rounded-full"></div>
+                    Lenders
+                  </span>
+                </div>
+                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Network</h3>
+                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Direct access to alternative high-limit lenders — bypass traditional banks and unlock capital others can't reach.</p>
+                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
+                  <span>Access The Network</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 3: The Academy */}
+            <div className="group relative overflow-hidden transition-all duration-500 hover:border-violet-500/30 hover:ring-violet-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-violet-500/30 via-purple-500/20 to-indigo-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-violet-500/25 via-purple-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+              <div className="p-6 relative z-10 flex flex-col h-full">
+                <div className="flex mb-4 items-start justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
+                    <div className="h-1.5 w-1.5 animate-pulse bg-violet-400 rounded-full"></div>
+                    Community
+                  </span>
+                </div>
+                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M3 3v18h18"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Academy</h3>
+                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Exclusive Skool community for digital entrepreneurs — live trainings, deal flow, and a network of funded founders.</p>
+                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
+                  <span>Join The Academy</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 4: Digital Assets */}
+            <div className="group relative overflow-hidden transition-all duration-500 hover:border-rose-500/30 hover:ring-rose-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-rose-500/30 via-pink-500/20 to-red-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-rose-500/25 via-pink-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+              <div className="p-6 relative z-10 flex flex-col h-full">
+                <div className="flex mb-4 items-start justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
+                    <div className="h-1.5 w-1.5 animate-pulse bg-rose-400 rounded-full"></div>
+                    Tools
+                  </span>
+                </div>
+                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Digital Assets</h3>
+                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">DIY kits, automation tools, and scaling blueprints — everything you need to build and grow your digital empire.</p>
+                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
+                  <span>Get The Tools</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 5: Expert Support */}
+            <div className="group relative overflow-hidden transition-all duration-500 hover:border-emerald-500/30 hover:ring-emerald-500/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl">
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-500/20 to-green-500/10 blur-3xl transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-8 -left-8 bg-gradient-to-br from-emerald-500/25 via-teal-500/15 to-transparent w-40 h-40 rounded-full blur-2xl"></div>
+              <div className="p-6 relative z-10 flex flex-col h-full">
+                <div className="flex mb-4 items-start justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/5 ring-white/20 ring-1 rounded-lg py-1 px-2.5">
+                    <div className="h-1.5 w-1.5 animate-pulse bg-emerald-400 rounded-full"></div>
+                    Strategy
+                  </span>
+                </div>
+                <div className="inline-flex text-slate-200 bg-white/5 w-12 h-12 ring-white/10 ring-1 rounded-xl mb-4 items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Expert Support</h3>
+                <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">1-on-1 guidance from funding strategists who've helped thousands of entrepreneurs secure capital and scale.</p>
+                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
+                  <span>Talk To An Expert</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
