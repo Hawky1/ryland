@@ -674,7 +674,7 @@ const Index = () => {
             {/* Card 1: The Vault */}
             <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
               <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
               </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
@@ -698,7 +698,7 @@ const Index = () => {
             {/* Card 2: The Network */}
             <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
               <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
               </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
@@ -722,7 +722,7 @@ const Index = () => {
             {/* Card 3: The Academy */}
             <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
               <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
               </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
@@ -746,7 +746,7 @@ const Index = () => {
             {/* Card 4: Digital Assets */}
             <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
               <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
               </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
@@ -770,7 +770,7 @@ const Index = () => {
             {/* Card 5: Expert Support */}
             <div className="group relative overflow-hidden transition-all duration-500 border-white/10 border ring-white/5 ring-1 rounded-2xl">
               <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" /></video>
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40"><source src="https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8" type="application/x-mpegURL" /></video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
               </div>
               <div className="p-6 relative z-10 flex flex-col h-full">
