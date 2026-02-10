@@ -426,12 +426,12 @@ const Index = () => {
           <div className="flex items-center gap-2">
             <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
           </div>
-          <nav className="hidden gap-6 md:flex gap-x-6 gap-y-6 items-center">
+          <nav className="hidden gap-10 md:flex items-center">
             <a href="#features" className="nav-link hover:text-white text-sm text-slate-300 relative">Features</a>
             <a href="#services" className="nav-link relative text-sm text-slate-300 hover:text-white">Services</a>
             <a href="#showcase" className="nav-link relative text-sm text-slate-300 hover:text-white">Results</a>
             <a href="#pricing" className="nav-link relative text-sm text-slate-300 hover:text-white">Pricing</a>
-            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm focus:outline-none">
+            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
               <span className="flex items-center gap-2">Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
             </a>
           </nav>
