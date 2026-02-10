@@ -1,20 +1,35 @@
 
-## Add Video Background to Wealth Ecosystem Cards
+
+## Add Red Volume Button to Hero Video
 
 ### What changes
-Replace the colored gradient backgrounds on all 5 ecosystem cards with the same video background used in the hero section. Remove the per-card color glow effects and unify the look.
+Add a red, circular mute/unmute toggle button overlaid on the hero video (the Gene Ryland video on the right side). This lets visitors know the video has audio and gives them a way to turn it on.
 
 ### Technical details
 
-**File:** `src/pages/Index.tsx`, lines 675-782 (all 5 cards)
+**File:** `src/pages/Index.tsx`
 
-For each of the 5 cards (The Vault, The Network, The Academy, Digital Assets, Expert Support):
+1. **Add state** at the top of the `Index` component:
+   - `const [isMuted, setIsMuted] = useState(true)`
+   - `const videoRef = useRef<HTMLVideoElement>(null)`
 
-1. **Remove** the colored gradient background classes (`bg-gradient-to-br from-neutral-900/80 to-neutral-950/90`) and color-specific hover borders (`hover:border-amber-500/30`, `hover:border-cyan-500/30`, etc.)
-2. **Remove** the two colored glow `div` elements (the `-bottom-16 -right-16` and `-top-8 -left-8` blurred circles)
-3. **Add** inside each card (before the content) a video background block matching the hero pattern:
-   - An `absolute inset-0 z-0 overflow-hidden rounded-2xl` wrapper containing the same `<video>` element (autoPlay, loop, muted, playsInline, 40% opacity, same MP4 source)
-   - A gradient overlay `div` (`bg-gradient-to-r from-black/70 via-black/40 to-transparent`) for text readability
-4. **Keep** the existing card shell styling: `rounded-2xl border border-white/10 ring-1 ring-white/5 overflow-hidden`
-5. **Keep** all badge pulse dots as a uniform white/neutral color instead of per-card colors (amber, cyan, violet, rose, emerald)
-6. **Keep** all existing text content, icons, and shiny-cta buttons unchanged
+2. **Attach ref** to the hero video element at line 510 and bind `muted={isMuted}` instead of the static `muted` attribute.
+
+3. **Add a red volume button** positioned absolutely over the bottom-right corner of the video:
+   - Uses `lucide-react` icons: `VolumeX` (muted) / `Volume2` (unmuted)
+   - Styled as a red circle (`bg-red-600 hover:bg-red-700`) with white icon
+   - Includes a subtle pulse animation when muted to draw attention
+   - On click, toggles `isMuted` state
+
+4. **Button markup** (placed right after the `<video>` element, inside the same relative container):
+```tsx
+<button
+  onClick={() => setIsMuted(!isMuted)}
+  className="absolute bottom-4 right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full p-3 shadow-lg transition-colors"
+>
+  {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+</button>
+```
+
+5. **Imports** to add: `useState`, `useRef` from React; `VolumeX`, `Volume2` from `lucide-react`.
+
