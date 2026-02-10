@@ -504,7 +504,7 @@ const Index = () => {
             </div>
           </div>
           {/* Right - video showcase */}
-          <div className="relative lg:flex-1 flex justify-center lg:mt-8">
+          <div className="relative lg:flex-1 flex justify-center lg:mt-16">
             <div className="relative flex flex-col items-center gap-6">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
               <video
