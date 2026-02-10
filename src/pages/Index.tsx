@@ -3,6 +3,7 @@ import { VolumeX, Volume2 } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
 import heroPortrait from "@/assets/hero-portrait.png";
 import asSeenOn from "@/assets/as-seen-on.png";
+import geneRylandAbout from "@/assets/gene-ryland-about.png";
 import logoUsBank from "@/assets/logo-usbank.png";
 import logoBoa from "@/assets/logo-boa.png";
 import logoNavyFed from "@/assets/logo-navyfed.png";
@@ -27,40 +28,7 @@ const Index = () => {
     closeMenuBtn?.addEventListener('click', closeMenu);
     mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-    // Billing toggle
-    const toggleContainer = document.getElementById('billing-toggle-container');
-    const indicator = document.getElementById('toggle-indicator');
-    const monthlyBtn = toggleContainer?.querySelector('[data-plan="monthly"]');
-    const yearlyBtn = toggleContainer?.querySelector('[data-plan="yearly"]');
-    const amounts = document.querySelectorAll('.pricing-amount');
-    
-    let isYearly = false;
 
-    toggleContainer?.addEventListener('click', () => {
-      isYearly = !isYearly;
-      
-      if (isYearly) {
-        if (indicator) indicator.style.transform = 'translateX(100%)';
-        yearlyBtn?.classList.replace('text-slate-400', 'text-white');
-        monthlyBtn?.classList.replace('text-white', 'text-slate-400');
-      } else {
-        if (indicator) indicator.style.transform = 'translateX(0)';
-        monthlyBtn?.classList.replace('text-slate-400', 'text-white');
-        yearlyBtn?.classList.replace('text-white', 'text-slate-400');
-      }
-
-      amounts.forEach(el => {
-        (el as HTMLElement).style.opacity = '0';
-        setTimeout(() => {
-          if (isYearly) {
-            el.textContent = '$' + (el as HTMLElement).dataset.yearly;
-          } else {
-            el.textContent = '$' + (el as HTMLElement).dataset.monthly;
-          }
-          (el as HTMLElement).style.opacity = '1';
-        }, 150);
-      });
-    });
 
     // FAQ
     const faqItems = document.querySelectorAll('.faq-item');
@@ -433,7 +401,7 @@ const Index = () => {
             <a href="#features" className="nav-link hover:text-white text-sm text-slate-300 relative">Features</a>
             <a href="#services" className="nav-link relative text-sm text-slate-300 hover:text-white">Services</a>
             <a href="#showcase" className="nav-link relative text-sm text-slate-300 hover:text-white">Results</a>
-            <a href="#pricing" className="nav-link relative text-sm text-slate-300 hover:text-white">Pricing</a>
+            <a href="#about" className="nav-link relative text-sm text-slate-300 hover:text-white">About</a>
             <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
               <span>Get Started</span>
             </a>
@@ -455,7 +423,7 @@ const Index = () => {
             <li><a href="#features" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Features</a></li>
             <li><a href="#services" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Services</a></li>
             <li><a href="#showcase" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Results</a></li>
-            <li><a href="#pricing" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Pricing</a></li>
+            <li><a href="#about" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">About</a></li>
           </ul>
           <a href="#cta" className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/10 transition-colors">
             Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
@@ -874,137 +842,67 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pricing section */}
-      <section className="overflow-hidden mt-40 mb-40 pt-24 pb-24 relative" id="pricing">
+      {/* About section */}
+      <section className="overflow-hidden mt-40 mb-40 pt-24 pb-24 relative" id="about">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
 
-        <div className="max-w-7xl mr-auto ml-auto pr-6 pl-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-xs sm:text-sm text-zinc-400 mb-4">Meet The Founder</p>
             <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-white mb-6" style={{ maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.5))' }}>
-              Simple, transparent pricing
+              Gene Ryland
             </h2>
             <p className="text-lg text-slate-400">
-              Start for free, upgrade when you need more power. No hidden fees.
+              CEO &amp; Founder, Ryland Partners
             </p>
-
-            <div className="mt-10 flex items-center justify-center">
-              <div className="flex cursor-pointer bg-white/5 border-white/10 border rounded-full pt-1 pr-1 pb-1 pl-1 relative items-center hover:bg-white/10 transition-colors" id="billing-toggle-container">
-                <span className="px-4 py-1 rounded-full text-sm font-medium text-white transition-colors" data-plan="monthly">Monthly</span>
-                <span className="px-4 py-1 rounded-full text-sm font-medium text-slate-400 transition-colors" data-plan="yearly">Yearly</span>
-                <div className="absolute inset-y-1 left-1 w-[calc(50%-4px)] rounded-full -z-10 transition-transform duration-300 ease-out bg-indigo-500" id="toggle-indicator" style={{ transform: 'translateX(0)' }}></div>
-              </div>
-              <span className="ml-4 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border bg-indigo-500/10 text-indigo-400 border-indigo-500/20">
-                Save 20%
-              </span>
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Starter Plan */}
-            <div className="group transition-all duration-500 hover:border-white/20 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl pt-8 pr-8 pb-8 pl-8 relative">
-              <div className="mb-6">
-                <h3 className="text-lg font-medium text-white">Starter</h3>
-                <p className="text-sm text-slate-400 mt-2">The DIYer — perfect for getting started.</p>
-              </div>
-              <div className="mb-6 flex items-baseline gap-1">
-                <span className="text-4xl font-medium text-white tracking-tight">$0</span>
-                <span className="text-slate-500">/mo</span>
-              </div>
-              
-              <div className="mt-8 mb-8 space-y-4">
-                <div className="flex gap-3 text-sm text-slate-300 gap-x-3 gap-y-3 items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Funding Assessment</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Weekly Newsletter</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Community Access</span>
-                </div>
-              </div>
-              <a href="#" className="flex items-center justify-center hover:bg-white/10 transition-colors text-sm font-medium text-white bg-white/5 w-full border-white/10 border rounded-full pt-3 pb-3">
-                Join for Free
-              </a>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Image */}
+            <div className="relative group flex justify-center">
+              <div className="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full transition-all duration-700 group-hover:bg-blue-500/15"></div>
+              <img
+                src={geneRylandAbout}
+                alt="Gene Ryland — Founder of Ryland Partners"
+                className="relative z-10 rounded-2xl border border-white/10 ring-1 ring-white/5 w-full max-w-md object-cover shadow-2xl"
+              />
             </div>
 
-            {/* Pro Plan (Highlighted) */}
-            <div className="group relative overflow-hidden transition-all duration-500 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 border-white/10 border ring-white/5 ring-1 rounded-2xl p-8 shadow-2xl hover:border-indigo-500/30 hover:ring-indigo-500/20 shadow-indigo-900/10">
-              
-              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-tr from-violet-500/30 to-cyan-500/10 blur-3xl transition-all duration-700 group-hover:scale-110 via-indigo-500/20"></div>
-              <div className="absolute -top-8 -left-8 bg-gradient-to-br via-violet-500/15 to-transparent w-40 h-40 rounded-full blur-2xl from-indigo-500/25"></div>
+            {/* Bio */}
+            <div className="space-y-6">
+              <p className="text-slate-300 leading-relaxed text-base">
+                Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
+              </p>
+              <p className="text-slate-400 leading-relaxed text-base">
+                After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
+              </p>
+              <p className="text-slate-400 leading-relaxed text-base">
+                Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
+              </p>
 
-              <div className="relative z-10">
-                <div className="mb-6 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-medium text-white">Pro</h3>
-                    <p className="text-sm mt-2 text-indigo-200/70">The Scaler — for serious entrepreneurs.</p>
-                  </div>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white shadow-lg bg-indigo-600 shadow-indigo-500/30">
-                    Popular
-                  </span>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10">
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p>
+                  <p className="text-xs text-slate-500 mt-1">Funding Secured</p>
                 </div>
-                <div className="mb-6 flex items-baseline gap-1">
-                  <span className="text-4xl font-medium text-white tracking-tight pricing-amount" data-monthly="97" data-yearly="78">$97</span>
-                  <span className="text-slate-400 pricing-period">/mo</span>
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p>
+                  <p className="text-xs text-slate-500 mt-1">Entrepreneurs Helped</p>
                 </div>
-                
-                <div className="mt-8 mb-8 space-y-4">
-                  <div className="flex gap-3 text-sm text-white gap-x-3 gap-y-3 items-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0 text-indigo-400"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Full Skool Academy</span>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0 text-indigo-400"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Credit Repair Blueprints</span>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0 text-indigo-400"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Digital Product Library</span>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0 text-indigo-400"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Group Coaching</span>
-                  </div>
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p>
+                  <p className="text-xs text-slate-500 mt-1">Years of Experience</p>
                 </div>
-                <a href="#" className="flex items-center justify-center hover:bg-slate-200 transition-colors shadow-white/10 text-sm font-medium text-black bg-white w-full rounded-full pt-3 pb-3 shadow-lg">
-                  Join the Academy
+              </div>
+
+              {/* CTA */}
+              <div className="pt-4">
+                <a href="#cta" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Work With Gene
                 </a>
               </div>
             </div>
-
-            {/* Business Plan */}
-            <div className="relative group rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900/80 to-neutral-950/90 ring-1 ring-white/5 p-8 transition-all duration-500 hover:border-white/20">
-              <div className="mb-6">
-                <h3 className="text-lg font-medium text-white">Business</h3>
-                <p className="text-sm text-slate-400 mt-2">The Elite — done-for-you funding.</p>
-              </div>
-              <div className="mb-6 flex items-baseline gap-1">
-                <span className="text-4xl font-medium text-white tracking-tight">Custom</span>
-              </div>
-              
-              <div className="mt-8 mb-8 space-y-4">
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Done-For-You Funding ($150k+ Goal)</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>1-on-1 Credit Concierge</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Priority Lender Access</span>
-                </div>
-              </div>
-              <a href="#" className="flex items-center justify-center hover:bg-white/10 transition-colors text-sm font-medium text-white bg-white/5 w-full border-white/10 border rounded-full pt-3 pb-3">
-                Speak to a Specialist
-              </a>
-            </div>
-
           </div>
         </div>
       </section>
