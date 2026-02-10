@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import { VolumeX, Volume2 } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
 import heroPortrait from "@/assets/hero-portrait.png";
 import asSeenOn from "@/assets/as-seen-on.png";
@@ -10,6 +11,8 @@ import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 
 const Index = () => {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
@@ -507,15 +510,24 @@ const Index = () => {
           <div className="relative lg:flex-1 flex justify-center lg:mt-16">
             <div className="relative flex flex-col items-center gap-6">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="relative z-10 w-full max-w-xl rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
-              >
-                <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
-              </video>
+              <div className="relative z-10 w-full max-w-xl">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  className="w-full rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover"
+                >
+                  <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
+                </video>
+                <button
+                  onClick={() => setIsMuted(!isMuted)}
+                  className={`absolute bottom-4 right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full p-3 shadow-lg transition-colors ${isMuted ? 'animate-pulse' : ''}`}
+                >
+                  {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                </button>
+              </div>
               <div className="relative z-10 flex flex-col items-center mt-2">
                 <h3 className="text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
                 <p className="text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Funding Expert</p>
