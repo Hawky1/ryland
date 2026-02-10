@@ -321,7 +321,7 @@ export default function FundingJourney() {
 
         {/* Device frame */}
         <div
-          className="relative max-w-2xl mx-auto"
+          className="relative w-full mx-auto"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
