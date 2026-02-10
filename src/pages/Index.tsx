@@ -1174,11 +1174,14 @@ const Index = () => {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Resources</h3>
+              <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Support</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Community</a></li>
+                <li><a href="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/ccpa" className="text-sm text-slate-400 hover:text-white transition-colors">CCPA Notice</a></li>
+                <li><a href="/tsr-compliance" className="text-sm text-slate-400 hover:text-white transition-colors">TSR Compliance</a></li>
+                <li><a href="/disclaimers" className="text-sm text-slate-400 hover:text-white transition-colors">Disclaimers</a></li>
+                <li><a href="/cookie-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Cookie Policy</a></li>
               </ul>
             </div>
           </div>
@@ -1188,8 +1191,8 @@ const Index = () => {
               © <span id="year">2026</span> Ryland Partners. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+              <a href="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>
