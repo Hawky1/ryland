@@ -701,8 +701,8 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Vault</h3>
                 <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Personal & Business Credit Optimization — build, protect, and leverage your credit profile for maximum funding power.</p>
-                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-                  <span>Optimize Your Credit</span>
+                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Optimize Your Credit
                 </a>
               </div>
             </div>
@@ -725,8 +725,8 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Network</h3>
                 <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Direct access to alternative high-limit lenders — bypass traditional banks and unlock capital others can't reach.</p>
-                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-                  <span>Access The Network</span>
+                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Access The Network
                 </a>
               </div>
             </div>
@@ -749,8 +749,8 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">The Academy</h3>
                 <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">Exclusive Skool community for digital entrepreneurs — live trainings, deal flow, and a network of funded founders.</p>
-                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-                  <span>Join The Academy</span>
+                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Join The Academy
                 </a>
               </div>
             </div>
@@ -773,8 +773,8 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Digital Assets</h3>
                 <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">DIY kits, automation tools, and scaling blueprints — everything you need to build and grow your digital empire.</p>
-                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-                  <span>Get The Tools</span>
+                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Get The Tools
                 </a>
               </div>
             </div>
@@ -797,8 +797,8 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-semibold tracking-tight text-neutral-100 mb-2">Expert Support</h3>
                 <p className="leading-relaxed text-sm text-neutral-400 mb-6 flex-1">1-on-1 guidance from funding strategists who've helped thousands of entrepreneurs secure capital and scale.</p>
-                <a href="#cta" className="shiny-cta !py-2.5 !px-5 !text-sm focus:outline-none text-center w-full block">
-                  <span>Talk To An Expert</span>
+                <a href="#cta" className="inline-flex w-full transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Talk To An Expert
                 </a>
               </div>
             </div>
