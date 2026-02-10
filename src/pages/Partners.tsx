@@ -386,12 +386,23 @@ const Partners = () => {
                 <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Community</a></li>
               </ul>
             </div>
+            <div>
+              <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
+              <ul className="space-y-3">
+                <li><Link to="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/ccpa" className="text-sm text-slate-400 hover:text-white transition-colors">CCPA Notice</Link></li>
+                <li><Link to="/tsr-compliance" className="text-sm text-slate-400 hover:text-white transition-colors">TSR Compliance</Link></li>
+                <li><Link to="/disclaimers" className="text-sm text-slate-400 hover:text-white transition-colors">Disclaimers</Link></li>
+                <li><Link to="/cookie-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Cookie Policy</Link></li>
+              </ul>
+            </div>
           </div>
           <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-slate-400">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+              <Link to="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
