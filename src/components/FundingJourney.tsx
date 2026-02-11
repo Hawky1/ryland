@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Check, CreditCard, TrendingUp, Shield, Building2, PartyPopper } from "lucide-react";
-import logoChase from "@/assets/logo-chase.png";
-import logoBoa from "@/assets/logo-boa.png";
-import logoNavyFed from "@/assets/logo-navyfed.png";
-import logoTruist from "@/assets/logo-truist.png";
-import logoUsBank from "@/assets/logo-usbank.png";
+import { ChevronLeft, ChevronRight, CreditCard, TrendingUp, Shield, Building2, PartyPopper } from "lucide-react";
+import AssessmentVisual from "./funding-visuals/AssessmentVisual";
+import CreditAnalysisVisual from "./funding-visuals/CreditAnalysisVisual";
+import RestorationVisual from "./funding-visuals/RestorationVisual";
+import LenderMatchVisual from "./funding-visuals/LenderMatchVisual";
+import GetFundedVisual from "./funding-visuals/GetFundedVisual";
 
 const STEPS = [
   {
@@ -35,210 +35,7 @@ const STEPS = [
   },
 ];
 
-/* ── Step Visuals ── */
-
-function AssessmentVisual() {
-  const fields = ["Business Name", "Industry", "Monthly Revenue", "Funding Goal"];
-  return (
-    <div className="space-y-3 w-full max-w-xs mx-auto">
-      {fields.map((f, i) => (
-        <motion.div
-          key={f}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.15, duration: 0.4 }}
-          className="space-y-1"
-        >
-          <span className="text-[11px] text-neutral-400 font-medium">{f}</span>
-          <div className="h-8 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
-            <motion.div
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500/20 to-transparent"
-              initial={{ width: 0 }}
-              animate={{ width: "60%" }}
-              transition={{ delay: i * 0.15 + 0.3, duration: 0.6 }}
-            />
-          </div>
-        </motion.div>
-      ))}
-      {/* progress bar */}
-      <div className="pt-2">
-        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-          <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
-            initial={{ width: 0 }}
-            animate={{ width: "75%" }}
-            transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-          />
-        </div>
-        <span className="text-[10px] text-neutral-500 mt-1 block text-right">75% complete</span>
-      </div>
-    </div>
-  );
-}
-
-function CreditGaugeVisual() {
-  const score = 742;
-  const circumference = 2 * Math.PI * 54;
-  const pct = (score - 300) / 550; // 300-850 range
-
-  return (
-    <div className="flex flex-col items-center gap-2">
-      <svg width="140" height="90" viewBox="0 0 140 90" className="overflow-visible">
-        {/* background arc */}
-        <path
-          d="M 10 80 A 54 54 0 0 1 130 80"
-          fill="none"
-          stroke="rgba(255,255,255,0.06)"
-          strokeWidth="10"
-          strokeLinecap="round"
-        />
-        {/* animated arc */}
-        <motion.path
-          d="M 10 80 A 54 54 0 0 1 130 80"
-          fill="none"
-          stroke="url(#gaugeGrad)"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeDasharray={circumference / 2}
-          initial={{ strokeDashoffset: circumference / 2 }}
-          animate={{ strokeDashoffset: (circumference / 2) * (1 - pct) }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-        />
-        <defs>
-          <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#06b6d4" />
-            <stop offset="100%" stopColor="#3b82f6" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <motion.span
-        className="text-3xl font-bold text-white -mt-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        <Counter target={score} />
-      </motion.span>
-      <span className="text-[11px] text-neutral-400">Credit Score</span>
-    </div>
-  );
-}
-
-function RestorationVisual() {
-  const items = [
-    "Late payment – Experian",
-    "Collection account – TransUnion",
-    "Hard inquiry – Equifax",
-    "Charge-off – Experian",
-  ];
-  return (
-    <div className="space-y-2.5 w-full max-w-xs mx-auto">
-      {items.map((item, i) => (
-        <motion.div
-          key={item}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: i * 0.3 }}
-          className="flex items-center gap-2"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: i * 0.3 + 0.4, type: "spring", stiffness: 300 }}
-            className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center"
-          >
-            <Check className="w-3 h-3 text-emerald-400" />
-          </motion.div>
-          <motion.span
-            className="text-sm text-neutral-300"
-            initial={{ textDecoration: "none" }}
-            animate={{ textDecoration: "line-through", color: "rgba(163,163,163,0.5)" }}
-            transition={{ delay: i * 0.3 + 0.5, duration: 0.3 }}
-          >
-            {item}
-          </motion.span>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-function LenderMatchVisual() {
-  const logos = [
-    { src: logoChase, name: "Chase" },
-    { src: logoBoa, name: "Bank of America" },
-    { src: logoNavyFed, name: "Navy Federal" },
-    { src: logoUsBank, name: "US Bank" },
-    { src: logoTruist, name: "Truist" },
-  ];
-  return (
-    <div className="flex flex-wrap justify-center gap-3">
-      {logos.map((l, i) => (
-        <motion.div
-          key={l.name}
-          initial={{ opacity: 0, y: 20, rotate: -5 }}
-          animate={{ opacity: 1, y: 0, rotate: 0 }}
-          transition={{ delay: i * 0.15, type: "spring", stiffness: 200 }}
-          className="w-20 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-2 backdrop-blur-sm"
-        >
-          <img src={l.src} alt={l.name} className="h-5 w-auto object-contain brightness-0 invert opacity-80" />
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-function GetFundedVisual() {
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-        className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
-      >
-        $<Counter target={250000} prefix="" />
-      </motion.div>
-      <span className="text-sm text-neutral-400">in Available Funding</span>
-      {/* particles */}
-      <div className="relative w-full h-8">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1.5 h-1.5 rounded-full"
-            style={{
-              left: `${10 + Math.random() * 80}%`,
-              background: ["#06b6d4", "#3b82f6", "#8b5cf6", "#10b981"][i % 4],
-            }}
-            initial={{ y: 0, opacity: 1 }}
-            animate={{ y: -40 - Math.random() * 30, opacity: 0, x: (Math.random() - 0.5) * 40 }}
-            transition={{ delay: 0.5 + i * 0.08, duration: 0.8, ease: "easeOut" }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const VISUALS = [AssessmentVisual, CreditGaugeVisual, RestorationVisual, LenderMatchVisual, GetFundedVisual];
-
-/* ── Animated Counter ── */
-function Counter({ target, prefix }: { target: number; prefix?: string }) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    let start = 0;
-    const duration = 1200;
-    const step = (ts: number) => {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      setVal(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    const id = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(id);
-  }, [target]);
-  return <>{prefix !== undefined ? prefix : ""}{val.toLocaleString()}</>;
-}
+const VISUALS = [AssessmentVisual, CreditAnalysisVisual, RestorationVisual, LenderMatchVisual, GetFundedVisual];
 
 /* ── Main Component ── */
 export default function FundingJourney() {
@@ -331,7 +128,7 @@ export default function FundingJourney() {
               <div className="w-24 h-1 rounded-full bg-white/10" />
             </div>
 
-            <div className="px-6 sm:px-10 pb-8 pt-4 min-h-[340px] flex flex-col">
+            <div className="px-6 sm:px-10 pb-8 pt-4 min-h-[420px] flex flex-col">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
