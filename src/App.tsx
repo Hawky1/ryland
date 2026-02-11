@@ -14,6 +14,7 @@ import CCPA from "./pages/CCPA";
 import TSRCompliance from "./pages/TSRCompliance";
 import Disclaimers from "./pages/Disclaimers";
 import CookiePolicy from "./pages/CookiePolicy";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/store" element={<Store />} />
           <Route path="/product/:handle" element={<ProductDetail />} />
