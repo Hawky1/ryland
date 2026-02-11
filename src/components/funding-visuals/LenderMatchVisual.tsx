@@ -25,19 +25,19 @@ export default function LenderMatchVisual() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
-          className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 text-center flex-1 flex flex-col justify-center"
+           className="rounded-xl bg-white/5 border border-white/10 p-5 text-center flex-1 flex flex-col justify-center"
         >
-          <span className="text-sm text-slate-500 block">Credit Lines</span>
-          <span className="text-4xl font-black text-slate-900"><Counter target={7} /> Approved</span>
+          <span className="text-sm text-neutral-400 block">Credit Lines</span>
+          <span className="text-4xl font-black text-white"><Counter target={7} /> Approved</span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
-          className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 text-center flex-1 flex flex-col justify-center"
+          className="rounded-xl bg-white/5 border border-white/10 p-5 text-center flex-1 flex flex-col justify-center"
         >
-          <span className="text-sm text-slate-500 block">Total Available</span>
-          <span className="text-4xl font-black text-cyan-600">$<Counter target={125000} /></span>
+          <span className="text-sm text-neutral-400 block">Total Available</span>
+          <span className="text-4xl font-black text-cyan-400">$<Counter target={125000} /></span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}

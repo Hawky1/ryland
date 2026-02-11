@@ -96,7 +96,7 @@ export default function FundingJourney() {
             </div>
 
             {/* Step bar inside card */}
-            <div className="flex items-center justify-center gap-0 overflow-x-auto px-6 pt-4 pb-2 relative z-10">
+            <div className="flex items-center justify-center gap-0 px-3 sm:px-6 pt-4 pb-2 relative z-10">
               {STEPS.map((s, i) => (
                 <div key={i} className="flex items-center">
                   <button
@@ -104,7 +104,7 @@ export default function FundingJourney() {
                     className="flex flex-col items-center gap-1.5 group relative"
                   >
                     <motion.div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border transition-colors duration-300 ${
+                      className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs font-bold border transition-colors duration-300 ${
                         i <= active
                           ? "bg-gradient-to-br from-cyan-500 to-blue-600 border-cyan-400/50 text-white shadow-[0_0_16px_rgba(6,182,212,0.4)]"
                           : "bg-white/5 border-white/10 text-neutral-500"
@@ -114,12 +114,12 @@ export default function FundingJourney() {
                     >
                       {i + 1}
                     </motion.div>
-                    <span className={`text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
+                    <span className={`hidden sm:block text-sm font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
                       {s.title}
                     </span>
                   </button>
                   {i < STEPS.length - 1 && (
-                    <div className="w-8 sm:w-14 h-0.5 mx-1 rounded-full bg-white/5 relative overflow-hidden self-start mt-[18px]">
+                    <div className="w-4 sm:w-14 h-0.5 mx-0.5 sm:mx-1 rounded-full bg-white/5 relative overflow-hidden self-start mt-[14px] sm:mt-[18px]">
                       <motion.div
                         className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
                         animate={{ width: i < active ? "100%" : "0%" }}
