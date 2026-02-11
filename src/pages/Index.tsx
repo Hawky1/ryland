@@ -401,7 +401,7 @@ const Index = () => {
       </div>
 
       {/* NAVBAR */}
-      <header className="sticky z-20 top-0">
+      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
         <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-6 pb-4 pl-6 items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
@@ -441,7 +441,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-slate-800">
+      <section className="relative max-w-7xl mx-auto mt-8 pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-slate-800">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
