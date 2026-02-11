@@ -1,68 +1,66 @@
 
 
-# Create the About Gene Ryland Page (`/about`)
+# Redesign the Wealth Ecosystem Service Cards
 
 ## Overview
-A new dedicated About page at `/about` that mirrors the homepage's exact design system -- same navbar, footer, InfiniteGrid background, typography, color palette, and motion language -- populated with Gene Ryland's authority-building content.
+Replace the current full-bleed background image cards with a modern, clean card design featuring the uploaded isometric 3D illustrations, bold titles, and brief service descriptions.
 
-## Page Sections
+## Current State
+The six service cards currently use full-background photos (service-funding.png, etc.) in aspect-square containers with overlaid text and a blue gradient CTA button. The user wants to move away from this image-heavy approach.
 
-### 1. Hero Section
-- Same split-layout card container as the homepage hero (rounded-2xl, Chase blue gradient overlay, border-[#004E8C])
-- Left side: Headline "The Architect of Capital: Bridging the Gap Between Banks and Visionaries" in the luxury gradient typography (white-to-zinc-500)
-- Sub-headline: "Helping entrepreneurs unlock capital to build, scale, and grow their businesses"
-- "As Seen On" media logos (FOX, USA Today, etc.) below the sub-headline
-- Right side: Gene Ryland's portrait image with the signature name block underneath
+## New Card Design
 
-### 2. Stats Bar
-- 4-column grid of animated counters (reusing the existing Counter component)
-- Metrics: $150M+ Funding Secured | 10,000+ Entrepreneurs Helped | 8+ Years Experience | 0% APR Introductory Rates
-- Styled in the Chase blue gradient card with white text, matching the homepage about section's stat row
+Each card will feature:
+- A clean white/light background with a subtle border and soft shadow
+- The isometric 3D illustration centered at the top (sized ~120px)
+- A bold, dark title below the illustration
+- A 1-2 sentence description in muted text
+- A blue gradient CTA button at the bottom
+- Smooth hover animation (slight lift + shadow increase via Framer Motion)
+- Rounded-2xl corners to match the site's existing card language
 
-### 3. The Founder's Journey
-- Clean, wide-column text section on the white background
-- Detailed narrative about Gene's background as a serial entrepreneur and funding strategist
-- Mentions media features (FOX, USA Today, Digital Journal, MarketWatch)
-- Uses the same text styling and spacing patterns from the homepage
+### Icon-to-Service Mapping
+| Service | Icon File | Description |
+|---------|-----------|-------------|
+| Get Business Funding | Bank building (row-1-column-1) | Secure $50K-$250K in 0% APR business credit lines with no revenue or tax returns required. |
+| Repair My Credit | Target (row-2-column-3) | Done-for-you credit restoration with negative item removals and dispute management in 35-90 days. |
+| Join The Community | Trophy (row-1-column-3) | Access our private Skool network and learn to invest your funding into high-ROI digital businesses. |
+| Shop Digital Products | Wallet (row-2-column-1) | Browse our curated collection of eBooks and digital resources to accelerate your business growth. |
+| Become A Partner | Briefcase (row-1-column-2) | Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join. |
+| Schedule A Consultation | Office buildings (row-2-column-2) | Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan. |
 
-### 4. The Ryland Pillars (3-Card Grid)
-- Three cards in the same Chase blue gradient style (from-[#0060A9] to-[#003A70], border-[#004E8C])
-- Card 1: "Strategic Restoration" -- TSR-compliant credit optimization, 35-90 day results
-- Card 2: "Business Funding" -- $50K-$250K in business credit lines, no tax returns required
-- Card 3: "Private Community" -- Skool platform for high-ROI business training
-- Each card has an icon, title, and description
+Note: The safe icon (row-3-column-3) will not be used in this initial redesign but will be saved as an asset for future use.
 
-### 5. CTA Footer Section
-- Same Chase blue gradient card as the homepage CTA
-- Two primary buttons: "Get Funded" (links to /) and "Become A Partner" (links to /partners)
-- Tagline: "Join thousands of entrepreneurs building their future with Ryland Partners"
-
-## Global Elements (Copied from Homepage)
-- Identical sticky navbar with nav links and shiny-cta button
-- InfiniteGrid animated background
-- Gradient-blur top fade effect
-- Full footer with social links, product/company/legal columns, and copyright
-- Same Google Fonts (Geist, Manrope, Inter)
-- Same inline CSS keyframes and utility classes
+## Layout
+- Same 3-column grid on desktop (lg:grid-cols-3), 2 columns on tablet (sm:grid-cols-2), 1 column on mobile
+- Cards will no longer be aspect-square -- they'll use natural content height for a cleaner look
+- Consistent padding and spacing across all cards
 
 ## Technical Details
 
-### Files to Create
-- `src/pages/About.tsx` -- The full About page component, structured identically to `Index.tsx` (navbar + content + footer in one file to match the existing pattern)
+### Files to Create (Assets)
+Copy uploaded icons into `src/assets/`:
+- `src/assets/icon-funding.png` (bank building)
+- `src/assets/icon-credit.png` (target)
+- `src/assets/icon-community.png` (trophy)
+- `src/assets/icon-products.png` (wallet)
+- `src/assets/icon-partner.png` (briefcase)
+- `src/assets/icon-consultation.png` (office buildings)
+- `src/assets/icon-vault.png` (safe -- saved for future use)
 
 ### Files to Modify
-- `src/App.tsx` -- Add `Route path="/about"` pointing to the new About page
+- `src/pages/Index.tsx` -- Replace the Wealth Ecosystem section (lines ~782-818) with the new card design. Remove old service image imports (service-funding, service-credit, etc.) and add new icon imports.
 
-### Dependencies
-- Reuses the existing `Counter` component from `src/components/funding-visuals/Counter.tsx`
-- Reuses the existing `InfiniteGrid` component
-- Imports the same asset images (logoDark, heroPortrait, geneRylandAbout, asSeenOn, etc.)
-- No new dependencies required
+### Card Styling
+- Container: `bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300`
+- On hover: translateY(-4px) lift effect via Framer Motion
+- Icon: `w-28 h-28 mx-auto mb-6 object-contain`
+- Title: `text-xl font-bold text-slate-900 text-center mb-3`
+- Description: `text-sm text-slate-500 text-center mb-6 leading-relaxed`
+- CTA Button: Same blue gradient rounded-full button already used across the site
 
-### Design Tokens (Matching Homepage Exactly)
-- Primary blue: #0060A9
-- Deep navy: #003A70
-- Mid-tone border: #004E8C
-- Card style: `bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl`
-- Headline gradient: `bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent`
-- CTA button: `bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full`
+### Section Header (New Addition)
+A section heading will be added above the grid:
+- "The Wealth Ecosystem" in the site's standard h2 style (text-3xl sm:text-5xl, font-medium, tracking-tighter)
+- Subtitle: "Everything you need to build, fund, and scale your business" in muted slate text
+
