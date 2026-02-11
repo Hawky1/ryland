@@ -71,7 +71,7 @@ const ProductDetail = () => {
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
+            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-4">
             <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900">Store</Link>
