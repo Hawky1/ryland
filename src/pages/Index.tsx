@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { VolumeX, Volume2 } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
+import logoDark from "@/assets/logo-dark.png";
 import heroPortrait from "@/assets/hero-portrait.png";
 import asSeenOn from "@/assets/as-seen-on.png";
 import geneRylandAbout from "@/assets/gene-ryland-about.png";
@@ -37,8 +38,6 @@ const Index = () => {
     menuBtn?.addEventListener('click', openMenu);
     closeMenuBtn?.addEventListener('click', closeMenu);
     mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-
 
     // FAQ
     const faqItems = document.querySelectorAll('.faq-item');
@@ -131,7 +130,7 @@ const Index = () => {
           pointer-events: none;
         }
 
-        .gradient-blur>div,
+        .gradient-blur>,
         .gradient-blur::before,
         .gradient-blur::after {
           position: absolute;
@@ -405,7 +404,7 @@ const Index = () => {
       <header className="sticky z-20 top-0">
         <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-6 pb-4 pl-6 items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
+            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
           </div>
           <nav className="hidden gap-10 md:flex items-center">
             <a href="#features" className="nav-link hover:text-slate-900 text-sm text-slate-600 relative">Features</a>
@@ -549,46 +548,69 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Funding Journey */}
-      <FundingJourney />
+      {/* About section — moved up for authority */}
+      <section className="overflow-hidden mt-40 mb-40 pt-24 pb-24 relative" id="about">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
 
-      {/* Wealth ecosystem section */}
-      <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
-        <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-xs sm:text-sm text-slate-500 mb-4">Meet The Founder</p>
+            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-slate-900 mb-6" style={{ maskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))' }}>
+              Gene Ryland
+            </h2>
+            <p className="text-lg text-slate-500">
+              CEO &amp; Founder, Ryland Partners
+            </p>
+          </div>
 
-            {[
-              { img: serviceFunding, title: "GET BUSINESS\nFUNDING", cta: "Get Business Funding" },
-              { img: serviceCredit, title: "REPAIR\nMY CREDIT", cta: "Repair My Credit" },
-              { img: serviceCommunity, title: "JOIN THE\nCOMMUNITY", cta: "Join The Community" },
-              { img: serviceProducts, title: "SHOP DIGITAL\nPRODUCTS", cta: "Shop Digital Products" },
-              { img: servicePartner, title: "BECOME\nA PARTNER", cta: "Become A Partner" },
-              { img: serviceConsultation, title: "SCHEDULE A\nCONSULTATION", cta: "Schedule A Consultation" },
-            ].map((card, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 aspect-square">
-                <img
-                  src={card.img}
-                  alt={card.cta}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10" />
-                <div className="relative z-10 flex flex-col items-center justify-center h-full p-6">
-                  <h3 className="text-3xl sm:text-4xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-pre-line leading-tight">
-                    {card.title}
-                  </h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="relative group flex justify-center">
+              <div className="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full transition-all duration-700 group-hover:bg-blue-500/15"></div>
+              <img
+                src={geneRylandAbout}
+                alt="Gene Ryland — Founder of Ryland Partners"
+                className="relative z-10 rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 w-full max-w-md object-cover shadow-2xl"
+              />
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-slate-600 leading-relaxed text-base">
+                Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
+              </p>
+              <p className="text-slate-500 leading-relaxed text-base">
+                After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
+              </p>
+              <p className="text-slate-500 leading-relaxed text-base">
+                Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
+              </p>
+
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200">
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">$150M+</p>
+                  <p className="text-xs text-slate-500 mt-1">Funding Secured</p>
                 </div>
-                <a
-                  href="#cta"
-                  className="absolute bottom-6 left-6 right-6 z-10 inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center"
-                >
-                  {card.cta}
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">10K+</p>
+                  <p className="text-xs text-slate-500 mt-1">Entrepreneurs Helped</p>
+                </div>
+                <div>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">8+</p>
+                  <p className="text-xs text-slate-500 mt-1">Years of Experience</p>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <a href="#cta" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                  Work With Gene
                 </a>
               </div>
-            ))}
-
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Funding Journey */}
+      <FundingJourney />
 
       {/* Success Stories section */}
       <section className="sm:pt-24 md:pt-20 pt-24 pb-20 relative" id="showcase">
@@ -598,7 +620,6 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 pt-0 pr-0 pb-0 pl-0 space-x-5">
-            {/* Info card */}
             <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-slate-900 ring-white/10 ring-1 rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
               <div className="opacity-[0.07] absolute top-0 right-0 bottom-0 left-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
               <div className="flex gap-3 gap-x-3 gap-y-3 items-center">
@@ -614,7 +635,6 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Gallery */}
             <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
               <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-slate-900 text-white">
                 <div className="relative">
@@ -651,71 +671,6 @@ const Index = () => {
                   <h4 className="text-sm font-medium text-slate-100" style={{ fontFamily: "'Inter',sans-serif" }}>The Digital Empire</h4>
                   <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>$10k/mo Shopify store scaled with business credit</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About section */}
-      <section className="overflow-hidden mt-40 mb-40 pt-24 pb-24 relative" id="about">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
-
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-xs sm:text-sm text-slate-500 mb-4">Meet The Founder</p>
-            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-slate-900 mb-6" style={{ maskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))' }}>
-              Gene Ryland
-            </h2>
-            <p className="text-lg text-slate-500">
-              CEO &amp; Founder, Ryland Partners
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image */}
-            <div className="relative group flex justify-center">
-              <div className="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full transition-all duration-700 group-hover:bg-blue-500/15"></div>
-              <img
-                src={geneRylandAbout}
-                alt="Gene Ryland — Founder of Ryland Partners"
-                className="relative z-10 rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 w-full max-w-md object-cover shadow-2xl"
-              />
-            </div>
-
-            {/* Bio */}
-            <div className="space-y-6">
-              <p className="text-slate-600 leading-relaxed text-base">
-                Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
-              </p>
-              <p className="text-slate-500 leading-relaxed text-base">
-                After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
-              </p>
-              <p className="text-slate-500 leading-relaxed text-base">
-                Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
-              </p>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200">
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">$150M+</p>
-                  <p className="text-xs text-slate-500 mt-1">Funding Secured</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">10K+</p>
-                  <p className="text-xs text-slate-500 mt-1">Entrepreneurs Helped</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">8+</p>
-                  <p className="text-xs text-slate-500 mt-1">Years of Experience</p>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="pt-4">
-                <a href="#cta" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Work With Gene
-                </a>
               </div>
             </div>
           </div>
@@ -819,6 +774,44 @@ const Index = () => {
                 </p>
               </article>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Wealth ecosystem section */}
+      <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
+        <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            {[
+              { img: serviceFunding, title: "GET BUSINESS\nFUNDING", cta: "Get Business Funding" },
+              { img: serviceCredit, title: "REPAIR\nMY CREDIT", cta: "Repair My Credit" },
+              { img: serviceCommunity, title: "JOIN THE\nCOMMUNITY", cta: "Join The Community" },
+              { img: serviceProducts, title: "SHOP DIGITAL\nPRODUCTS", cta: "Shop Digital Products" },
+              { img: servicePartner, title: "BECOME\nA PARTNER", cta: "Become A Partner" },
+              { img: serviceConsultation, title: "SCHEDULE A\nCONSULTATION", cta: "Schedule A Consultation" },
+            ].map((card, i) => (
+              <div key={i} className="group relative overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5 aspect-square">
+                <img
+                  src={card.img}
+                  alt={card.cta}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10" />
+                <div className="relative z-10 flex flex-col items-center justify-center h-full p-6">
+                  <h3 className="text-3xl sm:text-4xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-pre-line leading-tight">
+                    {card.title}
+                  </h3>
+                </div>
+                <a
+                  href="#cta"
+                  className="absolute bottom-6 left-6 right-6 z-10 inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center"
+                >
+                  {card.cta}
+                </a>
+              </div>
+            ))}
+
           </div>
         </div>
       </section>
@@ -928,7 +921,7 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
+                <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
               </div>
               <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
               <div className="flex items-center gap-3">
