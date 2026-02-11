@@ -6,6 +6,7 @@ import CreditAnalysisVisual from "./funding-visuals/CreditAnalysisVisual";
 import RestorationVisual from "./funding-visuals/RestorationVisual";
 import LenderMatchVisual from "./funding-visuals/LenderMatchVisual";
 import GetFundedVisual from "./funding-visuals/GetFundedVisual";
+import HlsVideoBackground from "./HlsVideoBackground";
 
 const STEPS = [
   {
@@ -88,18 +89,7 @@ export default function FundingJourney() {
         >
           <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
             {/* Background video matching hero */}
-            <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              >
-                <source src="/videos/hero-bg.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-[#003A70]/90" />
-            </div>
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
             {/* notch */}
             <div className="flex justify-center pt-3 pb-1 relative z-10">
               <div className="w-24 h-1 rounded-full bg-white/10" />
