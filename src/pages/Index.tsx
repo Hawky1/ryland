@@ -12,6 +12,7 @@ import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import FundingJourney from "@/components/FundingJourney";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 import iconFunding from "@/assets/icon-funding.png";
 import iconCredit from "@/assets/icon-credit.png";
 import iconCommunity from "@/assets/icon-community.png";
@@ -444,30 +445,7 @@ const Index = () => {
       {/* HERO */}
       <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         {/* Background Video */}
-        <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
-          <video
-            ref={(el) => {
-              if (el && typeof window !== 'undefined') {
-                import('hls.js').then(({ default: Hls }) => {
-                  if (Hls.isSupported()) {
-                    const hls = new Hls({ enableWorker: false });
-                    hls.loadSource('https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8');
-                    hls.attachMedia(el);
-                  } else if (el.canPlayType('application/vnd.apple.mpegurl')) {
-                    el.src = 'https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8';
-                  }
-                });
-              }
-            }}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        </div>
-        {/* Gradient overlay for text readability - dark blue to match logo */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#003A70]/95 via-[#003A70]/75 to-[#004E8C]/50 rounded-2xl" />
+        <HlsVideoBackground overlay="bg-gradient-to-r from-[#003A70]/95 via-[#003A70]/75 to-[#004E8C]/50" className="rounded-2xl" />
 
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
           {/* Left - text + CTAs */}
@@ -832,8 +810,9 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-20 sm:mt-40 mx-4 sm:mx-auto pt-6 px-4 sm:px-6 pb-6 shadow-2xl text-white">
-        <div className="mb-8 flex items-center justify-between">
+      <section className="md:p-10 max-w-7xl border border-[#004E8C] rounded-3xl mt-20 sm:mt-40 mx-4 sm:mx-auto pt-6 px-4 sm:px-6 pb-6 shadow-2xl text-white relative overflow-hidden">
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+        <div className="mb-8 flex items-center justify-between relative z-10">
           <div className="flex items-center gap-3">
             <div>
               <h1 className="sm:text-5xl text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)' }}>Ryland Partners — Help &amp; FAQs</h1>
@@ -842,7 +821,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 relative z-10">
           <div className="faq-item rounded-2xl border border-white/10 bg-white/5 p-4 md:p-5">
             <button type="button" className="faq-trigger flex text-left w-full gap-x-4 gap-y-4 items-center justify-between">
               <span className="text-base md:text-lg font-semibold leading-6 tracking-tight text-slate-100">Do I need revenue to get funded?</span>
@@ -892,7 +871,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 sm:flex-row relative z-10">
           <div className="flex items-center gap-3">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/10">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-sky-300"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
@@ -914,9 +893,10 @@ const Index = () => {
       {/* CTA */}
       <section className="overflow-hidden my-10 relative" id="cta">
         <div className="max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
-          <div className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
+            <div className="md:p-10 max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white relative overflow-hidden">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
             
-            <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 gap-x-6 gap-y-6 items-center">
+            <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 gap-x-6 gap-y-6 items-center relative z-10">
               <div>
                 <h3 className="text-2xl font-semibold tracking-tight text-white">Ready to scale?</h3>
                 <p className="mt-2 max-w-prose text-slate-200">Join thousands of entrepreneurs building their future with Ryland Partners.</p>
