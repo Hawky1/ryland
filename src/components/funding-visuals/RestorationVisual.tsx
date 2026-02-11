@@ -1,115 +1,203 @@
 import { motion } from "framer-motion";
-import { Check, TrendingUp } from "lucide-react";
+import { Check, TrendingUp, ShieldCheck, Trash2, ArrowUpRight } from "lucide-react";
 import Counter from "./Counter";
 
 const disputes = [
-  "Late payment – Experian",
-  "Collection acct – TransUnion",
-  "Hard inquiry – Equifax",
-  "Charge-off – Experian",
-  "Medical debt – TransUnion",
+  { item: "Late Payment – Experian", result: "Collection Removed", bureau: "EXP" },
+  { item: "Collection Acct – TransUnion", result: "Account Deleted", bureau: "TU" },
+  { item: "Hard Inquiry – Equifax", result: "Inquiry Removed", bureau: "EQ" },
+  { item: "Charge-Off – Experian", result: "Credit Improved", bureau: "EXP" },
+  { item: "Medical Debt – TransUnion", result: "Balance Cleared", bureau: "TU" },
+  { item: "Late Payment – Equifax", result: "Collection Removed", bureau: "EQ" },
+];
+
+const bureauScores = [
+  { name: "TransUnion", before: 578, after: 716, change: +138 },
+  { name: "Equifax", before: 585, after: 722, change: +137 },
+  { name: "Experian", before: 582, after: 718, change: +136 },
 ];
 
 export default function RestorationVisual() {
   const resolved = 12;
   const total = 15;
-  const circumference = 2 * Math.PI * 40;
+  const circumference = 2 * Math.PI * 44;
   const pct = resolved / total;
 
   return (
-    <div className="w-full grid grid-cols-3 gap-3">
-      {/* Circular progress */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 200 }}
-        className="rounded-xl bg-white/5 border border-white/10 p-4 flex flex-col items-center justify-center"
-      >
-        <svg width="90" height="90" viewBox="0 0 100 100" className="overflow-visible">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="6" />
-          <motion.circle
-            cx="50" cy="50" r="40" fill="none"
-            stroke="url(#restoreGrad)"
-            strokeWidth="6" strokeLinecap="round"
-            strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={{ strokeDashoffset: circumference * (1 - pct) }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-            transform="rotate(-90 50 50)"
-          />
-          <defs>
-            <linearGradient id="restoreGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#10b981" />
-              <stop offset="100%" stopColor="#06b6d4" />
-            </linearGradient>
-          </defs>
-        </svg>
+    <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-3">
+      {/* LEFT: Progress Ring + Stats */}
+      <div className="flex flex-col gap-3">
         <motion.div
-          className="text-center -mt-14"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 200 }}
+          className="rounded-xl bg-white/5 border border-white/10 p-5 flex flex-col items-center justify-center flex-1 relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent" />
+
+          <svg width="110" height="110" viewBox="0 0 100 100" className="overflow-visible relative z-10">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="5" />
+            <motion.circle
+              cx="50" cy="50" r="44" fill="none"
+              stroke="url(#restoreGrad)"
+              strokeWidth="5" strokeLinecap="round"
+              strokeDasharray={circumference}
+              initial={{ strokeDashoffset: circumference }}
+              animate={{ strokeDashoffset: circumference * (1 - pct) }}
+              transition={{ duration: 1.8, ease: "easeOut", delay: 0.3 }}
+              transform="rotate(-90 50 50)"
+            />
+            <defs>
+              <linearGradient id="restoreGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#10b981" />
+                <stop offset="100%" stopColor="#06b6d4" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <motion.div
+            className="text-center -mt-16 relative z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <span className="text-2xl font-black text-white"><Counter target={resolved} />/{total}</span>
+            <span className="text-[10px] text-neutral-400 block">Items Resolved</span>
+          </motion.div>
+        </motion.div>
+
+        {/* Summary badges */}
+        <div className="grid grid-cols-2 gap-2">
+          <motion.div
+            className="rounded-lg bg-white/5 border border-white/10 p-2.5 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, type: "spring" }}
+          >
+            <Trash2 className="w-3.5 h-3.5 text-red-400 mx-auto mb-1" />
+            <span className="text-sm font-bold text-white block"><Counter target={8} /></span>
+            <span className="text-[8px] text-neutral-500">Negatives Removed</span>
+          </motion.div>
+          <motion.div
+            className="rounded-lg bg-white/5 border border-white/10 p-2.5 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.35, type: "spring" }}
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 mx-auto mb-1" />
+            <span className="text-sm font-bold text-white block"><Counter target={4} /></span>
+            <span className="text-[8px] text-neutral-500">Disputes Won</span>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* CENTER: Dispute List */}
+      <motion.div
+        className="rounded-xl bg-white/5 border border-white/10 p-4 flex flex-col relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Dispute Results</span>
+
+        <div className="space-y-2.5 flex-1">
+          {disputes.map((d, i) => (
+            <motion.div
+              key={i}
+              className="flex items-start gap-2"
+              initial={{ opacity: 0, x: 15 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 + i * 0.18, type: "spring" }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center flex-shrink-0 mt-0.5"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5 + i * 0.18, type: "spring", stiffness: 400 }}
+              >
+                <Check className="w-2.5 h-2.5 text-emerald-400" />
+              </motion.div>
+              <div className="flex-1 min-w-0">
+                <motion.span
+                  className="text-[11px] text-neutral-400 line-through block truncate"
+                  initial={{ textDecorationColor: "transparent" }}
+                  animate={{ textDecorationColor: "rgba(163,163,163,0.4)" }}
+                  transition={{ delay: 0.6 + i * 0.18, duration: 0.4 }}
+                >
+                  {d.item}
+                </motion.span>
+                <motion.span
+                  className="text-[10px] font-semibold text-emerald-400"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7 + i * 0.18 }}
+                >
+                  ✓ {d.result}
+                </motion.span>
+              </div>
+              <span className="text-[8px] bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-neutral-500 flex-shrink-0">
+                {d.bureau}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-3 pt-2 border-t border-white/5 flex items-center gap-1.5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 2 }}
         >
-          <span className="text-xl font-bold text-white"><Counter target={resolved} />/{total}</span>
-          <span className="text-[9px] text-neutral-400 block">Items Resolved</span>
+          <motion.div
+            className="w-2 h-2 rounded-full bg-emerald-400"
+            animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          />
+          <span className="text-[9px] text-neutral-500">All disputes processed in 30 days</span>
         </motion.div>
       </motion.div>
 
-      {/* Dispute checklist */}
-      <div className="rounded-xl bg-white/5 border border-white/10 p-3 space-y-2">
-        <span className="text-[10px] text-neutral-400 font-medium block mb-1">Disputes</span>
-        {disputes.map((item, i) => (
+      {/* RIGHT: Bureau Score Improvements */}
+      <div className="flex flex-col gap-3">
+        {bureauScores.map((b, i) => (
           <motion.div
-            key={item}
-            initial={{ opacity: 0, x: 10 }}
+            key={b.name}
+            className="rounded-xl bg-white/5 border border-white/10 p-3 flex-1 flex flex-col justify-center relative overflow-hidden"
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 + i * 0.25 }}
-            className="flex items-center gap-1.5"
+            transition={{ delay: 0.5 + i * 0.15, type: "spring" }}
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.3 + i * 0.25 + 0.2, type: "spring", stiffness: 400 }}
-              className="flex-shrink-0 w-4 h-4 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center"
-            >
-              <Check className="w-2.5 h-2.5 text-emerald-400" />
-            </motion.div>
-            <motion.span
-              className="text-[10px] text-neutral-300"
-              animate={{ textDecoration: "line-through", color: "rgba(163,163,163,0.4)" }}
-              transition={{ delay: 0.3 + i * 0.25 + 0.3, duration: 0.3 }}
-            >
-              {item}
-            </motion.span>
+            <span className="text-[10px] text-neutral-500 mb-1.5">{b.name}</span>
+            <div className="flex items-end justify-between">
+              <div>
+                <span className="text-[9px] text-neutral-600 block">Before</span>
+                <span className="text-lg font-bold text-red-400"><Counter target={b.before} /></span>
+              </div>
+              <motion.div
+                className="flex items-center gap-0.5 mb-1"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1 + i * 0.15, type: "spring" }}
+              >
+                <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-xs font-bold text-emerald-400">+{b.change}</span>
+              </motion.div>
+              <div className="text-right">
+                <span className="text-[9px] text-neutral-600 block">After</span>
+                <span className="text-lg font-bold text-emerald-400"><Counter target={b.after} /></span>
+              </div>
+            </div>
+            {/* Progress bar */}
+            <div className="mt-2 h-1 rounded-full bg-white/5 overflow-hidden">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-red-500 via-amber-400 to-emerald-400"
+                initial={{ width: "30%" }}
+                animate={{ width: "85%" }}
+                transition={{ delay: 0.8 + i * 0.15, duration: 1.2, ease: "easeOut" }}
+              />
+            </div>
           </motion.div>
         ))}
       </div>
-
-      {/* Score improvement */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, type: "spring" }}
-        className="rounded-xl bg-white/5 border border-white/10 p-4 flex flex-col items-center justify-center gap-2"
-      >
-        <div className="text-center">
-          <span className="text-[10px] text-neutral-500 block">Before</span>
-          <span className="text-lg font-bold text-red-400"><Counter target={582} /></span>
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, type: "spring" }}
-          className="flex items-center gap-1"
-        >
-          <TrendingUp className="w-4 h-4 text-emerald-400" />
-          <span className="text-sm font-bold text-emerald-400">+<Counter target={138} /> pts</span>
-        </motion.div>
-        <div className="text-center">
-          <span className="text-[10px] text-neutral-500 block">After</span>
-          <span className="text-lg font-bold text-emerald-400"><Counter target={720} /></span>
-        </div>
-      </motion.div>
     </div>
   );
 }
