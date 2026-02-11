@@ -404,7 +404,7 @@ const Index = () => {
       <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
         <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-4 sm:pr-6 pb-4 pl-4 sm:pl-6 items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
+            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
           </div>
           <nav className="hidden gap-10 md:flex items-center">
             <a href="#features" className="nav-link hover:text-slate-900 text-sm text-slate-600 relative">Features</a>
@@ -922,7 +922,7 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
+                <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
               </div>
               <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
               <div className="flex items-center gap-3">
