@@ -1,57 +1,43 @@
 
 
-## Remove Transparency and Make Dark Sections Fully Opaque
+## Logo Swap, Glassmorphism Navbar, and Spacing Update
 
-Replace all semi-transparent borders, rings, overlays, and backgrounds with solid opaque equivalents so the dark cards and hero section stand out crisply against the white page background.
-
----
-
-### Changes Overview
-
-Every dark card/section currently uses `border-white/10`, `ring-white/5`, `bg-black/60`, and `opacity-40` patterns that create a washed-out, see-through look on the white background. This plan replaces them all with solid values.
+Three focused changes to polish the header area and branding.
 
 ---
 
-### File 1: `src/pages/Index.tsx`
+### 1. Replace Chase Bank Logo with Ryland Partners Logo
 
-**Hero section (line ~444):**
-- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-800`
-- Change video `opacity-40` to `opacity-100` (full visibility)
-- Change gradient overlay `from-black/70 via-black/40 to-transparent` to `from-black/80 via-black/50 to-black/20` (solid dark overlay, no fully transparent edge)
+Copy the uploaded `black_logo-2.png` into the project and use it in place of the Chase Bank logo in the "Trusted Banking Partners" carousel.
 
-**Success Stories cards (lines ~623-674):**
-- Change all `ring-white/10 ring-1` to solid `border border-slate-700`
-- Keep `bg-slate-900` (already solid)
+- Copy `user-uploads://black_logo-2.png` to `src/assets/logo-chase.png` (overwrite the existing Chase logo file)
+- No import changes needed since the file path stays the same
+- Both instances of the Chase logo in the carousel (lines 533 and 540) will automatically pick up the new image
 
-**Testimonial cards (lines ~696-775):**
-- Change `border border-white/10` to `border border-slate-700`
+### 2. Glassmorphism Sticky Navbar
 
-**Services/Wealth Ecosystem cards (line ~794):**
-- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-700`
+The navbar is already `sticky top-0`, but it has no background -- content scrolls behind it visibly. Add a frosted glass effect:
 
-**FAQ section (line ~820):**
-- Change `border-white/10 border` and `ring-white/10 ring-1` to `border border-slate-700`
-- Change inner FAQ items `border border-white/10 bg-white/5` to `border border-white/10 bg-white/5` (these are INSIDE the dark card so they stay as-is -- they look correct on dark bg)
+- Update the `<header>` className from `sticky z-20 top-0` to `sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100`
+- This gives a semi-transparent white background with a strong blur, plus a subtle bottom border separator
 
-**CTA section (line ~902):**
-- Change `border-white/10 border` and `ring-white/10 ring-1` to `border border-slate-700`
+### 3. Add Space Between Navbar and Hero Card
 
-### File 2: `src/components/FundingJourney.tsx`
+Currently the hero section starts immediately after the header with `pt-16` internal padding but no top margin separating it from the nav.
 
-**Card container (line ~89):**
-- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-700`
-- Change video overlay `bg-black/60` to `bg-black/80` (darker, more opaque)
+- Add `mt-8` (32px gap) to the hero `<section>` element on line 444, creating breathing room between the navbar and the hero card
 
 ---
 
-### Technical Summary
+### File: `src/pages/Index.tsx`
 
-| Element | Current (Transparent) | New (Solid) |
-|---|---|---|
-| Dark card borders | `border-white/10` | `border-slate-700` |
-| Card rings | `ring-1 ring-white/5` | removed |
-| Hero video | `opacity-40` | `opacity-100` |
-| Hero overlay | `from-black/70 via-black/40 to-transparent` | `from-black/80 via-black/50 to-black/20` |
-| Funding Journey overlay | `bg-black/60` | `bg-black/80` |
+**Line 404 (header):**
+- Change: `sticky z-20 top-0`
+- To: `sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100`
 
-Elements INSIDE dark cards (FAQ items, step indicators) keep their existing `border-white/10` and `bg-white/5` since those are designed for dark-on-dark contrast and look correct.
+**Line 444 (hero section):**
+- Add `mt-8` to the existing className
+
+**Logo file replacement:**
+- Overwrite `src/assets/logo-chase.png` with the uploaded Ryland Partners logo
+
