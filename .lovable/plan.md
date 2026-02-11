@@ -1,66 +1,129 @@
 
 
-# Redesign the Wealth Ecosystem Service Cards
+# Add 44 Digital Products to Shopify & Redesign Store Page
 
 ## Overview
-Replace the current full-bleed background image cards with a modern, clean card design featuring the uploaded isometric 3D illustrations, bold titles, and brief service descriptions.
+Create all 44 digital products in Shopify with strategic pricing ($17-$27), then rebuild the `/store` page with a premium bundle-organized layout matching the site's design system.
 
-## Current State
-The six service cards currently use full-background photos (service-funding.png, etc.) in aspect-square containers with overlaid text and a blue gradient CTA button. The user wants to move away from this image-heavy approach.
+## Pricing Strategy
 
-## New Card Design
+Products are priced on a tiered basis: basic resources at $17, mid-tier guides at $22, and premium business credit/funding content at $27.
 
-Each card will feature:
-- A clean white/light background with a subtle border and soft shadow
-- The isometric 3D illustration centered at the top (sized ~120px)
-- A bold, dark title below the illustration
-- A 1-2 sentence description in muted text
-- A blue gradient CTA button at the bottom
-- Smooth hover animation (slight lift + shadow increase via Framer Motion)
-- Rounded-2xl corners to match the site's existing card language
+### Bundle 1: CREDIT AUTHORITY BUNDLE (6 products)
+| Product | Price |
+|---------|-------|
+| Ultimate Business Credit Blueprint | $27 |
+| Ultimate Credit Card Lender List | $27 |
+| The Financial Playbook: Your Ultimate Money Resource Guide | $22 |
+| Smart Credit Hacks | $22 |
+| Credit Inquiry Phone Script -- Remove Inquiries Fast | $17 |
+| AI-Powered Credit Dispute Letter Prompts | $17 |
 
-### Icon-to-Service Mapping
-| Service | Icon File | Description |
-|---------|-----------|-------------|
-| Get Business Funding | Bank building (row-1-column-1) | Secure $50K-$250K in 0% APR business credit lines with no revenue or tax returns required. |
-| Repair My Credit | Target (row-2-column-3) | Done-for-you credit restoration with negative item removals and dispute management in 35-90 days. |
-| Join The Community | Trophy (row-1-column-3) | Access our private Skool network and learn to invest your funding into high-ROI digital businesses. |
-| Shop Digital Products | Wallet (row-2-column-1) | Browse our curated collection of eBooks and digital resources to accelerate your business growth. |
-| Become A Partner | Briefcase (row-1-column-2) | Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join. |
-| Schedule A Consultation | Office buildings (row-2-column-2) | Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan. |
+### Bundle 2: CREDIT BUSINESS ACCELERATOR (9 products -- Basic tier)
+| Product | Price |
+|---------|-------|
+| Unlock Credit Potential | $17 |
+| DIY Credit Master Guide | $17 |
+| DIY Credit Repair Workbook | $17 |
+| 13 Ways to Pay Off Debt | $17 |
+| Frugal Living Success Workbook | $17 |
+| Crush $100K Debt Worksheet | $17 |
+| Stop Living Paycheck to Paycheck | $17 |
+| Money Management Worksheet | $17 |
+| 23 Money-Wasting Habits to Break | $17 |
 
-Note: The safe icon (row-3-column-3) will not be used in this initial redesign but will be saved as an asset for future use.
+### Bundle 3: CREDIT BUSINESS FUNDING (6 products -- Premium tier)
+| Product | Price |
+|---------|-------|
+| The "Fundability Factor" Business Assessment & Scorecard | $27 |
+| The Business Funding Application Success Checklist | $27 |
+| The Ultimate Business Credit Card Playbook | $27 |
+| How to Get Up to $150,000 in Funding -- Even with a New LLC | $27 |
+| Fast-Track Vendor Accounts for New Businesses | $27 |
+| How to Get Vehicle Financing with EIN Only | $27 |
 
-## Layout
-- Same 3-column grid on desktop (lg:grid-cols-3), 2 columns on tablet (sm:grid-cols-2), 1 column on mobile
-- Cards will no longer be aspect-square -- they'll use natural content height for a cleaner look
-- Consistent padding and spacing across all cards
+### Bundle 4: CREDIT BUSINESS QUICKSTART (3 products)
+| Product | Price |
+|---------|-------|
+| Business Credit Basics 101 | $17 |
+| How to Get Your First Net-30 Account | $17 |
+| Essential Business Credit Checklist | $17 |
 
-## Technical Details
+### Bundle 5: ULTIMATE CREDIT BUSINESS BUNDLE (16 products)
+| Product | Price |
+|---------|-------|
+| Secret Lenders Database | $27 |
+| Inquiry Removal Guide | $22 |
+| Late Payment Removal Guide | $22 |
+| Bankruptcy Removal Blueprint | $22 |
+| Credit Repair Mistakes to Avoid Guide | $17 |
+| Credit Repair Success Mindset Guide | $17 |
+| 100 Dispute Letters Templates | $27 |
+| Credit Repair Legal Rights Cheat Sheet | $17 |
+| Credit Repair Success Planner | $17 |
+| Unlocking Business Credit: Step-by-Step Success | $27 |
+| Credit Score Tracker -- Printable | $17 |
+| Credit Repair ChatGPT Prompts | $17 |
+| Credit Building Resource Library | $22 |
+| Repo Eraser: How to Delete Repossessions from Your Credit Fast | $22 |
+| Credit Score Accelerator: The 90-Day Credit Comeback Plan | $27 |
+| Manufactured Spending Techniques | $27 |
 
-### Files to Create (Assets)
-Copy uploaded icons into `src/assets/`:
-- `src/assets/icon-funding.png` (bank building)
-- `src/assets/icon-credit.png` (target)
-- `src/assets/icon-community.png` (trophy)
-- `src/assets/icon-products.png` (wallet)
-- `src/assets/icon-partner.png` (briefcase)
-- `src/assets/icon-consultation.png` (office buildings)
-- `src/assets/icon-vault.png` (safe -- saved for future use)
+### Standalone Products
+| Product | Price |
+|---------|-------|
+| The Ultimate Homebuyers Handbook | $27 |
+| Master Your Credit: A Practical, Step-by-Step Guide | $22 |
 
-### Files to Modify
-- `src/pages/Index.tsx` -- Replace the Wealth Ecosystem section (lines ~782-818) with the new card design. Remove old service image imports (service-funding, service-credit, etc.) and add new icon imports.
+## Step 1: Create All 44 Products in Shopify
 
-### Card Styling
-- Container: `bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300`
-- On hover: translateY(-4px) lift effect via Framer Motion
-- Icon: `w-28 h-28 mx-auto mb-6 object-contain`
-- Title: `text-xl font-bold text-slate-900 text-center mb-3`
-- Description: `text-sm text-slate-500 text-center mb-6 leading-relaxed`
-- CTA Button: Same blue gradient rounded-full button already used across the site
+Each product will be created using the Shopify create product tool with:
+- Title as provided
+- Price as listed above
+- Cover image from the provided URLs
+- Tags for bundle categorization (e.g., "Credit Authority Bundle", "Credit Business Accelerator")
+- Product type: "Digital Product"
 
-### Section Header (New Addition)
-A section heading will be added above the grid:
-- "The Wealth Ecosystem" in the site's standard h2 style (text-3xl sm:text-5xl, font-medium, tracking-tighter)
-- Subtitle: "Everything you need to build, fund, and scale your business" in muted slate text
+## Step 2: Redesign the Store Page
+
+Replace the current generic grid with a premium, bundle-organized layout.
+
+### Page Structure
+
+**Hero Section**
+- InfiniteGrid animated background
+- Same sticky navbar as homepage
+- Headline: "Digital Products & Resources"
+- Sub-headline: "Expert guides and actionable playbooks to master credit, funding, and business growth"
+
+**Bundle Navigation**
+- Horizontal pill/tab navigation to jump between bundles
+- Sticky below the hero for easy browsing
+
+**5 Bundle Sections**
+Each bundle gets its own section with:
+- Large bundle name header with a short tagline
+- Responsive product card grid (3 columns desktop, 2 tablet, 1 mobile)
+- Framer Motion staggered entrance animations
+
+**Product Cards (New Design)**
+- Clean white card with rounded-2xl and subtle shadow (matching Wealth Ecosystem cards)
+- Book cover image at top (aspect-[3/4])
+- Title in bold dark text (font-manrope)
+- Price badge in blue
+- "Add to Cart" button with the signature blue gradient
+- Hover: translateY(-4px) lift + shadow-xl via Framer Motion
+- Click-through to `/product/:handle` detail page
+
+**Footer**
+- Same full footer as homepage
+
+### Technical Details
+
+**Files to Modify:**
+- `src/pages/Store.tsx` -- Complete redesign with bundle sections, matching homepage design DNA (navbar, footer, InfiniteGrid, Framer Motion animations, Manrope/Geist typography)
+
+**No new files or dependencies needed** -- reuses existing CartDrawer, InfiniteGrid, and shopify lib.
+
+**Products loaded from Shopify API**, filtered client-side by tags into bundle groups.
 
