@@ -102,9 +102,9 @@ const InfiniteGrid = ({
       </motion.div>
 
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-10rem', left: '-10rem', width: '20rem', height: '20rem', background: 'rgba(6,182,212,0.2)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite' }} />
-        <div style={{ position: 'absolute', top: '50%', right: '-5rem', width: '15rem', height: '15rem', background: 'rgba(59,130,246,0.2)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite', animationDelay: '1s' }} />
-        <div style={{ position: 'absolute', bottom: '-5rem', left: '33%', width: '18rem', height: '18rem', background: 'rgba(99,102,241,0.15)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite', animationDelay: '2s' }} />
+        <div style={{ position: 'absolute', top: '-10rem', left: '-10rem', width: '20rem', height: '20rem', background: 'rgba(59,130,246,0.08)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite' }} />
+        <div style={{ position: 'absolute', top: '50%', right: '-5rem', width: '15rem', height: '15rem', background: 'rgba(99,102,241,0.08)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite', animationDelay: '1s' }} />
+        <div style={{ position: 'absolute', bottom: '-5rem', left: '33%', width: '18rem', height: '18rem', background: 'rgba(148,163,184,0.06)', borderRadius: '9999px', filter: 'blur(48px)', animation: 'pulse 2s infinite', animationDelay: '2s' }} />
       </div>
     </div>
   );

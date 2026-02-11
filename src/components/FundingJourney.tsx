@@ -67,7 +67,7 @@ export default function FundingJourney() {
         {/* header */}
         <div className="text-center mb-14">
           <h2
-            className="text-2xl font-medium text-white tracking-tighter sm:text-5xl"
+            className="text-2xl font-medium text-slate-900 tracking-tighter sm:text-5xl"
             style={{
               maskImage: "linear-gradient(90deg, transparent, black 0%, black 10%, transparent)",
               WebkitMaskImage: "linear-gradient(90deg, transparent, black 0%, black 10%, transparent)",
@@ -75,7 +75,7 @@ export default function FundingJourney() {
           >
             Your Path To Funding
           </h2>
-          <p className="text-neutral-400 mt-3 text-sm max-w-lg mx-auto">
+          <p className="text-slate-500 mt-3 text-sm max-w-lg mx-auto">
             From assessment to funded — see exactly how we get you $50k–$250k in business credit.
           </p>
         </div>
@@ -174,7 +174,7 @@ export default function FundingJourney() {
           <div className="flex items-center justify-between mt-6">
             <button
               onClick={prev}
-              className="flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors group"
+              className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-900 transition-colors group"
             >
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
               Previous
@@ -184,14 +184,14 @@ export default function FundingJourney() {
             <div className="flex gap-1.5">
               {STEPS.map((_, i) => (
                 <button key={i} onClick={() => go(i)} className="p-0.5">
-                  <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === active ? "bg-cyan-400 w-4" : "bg-white/20"}`} />
+                  <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === active ? "bg-cyan-400 w-4" : "bg-slate-300"}`} />
                 </button>
               ))}
             </div>
 
             <button
               onClick={next}
-              className="flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors group"
+              className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-900 transition-colors group"
             >
               Next
               <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
