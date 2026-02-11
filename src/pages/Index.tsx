@@ -402,7 +402,7 @@ const Index = () => {
 
       {/* NAVBAR */}
       <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
-        <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-6 pb-4 pl-6 items-center justify-between">
+        <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-4 sm:pr-6 pb-4 pl-4 sm:pl-6 items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)' }} />
           </div>
@@ -441,7 +441,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto mt-8 pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      <section className="relative max-w-7xl mx-auto mt-8 pt-12 sm:pt-16 pb-20 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
@@ -549,7 +549,7 @@ const Index = () => {
       </section>
 
       {/* About section — moved up for authority */}
-      <section className="overflow-hidden mt-40 mb-40 pt-24 pb-24 relative" id="about">
+      <section className="overflow-hidden mt-20 sm:mt-40 mb-20 sm:mb-40 pt-16 sm:pt-24 pb-16 sm:pb-24 relative" id="about">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
 
         <div className="max-w-7xl mx-auto px-6">
@@ -563,13 +563,13 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-8 md:p-12 shadow-2xl overflow-visible relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="relative flex justify-center -mt-40 md:-mt-56 lg:-mt-64">
+          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl overflow-visible relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+              <div className="relative flex justify-center -mt-20 sm:-mt-32 md:-mt-56 lg:-mt-64">
                 <img
                   src={geneRylandAbout}
                   alt="Gene Ryland — Founder of Ryland Partners"
-                  className="relative z-10 rounded-2xl w-full max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] drop-shadow-2xl"
+                  className="relative z-10 rounded-2xl w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] drop-shadow-2xl"
                 />
               </div>
 
@@ -620,7 +620,7 @@ const Index = () => {
             <h2 className="text-2xl font-medium text-slate-900 tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)' }}>Success Stories</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 pt-0 pr-0 pb-0 pl-0 space-x-5">
+          <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 gap-5">
             <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
               <div className="opacity-[0.07] absolute top-0 right-0 bottom-0 left-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
               <div className="flex gap-3 gap-x-3 gap-y-3 items-center">
@@ -636,7 +636,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
                 <div className="relative">
                   <img src={successFunding} alt="The Startup Launch" className="transition-all duration-300 w-full h-[224px] object-cover" />
@@ -818,7 +818,7 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
+      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-20 sm:mt-40 mx-4 sm:mx-auto pt-6 px-4 sm:px-6 pb-6 shadow-2xl text-white">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div>
