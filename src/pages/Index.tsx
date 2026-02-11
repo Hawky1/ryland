@@ -446,17 +446,28 @@ const Index = () => {
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
+            ref={(el) => {
+              if (el && typeof window !== 'undefined') {
+                import('hls.js').then(({ default: Hls }) => {
+                  if (Hls.isSupported()) {
+                    const hls = new Hls({ enableWorker: false });
+                    hls.loadSource('https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8');
+                    hls.attachMedia(el);
+                  } else if (el.canPlayType('application/vnd.apple.mpegurl')) {
+                    el.src = 'https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8';
+                  }
+                });
+              }
+            }}
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
-          >
-            <source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#003A70]/90 via-[#003A70]/60 to-[#0060A9]/30 rounded-2xl" />
+        {/* Gradient overlay for text readability - dark blue to match logo */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#003A70]/95 via-[#003A70]/75 to-[#004E8C]/50 rounded-2xl" />
 
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
           {/* Left - text + CTAs */}
