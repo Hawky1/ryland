@@ -141,7 +141,7 @@ export default function FundingJourney() {
               ))}
             </div>
 
-            <div className="px-6 sm:px-10 pb-8 pt-4 h-[580px] flex flex-col relative z-10">
+            <div className="px-4 sm:px-10 pb-8 pt-4 min-h-[480px] sm:h-[580px] flex flex-col relative z-10">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
