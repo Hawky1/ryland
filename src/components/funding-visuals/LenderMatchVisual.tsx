@@ -27,8 +27,8 @@ export default function LenderMatchVisual() {
           transition={{ type: "spring", stiffness: 200 }}
           className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 text-center flex-1 flex flex-col justify-center"
         >
-          <span className="text-[10px] text-slate-500 block">Credit Lines</span>
-          <span className="text-3xl font-black text-slate-900"><Counter target={7} /> Approved</span>
+          <span className="text-sm text-slate-500 block">Credit Lines</span>
+          <span className="text-4xl font-black text-slate-900"><Counter target={7} /> Approved</span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -36,8 +36,8 @@ export default function LenderMatchVisual() {
           transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
           className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 text-center flex-1 flex flex-col justify-center"
         >
-          <span className="text-[10px] text-slate-500 block">Total Available</span>
-          <span className="text-3xl font-black text-cyan-600">$<Counter target={125000} /></span>
+          <span className="text-sm text-slate-500 block">Total Available</span>
+          <span className="text-4xl font-black text-cyan-600">$<Counter target={125000} /></span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -46,11 +46,11 @@ export default function LenderMatchVisual() {
           className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3"
         >
           <motion.div
-            className="w-2 h-2 rounded-full bg-cyan-400"
+            className="w-2.5 h-2.5 rounded-full bg-cyan-400"
             animate={{ scale: [1, 1.4, 1] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           />
-          <span className="text-xs text-neutral-300">Latest deposit: <span className="text-cyan-400 font-bold">$15,000</span></span>
+          <span className="text-sm text-neutral-300">Latest deposit: <span className="text-cyan-400 font-bold">$15,000</span></span>
         </motion.div>
       </div>
 
@@ -62,7 +62,7 @@ export default function LenderMatchVisual() {
           backgroundSize: "24px 24px"
         }} />
 
-        <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-5 relative z-10">Funding By Lender</span>
+        <span className="text-sm uppercase tracking-widest text-neutral-500 mb-5 relative z-10">Funding By Lender</span>
 
         <div className="space-y-4 relative z-10">
           {lenders.map((l, i) => (
@@ -75,7 +75,7 @@ export default function LenderMatchVisual() {
             >
               <div className="flex items-center gap-3 w-44 flex-shrink-0">
                 <img src={l.logo} alt={l.name} className="w-8 h-8 object-contain brightness-0 invert opacity-70 flex-shrink-0" />
-                <span className="text-sm text-neutral-200 font-semibold">{l.name}</span>
+                <span className="text-base text-neutral-200 font-semibold">{l.name}</span>
               </div>
               <div className="flex-1 h-7 rounded-lg bg-white/5 overflow-hidden relative">
                 <motion.div
@@ -91,7 +91,7 @@ export default function LenderMatchVisual() {
                   />
                 </motion.div>
               </div>
-              <span className="text-base font-bold text-cyan-400 w-16 text-right">${(l.amount / 1000)}k</span>
+              <span className="text-lg font-bold text-cyan-400 w-16 text-right">${(l.amount / 1000)}k</span>
             </motion.div>
           ))}
         </div>

@@ -26,13 +26,13 @@ export default function AssessmentVisual() {
             <motion.div
               animate={{ scale: [1, 1.15, 1] }}
               transition={{ repeat: Infinity, duration: 2, delay: i * 0.4 }}
-              className="mx-auto w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center mb-2"
+              className="mx-auto w-10 h-10 rounded-lg bg-cyan-50 flex items-center justify-center mb-2"
             >
-              <card.icon className="w-4 h-4 text-cyan-600" />
+              <card.icon className="w-5 h-5 text-cyan-600" />
             </motion.div>
-            <span className="text-[10px] text-slate-500 block">{card.label}</span>
-            <span className="text-sm font-bold text-slate-900 mt-0.5 block">
-              {card.counter ? <>${""}< Counter target={card.value as number} /></> : card.value as string}
+            <span className="text-sm text-slate-500 block">{card.label}</span>
+            <span className="text-base font-bold text-slate-900 mt-0.5 block">
+              {card.counter ? <>${""}<Counter target={card.value as number} /></> : card.value as string}
             </span>
           </motion.div>
         ))}
@@ -48,8 +48,8 @@ export default function AssessmentVisual() {
             transition={{ delay: 0.4 + i * 0.12, duration: 0.4 }}
             className="space-y-1"
           >
-            <span className="text-[10px] text-neutral-500 font-medium">{f}</span>
-            <div className="h-7 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden flex items-center px-2">
+            <span className="text-sm text-neutral-500 font-medium">{f}</span>
+            <div className="h-8 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden flex items-center px-2">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500/15 to-transparent"
                 initial={{ width: 0 }}
@@ -57,7 +57,7 @@ export default function AssessmentVisual() {
                 transition={{ delay: 0.5 + i * 0.12, duration: 0.6 }}
               />
               <motion.div
-                className="w-[1px] h-3.5 bg-cyan-400"
+                className="w-[1px] h-4 bg-cyan-400"
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ repeat: Infinity, duration: 0.8, delay: 0.8 + i * 0.12 }}
               />
@@ -74,8 +74,8 @@ export default function AssessmentVisual() {
         className="rounded-xl bg-white/5 border border-white/10 p-3"
       >
         <div className="flex justify-between items-center mb-2">
-          <span className="text-[10px] text-neutral-400">Assessment Progress</span>
-          <span className="text-[10px] text-cyan-400 font-bold">75%</span>
+          <span className="text-sm text-neutral-400">Assessment Progress</span>
+          <span className="text-sm text-cyan-400 font-bold">75%</span>
         </div>
         <div className="h-2 rounded-full bg-white/5 overflow-hidden">
           <motion.div
@@ -89,12 +89,12 @@ export default function AssessmentVisual() {
           {["Info", "Goals", "Finance", "Review"].map((s, i) => (
             <div key={s} className="flex items-center gap-1">
               <motion.div
-                className={`w-2 h-2 rounded-full ${i < 3 ? "bg-cyan-500" : "bg-white/10"}`}
+                className={`w-2.5 h-2.5 rounded-full ${i < 3 ? "bg-cyan-500" : "bg-white/10"}`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 1.1 + i * 0.1, type: "spring" }}
               />
-              <span className="text-[8px] text-neutral-500">{s}</span>
+              <span className="text-xs text-neutral-500">{s}</span>
             </div>
           ))}
         </div>

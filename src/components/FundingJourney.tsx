@@ -114,7 +114,7 @@ export default function FundingJourney() {
                     >
                       {i + 1}
                     </motion.div>
-                    <span className={`text-[10px] sm:text-xs font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
+                    <span className={`text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
                       {s.title}
                     </span>
                   </button>
@@ -144,7 +144,7 @@ export default function FundingJourney() {
                 >
                   {/* step content */}
                   <div className="text-center mb-6">
-                    <span className="text-[11px] uppercase tracking-widest text-cyan-400 font-semibold">
+                    <span className="text-sm uppercase tracking-widest text-cyan-400 font-semibold">
                       Step {active + 1}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">{STEPS[active].title}</h3>

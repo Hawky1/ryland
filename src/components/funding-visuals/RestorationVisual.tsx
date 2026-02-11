@@ -58,8 +58,8 @@ export default function RestorationVisual() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="text-2xl font-black text-slate-900"><Counter target={resolved} />/{total}</span>
-            <span className="text-[10px] text-slate-500 block">Items Resolved</span>
+            <span className="text-3xl font-black text-slate-900"><Counter target={resolved} />/{total}</span>
+            <span className="text-sm text-slate-500 block">Items Resolved</span>
           </motion.div>
         </motion.div>
 
@@ -71,9 +71,9 @@ export default function RestorationVisual() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, type: "spring" }}
           >
-            <Trash2 className="w-3.5 h-3.5 text-red-500 mx-auto mb-1" />
-            <span className="text-sm font-bold text-slate-900 block"><Counter target={8} /></span>
-            <span className="text-[8px] text-slate-500">Negatives Removed</span>
+            <Trash2 className="w-5 h-5 text-red-500 mx-auto mb-1" />
+            <span className="text-base font-bold text-slate-900 block"><Counter target={8} /></span>
+            <span className="text-xs text-slate-500">Negatives Removed</span>
           </motion.div>
           <motion.div
             className="rounded-lg bg-white border border-slate-200 shadow-sm p-2.5 text-center"
@@ -81,9 +81,9 @@ export default function RestorationVisual() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35, type: "spring" }}
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 mx-auto mb-1" />
-            <span className="text-sm font-bold text-slate-900 block"><Counter target={4} /></span>
-            <span className="text-[8px] text-slate-500">Disputes Won</span>
+            <ShieldCheck className="w-5 h-5 text-emerald-500 mx-auto mb-1" />
+            <span className="text-base font-bold text-slate-900 block"><Counter target={4} /></span>
+            <span className="text-xs text-slate-500">Disputes Won</span>
           </motion.div>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default function RestorationVisual() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Dispute Results</span>
+        <span className="text-sm uppercase tracking-widest text-neutral-500 mb-3">Dispute Results</span>
 
         <div className="space-y-2.5 flex-1">
           {disputes.map((d, i) => (
@@ -107,16 +107,16 @@ export default function RestorationVisual() {
               transition={{ delay: 0.4 + i * 0.18, type: "spring" }}
             >
               <motion.div
-                className="w-4 h-4 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center flex-shrink-0 mt-0.5"
+                className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center flex-shrink-0 mt-0.5"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.18, type: "spring", stiffness: 400 }}
               >
-                <Check className="w-2.5 h-2.5 text-emerald-400" />
+                <Check className="w-3 h-3 text-emerald-400" />
               </motion.div>
               <div className="flex-1 min-w-0">
                 <motion.span
-                  className="text-[11px] text-neutral-400 line-through block truncate"
+                  className="text-sm text-neutral-400 line-through block truncate"
                   initial={{ textDecorationColor: "transparent" }}
                   animate={{ textDecorationColor: "rgba(163,163,163,0.4)" }}
                   transition={{ delay: 0.6 + i * 0.18, duration: 0.4 }}
@@ -124,7 +124,7 @@ export default function RestorationVisual() {
                   {d.item}
                 </motion.span>
                 <motion.span
-                  className="text-[10px] font-semibold text-emerald-400"
+                  className="text-xs font-semibold text-emerald-400"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7 + i * 0.18 }}
@@ -132,7 +132,7 @@ export default function RestorationVisual() {
                   ✓ {d.result}
                 </motion.span>
               </div>
-              <span className="text-[8px] bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-neutral-500 flex-shrink-0">
+              <span className="text-xs bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-neutral-500 flex-shrink-0">
                 {d.bureau}
               </span>
             </motion.div>
@@ -146,11 +146,11 @@ export default function RestorationVisual() {
           transition={{ delay: 2 }}
         >
           <motion.div
-            className="w-2 h-2 rounded-full bg-emerald-400"
+            className="w-2.5 h-2.5 rounded-full bg-emerald-400"
             animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
             transition={{ repeat: Infinity, duration: 2 }}
           />
-          <span className="text-[9px] text-neutral-500">All disputes processed in 30 days</span>
+          <span className="text-xs text-neutral-500">All disputes processed in 30 days</span>
         </motion.div>
       </motion.div>
 
@@ -164,11 +164,11 @@ export default function RestorationVisual() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + i * 0.15, type: "spring" }}
           >
-            <span className="text-[10px] text-neutral-500 mb-1.5">{b.name}</span>
+            <span className="text-sm text-neutral-500 mb-1.5">{b.name}</span>
             <div className="flex items-end justify-between">
               <div>
-                <span className="text-[9px] text-neutral-600 block">Before</span>
-                <span className="text-lg font-bold text-red-400"><Counter target={b.before} /></span>
+                <span className="text-xs text-neutral-600 block">Before</span>
+                <span className="text-xl font-bold text-red-400"><Counter target={b.before} /></span>
               </div>
               <motion.div
                 className="flex items-center gap-0.5 mb-1"
@@ -176,16 +176,16 @@ export default function RestorationVisual() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + i * 0.15, type: "spring" }}
               >
-                <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-xs font-bold text-emerald-400">+{b.change}</span>
+                <ArrowUpRight className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm font-bold text-emerald-400">+{b.change}</span>
               </motion.div>
               <div className="text-right">
-                <span className="text-[9px] text-neutral-600 block">After</span>
-                <span className="text-lg font-bold text-emerald-400"><Counter target={b.after} /></span>
+                <span className="text-xs text-neutral-600 block">After</span>
+                <span className="text-xl font-bold text-emerald-400"><Counter target={b.after} /></span>
               </div>
             </div>
             {/* Progress bar */}
-            <div className="mt-2 h-1 rounded-full bg-white/5 overflow-hidden">
+            <div className="mt-2 h-1.5 rounded-full bg-white/5 overflow-hidden">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-red-500 via-amber-400 to-emerald-400"
                 initial={{ width: "30%" }}
