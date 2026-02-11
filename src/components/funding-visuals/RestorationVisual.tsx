@@ -53,7 +53,7 @@ export default function RestorationVisual() {
             </defs>
           </svg>
           <motion.div
-            className="text-center -mt-16 relative z-10"
+            className="text-center mt-2 relative z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
