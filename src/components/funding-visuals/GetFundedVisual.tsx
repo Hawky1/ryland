@@ -32,10 +32,10 @@ export default function GetFundedVisual() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
-          className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 flex flex-col items-center justify-center flex-1 relative overflow-hidden"
+          className="rounded-xl bg-white/5 border border-white/10 p-5 flex flex-col items-center justify-center flex-1 relative overflow-hidden"
         >
-          <PartyPopper className="w-7 h-7 text-cyan-600 mb-2 relative z-10" />
-          <span className="text-sm text-slate-500 mb-1 relative z-10">Total Funded</span>
+          <PartyPopper className="w-7 h-7 text-cyan-400 mb-2 relative z-10" />
+          <span className="text-sm text-neutral-400 mb-1 relative z-10">Total Funded</span>
           <motion.span
             className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 relative z-10"
             initial={{ scale: 0.5, opacity: 0 }}
@@ -143,10 +143,10 @@ export default function GetFundedVisual() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, type: "spring" }}
-          className="rounded-xl bg-white border border-slate-200 shadow-sm p-4 flex flex-col items-center justify-center flex-1"
+          className="rounded-xl bg-white/5 border border-white/10 p-4 flex flex-col items-center justify-center flex-1"
         >
-          <DollarSign className="w-6 h-6 text-cyan-600 mb-2" />
-          <span className="text-sm text-slate-500 mb-3">Funding Highlights</span>
+          <DollarSign className="w-6 h-6 text-cyan-400 mb-2" />
+          <span className="text-sm text-neutral-400 mb-3">Funding Highlights</span>
           <div className="space-y-2 w-full">
             {badges.map((b, i) => (
               <motion.div
@@ -154,10 +154,10 @@ export default function GetFundedVisual() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + i * 0.12, type: "spring" }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-50 border border-cyan-200"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30"
               >
-                <b.icon className="w-4 h-4 text-cyan-600 flex-shrink-0" />
-                <span className="text-sm text-cyan-700 font-semibold">{b.text}</span>
+                <b.icon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                <span className="text-sm text-cyan-300 font-semibold">{b.text}</span>
               </motion.div>
             ))}
           </div>
