@@ -131,7 +131,7 @@ export default function FundingJourney() {
               ))}
             </div>
 
-            <div className="px-4 sm:px-10 pb-8 pt-4 min-h-[480px] sm:h-[580px] flex flex-col relative z-10">
+            <div className="px-4 sm:px-10 pb-6 pt-2 min-h-[400px] sm:h-[480px] flex flex-col relative z-10">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
@@ -140,21 +140,9 @@ export default function FundingJourney() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -direction * 40 }}
                   transition={{ duration: 0.35, ease: "easeInOut" }}
-                  className="flex-1 flex flex-col"
+                  className="flex-1 flex items-center justify-center"
                 >
-                  {/* step content */}
-                  <div className="text-center mb-6">
-                    <span className="text-sm uppercase tracking-widest text-cyan-400 font-semibold">
-                      Step {active + 1}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">{STEPS[active].title}</h3>
-                    <p className="text-sm text-neutral-400 mt-2 max-w-md mx-auto">{STEPS[active].description}</p>
-                  </div>
-
-                  {/* animated visual */}
-                  <div className="flex-1 flex items-center justify-center py-4">
-                    <Visual />
-                  </div>
+                  <Visual />
                 </motion.div>
               </AnimatePresence>
             </div>
