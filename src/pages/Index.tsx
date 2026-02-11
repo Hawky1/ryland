@@ -571,8 +571,6 @@ const Index = () => {
                   alt="Gene Ryland — Founder of Ryland Partners"
                   className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl"
                 />
-                {/* Blue blur fade at bottom on mobile */}
-                <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-20 lg:h-16 z-20 bg-gradient-to-t from-[#003A70] via-[#003A70]/80 to-transparent blur-sm pointer-events-none" />
               </div>
 
               <div className="space-y-6">
