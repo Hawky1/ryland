@@ -441,7 +441,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
