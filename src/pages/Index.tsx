@@ -12,12 +12,13 @@ import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import FundingJourney from "@/components/FundingJourney";
-import serviceFunding from "@/assets/service-funding.png";
-import serviceCredit from "@/assets/service-credit.png";
-import serviceCommunity from "@/assets/service-community.png";
-import serviceProducts from "@/assets/service-products.png";
-import servicePartner from "@/assets/service-partner.png";
-import serviceConsultation from "@/assets/service-consultation.png";
+import iconFunding from "@/assets/icon-funding.png";
+import iconCredit from "@/assets/icon-credit.png";
+import iconCommunity from "@/assets/icon-community.png";
+import iconProducts from "@/assets/icon-products.png";
+import iconPartner from "@/assets/icon-partner.png";
+import iconConsultation from "@/assets/icon-consultation.png";
+import { motion } from "framer-motion";
 import successFunding from "@/assets/success-funding.jpg";
 import successCredit from "@/assets/success-credit.webp";
 import successEmpire from "@/assets/success-empire.webp";
@@ -782,37 +783,39 @@ const Index = () => {
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
         <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tighter text-slate-900 font-manrope">The Wealth Ecosystem</h2>
+            <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">Everything you need to build, fund, and scale your business</p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
             {[
-              { img: serviceFunding, title: "GET BUSINESS\nFUNDING", cta: "Get Business Funding" },
-              { img: serviceCredit, title: "REPAIR\nMY CREDIT", cta: "Repair My Credit" },
-              { img: serviceCommunity, title: "JOIN THE\nCOMMUNITY", cta: "Join The Community" },
-              { img: serviceProducts, title: "SHOP DIGITAL\nPRODUCTS", cta: "Shop Digital Products" },
-              { img: servicePartner, title: "BECOME\nA PARTNER", cta: "Become A Partner" },
-              { img: serviceConsultation, title: "SCHEDULE A\nCONSULTATION", cta: "Schedule A Consultation" },
+              { icon: iconFunding, title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines with no revenue or tax returns required.", cta: "Get Funded", href: "#cta" },
+              { icon: iconCredit, title: "Repair My Credit", desc: "Done-for-you credit restoration with negative item removals and dispute management in 35–90 days.", cta: "Repair Credit", href: "#cta" },
+              { icon: iconCommunity, title: "Join The Community", desc: "Access our private Skool network and learn to invest your funding into high-ROI digital businesses.", cta: "Join Now", href: "#cta" },
+              { icon: iconProducts, title: "Shop Digital Products", desc: "Browse our curated collection of eBooks and digital resources to accelerate your business growth.", cta: "Shop Now", href: "/store" },
+              { icon: iconPartner, title: "Become A Partner", desc: "Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join.", cta: "Partner Up", href: "/partners" },
+              { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "#cta" },
             ].map((card, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-2xl border border-[#004E8C] aspect-square">
-                <img
-                  src={card.img}
-                  alt={card.cta}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10" />
-                <div className="relative z-10 flex flex-col items-center justify-center h-full p-6">
-                  <h3 className="text-3xl sm:text-4xl font-black italic text-white text-center uppercase tracking-tight drop-shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-pre-line leading-tight">
-                    {card.title}
-                  </h3>
-                </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                whileHover={{ y: -4 }}
+                className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+              >
+                <img src={card.icon} alt={card.title} className="w-28 h-28 mx-auto mb-6 object-contain" />
+                <h3 className="text-xl font-bold text-slate-900 mb-3 font-manrope">{card.title}</h3>
+                <p className="text-sm text-slate-500 mb-6 leading-relaxed">{card.desc}</p>
                 <a
-                  href="#cta"
-                  className="absolute bottom-6 left-6 right-6 z-10 inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center"
+                  href={card.href}
+                  className="mt-auto inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center"
                 >
                   {card.cta}
                 </a>
-              </div>
+              </motion.div>
             ))}
-
           </div>
         </div>
       </section>
