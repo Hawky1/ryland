@@ -87,7 +87,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-white">
+    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -237,7 +237,7 @@ const Index = () => {
           line-height: 1.2;
           font-weight: 500;
           color: #ffffff;
-          background: linear-gradient(#000000, #000000) padding-box, conic-gradient(
+          background: linear-gradient(#0f172a, #0f172a) padding-box, conic-gradient(
             from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
             transparent 0%,
             #3b82f6 5%,
@@ -247,7 +247,7 @@ const Index = () => {
             transparent 100%
           ) border-box;
           border: 2px solid transparent;
-          box-shadow: inset 0 0 0 1px #1a1818;
+          box-shadow: inset 0 0 0 1px #1e293b;
           outline: none;
           transition: --gradient-angle-offset 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-percent 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-shine 800ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
           cursor: pointer;
@@ -384,10 +384,10 @@ const Index = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
       {/* Animated Background - InfiniteGrid */}
-      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a, #1e293b, #0f172a)' }}>
+      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
         <InfiniteGrid
-          baseGridColor="rgba(148, 163, 184, 0.08)"
-          activeGridColor="rgba(6, 182, 212, 0.6)"
+          baseGridColor="rgba(148, 163, 184, 0.12)"
+          activeGridColor="rgba(59, 130, 246, 0.3)"
         />
       </div>
 
@@ -408,34 +408,34 @@ const Index = () => {
             <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
           </div>
           <nav className="hidden gap-10 md:flex items-center">
-            <a href="#features" className="nav-link hover:text-white text-sm text-slate-300 relative">Features</a>
-            <a href="#services" className="nav-link relative text-sm text-slate-300 hover:text-white">Services</a>
-            <a href="#showcase" className="nav-link relative text-sm text-slate-300 hover:text-white">Results</a>
-            <a href="#about" className="nav-link relative text-sm text-slate-300 hover:text-white">About</a>
+            <a href="#features" className="nav-link hover:text-slate-900 text-sm text-slate-600 relative">Features</a>
+            <a href="#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900">Services</a>
+            <a href="#showcase" className="nav-link relative text-sm text-slate-600 hover:text-slate-900">Results</a>
+            <a href="#about" className="nav-link relative text-sm text-slate-600 hover:text-slate-900">About</a>
             <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
               <span>Get Started</span>
             </a>
           </nav>
-          <button id="menuBtn" className="md:hidden rounded-lg p-2 text-slate-200 hover:bg-white/5 transition-colors" aria-label="Open menu">
+          <button id="menuBtn" className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
           </button>
         </div>
 
         {/* Mobile drawer */}
-        <aside className="mobile-menu fixed z-50 bg-slate-950/95 w-[80%] max-w-sm border-white/10 border-l pt-6 pr-6 pb-6 pl-6 top-0 right-0 bottom-0 backdrop-blur" aria-label="Mobile menu" id="mobileMenu">
+        <aside className="mobile-menu fixed z-50 bg-white/95 w-[80%] max-w-sm border-slate-200 border-l pt-6 pr-6 pb-6 pl-6 top-0 right-0 bottom-0 backdrop-blur" aria-label="Mobile menu" id="mobileMenu">
           <div className="flex items-center justify-between">
-            <span className="font-semibold">Ryland Partners</span>
-            <button id="closeMenuBtn" className="rounded-lg p-2 text-slate-200 hover:bg-white/5 transition-colors" aria-label="Close menu">
+            <span className="font-semibold text-slate-900">Ryland Partners</span>
+            <button id="closeMenuBtn" className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Close menu">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
             </button>
           </div>
           <ul className="mt-6 space-y-4">
-            <li><a href="#features" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Features</a></li>
-            <li><a href="#services" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Services</a></li>
-            <li><a href="#showcase" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Results</a></li>
-            <li><a href="#about" className="mobile-link block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">About</a></li>
+            <li><a href="#features" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Features</a></li>
+            <li><a href="#services" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
+            <li><a href="#showcase" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Results</a></li>
+            <li><a href="#about" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">About</a></li>
           </ul>
-          <a href="#cta" className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/10 transition-colors">
+          <a href="#cta" className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
             Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </a>
         </aside>
@@ -523,7 +523,7 @@ const Index = () => {
       {/* Logos Section */}
       <section className="sm:px-6 lg:px-8 lg:pt-6 max-w-7xl z-10 mt-8 mr-auto mb-16 ml-auto pt-16 pr-4 pb-6 pl-4 relative">
         <div className="text-center">
-          <p className="uppercase text-sm font-medium text-slate-400 tracking-wide">
+          <p className="uppercase text-sm font-medium text-slate-500 tracking-wide">
             TRUSTED BANKING PARTNERS
           </p>
         </div>
@@ -531,18 +531,18 @@ const Index = () => {
           <div style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
             <div className="flex carousel-wrapper gap-x-10 lg:gap-x-20">
               <div className="flex gap-10 shrink-0 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex shrink-0 gap-10 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -594,12 +594,12 @@ const Index = () => {
       <section className="sm:pt-24 md:pt-20 pt-24 pb-20 relative" id="showcase">
         <div className="max-w-7xl mr-auto ml-auto pr-6 pl-6">
           <div className="text-center">
-            <h2 className="text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)' }}>Success Stories</h2>
+            <h2 className="text-2xl font-medium text-slate-900 tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)' }}>Success Stories</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 pt-0 pr-0 pb-0 pl-0 space-x-5">
             {/* Info card */}
-            <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-50/20 transition-all duration-300 sm:p-6 bg-gradient-to-b from-[#ffffff]/10 to-[#000000]/10 ring-[#ffffff]/10 ring-1 rounded-2xl pt-5 pr-5 pb-5 pl-5 relative">
+            <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-slate-900 ring-white/10 ring-1 rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
               <div className="opacity-[0.07] absolute top-0 right-0 bottom-0 left-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
               <div className="flex gap-3 gap-x-3 gap-y-3 items-center">
                 <span className="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/15 px-2.5 py-1 text-xs text-white/80">Results</span>
@@ -616,7 +616,7 @@ const Index = () => {
             
             {/* Gallery */}
             <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
-              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
+              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-slate-900 text-white">
                 <div className="relative">
                   <img src={successFunding} alt="The Startup Launch" className="transition-all duration-300 w-full h-[224px] object-cover" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -628,7 +628,7 @@ const Index = () => {
                   <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>New LLC secured $50k at 0% interest</p>
                 </div>
               </div>
-              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
+              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-slate-900 text-white">
                 <div className="relative">
                   <img src={successCredit} alt="The Credit Pivot" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -640,7 +640,7 @@ const Index = () => {
                   <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>From 580 to 740 score</p>
                 </div>
               </div>
-              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-zinc-900">
+              <div className="group overflow-hidden hover:ring-white/20 hover:shadow-xl transition ring-white/10 ring-1 rounded-2xl bg-slate-900 text-white">
                 <div className="relative">
                   <img src={successEmpire} alt="The Digital Empire" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -663,11 +663,11 @@ const Index = () => {
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-xs sm:text-sm text-zinc-400 mb-4">Meet The Founder</p>
-            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-white mb-6" style={{ maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.5))' }}>
+            <p className="text-xs sm:text-sm text-slate-500 mb-4">Meet The Founder</p>
+            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-slate-900 mb-6" style={{ maskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))' }}>
               Gene Ryland
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-slate-500">
               CEO &amp; Founder, Ryland Partners
             </p>
           </div>
@@ -679,34 +679,34 @@ const Index = () => {
               <img
                 src={geneRylandAbout}
                 alt="Gene Ryland — Founder of Ryland Partners"
-                className="relative z-10 rounded-2xl border border-white/10 ring-1 ring-white/5 w-full max-w-md object-cover shadow-2xl"
+                className="relative z-10 rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 w-full max-w-md object-cover shadow-2xl"
               />
             </div>
 
             {/* Bio */}
             <div className="space-y-6">
-              <p className="text-slate-300 leading-relaxed text-base">
+              <p className="text-slate-600 leading-relaxed text-base">
                 Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
               </p>
-              <p className="text-slate-400 leading-relaxed text-base">
+              <p className="text-slate-500 leading-relaxed text-base">
                 After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
               </p>
-              <p className="text-slate-400 leading-relaxed text-base">
+              <p className="text-slate-500 leading-relaxed text-base">
                 Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
               </p>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10">
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200">
                 <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">$150M+</p>
                   <p className="text-xs text-slate-500 mt-1">Funding Secured</p>
                 </div>
                 <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">10K+</p>
                   <p className="text-xs text-slate-500 mt-1">Entrepreneurs Helped</p>
                 </div>
                 <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p>
+                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">8+</p>
                   <p className="text-xs text-slate-500 mt-1">Years of Experience</p>
                 </div>
               </div>
@@ -726,19 +726,19 @@ const Index = () => {
       <section className="sm:px-6 sm:py-10 md:py-12 lg:pl-8 lg:pr-8 max-w-7xl mt-20 mr-auto ml-auto pt-8 pr-4 pb-8 pl-4">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <p className="text-xs sm:text-sm text-zinc-400">Trusted by entrepreneurs</p>
-            <h2 className="text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)', WebkitMaskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)' }}>Testimonials</h2>
+            <p className="text-xs sm:text-sm text-slate-500">Trusted by entrepreneurs</p>
+            <h2 className="text-2xl font-medium text-slate-900 tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)', WebkitMaskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)' }}>Testimonials</h2>
           </div>
         </div>
 
         <div className="sm:mt-8 overflow-hidden sm:rounded-3xl mt-6 relative" style={{ maskImage: 'linear-gradient(90deg, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 10%, black 90%, transparent)' }}>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-zinc-950 to-transparent z-10"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-zinc-950 to-transparent z-10"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-white to-transparent z-10"></div>
 
           {/* Row 1 — left to right */}
           <div className="sm:py-8 pt-6 pb-6 relative">
             <div className="flex gap-4 sm:gap-5 will-change-transform" style={{ animation: 'marquee-ltr 45s linear infinite' }}>
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-white/10 bg-slate-900 p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -754,7 +754,7 @@ const Index = () => {
                 </p>
               </article>
 
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-white/10 bg-slate-900 p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -770,7 +770,7 @@ const Index = () => {
                 </p>
               </article>
               
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-white/10 bg-slate-900 p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=120&h=120&fit=crop&crop=faces" alt="Avatar" className="size-9 rounded-full object-cover" />
                   <div>
@@ -787,7 +787,7 @@ const Index = () => {
               </article>
 
               {/* Duplicate for seamless loop */}
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-white/10 bg-slate-900 p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -803,7 +803,7 @@ const Index = () => {
                 </p>
               </article>
 
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-white/10 bg-slate-900 p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -824,7 +824,7 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="md:p-10 bg-zinc-500/5 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl backdrop-blur-xl" style={{ maskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)', WebkitMaskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)' }}>
+      <section className="md:p-10 bg-slate-900 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)', WebkitMaskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)' }}>
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div>
@@ -905,12 +905,12 @@ const Index = () => {
 
       {/* CTA */}
       <section className="overflow-hidden my-10 relative" id="cta">
-        <div className="text-white max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
-          <div className="md:p-10 bg-zinc-500/5 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl backdrop-blur-xl" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
+        <div className="max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
+          <div className="md:p-10 bg-slate-900 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
             
             <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 gap-x-6 gap-y-6 items-center">
               <div>
-                <h3 className="text-2xl font-semibold tracking-tight">Ready to scale?</h3>
+                <h3 className="text-2xl font-semibold tracking-tight text-white">Ready to scale?</h3>
                 <p className="mt-2 max-w-prose text-slate-200">Join thousands of entrepreneurs building their future with Ryland Partners.</p>
                 <div className="mt-5 flex gap-3 flex-wrap">
                   <a href="#" className="hover:shadow-lg transition-shadow text-sm font-medium text-slate-900 bg-white rounded-full pt-3 pr-5 pb-3 pl-5 shadow">Get Funded</a>
@@ -923,64 +923,64 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-white/10 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
+      <footer className="border-slate-200 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
               </div>
-              <p className="text-sm text-slate-400 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
+              <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
               <div className="flex items-center gap-3">
-                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white transition-colors">
+                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
                 </a>
-                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white transition-colors">
+                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
                 </a>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Product</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Product</h3>
               <ul className="space-y-3">
-                <li><a href="#services" className="text-sm text-slate-400 hover:text-white transition-colors">Funding</a></li>
-                <li><a href="#services" className="text-sm text-slate-400 hover:text-white transition-colors">Credit</a></li>
-                <li><a href="#features" className="text-sm text-slate-400 hover:text-white transition-colors">Academy</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Store</a></li>
+                <li><a href="#services" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Funding</a></li>
+                <li><a href="#services" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Credit</a></li>
+                <li><a href="#features" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Academy</a></li>
+                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Store</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Company</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Company</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#showcase" className="text-sm text-slate-400 hover:text-white transition-colors">Results</a></li>
-                <li><a href="/partners" className="text-sm text-slate-400 hover:text-white transition-colors">Partners</a></li>
+                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">About</a></li>
+                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Blog</a></li>
+                <li><a href="#showcase" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Results</a></li>
+                <li><a href="/partners" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Partners</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Legal</h3>
               <ul className="space-y-3">
-                <li><a href="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="/ccpa" className="text-sm text-slate-400 hover:text-white transition-colors">CCPA Notice</a></li>
-                <li><a href="/tsr-compliance" className="text-sm text-slate-400 hover:text-white transition-colors">TSR Compliance</a></li>
-                <li><a href="/disclaimers" className="text-sm text-slate-400 hover:text-white transition-colors">Disclaimers</a></li>
-                <li><a href="/cookie-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                <li><a href="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a></li>
+                <li><a href="/ccpa" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">CCPA Notice</a></li>
+                <li><a href="/tsr-compliance" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">TSR Compliance</a></li>
+                <li><a href="/disclaimers" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Disclaimers</a></li>
+                <li><a href="/cookie-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Cookie Policy</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-slate-400">
+          <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate-500">
               © <span id="year">2026</span> Ryland Partners. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <a href="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+              <a href="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a>
+              <a href="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>

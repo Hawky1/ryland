@@ -41,7 +41,7 @@ const Partners = () => {
   ];
 
   return (
-    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-white">
+    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -75,8 +75,8 @@ const Partners = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
 
       {/* Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a, #1e293b, #0f172a)' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.08)" activeGridColor="rgba(6, 182, 212, 0.6)" />
+      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.12)" activeGridColor="rgba(59, 130, 246, 0.3)" />
       </div>
 
       {/* Gradient blur */}
@@ -91,29 +91,29 @@ const Partners = () => {
             <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center gap-10">
-            <Link to="/" className="text-sm text-slate-300 hover:text-white transition-colors">Home</Link>
-            <a href="#how-it-works" className="text-sm text-slate-300 hover:text-white transition-colors">How It Works</a>
-            <a href="#faq" className="text-sm text-slate-300 hover:text-white transition-colors">FAQ</a>
+            <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
+            <a href="#how-it-works" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">How It Works</a>
+            <a href="#faq" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">FAQ</a>
             <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-sm font-medium rounded-full py-2.5 px-6 transition-all shadow-lg shadow-blue-500/25">
               Become A Partner
             </a>
           </nav>
-          <button onClick={() => setMobileOpen(true)} className="md:hidden rounded-lg p-2 text-slate-200 hover:bg-white/5 transition-colors" aria-label="Open menu">
+          <button onClick={() => setMobileOpen(true)} className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
             <Menu className="w-6 h-6" />
           </button>
         </div>
         {/* Mobile drawer */}
-        <aside className={`mobile-menu fixed z-50 bg-slate-950/95 w-[80%] max-w-sm border-white/10 border-l p-6 top-0 right-0 bottom-0 backdrop-blur ${mobileOpen ? 'open' : ''}`}>
+        <aside className={`mobile-menu fixed z-50 bg-white/95 w-[80%] max-w-sm border-slate-200 border-l p-6 top-0 right-0 bottom-0 backdrop-blur ${mobileOpen ? 'open' : ''}`}>
           <div className="flex items-center justify-between">
-            <span className="font-semibold">Ryland Partners</span>
-            <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-200 hover:bg-white/5 transition-colors" aria-label="Close menu">
+            <span className="font-semibold text-slate-900">Ryland Partners</span>
+            <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Close menu">
               <X className="h-6 w-6" />
             </button>
           </div>
           <ul className="mt-6 space-y-4">
-            <li><Link to="/" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Home</Link></li>
-            <li><a href="#how-it-works" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">How It Works</a></li>
-            <li><a href="#faq" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-300 hover:bg-white/5 hover:text-white transition-colors">FAQ</a></li>
+            <li><Link to="/" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Home</Link></li>
+            <li><a href="#how-it-works" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">How It Works</a></li>
+            <li><a href="#faq" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">FAQ</a></li>
             <li><a href="#cta" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 text-white text-center font-medium transition-colors">Become A Partner</a></li>
           </ul>
         </aside>
@@ -121,13 +121,11 @@ const Partners = () => {
 
       {/* ===================== HERO ===================== */}
       <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
-        {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-40">
             <source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" />
           </video>
         </div>
-        {/* Gradient overlay */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
@@ -159,7 +157,7 @@ const Partners = () => {
             { icon: LineChart, title: "$10M+ Funded And Counting", desc: "Backed by real results and proven infrastructure. You'll get full support, access to our marketing system, and earn unlimited commissions." },
             { icon: Handshake, title: "Strengthen Your Network", desc: "Help people in your network get the capital they need — and profit while doing it. Position yourself as the go-to person for business funding." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-8 text-center">
+            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 text-center text-white">
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                 <item.icon className="h-7 w-7 text-blue-400" />
               </div>
@@ -172,8 +170,8 @@ const Partners = () => {
 
       {/* ===================== HOW IT WORKS / COPY BLOCK ===================== */}
       <section className="max-w-4xl mx-auto px-6 pb-24" id="how-it-works">
-        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-8 md:p-12">
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold text-white mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 md:p-12 text-white">
+          <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
             Here's How Ryland Partners Is Going To Turn Your Connections Into Commissions
           </h2>
           <div className="space-y-4 text-slate-300 text-base leading-relaxed">
@@ -196,17 +194,17 @@ const Partners = () => {
 
       {/* ===================== 3-STEP PROCESS ===================== */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
           Monetize Your Network In 3 Simple Steps
         </h2>
-        <p className="text-center text-slate-400 mb-12 max-w-xl mx-auto">Follow our proven system and start earning commissions with zero selling.</p>
+        <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">Follow our proven system and start earning commissions with zero selling.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { step: "01", icon: Link2, title: "Get Your Partner Link", desc: "Apply and get approved. You'll receive your unique referral link — the engine of your money-making machine." },
             { step: "02", icon: Share2, title: "Refer Business Owners", desc: "Follow our proven step-by-step strategy. Our trainings, live calls, and done-for-you marketing assets guide you to maximize profits." },
             { step: "03", icon: Wallet, title: "Get Paid", desc: "You get paid for every client you refer who qualifies. Even if they don't take the funding — you still keep your share." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-8 relative">
+            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 relative text-white">
               <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                 <item.icon className="h-6 w-6 text-blue-400" />
@@ -220,21 +218,21 @@ const Partners = () => {
 
       {/* ===================== PERFECT FOR GRID ===================== */}
       <section className="max-w-5xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
           The Ryland Partners Program Is Perfect For
         </h2>
-        <p className="text-center text-slate-400 mb-12">Professionals who already have a network of business owners.</p>
+        <p className="text-center text-slate-500 mb-12">Professionals who already have a network of business owners.</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {personas.map((p, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-5 flex flex-col items-center text-center gap-3 hover:bg-white/[0.06] transition-colors">
+            <div key={i} className="rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 bg-white backdrop-blur-sm p-5 flex flex-col items-center text-center gap-3 hover:bg-slate-50 transition-colors">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                 <p.icon className="h-5 w-5 text-blue-400" />
               </div>
-              <span className="text-sm font-medium text-slate-200">{p.label}</span>
+              <span className="text-sm font-medium text-slate-700">{p.label}</span>
             </div>
           ))}
         </div>
-        <p className="text-center text-slate-400 mt-8 text-sm font-medium">OR anyone who knows business owners!</p>
+        <p className="text-center text-slate-500 mt-8 text-sm font-medium">OR anyone who knows business owners!</p>
         <div className="text-center mt-8">
           <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
             Become A Partner Now
@@ -245,10 +243,10 @@ const Partners = () => {
       {/* ===================== SUPPORT & RESOURCES ===================== */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+          <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
             We Provide All The Direction, Guidance & Support You Need
           </h2>
-          <p className="text-center text-slate-400 mb-12 max-w-xl mx-auto">Everything you need to succeed as a Ryland Partner.</p>
+          <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">Everything you need to succeed as a Ryland Partner.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: FileText, title: "Done-For-You Marketing Assets", desc: "We hand you ad creatives, email swipes, templates, and PDFs. Just plug, play, and start earning." },
@@ -256,7 +254,7 @@ const Partners = () => {
               { icon: CreditCard, title: "Get Paid Fast & On Time", desc: "Most partners start seeing commissions within just a few days — not weeks. Quick results keep your momentum going." },
               { icon: MessagesSquare, title: "Community Support", desc: "Join our members-only community where you can share wins, ask questions, and stay connected." },
             ].map((item, i) => (
-              <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-6">
+              <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-6 text-white">
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                   <item.icon className="h-5 w-5 text-blue-400" />
                 </div>
@@ -270,7 +268,7 @@ const Partners = () => {
 
       {/* ===================== EASIEST MONEY CTA ===================== */}
       <section className="max-w-4xl mx-auto px-6 pb-24">
-        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-8 md:p-12 text-center">
+        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 md:p-12 text-center text-white">
           <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
             This Is The Easiest Money You've Never Made
           </h2>
@@ -288,17 +286,17 @@ const Partners = () => {
 
       {/* ===================== HOW WE SERVICE REFERRALS ===================== */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
           Here Is How We Service The Business Owners You Refer
         </h2>
-        <p className="text-center text-slate-400 mb-12 max-w-xl mx-auto">A seamless experience for your referrals — from application to funded.</p>
+        <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">A seamless experience for your referrals — from application to funded.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { step: "01", icon: UserCheck, title: "Get Approved", desc: "The businesses you refer fill out a quick questionnaire and get approved in less than 2 minutes." },
             { step: "02", icon: LineChart, title: "Find The Best Terms", desc: "They choose terms tailored to their budget so they can comfortably manage their funding." },
             { step: "03", icon: DollarSign, title: "Ready To Scale", desc: "They can immediately access funds up to $250,000 after linking their business checking account." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm p-8 relative">
+            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 relative text-white">
               <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                 <item.icon className="h-6 w-6 text-blue-400" />
@@ -308,29 +306,29 @@ const Partners = () => {
             </div>
           ))}
         </div>
-        <div className="mt-8 rounded-2xl border border-blue-400/20 bg-blue-500/5 p-5 text-center">
-          <p className="text-blue-300 font-medium">And remember, as long as they qualify (even if they don't take the funding), <span className="text-white font-semibold">you get paid!</span></p>
+        <div className="mt-8 rounded-2xl border border-blue-400/20 bg-blue-50 p-5 text-center">
+          <p className="text-blue-700 font-medium">And remember, as long as they qualify (even if they don't take the funding), <span className="text-blue-900 font-semibold">you get paid!</span></p>
         </div>
       </section>
 
       {/* ===================== FAQ ===================== */}
       <section className="max-w-3xl mx-auto px-6 pb-24" id="faq">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-12 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-12 text-slate-900">
           Frequently Asked Questions
         </h2>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+            <div key={i} className="rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 bg-white overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors"
+                className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors"
               >
-                <span className="text-sm font-medium text-white pr-4">{faq.q}</span>
+                <span className="text-sm font-medium text-slate-900 pr-4">{faq.q}</span>
                 <ChevronDown className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
               </button>
               {openFaq === i && (
                 <div className="px-5 pb-5">
-                  <p className="text-sm text-slate-400 leading-relaxed">{faq.a}</p>
+                  <p className="text-sm text-slate-500 leading-relaxed">{faq.a}</p>
                 </div>
               )}
             </div>
@@ -340,10 +338,10 @@ const Partners = () => {
 
       {/* ===================== FINAL CTA ===================== */}
       <section className="overflow-hidden my-10 relative" id="cta">
-        <div className="text-white max-w-7xl mx-auto px-0 pb-24">
-          <div className="md:p-10 bg-zinc-500/5 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mx-auto p-6 shadow-2xl backdrop-blur-xl" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
+        <div className="max-w-7xl mx-auto px-0 pb-24">
+          <div className="md:p-10 bg-slate-900 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mx-auto p-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
             <div className="md:p-12 p-8 text-center">
-              <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Click Below. Become A Partner. Get Paid To Be A Connector.</h3>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-white">Click Below. Become A Partner. Get Paid To Be A Connector.</h3>
               <p className="mt-2 max-w-prose text-slate-300 mx-auto mb-8">Join thousands of partners already earning commissions with Ryland Partners.</p>
               <a href="#" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-lg font-semibold rounded-full py-4 px-12 transition-all shadow-lg shadow-blue-500/25">
                 Start Earning Now
@@ -354,55 +352,48 @@ const Partners = () => {
       </section>
 
       {/* ===================== FOOTER ===================== */}
-      <footer className="border-white/10 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
+      <footer className="border-slate-200 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
               <Link to="/" className="flex items-center gap-2">
                 <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
               </Link>
-              <p className="text-sm text-slate-400 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
+              <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Product</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Product</h3>
               <ul className="space-y-3">
-                <li><Link to="/" className="text-sm text-slate-400 hover:text-white transition-colors">Funding</Link></li>
-                <li><Link to="/" className="text-sm text-slate-400 hover:text-white transition-colors">Credit</Link></li>
-                <li><Link to="/" className="text-sm text-slate-400 hover:text-white transition-colors">Academy</Link></li>
+                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Funding</Link></li>
+                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Credit</Link></li>
+                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Academy</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Company</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Company</h3>
               <ul className="space-y-3">
-                <li><Link to="/" className="text-sm text-slate-400 hover:text-white transition-colors">About</Link></li>
-                <li><Link to="/" className="text-sm text-slate-400 hover:text-white transition-colors">Results</Link></li>
-                <li><Link to="/partners" className="text-sm text-slate-400 hover:text-white transition-colors">Partners</Link></li>
+                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">About</Link></li>
+                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Results</Link></li>
+                <li><Link to="/partners" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Partners</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Resources</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Legal</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Support</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Community</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
-              <ul className="space-y-3">
-                <li><Link to="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link to="/ccpa" className="text-sm text-slate-400 hover:text-white transition-colors">CCPA Notice</Link></li>
-                <li><Link to="/tsr-compliance" className="text-sm text-slate-400 hover:text-white transition-colors">TSR Compliance</Link></li>
-                <li><Link to="/disclaimers" className="text-sm text-slate-400 hover:text-white transition-colors">Disclaimers</Link></li>
-                <li><Link to="/cookie-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Cookie Policy</Link></li>
+                <li><Link to="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</Link></li>
+                <li><Link to="/ccpa" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">CCPA Notice</Link></li>
+                <li><Link to="/tsr-compliance" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">TSR Compliance</Link></li>
+                <li><Link to="/disclaimers" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Disclaimers</Link></li>
+                <li><Link to="/cookie-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Cookie Policy</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-slate-400">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
+          <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate-500">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <Link to="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link>
+              <Link to="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
