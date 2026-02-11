@@ -550,7 +550,7 @@ const Index = () => {
       </section>
 
       {/* About section — moved up for authority */}
-      <section className="overflow-hidden mt-4 sm:mt-8 mb-20 sm:mb-40 pt-16 sm:pt-24 pb-16 sm:pb-24 relative" id="about">
+      <section className="overflow-hidden mt-4 sm:mt-8 mb-8 sm:mb-12 pt-16 sm:pt-24 pb-16 sm:pb-24 relative" id="about">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
 
         <div className="max-w-7xl mx-auto px-6">
