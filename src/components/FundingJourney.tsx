@@ -86,7 +86,7 @@ export default function FundingJourney() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 overflow-hidden relative">
+          <div className="rounded-2xl border border-slate-700 overflow-hidden relative">
             {/* Background video matching hero */}
             <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
               <video
@@ -98,7 +98,7 @@ export default function FundingJourney() {
               >
                 <source src="/videos/hero-bg.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 bg-black/80" />
             </div>
             {/* notch */}
             <div className="flex justify-center pt-3 pb-1 relative z-10">
