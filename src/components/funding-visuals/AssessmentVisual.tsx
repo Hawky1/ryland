@@ -21,17 +21,17 @@ export default function AssessmentVisual() {
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: i * 0.12, type: "spring", stiffness: 200 }}
-            className={`rounded-xl bg-gradient-to-br ${card.color} border border-white/10 p-3 text-center`}
+            className="rounded-xl bg-white border border-slate-200 shadow-sm p-3 text-center"
           >
             <motion.div
               animate={{ scale: [1, 1.15, 1] }}
               transition={{ repeat: Infinity, duration: 2, delay: i * 0.4 }}
-              className="mx-auto w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2"
+              className="mx-auto w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center mb-2"
             >
-              <card.icon className="w-4 h-4 text-cyan-400" />
+              <card.icon className="w-4 h-4 text-cyan-600" />
             </motion.div>
-            <span className="text-[10px] text-neutral-400 block">{card.label}</span>
-            <span className="text-sm font-bold text-white mt-0.5 block">
+            <span className="text-[10px] text-slate-500 block">{card.label}</span>
+            <span className="text-sm font-bold text-slate-900 mt-0.5 block">
               {card.counter ? <>${""}< Counter target={card.value as number} /></> : card.value as string}
             </span>
           </motion.div>

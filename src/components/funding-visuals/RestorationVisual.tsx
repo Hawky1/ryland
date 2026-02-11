@@ -31,12 +31,10 @@ export default function RestorationVisual() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
-          className="rounded-xl bg-white/5 border border-white/10 p-5 flex flex-col items-center justify-center flex-1 relative overflow-hidden"
+          className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 flex flex-col items-center justify-center flex-1 relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent" />
-
           <svg width="110" height="110" viewBox="0 0 100 100" className="overflow-visible relative z-10">
-            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="5" />
+            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="5" />
             <motion.circle
               cx="50" cy="50" r="44" fill="none"
               stroke="url(#restoreGrad)"
@@ -60,32 +58,32 @@ export default function RestorationVisual() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="text-2xl font-black text-white"><Counter target={resolved} />/{total}</span>
-            <span className="text-[10px] text-neutral-400 block">Items Resolved</span>
+            <span className="text-2xl font-black text-slate-900"><Counter target={resolved} />/{total}</span>
+            <span className="text-[10px] text-slate-500 block">Items Resolved</span>
           </motion.div>
         </motion.div>
 
         {/* Summary badges */}
         <div className="grid grid-cols-2 gap-2">
           <motion.div
-            className="rounded-lg bg-white/5 border border-white/10 p-2.5 text-center"
+            className="rounded-lg bg-white border border-slate-200 shadow-sm p-2.5 text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, type: "spring" }}
           >
-            <Trash2 className="w-3.5 h-3.5 text-red-400 mx-auto mb-1" />
-            <span className="text-sm font-bold text-white block"><Counter target={8} /></span>
-            <span className="text-[8px] text-neutral-500">Negatives Removed</span>
+            <Trash2 className="w-3.5 h-3.5 text-red-500 mx-auto mb-1" />
+            <span className="text-sm font-bold text-slate-900 block"><Counter target={8} /></span>
+            <span className="text-[8px] text-slate-500">Negatives Removed</span>
           </motion.div>
           <motion.div
-            className="rounded-lg bg-white/5 border border-white/10 p-2.5 text-center"
+            className="rounded-lg bg-white border border-slate-200 shadow-sm p-2.5 text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35, type: "spring" }}
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 mx-auto mb-1" />
-            <span className="text-sm font-bold text-white block"><Counter target={4} /></span>
-            <span className="text-[8px] text-neutral-500">Disputes Won</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 mx-auto mb-1" />
+            <span className="text-sm font-bold text-slate-900 block"><Counter target={4} /></span>
+            <span className="text-[8px] text-slate-500">Disputes Won</span>
           </motion.div>
         </div>
       </div>
