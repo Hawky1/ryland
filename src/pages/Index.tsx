@@ -569,7 +569,7 @@ const Index = () => {
                 <img
                   src={geneRylandAbout}
                   alt="Gene Ryland — Founder of Ryland Partners"
-                  className="relative z-10 rounded-2xl w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] drop-shadow-2xl"
+                  className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl"
                 />
               </div>
 
