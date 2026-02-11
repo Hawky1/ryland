@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import Counter from "./Counter";
+import logoTransunion from "@/assets/logo-transunion.png";
+import logoEquifax from "@/assets/logo-equifax.png";
+import logoExperian from "@/assets/logo-experian.png";
 
 const bureaus = [
-  { name: "TransUnion", score: 718, change: +42 },
-  { name: "Equifax", score: 724, change: +38 },
-  { name: "Experian", score: 712, change: +45 },
+  { name: "TransUnion", score: 718, change: +42, logo: logoTransunion },
+  { name: "Equifax", score: 724, change: +38, logo: logoEquifax },
+  { name: "Experian", score: 712, change: +45, logo: logoExperian },
 ];
 
 const barHeights = [30, 38, 28, 48, 45, 58, 68, 78, 82, 88, 95];
@@ -67,8 +70,8 @@ export default function CreditAnalysisVisual() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 + i * 0.12, type: "spring" }}
             >
-              <div>
-                <span className="text-sm text-slate-500 block">{b.name}</span>
+              <div className="flex items-center gap-2">
+                <img src={b.logo} alt={b.name} className="h-5 object-contain" />
                 <span className="text-base font-bold text-slate-900">
                   <Counter target={b.score} />
                 </span>
