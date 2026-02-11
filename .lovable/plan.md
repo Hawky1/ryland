@@ -1,49 +1,67 @@
 
 
-## Chase Blue About Card with Oversized Portrait
+# Create a Gene Ryland / Ryland Partners Reference Document
 
-Transform the "Meet The Founder" section into a Chase blue card with Gene's portrait enlarged so his head extends above the card boundary for a premium, editorial look.
+## What This Does
+Creates a single markdown file (`public/gene-ryland-overview.md`) containing a comprehensive overview of Gene Ryland, his business model, all services, the partner program, and key data points -- ready to copy/paste into any AI tool.
 
----
+## What's Included
 
-### 1. Wrap the About content in a Chase blue card
+The document will cover:
 
-Currently the About section sits on a plain white background. Wrap the two-column grid (image + bio) inside a Chase blue card container matching the rest of the site.
+1. **Gene Ryland - Bio & Background**
+   - Serial entrepreneur, business funding strategist
+   - CEO & Founder of Ryland Partners
+   - 8+ years experience, $150M+ funding secured, 10K+ entrepreneurs helped
+   - Featured on FOX, USA Today, Digital Journal, MarketWatch
 
-**Line ~566 area**: Wrap the grid in a new container div with:
-- `bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-8 md:p-12 shadow-2xl`
-- Update all text colors inside from slate (dark text on white) to white/light equivalents:
-  - `text-slate-600` / `text-slate-500` paragraphs become `text-white/80`
-  - `text-slate-900` stats become `text-white`
-  - `text-xs text-slate-500` stat labels become `text-white/60`
-  - Border divider `border-slate-200` becomes `border-white/20`
+2. **Company Overview - Ryland Partners**
+   - Mission: helping entrepreneurs unlock capital to scale
+   - Bridges the gap between ambitious entrepreneurs and traditional banking
+   - Trusted banking partners: Chase, Bank of America, US Bank, Navy Federal, Truist
 
-### 2. Enlarge Gene's portrait to extend above the card
+3. **Core Services (The Wealth Ecosystem)**
+   - Get Business Funding ($50K-$250K, 0% APR credit lines, no tax returns/revenue required)
+   - Credit Repair/Restoration (done-for-you, negative removals, dispute inaccuracies, 35-90 day results)
+   - Private Community (Skool-based, teaches investing funding into high-ROI digital businesses)
+   - Digital Products (eBooks via Shopify store)
+   - Partner/Affiliate Program
+   - 1-on-1 Consultation
 
-- Remove the current `max-w-md` constraint on the image
-- Add negative top margin (`-mt-24 md:-mt-32`) so the image rises above the card boundary
-- Add `overflow-visible` to the card container so the image isn't clipped
-- Make the image larger: `w-full max-w-sm md:max-w-md lg:max-w-lg`
-- Remove the light border (`border-slate-200 ring-1 ring-slate-200/50`) and replace with a Chase blue border or remove entirely for a cleaner floating look
-- Remove the blue blur glow behind the image (it won't read well on a blue card)
+4. **The Funding Journey (5-Step Process)**
+   - Step 1: Free Assessment (soft pull, no credit impact)
+   - Step 2: Credit Analysis (custom strategy)
+   - Step 3: Credit Restoration (done-for-you)
+   - Step 4: Lender Matching (proprietary system, 0% APR)
+   - Step 5: Get Funded ($50K-$250K)
 
-### 3. Update section header text
+5. **Partner Program Details**
+   - Earn commissions on qualified referrals (even if they don't take funding)
+   - Free to join, no cap on earnings
+   - 3-step process: get link, refer, get paid
+   - Support: done-for-you marketing assets, live monthly trainings, private community, dedicated partner portal
+   - Target partners: credit repair owners, marketing agencies, accountants, consultants, financial advisors, business coaches, community builders, real estate agents
 
-The "Meet The Founder" heading area (lines 557-563) sits above the card on white background -- these stay as-is (dark text on white). Only the content inside the card changes color.
+6. **Success Stories & Social Proof**
+   - New LLC secured $50K at 0% interest
+   - Credit score from 580 to 740
+   - $10K/mo Shopify store scaled with business credit
+   - Testimonials from Bradley A., Michael G., Ethan G.
 
----
+7. **Legal/Compliance**
+   - TSR Compliance (no advance fees for credit repair)
+   - Privacy Policy, Terms of Service, CCPA, Cookie Policy, Disclaimers
 
-### Technical Summary
+8. **Key Stats & Differentiators**
+   - $150M+ funding secured
+   - 10K+ entrepreneurs helped
+   - 8+ years experience
+   - No revenue or tax returns required for funding
+   - Soft pull only (no hard credit check)
+   - Results in 2 minutes for assessment
 
-| Element | Current | New |
-|---|---|---|
-| Card background | none (white page) | `bg-gradient-to-br from-[#0060A9] to-[#003A70]` |
-| Card border | none | `border border-[#004E8C] rounded-3xl` |
-| Card overflow | default | `overflow-visible` (allows portrait to extend out) |
-| Portrait size | `max-w-md` | `max-w-lg` with `-mt-24 md:-mt-32` |
-| Portrait border | `border-slate-200` | removed or `border-[#004E8C]` |
-| Bio text | `text-slate-600` | `text-white/80` |
-| Stat numbers | `text-slate-900` | `text-white` |
-| Stat labels | `text-slate-500` | `text-white/60` |
-| Stat divider | `border-slate-200` | `border-white/20` |
+## Technical Details
+- Creates one new file: `public/gene-ryland-overview.md`
+- Placed in `public/` so it's downloadable directly from the browser at `/gene-ryland-overview.md`
+- Pure markdown, no code changes to existing files
 
