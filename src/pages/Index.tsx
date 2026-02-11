@@ -565,11 +565,11 @@ const Index = () => {
 
           <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-8 md:p-12 shadow-2xl overflow-visible relative">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="relative flex justify-center -mt-24 md:-mt-32">
+              <div className="relative flex justify-center -mt-40 md:-mt-56 lg:-mt-64">
                 <img
                   src={geneRylandAbout}
                   alt="Gene Ryland — Founder of Ryland Partners"
-                  className="relative z-10 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg object-cover shadow-2xl"
+                  className="relative z-10 rounded-2xl w-full max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] drop-shadow-2xl"
                 />
               </div>
 
