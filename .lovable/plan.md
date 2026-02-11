@@ -1,64 +1,57 @@
 
 
-## Logo Swap + Homepage Section Reorder
+## Remove Transparency and Make Dark Sections Fully Opaque
 
-Two changes in one update: replace the navbar/footer logo with the uploaded black Ryland Partners logo (tinted dark navy blue to match the "Get Started" button), and reorder the homepage sections to the conversion-optimized flow discussed earlier.
-
----
-
-### 1. New Logo Integration
-
-- Copy the uploaded `black_logo.png` to `src/assets/logo-dark.png`
-- Import it in `Index.tsx` as the primary header logo (replacing `logo-white.png` for the navbar)
-- Apply a CSS filter to tint it dark navy blue to match the button color (`#0f172a`): use `brightness-0` combined with a `sepia`, `saturate`, and `hue-rotate` filter chain, or simply use a CSS `filter: brightness(0) saturate(100%)` approach that produces a near-black/dark navy tone
-- The footer can keep the white logo (it sits on a light background with dark text, but the black logo would also work there) -- or we swap both to the dark logo for consistency
-- The hero section retains the white logo inside its dark video card (no change needed there)
-
-### 2. Homepage Section Reorder
-
-Rearrange sections from the current order to the recommended conversion flow:
-
-**Current order:**
-1. Hero
-2. Trusted Banking Partners
-3. Funding Journey
-4. Wealth Ecosystem (Services)
-5. Success Stories
-6. About Gene Ryland
-7. Testimonials
-8. FAQ
-9. CTA
-10. Footer
-
-**New order:**
-1. Hero
-2. Trusted Banking Partners
-3. About Gene Ryland (moved up -- builds authority early)
-4. Funding Journey
-5. Success Stories
-6. Testimonials (right after success stories for back-to-back proof)
-7. Wealth Ecosystem / Services (broader offerings after trust is built)
-8. FAQ
-9. CTA
-10. Footer
+Replace all semi-transparent borders, rings, overlays, and backgrounds with solid opaque equivalents so the dark cards and hero section stand out crisply against the white page background.
 
 ---
 
-### Files to Modify
+### Changes Overview
 
-**`src/pages/Index.tsx`**
-- Add import for new dark logo asset (`logo-dark.png`)
-- Replace the navbar `<img>` src from `logoWhite` to `logoDark`
-- Apply a CSS filter to make it dark navy blue (e.g., `style={{ filter: 'brightness(0) saturate(100%)' }}` for pure black, or a custom filter for dark navy)
-- Replace the footer logo similarly
-- Cut the About Gene Ryland section (lines ~660-723) and paste it after the Banking Partners section (after line ~550)
-- Move the Wealth Ecosystem / Services section (lines ~555-591) to after Testimonials (after line ~823)
+Every dark card/section currently uses `border-white/10`, `ring-white/5`, `bg-black/60`, and `opacity-40` patterns that create a washed-out, see-through look on the white background. This plan replaces them all with solid values.
 
-### Technical Details
+---
 
-**Logo color filter** to match the dark navy button (`#0f172a`):
-- A simple `brightness(0)` filter will render the logo pure black, which is close to the button color and looks clean on white
-- For an exact navy tint, a filter like `brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(3000%) hue-rotate(200deg)` can approximate `#0f172a`
+### File 1: `src/pages/Index.tsx`
 
-**Section reorder** is purely a cut-and-paste of JSX blocks within `Index.tsx` -- no logic or prop changes needed, just repositioning the section blocks.
+**Hero section (line ~444):**
+- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-800`
+- Change video `opacity-40` to `opacity-100` (full visibility)
+- Change gradient overlay `from-black/70 via-black/40 to-transparent` to `from-black/80 via-black/50 to-black/20` (solid dark overlay, no fully transparent edge)
 
+**Success Stories cards (lines ~623-674):**
+- Change all `ring-white/10 ring-1` to solid `border border-slate-700`
+- Keep `bg-slate-900` (already solid)
+
+**Testimonial cards (lines ~696-775):**
+- Change `border border-white/10` to `border border-slate-700`
+
+**Services/Wealth Ecosystem cards (line ~794):**
+- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-700`
+
+**FAQ section (line ~820):**
+- Change `border-white/10 border` and `ring-white/10 ring-1` to `border border-slate-700`
+- Change inner FAQ items `border border-white/10 bg-white/5` to `border border-white/10 bg-white/5` (these are INSIDE the dark card so they stay as-is -- they look correct on dark bg)
+
+**CTA section (line ~902):**
+- Change `border-white/10 border` and `ring-white/10 ring-1` to `border border-slate-700`
+
+### File 2: `src/components/FundingJourney.tsx`
+
+**Card container (line ~89):**
+- Change `border border-white/10 ring-1 ring-white/5` to `border border-slate-700`
+- Change video overlay `bg-black/60` to `bg-black/80` (darker, more opaque)
+
+---
+
+### Technical Summary
+
+| Element | Current (Transparent) | New (Solid) |
+|---|---|---|
+| Dark card borders | `border-white/10` | `border-slate-700` |
+| Card rings | `ring-1 ring-white/5` | removed |
+| Hero video | `opacity-40` | `opacity-100` |
+| Hero overlay | `from-black/70 via-black/40 to-transparent` | `from-black/80 via-black/50 to-black/20` |
+| Funding Journey overlay | `bg-black/60` | `bg-black/80` |
+
+Elements INSIDE dark cards (FAQ items, step indicators) keep their existing `border-white/10` and `bg-white/5` since those are designed for dark-on-dark contrast and look correct.
