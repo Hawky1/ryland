@@ -237,7 +237,7 @@ const Index = () => {
           line-height: 1.2;
           font-weight: 500;
           color: #ffffff;
-          background: linear-gradient(#0f172a, #0f172a) padding-box, conic-gradient(
+          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(
             from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
             transparent 0%,
             #3b82f6 5%,
