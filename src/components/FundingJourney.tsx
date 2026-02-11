@@ -86,14 +86,27 @@ export default function FundingJourney() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/90 to-neutral-950 backdrop-blur-xl shadow-2xl ring-1 ring-white/5 overflow-hidden">
+          <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 overflow-hidden relative">
+            {/* Background video matching hero */}
+            <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/hero-bg.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-black/60" />
+            </div>
             {/* notch */}
-            <div className="flex justify-center pt-3 pb-1">
+            <div className="flex justify-center pt-3 pb-1 relative z-10">
               <div className="w-24 h-1 rounded-full bg-white/10" />
             </div>
 
             {/* Step bar inside card */}
-            <div className="flex items-center justify-center gap-0 overflow-x-auto px-6 pt-4 pb-2">
+            <div className="flex items-center justify-center gap-0 overflow-x-auto px-6 pt-4 pb-2 relative z-10">
               {STEPS.map((s, i) => (
                 <div key={i} className="flex items-center">
                   <button
@@ -128,7 +141,7 @@ export default function FundingJourney() {
               ))}
             </div>
 
-            <div className="px-6 sm:px-10 pb-8 pt-4 h-[580px] flex flex-col">
+            <div className="px-6 sm:px-10 pb-8 pt-4 h-[580px] flex flex-col relative z-10">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}

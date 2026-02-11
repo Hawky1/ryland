@@ -62,38 +62,38 @@ export default function LenderMatchVisual() {
           backgroundSize: "24px 24px"
         }} />
 
-        <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-4 relative z-10">Funding By Lender</span>
+        <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-5 relative z-10">Funding By Lender</span>
 
-        <div className="space-y-3 relative z-10">
+        <div className="space-y-4 relative z-10">
           {lenders.map((l, i) => (
             <motion.div
               key={l.name}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 + i * 0.1 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-4"
             >
-              <div className="flex items-center gap-2 w-32 flex-shrink-0">
-                <img src={l.logo} alt={l.name} className="w-5 h-5 object-contain brightness-0 invert opacity-60 flex-shrink-0" />
-                <span className="text-xs text-neutral-300 font-medium">{l.name}</span>
+              <div className="flex items-center gap-3 w-44 flex-shrink-0">
+                <img src={l.logo} alt={l.name} className="w-8 h-8 object-contain brightness-0 invert opacity-70 flex-shrink-0" />
+                <span className="text-sm text-neutral-200 font-semibold">{l.name}</span>
               </div>
-              <div className="flex-1 h-6 rounded-md bg-white/5 overflow-hidden relative">
+              <div className="flex-1 h-7 rounded-lg bg-white/5 overflow-hidden relative">
                 <motion.div
-                  className="h-full rounded-md bg-gradient-to-r from-cyan-500 to-blue-500"
+                  className="h-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500"
                   initial={{ width: 0 }}
                   animate={{ width: `${(l.amount / maxAmount) * 100}%` }}
                   transition={{ delay: 0.5 + i * 0.12, duration: 0.7, type: "spring", stiffness: 60 }}
                 >
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-md"
+                    className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-lg"
                     animate={{ opacity: [0.3, 0.5, 0.3] }}
                     transition={{ repeat: Infinity, duration: 2, delay: i * 0.15 }}
                   />
                 </motion.div>
               </div>
-              <span className="text-sm font-bold text-cyan-400 w-14 text-right">${(l.amount / 1000)}k</span>
-          </motion.div>
-        ))}
+              <span className="text-base font-bold text-cyan-400 w-16 text-right">${(l.amount / 1000)}k</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
