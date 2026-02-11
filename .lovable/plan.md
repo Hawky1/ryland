@@ -1,48 +1,103 @@
 
 
-# Add White Background Cards to Funding Journey Visuals
+# Increase Text Sizes Across Funding Journey Visuals
 
-## Overview
-Update select inner cards across the 5 funding journey visual components to use a solid white background with dark text, creating a professional contrast against the dark blue video background. Rather than making all cards white (which would look washed out), a mix of white and translucent cards will create visual depth and hierarchy.
+## Problem
+The text in the "Your Path To Funding" dashboard visuals is far too small. Most labels use `text-[8px]` to `text-[11px]`, making them nearly unreadable.
 
-## Design Approach
-- **Primary stat cards and key data panels** will get white backgrounds with dark text
-- **Secondary/supporting elements** (progress bars, small badges, status rows) will keep the current translucent dark style
-- This creates a layered, professional look similar to modern fintech dashboards
+## Size Bump Strategy
+Every text element across all 5 visual components will be bumped up by roughly 2 steps:
 
-## Changes by File
+| Current Size | New Size |
+|---|---|
+| `text-[8px]` | `text-xs` (12px) |
+| `text-[9px]` | `text-xs` (12px) |
+| `text-[10px]` | `text-sm` (14px) |
+| `text-[11px]` | `text-sm` (14px) |
+| `text-xs` | `text-sm` (14px) |
+| `text-sm` | `text-base` (16px) |
+| `text-base` | `text-lg` (18px) |
+| `text-lg` | `text-xl` (20px) |
+| `text-2xl` | `text-3xl` (30px) |
+| `text-3xl` | `text-4xl` (36px) |
+| `text-4xl` | `text-5xl` (48px) |
+| `text-5xl` | `text-6xl` (60px) |
+
+Icons will also be bumped slightly (e.g., `w-3.5 h-3.5` to `w-5 h-5`).
+
+## Files Changed
 
 ### 1. AssessmentVisual.tsx
-- **3 stat cards** (Business Type, Funding Goal, Timeline): Change to white background with dark text, subtle border, and light shadow
-- **Form fields and progress bar**: Keep dark/translucent (they look like form UI elements and work better dark)
+- Stat card labels: `text-[10px]` to `text-sm`
+- Stat card values: `text-sm` to `text-base`
+- Icon containers: slightly larger
+- Form field labels: `text-[10px]` to `text-sm`
+- Progress bar labels: `text-[10px]` to `text-sm`
+- Step dots labels: `text-[8px]` to `text-xs`
 
 ### 2. CreditAnalysisVisual.tsx
-- **Big "Current Score" card**: Change to white background with dark labels
-- **3 bureau score cards** (TransUnion, Equifax, Experian): Change to white background
-- **Bar chart panel and Starting/Current/Target row**: Keep dark (chart visuals read better on dark)
-- **Negative items panel**: Keep dark
+- "Current Score" label: `text-[10px]` to `text-sm`
+- Score number: `text-5xl` to `text-6xl`
+- "+42 pts" text: `text-[10px]` to `text-sm`
+- Bureau name labels: `text-[10px]` to `text-sm`
+- Bureau score values: `text-sm` to `text-base`
+- Change values: `text-xs` to `text-sm`
+- "Score History" label: `text-[10px]` to `text-sm`
+- Starting/Current/Target labels: `text-[9px]` to `text-xs`
+- Starting/Current/Target values: `text-sm` to `text-base`
+- "Negative Items" label: `text-[10px]` to `text-sm`
+- Counter "3/5": `text-2xl` to `text-3xl`
+- Resolved label: `text-[10px]` to `text-sm`
+- Negative item text: `text-[11px]` to `text-sm`
+- Status badges: `text-[9px]` to `text-xs`
+- "Avg. Improvement" label: `text-[10px]` to `text-sm`
 
 ### 3. RestorationVisual.tsx
-- **Progress ring card** (Items Resolved): Change to white background
-- **2 summary badges** (Negatives Removed, Disputes Won): Change to white background
-- **Dispute Results list and Bureau Score panels**: Keep dark
+- "Items Resolved" counter: `text-2xl` to `text-3xl`
+- "Items Resolved" label: `text-[10px]` to `text-sm`
+- Summary badge numbers: `text-sm` to `text-base`
+- Summary badge labels: `text-[8px]` to `text-xs`
+- Icons in badges: `w-3.5 h-3.5` to `w-5 h-5`
+- "Dispute Results" label: `text-[10px]` to `text-sm`
+- Dispute item text: `text-[11px]` to `text-sm`
+- Dispute result text: `text-[10px]` to `text-xs`
+- Bureau tags: `text-[8px]` to `text-xs`
+- Footer text: `text-[9px]` to `text-xs`
+- Bureau score names: `text-[10px]` to `text-sm`
+- Before/After labels: `text-[9px]` to `text-xs`
+- Before/After values: `text-lg` to `text-xl`
+- Change values: `text-xs` to `text-sm`
 
 ### 4. LenderMatchVisual.tsx
-- **2 stat cards** (Credit Lines, Total Available): Change to white background with dark text
-- **Bar chart panel and deposit badge**: Keep dark
+- "Credit Lines" label: `text-[10px]` to `text-sm`
+- "7 Approved" value: `text-3xl` to `text-4xl`
+- "Total Available" label: `text-[10px]` to `text-sm`
+- Dollar amount: `text-3xl` to `text-4xl`
+- "Latest deposit" text: `text-xs` to `text-sm`
+- "Funding By Lender" label: `text-[10px]` to `text-sm`
+- Lender names: `text-sm` to `text-base`
+- Dollar amounts: `text-base` to `text-lg`
 
 ### 5. GetFundedVisual.tsx
-- **Total Funded hero card**: Change to white background
-- **Funding Highlights badges panel**: Change to white background
-- **Checklist and breakdown items**: Keep dark
+- "Total Funded" label: `text-[10px]` to `text-sm`
+- Total amount: `text-4xl` to `text-5xl`
+- Breakdown labels: `text-[10px]` to `text-sm`
+- Breakdown values: `text-sm` to `text-base`
+- "Milestones Complete" label: `text-[10px]` to `text-sm`
+- Counter "5/5": `text-2xl` to `text-3xl`, sub-text `text-sm` to `text-base`
+- "All Complete" text: `text-[10px]` to `text-sm`
+- Checklist item labels: `text-xs` to `text-sm`
+- Checklist status: `text-[9px]` to `text-xs`
+- "Funding Highlights" label: `text-[10px]` to `text-sm`
+- Badge text: `text-[11px]` to `text-sm`
+- Icons in badges: `w-3.5 h-3.5` to `w-4 h-4`
+- "Funding Complete" text: `text-xs` to `text-sm`
+- "Average timeline" text: `text-[9px]` to `text-xs`
 
-## Technical Details
-For each white card:
-- Background: `bg-white` replacing `bg-white/5`
-- Border: `border-slate-200` replacing `border-white/10`
-- Shadow: Add `shadow-sm` for depth
-- Text colors: Labels become `text-slate-500`, values become `text-slate-900`
-- Icons: Adjust from `text-cyan-400` to brand-appropriate colors that work on white (keep cyan/blue tones)
-- Inner gradient overlays (`bg-gradient-to-br from-cyan-500/5`) will be adjusted or removed as they won't be visible on white
+### 6. FundingJourney.tsx (step labels inside the card)
+- "Step X" label: `text-[11px]` to `text-sm`
+- Step nav labels: `text-[10px]` to `text-xs` (already `sm:text-xs`, bump to `text-xs sm:text-sm`)
 
-This selective approach gives the section a polished, high-contrast look while maintaining visual variety and depth.
+## No layout changes
+The grid layouts, padding, and overall card structure remain the same. Only font sizes and icon sizes are being increased for readability.
+
