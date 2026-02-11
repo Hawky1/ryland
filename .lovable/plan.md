@@ -1,43 +1,48 @@
 
 
-## Logo Swap, Glassmorphism Navbar, and Spacing Update
+## Chase Bank Blue Theme for All Dark Sections
 
-Three focused changes to polish the header area and branding.
-
----
-
-### 1. Replace Chase Bank Logo with Ryland Partners Logo
-
-Copy the uploaded `black_logo-2.png` into the project and use it in place of the Chase Bank logo in the "Trusted Banking Partners" carousel.
-
-- Copy `user-uploads://black_logo-2.png` to `src/assets/logo-chase.png` (overwrite the existing Chase logo file)
-- No import changes needed since the file path stays the same
-- Both instances of the Chase logo in the carousel (lines 533 and 540) will automatically pick up the new image
-
-### 2. Glassmorphism Sticky Navbar
-
-The navbar is already `sticky top-0`, but it has no background -- content scrolls behind it visibly. Add a frosted glass effect:
-
-- Update the `<header>` className from `sticky z-20 top-0` to `sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100`
-- This gives a semi-transparent white background with a strong blur, plus a subtle bottom border separator
-
-### 3. Add Space Between Navbar and Hero Card
-
-Currently the hero section starts immediately after the header with `pt-16` internal padding but no top margin separating it from the nav.
-
-- Add `mt-8` (32px gap) to the hero `<section>` element on line 444, creating breathing room between the navbar and the hero card
+Transform all dark card sections from the current dark slate/black color scheme to Chase Bank's signature blue gradient -- starting from the uploaded blue (#0060A9) and transitioning to a deeper navy blue (#003A70).
 
 ---
 
-### File: `src/pages/Index.tsx`
+### Color Palette (Chase Bank inspired)
 
-**Line 404 (header):**
-- Change: `sticky z-20 top-0`
-- To: `sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100`
+- **Primary blue**: `#0060A9` (the uploaded swatch)
+- **Deep navy**: `#003A70` (darker end of gradient)
+- **Border**: `#004E8C` (mid-tone for solid borders)
+- **Accent highlights**: keep existing cyan/blue-400 accents -- they complement Chase blue naturally
 
-**Line 444 (hero section):**
-- Add `mt-8` to the existing className
+### Sections to Update
 
-**Logo file replacement:**
-- Overwrite `src/assets/logo-chase.png` with the uploaded Ryland Partners logo
+**File: `src/pages/Index.tsx`**
+
+1. **Hero section (line 444)**: Change `border-slate-800` to a Chase blue border. Update the gradient overlay from black-based to a deep Chase blue overlay (`from-[#003A70]/90 via-[#003A70]/60 to-[#0060A9]/30`).
+
+2. **Success Stories cards (lines 623-674)**: Replace `bg-slate-900` with `bg-gradient-to-br from-[#0060A9] to-[#003A70]`. Replace `border-slate-700` with `border-[#004E8C]`.
+
+3. **Testimonial cards (lines 696-775)**: Replace `bg-slate-900 border-slate-700` with `bg-gradient-to-br from-[#0060A9] to-[#003A70] border-[#004E8C]`.
+
+4. **FAQ section (line 820)**: Replace `bg-slate-900 border-slate-700` with `bg-gradient-to-br from-[#0060A9] to-[#003A70] border-[#004E8C]`.
+
+5. **CTA section (line 902)**: Replace `bg-slate-900 border-slate-700` with `bg-gradient-to-br from-[#0060A9] to-[#003A70] border-[#004E8C]`.
+
+**File: `src/components/FundingJourney.tsx`**
+
+6. **Funding Journey card (line 89)**: Replace `border-slate-700` with `border-[#004E8C]`. Change the video overlay from `bg-black/80` to `bg-[#003A70]/90` so the card reads as deep Chase blue rather than black.
+
+---
+
+### Technical Summary
+
+| Element | Current | New (Chase Blue) |
+|---|---|---|
+| Card backgrounds | `bg-slate-900` | `bg-gradient-to-br from-[#0060A9] to-[#003A70]` |
+| Card borders | `border-slate-700` | `border-[#004E8C]` |
+| Hero overlay | `from-black/80 via-black/50 to-black/20` | `from-[#003A70]/90 via-[#003A70]/60 to-[#0060A9]/30` |
+| Hero border | `border-slate-800` | `border-[#004E8C]` |
+| Funding Journey overlay | `bg-black/80` | `bg-[#003A70]/90` |
+| Inner elements (FAQ items, badges) | Unchanged | Unchanged (white/10 stays for internal contrast) |
+
+Text colors (white, zinc-100, zinc-300, zinc-400, slate-300, slate-400) remain the same -- they all have excellent contrast on the Chase blue backgrounds.
 
