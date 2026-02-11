@@ -563,46 +563,47 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative group flex justify-center">
-              <div className="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full transition-all duration-700 group-hover:bg-blue-500/15"></div>
-              <img
-                src={geneRylandAbout}
-                alt="Gene Ryland — Founder of Ryland Partners"
-                className="relative z-10 rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 w-full max-w-md object-cover shadow-2xl"
-              />
-            </div>
-
-            <div className="space-y-6">
-              <p className="text-slate-600 leading-relaxed text-base">
-                Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
-              </p>
-              <p className="text-slate-500 leading-relaxed text-base">
-                After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
-              </p>
-              <p className="text-slate-500 leading-relaxed text-base">
-                Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
-              </p>
-
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200">
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">$150M+</p>
-                  <p className="text-xs text-slate-500 mt-1">Funding Secured</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">10K+</p>
-                  <p className="text-xs text-slate-500 mt-1">Entrepreneurs Helped</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">8+</p>
-                  <p className="text-xs text-slate-500 mt-1">Years of Experience</p>
-                </div>
+          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-8 md:p-12 shadow-2xl overflow-visible relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="relative flex justify-center -mt-24 md:-mt-32">
+                <img
+                  src={geneRylandAbout}
+                  alt="Gene Ryland — Founder of Ryland Partners"
+                  className="relative z-10 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg object-cover shadow-2xl"
+                />
               </div>
 
-              <div className="pt-4">
-                <a href="#cta" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
-                  Work With Gene
-                </a>
+              <div className="space-y-6">
+                <p className="text-white/80 leading-relaxed text-base">
+                  Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.
+                </p>
+                <p className="text-white/80 leading-relaxed text-base">
+                  After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.
+                </p>
+                <p className="text-white/80 leading-relaxed text-base">
+                  Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.
+                </p>
+
+                <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/20">
+                  <div>
+                    <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p>
+                    <p className="text-xs text-white/60 mt-1">Funding Secured</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p>
+                    <p className="text-xs text-white/60 mt-1">Entrepreneurs Helped</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p>
+                    <p className="text-xs text-white/60 mt-1">Years of Experience</p>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <a href="#cta" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
+                    Work With Gene
+                  </a>
+                </div>
               </div>
             </div>
           </div>
