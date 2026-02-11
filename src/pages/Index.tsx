@@ -441,7 +441,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto mt-8 pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-slate-800">
+      <section className="relative max-w-7xl mx-auto mt-8 pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
@@ -455,7 +455,7 @@ const Index = () => {
           </video>
         </div>
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/50 to-black/20 rounded-2xl" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#003A70]/90 via-[#003A70]/60 to-[#0060A9]/30 rounded-2xl" />
 
         <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
           {/* Left - text + CTAs */}
@@ -620,7 +620,7 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 pt-0 pr-0 pb-0 pl-0 space-x-5">
-            <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-slate-900 border border-slate-700 rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
+            <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
               <div className="opacity-[0.07] absolute top-0 right-0 bottom-0 left-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
               <div className="flex gap-3 gap-x-3 gap-y-3 items-center">
                 <span className="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/15 px-2.5 py-1 text-xs text-white/80">Results</span>
@@ -636,7 +636,7 @@ const Index = () => {
             </div>
             
             <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
-              <div className="group overflow-hidden hover:shadow-xl transition border border-slate-700 rounded-2xl bg-slate-900 text-white">
+              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
                 <div className="relative">
                   <img src={successFunding} alt="The Startup Launch" className="transition-all duration-300 w-full h-[224px] object-cover" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -648,7 +648,7 @@ const Index = () => {
                   <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>New LLC secured $50k at 0% interest</p>
                 </div>
               </div>
-              <div className="group overflow-hidden hover:shadow-xl transition border border-slate-700 rounded-2xl bg-slate-900 text-white">
+              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
                 <div className="relative">
                   <img src={successCredit} alt="The Credit Pivot" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -660,7 +660,7 @@ const Index = () => {
                   <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>From 580 to 740 score</p>
                 </div>
               </div>
-              <div className="group overflow-hidden hover:shadow-xl transition border border-slate-700 rounded-2xl bg-slate-900 text-white">
+              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
                 <div className="relative">
                   <img src={successEmpire} alt="The Digital Empire" className="w-full h-[224px] object-cover transition-all duration-300" />
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
@@ -693,7 +693,7 @@ const Index = () => {
           {/* Row 1 — left to right */}
           <div className="sm:py-8 pt-6 pb-6 relative">
             <div className="flex gap-4 sm:gap-5 will-change-transform" style={{ animation: 'marquee-ltr 45s linear infinite' }}>
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-slate-700 bg-slate-900 p-5 text-white">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -709,7 +709,7 @@ const Index = () => {
                 </p>
               </article>
 
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-slate-700 bg-slate-900 p-5 text-white">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -742,7 +742,7 @@ const Index = () => {
               </article>
 
               {/* Duplicate for seamless loop */}
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-slate-700 bg-slate-900 p-5 text-white">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -758,7 +758,7 @@ const Index = () => {
                 </p>
               </article>
 
-              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-slate-700 bg-slate-900 p-5 text-white">
+              <article className="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
                 <div className="flex items-center gap-3">
                   <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" className="size-9 object-cover rounded-full" />
                   <div>
@@ -791,7 +791,7 @@ const Index = () => {
               { img: servicePartner, title: "BECOME\nA PARTNER", cta: "Become A Partner" },
               { img: serviceConsultation, title: "SCHEDULE A\nCONSULTATION", cta: "Schedule A Consultation" },
             ].map((card, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-2xl border border-slate-700 aspect-square">
+              <div key={i} className="group relative overflow-hidden rounded-2xl border border-[#004E8C] aspect-square">
                 <img
                   src={card.img}
                   alt={card.cta}
@@ -817,7 +817,7 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="md:p-10 bg-slate-900 max-w-7xl border border-slate-700 rounded-3xl mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)', WebkitMaskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)' }}>
+      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)', WebkitMaskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)' }}>
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div>
@@ -899,7 +899,7 @@ const Index = () => {
       {/* CTA */}
       <section className="overflow-hidden my-10 relative" id="cta">
         <div className="max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
-          <div className="md:p-10 bg-slate-900 max-w-7xl border border-slate-700 rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
+          <div className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
             
             <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 gap-x-6 gap-y-6 items-center">
               <div>
