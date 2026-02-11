@@ -817,7 +817,7 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)', WebkitMaskImage: 'linear-gradient(200deg, transparent, black 25%, black 65%, transparent)' }}>
+      <section className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mt-40 mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div>
@@ -899,7 +899,7 @@ const Index = () => {
       {/* CTA */}
       <section className="overflow-hidden my-10 relative" id="cta">
         <div className="max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
-          <div className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
+          <div className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
             
             <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 gap-x-6 gap-y-6 items-center">
               <div>
