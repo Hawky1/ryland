@@ -1,37 +1,71 @@
 
-
-# Credit Analysis Visual Redesign + Compact Funding Journey Layout
+# Revert White Cards to Blue Theme + Mobile Optimize Step Navigation
 
 ## Overview
-Two changes: (1) Add the three bureau logos to the Credit Analysis visual, and (2) remove the "Step X" label, title, and description text block from the Funding Journey card to create a more compact, centered layout.
+Two main changes: (1) Convert the white-background cards in GetFundedVisual and LenderMatchVisual back to the translucent blue style matching the dark video background, and (2) make the 1-2-3-4-5 step navigation mobile-friendly so it never causes a horizontal scrollbar.
 
-## Changes
+## 1. GetFundedVisual.tsx - Revert White Cards to Blue Theme
 
-### 1. Add Bureau Logos (CreditAnalysisVisual.tsx)
-- Copy the 3 uploaded logo files into `src/assets/`:
-  - `logo-transunion.png`
-  - `logo-equifax.png`
-  - `logo-experian.png`
-- Import them in the component
-- Add each logo as a small image (approx. `h-5`) next to or replacing the bureau name text in the bureau score cards
-- The bureau name text stays as a fallback/alt but the logo becomes the primary visual identifier
+### Total Funded hero card (line 35)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- Text: `text-slate-500` --> `text-neutral-400`
+- The gradient text on the dollar amount stays as-is (already cyan-to-blue gradient)
 
-### 2. Remove Step Header Block (FundingJourney.tsx)
-- Remove the "Step X" label (`<span>Step {active + 1}</span>`)
-- Remove the step title (`<h3>`)
-- Remove the description (`<p>`)
-- Remove the entire `<div className="text-center mb-6">` wrapper that contains these three elements
-- This gives the visual more vertical space and pushes content toward the center
-- Reduce top/bottom padding on the visual container (`mb-6` gone, adjust `pt-4` and `py-4` as needed) so everything sits more centrally in the card
+### Funding Highlights card (line 146)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- `text-slate-500` --> `text-neutral-400`
+- `text-cyan-600` icon --> `text-cyan-400`
+- Badge items: `bg-cyan-50 border border-cyan-200` --> `bg-cyan-500/10 border border-cyan-500/30`
+- Badge text: `text-cyan-700` --> `text-cyan-300`
+- Badge icon: `text-cyan-600` --> `text-cyan-400`
 
-### 3. Tighten Spacing
-- With the header block removed, reduce the `min-h-[480px] sm:h-[580px]` to something shorter like `min-h-[400px] sm:h-[480px]` since the content area no longer needs space for the text block
-- The visual will naturally center in the remaining space via the existing `flex items-center justify-center`
+## 2. LenderMatchVisual.tsx - Revert White Cards to Blue Theme
+
+### Credit Lines card (line 28)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- `text-slate-500` --> `text-neutral-400`
+- `text-slate-900` --> `text-white`
+
+### Total Available card (line 37)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- `text-slate-500` --> `text-neutral-400`
+- `text-cyan-600` --> `text-cyan-400`
+
+## 3. Also revert AssessmentVisual.tsx and RestorationVisual.tsx white cards
+
+### AssessmentVisual - 3 stat cards (line 24)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- `text-slate-500` --> `text-neutral-400`
+- `text-slate-900` --> `text-white`
+- Icon bg: `bg-cyan-50` --> `bg-cyan-500/10`
+- Icon: `text-cyan-600` --> `text-cyan-400`
+
+### RestorationVisual - Progress ring card (line 34)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- SVG stroke bg: `rgba(0,0,0,0.06)` --> `rgba(255,255,255,0.1)`
+- `text-slate-900` --> `text-white`
+- `text-slate-500` --> `text-neutral-400`
+
+### RestorationVisual - 2 summary badges (lines 69, 79)
+- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
+- `text-slate-900` --> `text-white`
+- `text-slate-500` --> `text-neutral-400`
+
+## 4. FundingJourney.tsx - Mobile-Optimize Step Navigation
+
+### Step bar (lines 99-132)
+- Remove `overflow-x-auto` to prevent scrollbar
+- On mobile, hide the step title text labels (show only the numbered circles)
+- Use responsive classes: `hidden sm:block` on the `<span>` with the step title
+- Reduce circle size on mobile: `w-7 h-7 sm:w-9 sm:h-9`
+- Reduce connector width on mobile: `w-4 sm:w-8` for the line between circles
+- Reduce horizontal padding: `px-3 sm:px-6`
+
+This ensures the 5 numbered circles fit comfortably on any screen width without scrolling, while the full labels still appear on tablet/desktop.
 
 ## Files Changed
-- `src/assets/logo-transunion.png` (new - copied from upload)
-- `src/assets/logo-equifax.png` (new - copied from upload)
-- `src/assets/logo-experian.png` (new - copied from upload)
-- `src/components/funding-visuals/CreditAnalysisVisual.tsx` (add logo imports + render logos in bureau cards)
-- `src/components/FundingJourney.tsx` (remove step header block, tighten spacing)
-
+- `src/components/funding-visuals/GetFundedVisual.tsx`
+- `src/components/funding-visuals/LenderMatchVisual.tsx`
+- `src/components/funding-visuals/AssessmentVisual.tsx`
+- `src/components/funding-visuals/RestorationVisual.tsx`
+- `src/components/FundingJourney.tsx`
