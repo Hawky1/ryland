@@ -80,42 +80,6 @@ export default function FundingJourney() {
           </p>
         </div>
 
-        {/* Step bar */}
-        <div className="flex items-center justify-center gap-0 mb-10 overflow-x-auto pb-2">
-          {STEPS.map((s, i) => (
-            <div key={i} className="flex items-center">
-              <button
-                onClick={() => go(i)}
-                className="flex flex-col items-center gap-1.5 group relative"
-              >
-                <motion.div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border transition-colors duration-300 ${
-                    i <= active
-                      ? "bg-gradient-to-br from-cyan-500 to-blue-600 border-cyan-400/50 text-white shadow-[0_0_16px_rgba(6,182,212,0.4)]"
-                      : "bg-white/5 border-white/10 text-neutral-500"
-                  }`}
-                  animate={i === active ? { scale: 1.15 } : { scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {i + 1}
-                </motion.div>
-                <span className={`text-[10px] sm:text-xs font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
-                  {s.title}
-                </span>
-              </button>
-              {i < STEPS.length - 1 && (
-                <div className="w-8 sm:w-14 h-0.5 mx-1 rounded-full bg-white/5 relative overflow-hidden self-start mt-[18px]">
-                  <motion.div
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
-                    animate={{ width: i < active ? "100%" : "0%" }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
         {/* Device frame */}
         <div
           className="relative w-full mx-auto"
@@ -128,7 +92,43 @@ export default function FundingJourney() {
               <div className="w-24 h-1 rounded-full bg-white/10" />
             </div>
 
-            <div className="px-6 sm:px-10 pb-8 pt-4 min-h-[420px] flex flex-col">
+            {/* Step bar inside card */}
+            <div className="flex items-center justify-center gap-0 overflow-x-auto px-6 pt-4 pb-2">
+              {STEPS.map((s, i) => (
+                <div key={i} className="flex items-center">
+                  <button
+                    onClick={() => go(i)}
+                    className="flex flex-col items-center gap-1.5 group relative"
+                  >
+                    <motion.div
+                      className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border transition-colors duration-300 ${
+                        i <= active
+                          ? "bg-gradient-to-br from-cyan-500 to-blue-600 border-cyan-400/50 text-white shadow-[0_0_16px_rgba(6,182,212,0.4)]"
+                          : "bg-white/5 border-white/10 text-neutral-500"
+                      }`}
+                      animate={i === active ? { scale: 1.15 } : { scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {i + 1}
+                    </motion.div>
+                    <span className={`text-[10px] sm:text-xs font-medium whitespace-nowrap transition-colors ${i === active ? "text-cyan-400" : "text-neutral-500"}`}>
+                      {s.title}
+                    </span>
+                  </button>
+                  {i < STEPS.length - 1 && (
+                    <div className="w-8 sm:w-14 h-0.5 mx-1 rounded-full bg-white/5 relative overflow-hidden self-start mt-[18px]">
+                      <motion.div
+                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                        animate={{ width: i < active ? "100%" : "0%" }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="px-6 sm:px-10 pb-8 pt-4 h-[580px] flex flex-col">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
