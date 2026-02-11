@@ -553,8 +553,9 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl overflow-visible relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+          <div className="border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl overflow-visible relative">
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center relative z-10">
               <div className="relative flex justify-center -mt-20 sm:-mt-32 md:-mt-56 lg:-mt-64">
                 <img
                   src={geneRylandAbout}
