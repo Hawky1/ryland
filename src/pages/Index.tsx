@@ -441,7 +441,7 @@ const Index = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto mt-8 pt-12 sm:pt-16 pb-20 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      <section className="relative max-w-7xl mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
           <video
@@ -457,24 +457,24 @@ const Index = () => {
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#003A70]/90 via-[#003A70]/60 to-[#0060A9]/30 rounded-2xl" />
 
-        <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
           {/* Left - text + CTAs */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
-            <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-left mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
+            <h1 className="text-[28px] leading-[0.95] sm:text-[42px] md:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-center lg:text-left mt-4 sm:mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
               Unlock the Capital, Credit, and Community to Build Your Empire
             </h1>
             
-            <p className="text-lg sm:text-xl text-zinc-400 mt-6 max-w-xl text-left leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-zinc-400 mt-4 sm:mt-6 max-w-xl text-center lg:text-left leading-relaxed mx-auto lg:mx-0">
               We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in business funding, repair their credit, and master the digital economy.
             </p>
 
-            <div className="flex flex-col xl:mt-10 mt-8 gap-4 items-start">
+            <div className="flex flex-col mt-6 sm:mt-8 xl:mt-10 gap-4 items-center lg:items-start">
               <div className="inline-block bg-transparent">
-                <button className="shiny-cta focus:outline-none">
+                <button className="shiny-cta !py-3 !px-6 sm:!py-5 sm:!px-10 !text-sm sm:!text-lg focus:outline-none">
                   <span>Take the Free Funding Assessment</span>
                 </button>
               </div>
-              <div className="flex items-center gap-3 text-xs sm:text-sm text-zinc-500">
+              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-3 text-[11px] sm:text-sm text-zinc-500">
                 <span>Results in 2 minutes</span>
                 <span className="text-zinc-600">•</span>
                 <span>No hard credit pull</span>
@@ -484,10 +484,10 @@ const Index = () => {
             </div>
           </div>
           {/* Right - video showcase */}
-          <div className="relative lg:flex-1 flex justify-center lg:mt-16">
-            <div className="relative flex flex-col items-center gap-6">
+          <div className="relative lg:flex-1 flex justify-center mt-4 lg:mt-16 w-full">
+            <div className="relative flex flex-col items-center gap-4 sm:gap-6 w-full max-w-sm sm:max-w-md lg:max-w-xl">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
-              <div className="relative z-10 w-full max-w-xl">
+              <div className="relative z-10 w-full">
                 <video
                   ref={videoRef}
                   autoPlay
@@ -500,19 +500,19 @@ const Index = () => {
                 </video>
                 <button
                   onClick={() => setIsMuted(!isMuted)}
-                  className={`absolute bottom-4 right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full p-3 shadow-lg transition-colors ${isMuted ? 'animate-pulse' : ''}`}
+                  className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full p-2 sm:p-3 shadow-lg transition-colors ${isMuted ? 'animate-pulse' : ''}`}
                 >
-                  {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  {isMuted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
                 </button>
               </div>
-              <div className="relative z-10 flex flex-col items-center mt-2">
-                <h3 className="text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
-                <p className="text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Funding Expert</p>
+              <div className="relative z-10 flex flex-col items-center mt-1 sm:mt-2">
+                <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Funding Expert</p>
               </div>
               <img
                 src={asSeenOn}
                 alt="As seen on FOX, USA Today, Digital Journal, MarketWatch"
-                className="relative z-10 w-full max-w-xl brightness-0 invert opacity-60"
+                className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60"
               />
             </div>
           </div>
