@@ -1,91 +1,73 @@
 
 
-## Transform "Capital On Your Terms" into an Interactive Funding Journey App
+## Upgrade Funding Journey Visuals to Dashboard-Style Graphics
 
-Replace the current 3-card layout with an immersive, app-style step-by-step process map that walks visitors through the entire funding journey -- from initial assessment to getting funded. This will use Framer Motion animations to create a polished, interactive experience.
+Redesign the animated visuals inside the device frame card to be rich, dashboard-style panels with more graphics, data visualizations, and motion -- inspired by the reference images showing stat cards, bar charts, and completion checklists.
 
 ---
 
-### What It Will Look Like
+### What Changes
 
-The section becomes a simulated "app interface" with a dark glass-morphism phone/tablet mockup in the center, surrounded by a visual step timeline. Users scroll through the section and each step animates into view.
+Each of the 5 step visuals will be replaced with a multi-panel dashboard layout inside the card, featuring animated charts, stat boxes, and progress indicators. The step header and navigation remain the same.
 
-**Layout:**
-- Left side: Vertical step indicator (numbered dots connected by an animated line)
-- Right side: A "device frame" showing the current step's content with smooth transitions
-- Each step slides/fades in as the user scrolls or clicks through
+---
 
-**The 5 Steps:**
+### Step-by-Step Visual Redesign
 
-| Step | Title | Description | Visual in "App" |
-|------|-------|-------------|-----------------|
-| 1 | Take Your Assessment | Answer a few quick questions about your business and goals | Animated form UI with progress bar |
-| 2 | Credit Analysis | We pull and analyze your credit profile to build a strategy | Animated credit score gauge rising |
-| 3 | Credit Restoration | Our team removes negatives and boosts your score | Checklist items checking off one by one |
-| 4 | Lender Matching | Our system matches you with the best 0% APR credit lines | Cards fanning out with bank logos |
-| 5 | Get Funded | Receive $50k-$250k in business funding | Celebration animation with funding amount counter |
+**Step 1 -- Take Your Assessment**
+- 3-column layout with animated stat cards:
+  - "Business Type" with a pulsing icon
+  - "Funding Goal" with an animated counter ($50k-$250k)
+  - "Timeline" showing "30-60 Days"
+- Below: animated progress bar filling to 75% with step dots
+- Form fields animate in sequentially with typing cursor effect
 
-**Interaction:** Users click step indicators or use prev/next arrows to navigate between steps. Each transition uses Framer Motion `AnimatePresence` for smooth crossfades.
+**Step 2 -- Credit Analysis**
+- Left panel: Large animated bar chart (7+ bars) showing credit history rising, with the current score (720) displayed large over the bars in a glowing green/cyan color
+- Bottom row: 3 stat boxes ("Starting: 582", "Current: 720", "Target: 750+") that count up with animated counters
+- Subtle grid background with animated scan line effect
+
+**Step 3 -- Credit Restoration**
+- Left panel: Animated circular progress ring showing "12/15 Items Resolved"
+- Center: List of dispute items with sequential check-mark animations and strikethrough
+- Right: Before/After score comparison with animated arrow showing +138 pts improvement
+- Each item fades in with a green checkmark bouncing into place
+
+**Step 4 -- Lender Matching**
+- Center: 2 large stat cards ("Credit Lines: 7 Approved" and "Total Available: $125,000") with counters
+- Below: Animated bar chart showing funding amounts per lender (pink/magenta gradient bars that grow sequentially)
+- Bottom badge: "Latest deposit: $15,000" with a pulsing green dot
+- Bank logos float in around the edges
+
+**Step 5 -- Get Funded**
+- 3-column dashboard layout:
+  - Left: Large funding counter ($250,000) with celebration particles
+  - Center: Completion checklist ("LLC Formation - Completed", "EIN Obtained - IRS Approved", "Operating Agreement - Filed") with animated cyan checkmarks
+  - Right: Summary card with "0% APR", "No Revenue Required", "No Tax Returns" badges
+- Confetti burst animation on entry
 
 ---
 
 ### Technical Details
 
-**File modified:** `src/pages/Index.tsx`
+**File modified:** `src/components/FundingJourney.tsx`
 
-**New component:** `src/components/FundingJourney.tsx`
-- Extracted into its own component to keep Index.tsx clean
-- Uses Framer Motion (`motion`, `AnimatePresence`) for step transitions
-- Self-contained state management with `useState` for active step
+**Key changes:**
+- Replace each of the 5 visual functions (`AssessmentVisual`, `CreditGaugeVisual`, `RestorationVisual`, `LenderMatchVisual`, `GetFundedVisual`) with richer dashboard-style layouts
+- Use CSS grid (`grid grid-cols-2 lg:grid-cols-3 gap-4`) inside each visual for multi-panel layouts
+- Each sub-panel uses the existing card style: `rounded-xl bg-white/5 border border-white/10 p-4`
+- Bar charts built with simple `div` elements + Framer Motion height animations (no external chart library needed)
+- Animated counters reuse the existing `Counter` component
+- Add staggered entrance animations using `motion` with increasing `delay` values
+- Increase `min-h` of the content area from `340px` to `420px` to accommodate richer visuals
+- Add subtle animated grid/scan-line background to the device frame using CSS gradients
 
-**Component structure:**
+**Animation additions:**
+- Bar chart bars grow from bottom with spring physics and staggered delays
+- Stat cards scale in with `type: "spring"` 
+- Circular progress rings use `strokeDashoffset` animation (same technique as existing gauge)
+- Pulsing green dots use `animate={{ scale: [1, 1.3, 1] }}` with `repeat: Infinity`
+- Scan line effect via a CSS `@keyframes` moving a gradient bar top-to-bottom
 
-```text
-+--------------------------------------------------+
-|  Section Header: "Your Path To Funding"           |
-+--------------------------------------------------+
-|                                                    |
-|  [1]----[2]----[3]----[4]----[5]  (step bar)      |
-|                                                    |
-|  +--------------------------------------------+   |
-|  |  "Device Frame" (rounded, glass border)     |   |
-|  |                                             |   |
-|  |   Step Title                                |   |
-|  |   Step Description                          |   |
-|  |                                             |   |
-|  |   +----------------------------------+      |   |
-|  |   |  Animated Visual for this step   |      |   |
-|  |   |  (gauge, checklist, cards, etc.) |      |   |
-|  |   +----------------------------------+      |   |
-|  |                                             |   |
-|  +--------------------------------------------+   |
-|                                                    |
-|         [ <  Previous ]  [ Next  > ]               |
-+--------------------------------------------------+
-```
-
-**Animations (Framer Motion):**
-- Step bar: Active dot scales up + glows cyan; connecting line fills with gradient as you progress
-- Content transitions: `AnimatePresence` with `mode="wait"`, slides in from right on next / left on previous
-- Each step's visual has its own micro-animation (e.g., score gauge animating up, checkmarks appearing sequentially)
-- Auto-play option: Steps advance every 4 seconds with a progress indicator, pauses on hover
-
-**Step visuals (built with Tailwind + Framer Motion, no external images):**
-1. Assessment: Animated form fields appearing one by one with a progress bar filling
-2. Credit Analysis: A circular gauge that animates from 0 to a score with a glowing arc
-3. Credit Restoration: A list of negative items with strikethrough animations + green checkmarks
-4. Lender Matching: Cards with bank-style logos sliding in and stacking
-5. Get Funded: A counter animating from $0 to $250,000 with confetti-style particles
-
-**Styling:**
-- Device frame: `rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/90 to-neutral-950 backdrop-blur-xl shadow-2xl`
-- Step indicator uses cyan/blue gradient for active state
-- Consistent with the existing dark premium aesthetic
-- Responsive: On mobile, the step bar becomes horizontal and scrollable; the device frame takes full width
-
-**What gets removed:**
-- The entire "Capital On Your Terms" section (lines 552-654) -- all 3 current cards (Business Funding, Credit Restoration, Rapid Execution)
-- Replaced with a single `<FundingJourney />` component call
-
-**Dependencies:** None new -- already has `framer-motion` installed.
+**No new dependencies needed** -- all built with existing Framer Motion + Tailwind.
 
