@@ -4,6 +4,7 @@ import logoDark from "@/assets/logo-dark.png";
 import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
+import Footer from "@/components/Footer";
 import {
   DollarSign, ShieldCheck, Users, Handshake, Calendar,
   Link2, Share2, Wallet, Megaphone, GraduationCap, Clock,
@@ -509,53 +510,7 @@ const Partners = () => {
         </div>
       </section>
 
-      {/* ===================== FOOTER ===================== */}
-      <footer className="border-slate-200 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div className="space-y-4">
-              <Link to="/" className="flex items-center gap-2">
-                <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
-              </Link>
-              <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Product</h3>
-              <ul className="space-y-3">
-                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Funding</Link></li>
-                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Credit</Link></li>
-                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Academy</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Company</h3>
-              <ul className="space-y-3">
-                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">About</Link></li>
-                <li><Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Results</Link></li>
-                <li><Link to="/partners" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Partners</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Legal</h3>
-              <ul className="space-y-3">
-                <li><Link to="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</Link></li>
-                <li><Link to="/ccpa" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">CCPA Notice</Link></li>
-                <li><Link to="/tsr-compliance" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">TSR Compliance</Link></li>
-                <li><Link to="/disclaimers" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Disclaimers</Link></li>
-                <li><Link to="/cookie-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Cookie Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-slate-500">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
-            <div className="flex items-center gap-6">
-              <Link to="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

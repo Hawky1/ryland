@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 import successFunding from "@/assets/success-funding.jpg";
 import successCredit from "@/assets/success-credit.webp";
 import successEmpire from "@/assets/success-empire.webp";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [isMuted, setIsMuted] = useState(true);
@@ -1033,97 +1034,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-slate-200 border-t pt-16 pb-10" style={{ maskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(100deg, transparent, black 25%, black 75%, transparent)' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-              </div>
-              <p className="text-sm text-slate-500 max-w-xs">Empowering entrepreneurs with capital, credit, and community.</p>
-              <div className="flex items-center gap-3">
-                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-                </a>
-                <a href="#" className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Product</h3>
-              <ul className="space-y-3">
-                <li><a href="#services" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Funding</a></li>
-                <li><a href="#services" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Credit</a></li>
-                <li><a href="#features" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Academy</a></li>
-                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Store</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Company</h3>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">About</a></li>
-                <li><a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Blog</a></li>
-                <li><a href="#showcase" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Results</a></li>
-                <li><a href="/partners" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Partners</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-slate-900 mb-4">Legal</h3>
-              <ul className="space-y-3">
-                <li><a href="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a></li>
-                <li><a href="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a></li>
-                <li><a href="/ccpa" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">CCPA Notice</a></li>
-                <li><a href="/tsr-compliance" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">TSR Compliance</a></li>
-                <li><a href="/disclaimers" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Disclaimers</a></li>
-                <li><a href="/cookie-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Cookie Policy</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-slate-500">
-              © <span id="year">2026</span> Ryland Partners. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <a href="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a>
-              <a href="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a>
-            </div>
-          </div>
-
-          {/* Consumer Disclosure */}
-          <div className="border-t border-slate-200 mt-8 pt-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-4 flex-wrap">
-              <h4 className="text-sm font-semibold text-slate-900">Consumer Disclosure</h4>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                CROA Compliant
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700 uppercase tracking-wider">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                TSR Compliant
-              </span>
-            </div>
-            <div className="space-y-3 text-xs text-slate-500 leading-relaxed max-w-4xl mx-auto">
-              <p><span className="font-semibold text-slate-700">Credit Repair Organizations Act (CROA) Notice:</span> You have a right to dispute inaccurate information in your credit report by contacting the credit bureau directly. However, neither you nor any credit repair company or credit repair organization has the right to have accurate, current, and verifiable information removed from your credit report.</p>
-              <p>You have a right to cancel this contract within 3 business days from the date you signed it. If you cancel, we cannot charge you any fees or collect any money for the services that have not yet been performed.</p>
-              <p><span className="font-semibold text-slate-700">No Guarantee:</span> We cannot guarantee specific results. Improvement in credit scores depends on the unique circumstances of each individual.</p>
-              <p><span className="font-semibold text-slate-700">FTC Telemarketing Sales Rule (TSR) Compliance:</span> In accordance with the TSR, no fees are charged or collected until services are fully performed.</p>
-            </div>
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-[10px] text-slate-400">All systems normal</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
