@@ -18,6 +18,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import FunnelLeadMagnet from "./pages/funnel/FunnelLeadMagnet";
+import FunnelCoreOffer from "./pages/funnel/FunnelCoreOffer";
+import FunnelDownsell from "./pages/funnel/FunnelDownsell";
+import FunnelConsultation from "./pages/funnel/FunnelConsultation";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +46,10 @@ const AppContent = () => {
           <Route path="/disclaimers" element={<Disclaimers />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/funnel" element={<FunnelLeadMagnet />} />
+          <Route path="/funnel/offer" element={<FunnelCoreOffer />} />
+          <Route path="/funnel/founders" element={<FunnelDownsell />} />
+          <Route path="/funnel/consultation" element={<FunnelConsultation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
