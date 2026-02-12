@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { VolumeX, Volume2 } from "lucide-react";
+import { VolumeX, Volume2, Rocket, LayoutDashboard, ShieldCheck, Handshake } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
 import logoDark from "@/assets/logo-dark.png";
 import heroPortrait from "@/assets/hero-portrait.png";
@@ -606,67 +606,62 @@ const Index = () => {
       {/* Funding Journey */}
       <FundingJourney />
 
-      {/* Success Stories section */}
+      {/* Who This Is For */}
       <section className="sm:pt-24 md:pt-20 pt-24 pb-20 relative" id="showcase">
-        <div className="max-w-7xl mr-auto ml-auto pr-6 pl-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-medium text-slate-900 tracking-tighter text-left pt-6 pb-6 sm:text-5xl" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 0%, transparent)' }}>Success Stories</h2>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mb-3">Who This Is For</p>
+            <h2 className="text-2xl sm:text-5xl font-medium text-slate-900 tracking-tighter">Designed for the Ambitious</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 mt-10 gap-5">
-            <div className="group overflow-hidden hover:bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] hover:from-blue-400/30 hover:to-blue-400/0 hover:border-slate-300 transition-all duration-300 sm:p-6 bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-2xl pt-5 pr-5 pb-5 pl-5 relative text-white">
-              <div className="opacity-[0.07] absolute top-0 right-0 bottom-0 left-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }}></div>
-              <div className="flex gap-3 gap-x-3 gap-y-3 items-center">
-                <span className="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/15 px-2.5 py-1 text-xs text-white/80">Results</span>
-              </div>
-              <h3 className="mt-3 text-xl sm:text-2xl font-semibold tracking-tight font-manrope">Real Entrepreneur Wins</h3>
-              <p className="text-sm text-neutral-400 mt-2">See how real entrepreneurs have used Ryland Partners to secure funding, fix their credit, and build digital empires.</p>
-              
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70 ring-1 ring-white/10">Startup Launch</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70 ring-1 ring-white/10">Credit Pivot</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70 ring-1 ring-white/10">Digital Empire</span>
-              </div>
-            </div>
-            
-            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
-                <div className="relative">
-                  <img src={successFunding} alt="The Startup Launch" className="transition-all duration-300 w-full h-[224px] object-cover" />
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
-                    <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: "Rocket",
+                title: "The Scale-Up",
+                desc: "Entrepreneurs ready to inject $100K+ into marketing or inventory.",
+                gradient: "from-blue-600 to-blue-800",
+              },
+              {
+                icon: "LayoutDashboard",
+                title: "The Digital Architect",
+                desc: "Founders building high-ROI Shopify or digital service businesses.",
+                gradient: "from-blue-700 to-indigo-900",
+              },
+              {
+                icon: "ShieldCheck",
+                title: "The Credit Restarter",
+                desc: "Visionaries who need to clear the path to capital through TSR-compliant restoration.",
+                gradient: "from-sky-600 to-blue-800",
+              },
+              {
+                icon: "Handshake",
+                title: "The Strategic Partner",
+                desc: "Professionals (CPAs, Coaches, Agencies) looking to offer funding to their own clients.",
+                gradient: "from-indigo-600 to-blue-900",
+              },
+            ].map((card, i) => {
+              const IconComp = { Rocket, LayoutDashboard, ShieldCheck, Handshake }[card.icon]!;
+              return (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${card.gradient} border border-white/10 p-6 sm:p-8 text-white`}
+                >
+                  <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
+                  <div className="relative z-10">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 ring-1 ring-white/20 mb-5">
+                      <IconComp className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight mb-2">{card.title}</h3>
+                    <p className="text-sm text-white/70 leading-relaxed">{card.desc}</p>
                   </div>
-                </div>
-                <div className="pt-4 pr-4 pb-4 pl-4">
-                  <h4 className="text-sm font-medium text-slate-100" style={{ fontFamily: "'Inter',sans-serif" }}>The Startup Launch</h4>
-                  <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>New LLC secured $50k at 0% interest</p>
-                </div>
-              </div>
-              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
-                <div className="relative">
-                  <img src={successCredit} alt="The Credit Pivot" className="w-full h-[224px] object-cover transition-all duration-300" />
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
-                    <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
-                  </div>
-                </div>
-                <div className="pt-4 pr-4 pb-4 pl-4">
-                  <h4 className="text-sm font-medium text-slate-100" style={{ fontFamily: "'Inter',sans-serif" }}>The Credit Pivot</h4>
-                  <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>From 580 to 740 score</p>
-                </div>
-              </div>
-              <div className="group overflow-hidden hover:shadow-xl transition border border-[#004E8C] rounded-2xl bg-gradient-to-br from-[#0060A9] to-[#003A70] text-white">
-                <div className="relative">
-                  <img src={successEmpire} alt="The Digital Empire" className="w-full h-[224px] object-cover transition-all duration-300" />
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
-                    <button className="px-3.5 py-1.5 rounded-full text-black text-xs bg-white hover:bg-slate-200" style={{ fontFamily: "'Inter',sans-serif" }}>View</button>
-                  </div>
-                </div>
-                <div className="pt-4 pr-4 pb-4 pl-4">
-                  <h4 className="text-sm font-medium text-slate-100" style={{ fontFamily: "'Inter',sans-serif" }}>The Digital Empire</h4>
-                  <p className="text-xs text-slate-400 mt-1" style={{ fontFamily: "'Inter',sans-serif" }}>$10k/mo Shopify store scaled with business credit</p>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
