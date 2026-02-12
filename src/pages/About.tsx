@@ -6,6 +6,7 @@ import asSeenOn from "@/assets/as-seen-on.png";
 import geneRylandAbout from "@/assets/gene-ryland-about.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Counter from "@/components/funding-visuals/Counter";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 
 const About = () => {
   useEffect(() => {
@@ -140,7 +141,8 @@ const About = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-20 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C] bg-gradient-to-r from-[#003A70] via-[#003A70]/90 to-[#0060A9]/80">
+      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-10 sm:pt-16 pb-12 sm:pb-20 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+        <HlsVideoBackground overlay="bg-[#003A70]/90" />
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
           {/* Left */}
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
@@ -178,8 +180,9 @@ const About = () => {
 
       {/* STATS BAR */}
       <section className="max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-8 sm:mt-12">
-        <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+        <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-10">
+          <HlsVideoBackground overlay="bg-[#003A70]/90" />
+          <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             <div>
               <p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight">$<Counter target={150} />M+</p>
               <p className="text-xs sm:text-sm text-white/60 mt-1">Funding Secured</p>
@@ -230,34 +233,43 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
-              <Shield className="w-6 h-6 text-sky-300" />
+          <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
+            <HlsVideoBackground overlay="bg-[#003A70]/90" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
+                <Shield className="w-6 h-6 text-sky-300" />
+              </div>
+              <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Strategic Restoration</h3>
+              <p className="text-white/70 text-sm leading-relaxed">
+                CROA-compliant credit optimization that removes negative items, disputes inaccuracies, and rebuilds your credit profile. Most clients see significant results within 35–90 days — with no advance fees charged until work is completed.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Strategic Restoration</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
-              CROA-compliant credit optimization that removes negative items, disputes inaccuracies, and rebuilds your credit profile. Most clients see significant results within 35–90 days — with no advance fees charged until work is completed.
-            </p>
           </div>
           {/* Card 2 */}
-          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
-              <DollarSign className="w-6 h-6 text-sky-300" />
+          <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
+            <HlsVideoBackground overlay="bg-[#003A70]/90" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
+                <DollarSign className="w-6 h-6 text-sky-300" />
+              </div>
+              <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Business Funding</h3>
+              <p className="text-white/70 text-sm leading-relaxed">
+                Secure $50K–$250K in business credit lines at 0% introductory APR. No tax returns, no revenue documentation required. Our proprietary lender matching system connects you with Chase, Bank of America, US Bank, Navy Federal, and Truist.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Business Funding</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
-              Secure $50K–$250K in business credit lines at 0% introductory APR. No tax returns, no revenue documentation required. Our proprietary lender matching system connects you with Chase, Bank of America, US Bank, Navy Federal, and Truist.
-            </p>
           </div>
           {/* Card 3 */}
-          <div className="bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
-              <Users className="w-6 h-6 text-sky-300" />
+          <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 text-white group hover:translate-y-[-2px] transition-transform">
+            <HlsVideoBackground overlay="bg-[#003A70]/90" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/15 mb-6">
+                <Users className="w-6 h-6 text-sky-300" />
+              </div>
+              <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Private Community</h3>
+              <p className="text-white/70 text-sm leading-relaxed">
+                Join our exclusive Skool platform where funded entrepreneurs learn to invest their capital into high-ROI digital businesses. Includes live training sessions, networking with like-minded founders, and ongoing mentorship.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Private Community</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
-              Join our exclusive Skool platform where funded entrepreneurs learn to invest their capital into high-ROI digital businesses. Includes live training sessions, networking with like-minded founders, and ongoing mentorship.
-            </p>
           </div>
         </div>
       </section>
@@ -265,8 +277,9 @@ const About = () => {
       {/* CTA */}
       <section className="overflow-hidden my-10 relative">
         <div className="max-w-7xl mr-auto ml-auto pr-0 pb-24 pl-0">
-          <div className="md:p-10 bg-gradient-to-br from-[#0060A9] to-[#003A70] max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
-            <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 items-center">
+            <div className="relative overflow-hidden md:p-10 max-w-7xl border border-[#004E8C] rounded-3xl mr-auto ml-auto pt-6 pr-6 pb-6 pl-6 shadow-2xl text-white">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+            <div className="relative z-10 grid gap-6 md:grid-cols-[1.2fr_1fr] md:p-12 pt-8 pr-8 pb-8 pl-8 items-center">
               <div>
                 <h3 className="text-2xl font-semibold tracking-tight text-white">Ready to Scale?</h3>
                 <p className="mt-2 max-w-prose text-slate-200">Join thousands of entrepreneurs building their future with Ryland Partners.</p>
