@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Target, Users, TrendingUp } from "lucide-react";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 
 const REASONS = [
   {
@@ -22,8 +23,7 @@ const REASONS = [
 const WhyChooseUs = () => {
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)]" />
+      <HlsVideoBackground overlay="bg-[#003A70]/90" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             Why Our Guides?
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
             Every resource is designed with one goal: helping you take control of your financial future.
           </p>
         </motion.div>
@@ -49,13 +49,13 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="relative rounded-2xl border border-blue-500/15 bg-gradient-to-br from-slate-900/90 to-blue-950/50 p-8 text-center"
+              className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 text-center"
             >
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center mx-auto mb-5">
-                <reason.icon className="w-7 h-7 text-blue-400" />
+              <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mx-auto mb-5">
+                <reason.icon className="w-7 h-7 text-blue-300" />
               </div>
               <h3 className="text-lg font-bold text-white mb-3">{reason.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{reason.desc}</p>
+              <p className="text-slate-300 text-sm leading-relaxed">{reason.desc}</p>
             </motion.div>
           ))}
         </div>

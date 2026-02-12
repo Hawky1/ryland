@@ -22,9 +22,9 @@ const ProductCard = ({ product, index, onAddToCart, isLoading }: ProductCardProp
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className="group"
     >
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-blue-500/15 bg-gradient-to-br from-[#003A70] to-[#0060A9]">
         <Link to={`/product/${product.node.handle}`}>
-          <div className="aspect-[4/5] bg-gradient-to-b from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center p-5">
+          <div className="aspect-[4/5] bg-white/10 overflow-hidden flex items-center justify-center p-5">
             {image ? (
               <img
                 src={image.url}
@@ -33,26 +33,26 @@ const ProductCard = ({ product, index, onAddToCart, isLoading }: ProductCardProp
                 loading="lazy"
               />
             ) : (
-              <BookOpen className="w-16 h-16 text-slate-300" />
+              <BookOpen className="w-16 h-16 text-white/30" />
             )}
           </div>
         </Link>
 
         <div className="p-5">
           <Link to={`/product/${product.node.handle}`}>
-            <h3 className="font-bold text-slate-900 text-sm leading-snug mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 min-h-[2.5rem]">
+            <h3 className="font-bold text-white text-sm leading-snug mb-3 group-hover:text-blue-200 transition-colors line-clamp-2 min-h-[2.5rem]">
               {product.node.title}
             </h3>
           </Link>
 
           <div className="flex items-center justify-between gap-3">
-            <span className="text-xl font-extrabold text-slate-900">
+            <span className="text-xl font-extrabold text-white">
               ${parseFloat(price.amount).toFixed(0)}
             </span>
             <button
               onClick={() => onAddToCart(product)}
               disabled={isLoading}
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 disabled:opacity-50 shadow-sm shadow-blue-500/20"
+              className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/20 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 disabled:opacity-50 backdrop-blur-sm"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               {isLoading ? "Adding..." : "Add to Cart"}

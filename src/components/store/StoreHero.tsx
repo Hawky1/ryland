@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowDown } from "lucide-react";
-import InfiniteGrid from "@/components/ui/infinite-grid";
 import bundleUltimate from "@/assets/bundle-ultimate-credit-stack.png";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 
 interface StoreHeroProps {
   onBrowse: () => void;
@@ -10,12 +10,7 @@ interface StoreHeroProps {
 const StoreHero = ({ onBrowse }: StoreHeroProps) => {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900" />
-      <div className="absolute inset-0 opacity-15">
-        <InfiniteGrid />
-      </div>
-      {/* Radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(59,130,246,0.15)_0%,transparent_60%)]" />
+      <HlsVideoBackground overlay="bg-[#003A70]/90" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full py-16 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -37,7 +32,7 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-400 max-w-xl leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-slate-300 max-w-xl leading-relaxed mb-8">
               Actionable playbooks and proven strategies from industry experts. Build credit, secure funding, and scale your business — starting today.
             </p>
 
