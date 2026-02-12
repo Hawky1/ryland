@@ -90,12 +90,14 @@ const Partners = () => {
           <Link to="/" className="flex items-center gap-2">
             <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
           </Link>
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
-            <a href="#how-it-works" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">How It Works</a>
-            <a href="#faq" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">FAQ</a>
-            <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-sm font-medium rounded-full py-2.5 px-6 transition-all shadow-lg shadow-blue-500/25">
-              Become A Partner
+            <Link to="/about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">About</Link>
+            <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
+            <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
+            <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</Link>
+            <a href="/#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
+              <span>Contact</span>
             </a>
           </nav>
           <button onClick={() => setMobileOpen(true)} className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
@@ -112,10 +114,14 @@ const Partners = () => {
           </div>
           <ul className="mt-6 space-y-4">
             <li><Link to="/" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Home</Link></li>
-            <li><a href="#how-it-works" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">How It Works</a></li>
-            <li><a href="#faq" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">FAQ</a></li>
-            <li><a href="#cta" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 text-white text-center font-medium transition-colors">Become A Partner</a></li>
+            <li><Link to="/about" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">About</Link></li>
+            <li><a href="/#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
+            <li><a href="/#features" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Community</a></li>
+            <li><Link to="/store" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Store</Link></li>
           </ul>
+          <a href="/#cta" onClick={() => setMobileOpen(false)} className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
+            Contact <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
         </aside>
       </header>
 

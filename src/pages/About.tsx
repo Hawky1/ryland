@@ -105,13 +105,14 @@ const About = () => {
               <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
             </a>
           </div>
-          <nav className="hidden gap-10 md:flex items-center">
-            <a href="/#features" className="nav-link hover:text-slate-900 text-sm text-slate-600 relative">Features</a>
-            <a href="/#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900">Services</a>
-            <a href="/#showcase" className="nav-link relative text-sm text-slate-600 hover:text-slate-900">Results</a>
+          <nav className="hidden gap-8 md:flex items-center">
+            <a href="/" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</a>
             <a href="/about" className="nav-link relative text-sm text-slate-900 font-medium">About</a>
+            <a href="/#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
+            <a href="/#features" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
+            <a href="/store" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</a>
             <a href="/#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
-              <span>Get Started</span>
+              <span>Contact</span>
             </a>
           </nav>
           <button id="menuBtn" className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
@@ -126,13 +127,14 @@ const About = () => {
             </button>
           </div>
           <ul className="mt-6 space-y-4">
-            <li><a href="/#features" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Features</a></li>
-            <li><a href="/#services" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
-            <li><a href="/#showcase" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Results</a></li>
+            <li><a href="/" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Home</a></li>
             <li><a href="/about" className="mobile-link block rounded-lg px-2 py-2 text-slate-900 font-medium hover:bg-slate-100 transition-colors">About</a></li>
+            <li><a href="/#services" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
+            <li><a href="/#features" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Community</a></li>
+            <li><a href="/store" className="mobile-link block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Store</a></li>
           </ul>
           <a href="/#cta" className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
-            Get Started <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            Contact <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </a>
         </aside>
       </header>
