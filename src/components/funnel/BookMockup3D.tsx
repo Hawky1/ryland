@@ -49,10 +49,10 @@ export default function BookMockup3D(props: Props) {
   const visibleCovers = props.covers.slice(0, 8);
   const count = visibleCovers.length;
   return (
-    <div className="relative w-full max-w-3xl mx-auto h-[340px] sm:h-[420px] md:h-[480px]" style={{ perspective: "1200px" }}>
+    <div className="relative w-full max-w-3xl mx-auto h-[280px] sm:h-[420px] md:h-[480px] overflow-hidden" style={{ perspective: "1200px" }}>
       {visibleCovers.map((cover, i) => {
         const rotation = -(count * 1.5) + i * 3.5;
-        const translateX = -(count * 14) + i * 38;
+        const translateX = -(count * 10) + i * 28;
         const translateZ = -i * 10;
         return (
           <motion.div
@@ -60,7 +60,7 @@ export default function BookMockup3D(props: Props) {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="absolute top-4 left-1/2 w-48 sm:w-56 md:w-64"
+            className="absolute top-4 left-1/2 w-32 sm:w-56 md:w-64"
             style={{
               transform: `translateX(${translateX}px) rotateY(-6deg) rotateZ(${rotation}deg) translateZ(${translateZ}px)`,
               transformStyle: "preserve-3d",

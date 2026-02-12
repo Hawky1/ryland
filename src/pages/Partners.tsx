@@ -237,7 +237,7 @@ const Partners = () => {
       </header>
 
       {/* ===================== HERO ===================== */}
-      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto pt-12 sm:pt-16 pb-20 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
