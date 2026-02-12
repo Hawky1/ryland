@@ -11,6 +11,7 @@ import InfiniteGrid from "@/components/ui/infinite-grid";
 import { motion } from "framer-motion";
 import { NavLink } from "@/components/NavLink";
 import Footer from "@/components/Footer";
+import FeaturedBundles from "@/components/FeaturedBundles";
 
 const BUNDLES = [
   { id: "credit-authority", tag: "Credit Authority Bundle", name: "Credit Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
@@ -117,6 +118,9 @@ const Store = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Featured Bundles Showcase */}
+      <FeaturedBundles onScrollToBundle={scrollToBundle} />
 
       {/* Bundle Navigation */}
       <div className="sticky top-[65px] z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/60">

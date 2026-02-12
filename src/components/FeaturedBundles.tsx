@@ -1,0 +1,157 @@
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
+import bundleUltimate from "@/assets/bundle-ultimate-credit-stack.png";
+import bundleMaster from "@/assets/bundle-master-credit.png";
+import bundleStarter from "@/assets/bundle-starter.png";
+import bundleAccelerator from "@/assets/bundle-accelerator.png";
+import bundleFunding from "@/assets/bundle-funding-mastery.png";
+
+const FEATURED = [
+  {
+    id: "ultimate-bundle",
+    image: bundleUltimate,
+    title: "The Ultimate Credit Stack Bundle",
+    subtitle: "16 Resources — Total Credit Transformation",
+    price: "$147",
+    highlight: true,
+  },
+  {
+    id: "credit-funding",
+    image: bundleFunding,
+    title: "Business Funding Mastery Bundle",
+    subtitle: "6 Advanced Business Funding E-Books",
+    price: "$147",
+  },
+  {
+    id: "credit-accelerator",
+    image: bundleAccelerator,
+    title: "The Credit Accelerator Bundle",
+    subtitle: "6 E-Books to Kick-Start Credit Knowledge",
+    price: "$97",
+  },
+  {
+    id: "credit-authority",
+    image: bundleMaster,
+    title: "Master Your Credit Bundle Pack",
+    subtitle: "9 E-Books to Guide You Every Step",
+    price: "$67",
+  },
+  {
+    id: "credit-quickstart",
+    image: bundleStarter,
+    title: "Business Credit Starter Bundle",
+    subtitle: "3 E-Books to Kick-Start Your Journey",
+    price: "$47",
+  },
+];
+
+interface FeaturedBundlesProps {
+  onScrollToBundle: (bundleId: string) => void;
+}
+
+const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
+  return (
+    <section className="relative py-16 sm:py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#002B5C] to-slate-950" />
+      {/* Subtle radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/20 text-blue-300 rounded-full px-5 py-2 text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4" />
+            Featured Bundles — Save Up to 70%
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+            Premium Bundle Collections
+          </h2>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Curated resource packs designed to fast-track your credit, funding, and business growth journey.
+          </p>
+        </motion.div>
+
+        {/* Top featured — large card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          onClick={() => onScrollToBundle(FEATURED[0].id)}
+          className="cursor-pointer group mb-8"
+        >
+          <div className="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-950/60 to-slate-900/80 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-500 shadow-2xl shadow-blue-900/20 hover:shadow-blue-800/30">
+            <div className="flex flex-col lg:flex-row items-center gap-6 p-6 sm:p-10">
+              <div className="lg:w-[55%] w-full">
+                <img
+                  src={FEATURED[0].image}
+                  alt={FEATURED[0].title}
+                  className="w-full rounded-2xl group-hover:scale-[1.02] transition-transform duration-700"
+                />
+              </div>
+              <div className="lg:w-[45%] w-full text-center lg:text-left py-4">
+                <div className="inline-flex items-center gap-1.5 bg-amber-500/15 border border-amber-400/30 text-amber-300 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-5">
+                  ⭐ Most Popular
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
+                  {FEATURED[0].title}
+                </h3>
+                <p className="text-slate-400 text-lg mb-6">
+                  {FEATURED[0].subtitle}
+                </p>
+                <div className="flex items-center gap-4 justify-center lg:justify-start">
+                  <span className="text-3xl font-extrabold text-white">{FEATURED[0].price}</span>
+                  <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-3 rounded-xl text-sm font-bold group-hover:from-blue-500 group-hover:to-blue-600 transition-all shadow-lg shadow-blue-600/25">
+                    View Bundle <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Remaining bundles — 2x2 grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {FEATURED.slice(1).map((bundle, idx) => (
+            <motion.div
+              key={bundle.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              onClick={() => onScrollToBundle(bundle.id)}
+              className="cursor-pointer group"
+            >
+              <div className="relative rounded-2xl overflow-hidden border border-blue-500/15 bg-gradient-to-br from-slate-900/90 to-blue-950/50 hover:border-blue-400/35 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-900/20 h-full">
+                <div className="p-5">
+                  <img
+                    src={bundle.image}
+                    alt={bundle.title}
+                    className="w-full rounded-xl mb-5 group-hover:scale-[1.02] transition-transform duration-700"
+                  />
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 leading-snug">
+                    {bundle.title}
+                  </h3>
+                  <p className="text-slate-400 text-sm mb-4">{bundle.subtitle}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-extrabold text-white">{bundle.price}</span>
+                    <span className="inline-flex items-center gap-1 text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors">
+                      View Bundle <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FeaturedBundles;
