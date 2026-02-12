@@ -620,25 +620,21 @@ const Index = () => {
                 icon: "Rocket",
                 title: "The Scale-Up",
                 desc: "Entrepreneurs ready to inject $100K+ into marketing or inventory.",
-                gradient: "from-blue-600 to-blue-800",
               },
               {
                 icon: "LayoutDashboard",
                 title: "The Digital Architect",
                 desc: "Founders building high-ROI Shopify or digital service businesses.",
-                gradient: "from-blue-700 to-indigo-900",
               },
               {
                 icon: "ShieldCheck",
                 title: "The Credit Restarter",
                 desc: "Visionaries who need to clear the path to capital through TSR-compliant restoration.",
-                gradient: "from-sky-600 to-blue-800",
               },
               {
                 icon: "Handshake",
                 title: "The Strategic Partner",
                 desc: "Professionals (CPAs, Coaches, Agencies) looking to offer funding to their own clients.",
-                gradient: "from-indigo-600 to-blue-900",
               },
             ].map((card, i) => {
               const IconComp = { Rocket, LayoutDashboard, ShieldCheck, Handshake }[card.icon]!;
@@ -649,9 +645,9 @@ const Index = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${card.gradient} border border-white/10 p-6 sm:p-8 text-white`}
+                  className="group relative overflow-hidden rounded-2xl border border-[#004E8C] p-6 sm:p-8 text-white min-h-[200px]"
                 >
-                  <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
+                  <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
                   <div className="relative z-10">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 ring-1 ring-white/20 mb-5">
                       <IconComp className="w-6 h-6 text-white" />
