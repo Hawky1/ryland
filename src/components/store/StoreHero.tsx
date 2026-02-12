@@ -53,7 +53,7 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
             <div className="flex flex-wrap gap-4 items-center">
               <button
                 onClick={onBrowse}
-                className="shiny-cta !py-3.5 !px-8 !text-base whitespace-nowrap focus:outline-none"
+                className="shiny-cta !py-3 !px-6 sm:!py-5 sm:!px-10 !text-sm sm:!text-lg whitespace-nowrap focus:outline-none"
               >
                 <span>Browse Collections</span>
               </button>
