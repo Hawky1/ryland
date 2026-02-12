@@ -72,9 +72,17 @@ const Store = () => {
           <Link to="/" className="flex items-center gap-2">
             <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
           </Link>
-          <div className="flex items-center gap-6">
-            <Link to="/" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors hidden sm:block">Home</Link>
-            <Link to="/about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors hidden sm:block">About</Link>
+          <nav className="hidden md:flex items-center gap-8">
+            <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
+            <Link to="/about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">About</Link>
+            <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
+            <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
+            <Link to="/store" className="text-sm text-slate-900 font-medium">Store</Link>
+            <a href="/#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
+              <span>Contact</span>
+            </a>
+          </nav>
+          <div className="flex items-center gap-4">
             <CartDrawer />
           </div>
         </div>
