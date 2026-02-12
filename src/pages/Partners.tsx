@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logoDark from "@/assets/logo-dark.png";
 import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 import {
   DollarSign, ShieldCheck, Users, Handshake, Calendar,
   Link2, Share2, Wallet, Megaphone, GraduationCap, Clock,
@@ -51,24 +53,135 @@ const Partners = () => {
         .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
         .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
 
-        .gradient-blur {
-          position: fixed; z-index: 5; inset: 0 0 auto 0; height: 12%; pointer-events: none;
-        }
-        .gradient-blur>div, .gradient-blur::before, .gradient-blur::after { position: absolute; inset: 0; }
-        .gradient-blur::before { content: ""; z-index: 1; backdrop-filter: blur(0.5px); mask: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12.5%, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 37.5%); }
-        .gradient-blur>div:nth-of-type(1) { z-index: 2; backdrop-filter: blur(1px); mask: linear-gradient(to top, rgba(0,0,0,0) 12.5%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 37.5%, rgba(0,0,0,0) 50%); }
-        .gradient-blur>div:nth-of-type(2) { z-index: 3; backdrop-filter: blur(2px); mask: linear-gradient(to top, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 62.5%); }
-        .gradient-blur>div:nth-of-type(3) { z-index: 4; backdrop-filter: blur(4px); mask: linear-gradient(to top, rgba(0,0,0,0) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 62.5%, rgba(0,0,0,0) 75%); }
-        .gradient-blur>div:nth-of-type(4) { z-index: 5; backdrop-filter: blur(8px); mask: linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 62.5%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 87.5%); }
-        .gradient-blur>div:nth-of-type(5) { z-index: 6; backdrop-filter: blur(16px); mask: linear-gradient(to top, rgba(0,0,0,0) 62.5%, rgba(0,0,0,1) 75%, rgba(0,0,0,1) 87.5%, rgba(0,0,0,0) 100%); }
-        .gradient-blur>div:nth-of-type(6) { z-index: 7; backdrop-filter: blur(32px); mask: linear-gradient(to top, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 87.5%, rgba(0,0,0,1) 100%); }
-        .gradient-blur::after { content: ""; z-index: 8; backdrop-filter: blur(64px); mask: linear-gradient(to top, rgba(0,0,0,0) 87.5%, rgba(0,0,0,1) 100%); }
-
         .font-geist { font-family: 'Geist', sans-serif !important; }
         .font-manrope { font-family: 'Manrope', sans-serif !important; }
 
         .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out; }
         .mobile-menu.open { transform: translateX(0); }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
+        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
+
+        .shiny-cta {
+          --gradient-angle: 0deg;
+          --gradient-angle-offset: 0deg;
+          --gradient-percent: 20%;
+          --gradient-shine: #8484ff;
+          --shadow-size: 2px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 9999px;
+          padding: 1.25rem 2.5rem;
+          font-size: 1.125rem;
+          line-height: 1.2;
+          font-weight: 500;
+          color: #ffffff;
+          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(
+            from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+            transparent 0%,
+            #3b82f6 5%,
+            var(--gradient-shine) 15%,
+            #3b82f6 30%,
+            transparent 40%,
+            transparent 100%
+          ) border-box;
+          border: 2px solid transparent;
+          box-shadow: inset 0 0 0 1px #1e293b;
+          outline: none;
+          transition: --gradient-angle-offset 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-percent 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-shine 800ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
+          cursor: pointer;
+          isolation: isolate;
+          outline-offset: 4px;
+          font-family: 'Inter', 'Helvetica Neue', sans-serif;
+          z-index: 0;
+          animation: border-spin 2.5s linear infinite;
+        }
+
+        @keyframes border-spin {
+          to { --gradient-angle: 360deg; }
+        }
+
+        .shiny-cta:active { transform: translateY(1px); }
+
+        .shiny-cta::before {
+          content: '';
+          pointer-events: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 0;
+          --size: calc(100% - 6px);
+          --position: 2px;
+          --space: 4px;
+          width: var(--size);
+          height: var(--size);
+          background: radial-gradient(circle at var(--position) var(--position), white 0.5px, transparent 0) padding-box;
+          background-size: var(--space) var(--space);
+          background-repeat: space;
+          mask-image: conic-gradient(
+            from calc(var(--gradient-angle) + 45deg),
+            black,
+            transparent 10% 90%,
+            black
+          );
+          border-radius: inherit;
+          opacity: 0.4;
+          pointer-events: none;
+        }
+
+        .shiny-cta::after {
+          content: '';
+          pointer-events: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          width: 100%;
+          aspect-ratio: 1;
+          background: linear-gradient(-50deg, transparent, #3b82f6, transparent);
+          mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+          opacity: 0.6;
+          animation: shimmer 4s linear infinite;
+          animation-play-state: running;
+        }
+
+        .shiny-cta span {
+          position: relative;
+          z-index: 2;
+          display: inline-block;
+        }
+
+        .shiny-cta span::before {
+          content: '';
+          pointer-events: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: -1;
+          --size: calc(100% + 1rem);
+          width: var(--size);
+          height: var(--size);
+          box-shadow: inset 0 -1ex 2rem 4px #3b82f6;
+          opacity: 0;
+          border-radius: inherit;
+          transition: opacity 800ms cubic-bezier(0.25, 1, 0.5, 1);
+          animation: breathe 4.5s linear infinite;
+        }
+
+        @keyframes shimmer {
+          to { transform: translate(-50%, -50%) rotate(360deg);}
+        }
+
+        @keyframes breathe {
+          0%, 100% { transform: translate(-50%, -50%) scale(1);}
+          50% { transform: translate(-50%, -50%) scale(1.20);}
+        }
       `}} />
 
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
@@ -76,19 +189,14 @@ const Partners = () => {
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.12)" activeGridColor="rgba(59, 130, 246, 0.3)" />
-      </div>
-
-      {/* Gradient blur */}
-      <div className="gradient-blur pointer-events-none">
-        <div /><div /><div /><div /><div /><div />
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.20)" activeGridColor="rgba(59, 130, 246, 0.45)" />
       </div>
 
       {/* NAVBAR */}
-      <header className="sticky z-20 top-0">
-        <div className="flex max-w-7xl mx-auto pt-4 px-6 pb-4 items-center justify-between">
+      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
+        <div className="flex max-w-7xl mx-auto pt-4 px-4 sm:px-6 pb-4 items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
+            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
@@ -96,7 +204,8 @@ const Partners = () => {
             <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
             <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
             <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</Link>
-            <a href="/#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
+            <Link to="/partners" className="text-sm text-slate-900 font-medium">Partners</Link>
+            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
               <span>Contact</span>
             </a>
           </nav>
@@ -118,21 +227,17 @@ const Partners = () => {
             <li><a href="/#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
             <li><a href="/#features" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Community</a></li>
             <li><Link to="/store" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Store</Link></li>
+            <li><Link to="/partners" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-900 font-medium hover:bg-slate-100 transition-colors">Partners</Link></li>
           </ul>
-          <a href="/#cta" onClick={() => setMobileOpen(false)} className="mobile-link mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
+          <a href="#cta" onClick={() => setMobileOpen(false)} className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
             Contact <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </a>
         </aside>
       </header>
 
       {/* ===================== HERO ===================== */}
-      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-white/10 ring-1 ring-white/5">
-        <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden">
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-40">
-            <source src="https://storage.googleapis.com/msgsndr/FuOewPgnMEW1CaeIftBR/media/698a6cea7f6dcf137c9c099c.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/40 to-transparent rounded-2xl" />
+      <section className="relative max-w-7xl mx-auto pt-16 pb-36 px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
@@ -145,8 +250,8 @@ const Partners = () => {
             Welcome to the Ryland Partners Program. Ready to start earning?
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up animate-delay-300">
-            <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
-              Become A Partner Now
+            <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+              <span>Become A Partner Now</span>
             </a>
             <a href="#" className="inline-flex items-center justify-center border border-white/20 hover:bg-white/5 text-white text-base font-medium rounded-full py-4 px-10 transition-all">
               Partner Login
@@ -163,12 +268,15 @@ const Partners = () => {
             { icon: LineChart, title: "$10M+ Funded And Counting", desc: "Backed by real results and proven infrastructure. You'll get full support, access to our marketing system, and earn unlimited commissions." },
             { icon: Handshake, title: "Strengthen Your Network", desc: "Help people in your network get the capital they need — and profit while doing it. Position yourself as the go-to person for business funding." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 text-center text-white">
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                <item.icon className="h-7 w-7 text-blue-400" />
+            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-center text-white">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <div className="relative z-10">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
+                  <item.icon className="h-7 w-7 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -176,24 +284,27 @@ const Partners = () => {
 
       {/* ===================== HOW IT WORKS / COPY BLOCK ===================== */}
       <section className="max-w-4xl mx-auto px-6 pb-24" id="how-it-works">
-        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 md:p-12 text-white">
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
-            Here's How Ryland Partners Is Going To Turn Your Connections Into Commissions
-          </h2>
-          <div className="space-y-4 text-slate-300 text-base leading-relaxed">
-            <p>Most affiliate programs only pay you if someone buys. If a deal closes. If they say yes.</p>
-            <p className="text-white font-medium">Not us.</p>
-            <p>We'll put money in your pocket as soon as your referral qualifies — not when they fund.</p>
-            <p>If you want to bring in extra cash without:</p>
-            <ul className="space-y-2 pl-1">
-              {["Hard selling anyone", "Spending time on funnels, sales, or tech", "Chasing commissions"].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-blue-400 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-white font-semibold text-lg pt-2">The Ryland Partners Program Is Perfect For You…</p>
+        <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 md:p-12 text-white">
+          <HlsVideoBackground overlay="bg-[#003A70]/90" />
+          <div className="relative z-10">
+            <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+              Here's How Ryland Partners Is Going To Turn Your Connections Into Commissions
+            </h2>
+            <div className="space-y-4 text-slate-300 text-base leading-relaxed">
+              <p>Most affiliate programs only pay you if someone buys. If a deal closes. If they say yes.</p>
+              <p className="text-white font-medium">Not us.</p>
+              <p>We'll put money in your pocket as soon as your referral qualifies — not when they fund.</p>
+              <p>If you want to bring in extra cash without:</p>
+              <ul className="space-y-2 pl-1">
+                {["Hard selling anyone", "Spending time on funnels, sales, or tech", "Chasing commissions"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-blue-400 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-white font-semibold text-lg pt-2">The Ryland Partners Program Is Perfect For You…</p>
+            </div>
           </div>
         </div>
       </section>
@@ -210,13 +321,16 @@ const Partners = () => {
             { step: "02", icon: Share2, title: "Refer Business Owners", desc: "Follow our proven step-by-step strategy. Our trainings, live calls, and done-for-you marketing assets guide you to maximize profits." },
             { step: "03", icon: Wallet, title: "Get Paid", desc: "You get paid for every client you refer who qualifies. Even if they don't take the funding — you still keep your share." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 relative text-white">
-              <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                <item.icon className="h-6 w-6 text-blue-400" />
+            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-white">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <div className="relative z-10">
+                <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
+                  <item.icon className="h-6 w-6 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -230,18 +344,21 @@ const Partners = () => {
         <p className="text-center text-slate-500 mb-12">Professionals who already have a network of business owners.</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {personas.map((p, i) => (
-            <div key={i} className="rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 bg-white backdrop-blur-sm p-5 flex flex-col items-center text-center gap-3 hover:bg-slate-50 transition-colors">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                <p.icon className="h-5 w-5 text-blue-400" />
+            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-5 flex flex-col items-center text-center gap-3">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <div className="relative z-10 flex flex-col items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
+                  <p.icon className="h-5 w-5 text-blue-400" />
+                </div>
+                <span className="text-sm font-medium text-white">{p.label}</span>
               </div>
-              <span className="text-sm font-medium text-slate-700">{p.label}</span>
             </div>
           ))}
         </div>
         <p className="text-center text-slate-500 mt-8 text-sm font-medium">OR anyone who knows business owners!</p>
         <div className="text-center mt-8">
-          <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
-            Become A Partner Now
+          <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+            <span>Become A Partner Now</span>
           </a>
         </div>
       </section>
@@ -260,12 +377,15 @@ const Partners = () => {
               { icon: CreditCard, title: "Get Paid Fast & On Time", desc: "Most partners start seeing commissions within just a few days — not weeks. Quick results keep your momentum going." },
               { icon: MessagesSquare, title: "Community Support", desc: "Join our members-only community where you can share wins, ask questions, and stay connected." },
             ].map((item, i) => (
-              <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-6 text-white">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                  <item.icon className="h-5 w-5 text-blue-400" />
+              <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-6 text-white">
+                <HlsVideoBackground overlay="bg-[#003A70]/90" />
+                <div className="relative z-10">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
+                    <item.icon className="h-5 w-5 text-blue-400" />
+                  </div>
+                  <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -274,19 +394,22 @@ const Partners = () => {
 
       {/* ===================== EASIEST MONEY CTA ===================== */}
       <section className="max-w-4xl mx-auto px-6 pb-24">
-        <div className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 md:p-12 text-center text-white">
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
-            This Is The Easiest Money You've Never Made
-          </h2>
-          <div className="space-y-3 text-slate-300 text-base max-w-lg mx-auto mb-8">
-            <p>And the business owners you know? <span className="text-white font-medium">They already need this!</span></p>
-            <p>You already know the business owners.</p>
-            <p>They already trust you.</p>
-            <p>You just need a partner link to send over to them.</p>
+        <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 md:p-12 text-center text-white">
+          <HlsVideoBackground overlay="bg-[#003A70]/90" />
+          <div className="relative z-10">
+            <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
+              This Is The Easiest Money You've Never Made
+            </h2>
+            <div className="space-y-3 text-slate-300 text-base max-w-lg mx-auto mb-8">
+              <p>And the business owners you know? <span className="text-white font-medium">They already need this!</span></p>
+              <p>You already know the business owners.</p>
+              <p>They already trust you.</p>
+              <p>You just need a partner link to send over to them.</p>
+            </div>
+            <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+              <span>Become A Partner Now</span>
+            </a>
           </div>
-          <a href="#cta" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-base font-semibold rounded-full py-4 px-10 transition-all shadow-lg shadow-blue-500/25">
-            Become A Partner Now
-          </a>
         </div>
       </section>
 
@@ -302,13 +425,16 @@ const Partners = () => {
             { step: "02", icon: LineChart, title: "Find The Best Terms", desc: "They choose terms tailored to their budget so they can comfortably manage their funding." },
             { step: "03", icon: DollarSign, title: "Ready To Scale", desc: "They can immediately access funds up to $250,000 after linking their business checking account." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 ring-1 ring-white/5 bg-slate-900 backdrop-blur-sm p-8 relative text-white">
-              <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                <item.icon className="h-6 w-6 text-blue-400" />
+            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-white">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <div className="relative z-10">
+                <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
+                  <item.icon className="h-6 w-6 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -324,17 +450,18 @@ const Partners = () => {
         </h2>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl border border-slate-200 ring-1 ring-slate-200/50 bg-white overflow-hidden">
+            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
+              <HlsVideoBackground overlay="bg-[#003A70]/90" />
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors"
+                className="relative z-10 w-full flex items-center justify-between p-5 text-left"
               >
-                <span className="text-sm font-medium text-slate-900 pr-4">{faq.q}</span>
-                <ChevronDown className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
+                <span className="text-sm font-medium text-white pr-4">{faq.q}</span>
+                <ChevronDown className={`h-5 w-5 text-zinc-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
               </button>
               {openFaq === i && (
-                <div className="px-5 pb-5">
-                  <p className="text-sm text-slate-500 leading-relaxed">{faq.a}</p>
+                <div className="relative z-10 px-5 pb-5">
+                  <p className="text-sm text-zinc-300 leading-relaxed">{faq.a}</p>
                 </div>
               )}
             </div>
@@ -344,14 +471,39 @@ const Partners = () => {
 
       {/* ===================== FINAL CTA ===================== */}
       <section className="overflow-hidden my-10 relative" id="cta">
-        <div className="max-w-7xl mx-auto px-0 pb-24">
-          <div className="md:p-10 bg-slate-900 max-w-7xl border-white/10 border rounded-3xl ring-white/10 ring-1 mx-auto p-6 shadow-2xl text-white" style={{ maskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)', WebkitMaskImage: 'linear-gradient(150deg, transparent, black 0%, black 60%, transparent)' }}>
-            <div className="md:p-12 p-8 text-center">
-              <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-white">Click Below. Become A Partner. Get Paid To Be A Connector.</h3>
-              <p className="mt-2 max-w-prose text-slate-300 mx-auto mb-8">Join thousands of partners already earning commissions with Ryland Partners.</p>
-              <a href="#" className="inline-flex items-center justify-center bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 hover:from-blue-500 hover:via-blue-700 hover:to-blue-900 text-white text-lg font-semibold rounded-full py-4 px-12 transition-all shadow-lg shadow-blue-500/25">
-                Start Earning Now
-              </a>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+          <div className="border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden">
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+
+            <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
+                Click Below. Become A Partner. Get Paid To Be A Connector.
+              </h3>
+              <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Join thousands of partners already earning commissions with Ryland Partners. No cost to join. No selling required.
+              </p>
+              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#" className="shiny-cta !py-4 !px-10 !text-lg">
+                  <span>Start Earning Now</span>
+                </a>
+                <a href="#faq" className="hover:bg-white/10 transition-colors text-base text-white border-white/20 border rounded-full py-3 px-6">
+                  Read FAQs
+                </a>
+              </div>
+              <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+                  100% free to join
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+                  Get paid even if they don't fund
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+                  No cap on earnings
+                </span>
+              </div>
             </div>
           </div>
         </div>
