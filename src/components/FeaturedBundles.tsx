@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import HlsVideoBackground from "@/components/HlsVideoBackground";
 import bundleUltimate from "@/assets/bundle-ultimate-credit-stack.png";
 import bundleMaster from "@/assets/bundle-master-credit.png";
 import bundleStarter from "@/assets/bundle-starter.png";
@@ -52,9 +53,7 @@ interface FeaturedBundlesProps {
 const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
   return (
     <section className="relative py-16 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#002B5C] to-slate-950" />
-      {/* Subtle radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
+      <HlsVideoBackground overlay="bg-[#003A70]/90" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div

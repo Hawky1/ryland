@@ -7,6 +7,7 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { motion } from "framer-motion";
+import InfiniteGrid from "@/components/ui/infinite-grid";
 import Footer from "@/components/Footer";
 import FeaturedBundles from "@/components/FeaturedBundles";
 import StoreHero from "@/components/store/StoreHero";
@@ -129,7 +130,11 @@ const Store = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div className="relative">
+        <div className="absolute inset-0 z-0">
+          <InfiniteGrid />
+        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {loading ? (
           <div className="flex justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-slate-400" />
@@ -185,6 +190,7 @@ const Store = () => {
             })}
           </div>
         )}
+      </div>
       </div>
 
       {/* Why Choose Us */}
