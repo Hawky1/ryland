@@ -387,20 +387,11 @@ const Index = () => {
       {/* Animated Background - InfiniteGrid */}
       <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
         <InfiniteGrid
-          baseGridColor="rgba(148, 163, 184, 0.12)"
-          activeGridColor="rgba(59, 130, 246, 0.3)"
+          baseGridColor="rgba(148, 163, 184, 0.20)"
+          activeGridColor="rgba(59, 130, 246, 0.45)"
         />
       </div>
 
-      {/* Gradient blur - top navigation fade */}
-      <div className="gradient-blur pointer-events-none">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
 
       {/* NAVBAR */}
       <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
@@ -737,8 +728,8 @@ const Index = () => {
         </div>
 
         <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/60 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/60 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/30 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/30 to-transparent z-10" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
             {/* Column 1 */}
