@@ -10,6 +10,7 @@ import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } 
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import { motion } from "framer-motion";
 import { NavLink } from "@/components/NavLink";
+import Footer from "@/components/Footer";
 
 const BUNDLES = [
   { id: "credit-authority", tag: "Credit Authority Bundle", name: "Credit Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
@@ -239,25 +240,7 @@ const Store = () => {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-slate-950 text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <Link to="/about" className="hover:text-white transition-colors">About</Link>
-              <Link to="/store" className="hover:text-white transition-colors">Store</Link>
-              <Link to="/partners" className="hover:text-white transition-colors">Partners</Link>
-              <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
-              <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms</Link>
-            </div>
-          </div>
-          <div className="border-t border-slate-800 mt-10 pt-8 text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} Ryland Partners. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

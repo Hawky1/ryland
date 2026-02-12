@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import Footer from "@/components/Footer";
 
 const PrivacyPolicy = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -161,16 +162,7 @@ const PrivacyPolicy = () => {
         </div>
       </main>
 
-      <footer className="border-t border-slate-200 py-8 mt-16">
-        <div className="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-slate-500">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link to="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</Link>
-            <Link to="/ccpa" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">CCPA</Link>
-            <Link to="/cookie-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Cookie Policy</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
