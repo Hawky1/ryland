@@ -11,7 +11,7 @@ const TRUST_BADGES = [
   { icon: Scale, label: "TSR Compliant" },
 ];
 
-const CALENDLY_URL = "https://calendly.com"; // Replace with actual Calendly URL
+const GHL_CALENDAR_URL = "https://api.leadconnectorhq.com/widget/booking/SCgFhVZJmkZBDLyiDGTl";
 
 export default function FunnelConsultation() {
   return (
@@ -83,7 +83,7 @@ export default function FunnelConsultation() {
             </div>
             <div className="relative" style={{ minHeight: "500px" }}>
               <iframe
-                src={CALENDLY_URL}
+                src={GHL_CALENDAR_URL}
                 title="Book a consultation"
                 className="w-full border-0"
                 style={{ height: "500px" }}
