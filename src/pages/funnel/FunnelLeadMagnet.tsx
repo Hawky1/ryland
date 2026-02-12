@@ -48,6 +48,16 @@ export default function FunnelLeadMagnet() {
         source: "blueprint",
       });
       if (error) throw error;
+
+      // Fire-and-forget: sync lead to GoHighLevel CRM
+      supabase.functions
+        .invoke("ghl-create-contact", {
+          body: { name: result.data.name, email: result.data.email },
+        })
+        .then(({ error: ghlErr }) => {
+          if (ghlErr) console.error("GHL sync failed:", ghlErr);
+        });
+
       navigate("/funnel/offer");
     } catch {
       toast.error("Something went wrong. Please try again.");
