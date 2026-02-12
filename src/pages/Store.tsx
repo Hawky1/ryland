@@ -104,7 +104,7 @@ const Store = () => {
       <TrustStrip />
 
       {/* Featured Bundles Showcase */}
-      <div className="mt-16">
+      <div className="mt-6">
         <FeaturedBundles onScrollToBundle={scrollToBundle} />
       </div>
 
