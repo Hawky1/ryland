@@ -10,12 +10,14 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
 const COVERS = [
+  "/covers/ultimate-business-credit-blueprint.png",
   "/covers/100-dispute-letters.png",
-  "/covers/business-credit-basics-101.png",
+  "/covers/150k-funding-new-llc.png",
   "/covers/diy-credit-master-guide.png",
-  "/covers/credit-repair-chatgpt-prompts.png",
-  "/covers/business-funding-checklist.png",
-  "/covers/fast-track-vendor-accounts.png",
+  "/covers/credit-score-accelerator.png",
+  "/covers/secret-lenders-database.png",
+  "/covers/business-credit-basics-101.png",
+  "/covers/financial-playbook.png",
 ];
 
 export default function FunnelDownsell() {

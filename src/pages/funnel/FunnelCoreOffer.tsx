@@ -31,14 +31,14 @@ const EBOOKS = [
 ];
 
 const COVERS = [
+  "/covers/ultimate-business-credit-blueprint.png",
   "/covers/100-dispute-letters.png",
-  "/covers/business-credit-basics-101.png",
+  "/covers/150k-funding-new-llc.png",
+  "/covers/credit-score-accelerator.png",
+  "/covers/secret-lenders-database.png",
   "/covers/diy-credit-master-guide.png",
-  "/covers/credit-repair-chatgpt-prompts.png",
-  "/covers/business-funding-checklist.png",
-  "/covers/fast-track-vendor-accounts.png",
-  "/covers/inquiry-removal-guide.png",
-  "/covers/late-payment-removal-guide.png",
+  "/covers/financial-playbook.png",
+  "/covers/master-your-credit.png",
 ];
 
 const STATS = [

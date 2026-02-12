@@ -47,21 +47,22 @@ export default function BookMockup3D(props: Props) {
 
   // Stacked variant — show 6-8 covers fanned out
   const visibleCovers = props.covers.slice(0, 8);
+  const count = visibleCovers.length;
   return (
-    <div className="relative w-full max-w-lg mx-auto h-72 sm:h-80" style={{ perspective: "1200px" }}>
+    <div className="relative w-full max-w-3xl mx-auto h-[340px] sm:h-[420px] md:h-[480px]" style={{ perspective: "1200px" }}>
       {visibleCovers.map((cover, i) => {
-        const rotation = -12 + i * 3.5;
-        const translateX = -80 + i * 28;
-        const translateZ = -i * 8;
+        const rotation = -(count * 1.5) + i * 3.5;
+        const translateX = -(count * 14) + i * 38;
+        const translateZ = -i * 10;
         return (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="absolute top-4 left-1/2 w-36 sm:w-40"
+            className="absolute top-4 left-1/2 w-48 sm:w-56 md:w-64"
             style={{
-              transform: `translateX(${translateX}px) rotateY(-8deg) rotateZ(${rotation}deg) translateZ(${translateZ}px)`,
+              transform: `translateX(${translateX}px) rotateY(-6deg) rotateZ(${rotation}deg) translateZ(${translateZ}px)`,
               transformStyle: "preserve-3d",
               zIndex: visibleCovers.length - i,
             }}
@@ -69,7 +70,7 @@ export default function BookMockup3D(props: Props) {
             <img
               src={cover}
               alt={`Ebook ${i + 1}`}
-              className="w-full rounded-md shadow-xl shadow-black/30"
+              className="w-full rounded-lg shadow-2xl shadow-black/40"
             />
           </motion.div>
         );
