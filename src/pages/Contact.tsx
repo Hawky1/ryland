@@ -66,8 +66,8 @@ const Contact = () => {
         .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
         .font-geist { font-family: 'Geist', sans-serif !important; }
         .font-manrope { font-family: 'Manrope', sans-serif !important; }
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out; }
-        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out, visibility 0s 0.3s; visibility: hidden; }
+        .mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform 0.3s ease-out, visibility 0s 0s; }
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
         @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
