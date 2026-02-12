@@ -662,187 +662,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <style>{`
-        @keyframes scrollUp {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-        @keyframes scrollDown {
-          0% { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
-        }
-        [data-scroll-column="1"] { animation: scrollUp 25s linear infinite; }
-        [data-scroll-column="2"] { animation: scrollDown 25s linear infinite; }
-        [data-scroll-column="3"] { animation: scrollUp 25s linear infinite; }
-        [data-scroll-column]:hover { animation-play-state: paused; }
-      `}</style>
-      <section className="sm:px-6 sm:py-10 md:py-12 lg:px-8 max-w-7xl mt-20 mx-auto pt-8 px-4 pb-8">
-        <div className="flex items-center justify-between mb-8">
-          <div className="space-y-1">
-            <p className="text-xs sm:text-sm text-slate-500">Trusted by entrepreneurs</p>
-            <h2 className="text-2xl sm:text-5xl font-medium text-slate-900 tracking-tighter pt-4 pb-4" style={{ maskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)', WebkitMaskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)' }}>Testimonials</h2>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#F59E0B" className="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ))}
-            </div>
-            <span className="text-xs sm:text-sm text-slate-500 font-medium">4.9/5 · 2,431 reviews</span>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl">
-          {/* Fade overlays */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent z-10" />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
-            {/* Column 1 — scrolls up */}
-            <div data-scroll-column="1" className="flex flex-col gap-4">
-              {[...Array(2)].map((_, dup) => (
-                <div key={dup} className="flex flex-col gap-4">
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Bradley A.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Business Owner</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"The funding process was seamless. I got $24k at 0% interest for 12 months. Changed my entire business trajectory."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&h=120&fit=crop&crop=faces" alt="Aisha G." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Aisha G.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Head of Business Intelligence</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"Within 60 days my business credit was established and I had three Net-30 vendor accounts reporting. The roadmap they gave me was flawless."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=120&h=120&fit=crop&crop=faces" alt="Ethan G." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Ethan G.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">E-Commerce Founder</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"The Skool community alone is worth 10x the price. The digital products are pure gold for anyone serious about credit."</p>
-                  </article>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 2 — scrolls down (hidden on mobile) */}
-            <div data-scroll-column="2" className="hidden md:flex flex-col gap-4">
-              {[...Array(2)].map((_, dup) => (
-                <div key={dup} className="flex flex-col gap-4">
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Michael G.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Real Estate Investor</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"Ryland Partners fixed my credit when no one else could. My score is up 115 points and I just closed on my first investment property."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=faces" alt="Rachel A." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Rachel A.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Product Manager</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"I was skeptical at first, but the team walked me through every step. $150K in business funding secured in under 45 days."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces" alt="Liam O." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Liam O.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Agency Owner</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"Support is outstanding. Every question had a thoughtful answer within minutes. I now refer all my clients here."</p>
-                  </article>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3 — scrolls up (hidden on mobile) */}
-            <div data-scroll-column="3" className="hidden md:flex flex-col gap-4">
-              {[...Array(2)].map((_, dup) => (
-                <div key={dup} className="flex flex-col gap-4">
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Carlos R.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">CEO, Rivera Ventures</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop&crop=faces" alt="Sofia M." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Sofia M.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Analytics Lead</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"Total transparency removed all doubt. I always knew exactly where my credit stood and what the next move was."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-5 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=faces" alt="Noah B." className="size-9 object-cover rounded-full" />
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium text-zinc-100">Noah B.</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <p className="text-xs text-zinc-400">Strategy Director</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-zinc-300 leading-relaxed">"The predictive funding models helped us spot opportunities early and act faster. It's like a compass for business growth."</p>
-                  </article>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
         <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
@@ -880,6 +699,186 @@ const Index = () => {
                 </a>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <style>{`
+        @keyframes scrollUp {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        @keyframes scrollDown {
+          0% { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
+        }
+        [data-scroll-column="1"] { animation: scrollUp 25s linear infinite; }
+        [data-scroll-column="2"] { animation: scrollDown 25s linear infinite; }
+        [data-scroll-column="3"] { animation: scrollUp 25s linear infinite; }
+        [data-scroll-column]:hover { animation-play-state: paused; }
+      `}</style>
+      <section className="sm:px-6 sm:py-10 md:py-12 lg:px-8 max-w-7xl mt-20 mx-auto pt-8 px-4 pb-8">
+        <div className="flex items-center justify-between mb-8">
+          <div className="space-y-1">
+            <p className="text-xs sm:text-sm text-slate-500">Trusted by entrepreneurs</p>
+            <h2 className="text-2xl sm:text-5xl font-medium text-slate-900 tracking-tighter pt-4 pb-4" style={{ maskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)', WebkitMaskImage: 'linear-gradient(250deg, transparent, black 25%, black 70%, transparent)' }}>Testimonials</h2>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#F59E0B" className="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+            </div>
+            <span className="text-xs sm:text-sm text-slate-500 font-medium">4.9/5 · 2,431 reviews</span>
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent z-10" />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+            {/* Column 1 */}
+            <div data-scroll-column="1" className="flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Bradley A.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Business Owner</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The funding process was seamless. I got $24k at 0% interest for 12 months. Changed my entire business trajectory."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&h=120&fit=crop&crop=faces" alt="Aisha G." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Aisha G.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Head of Business Intelligence</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Within 60 days my business credit was established and I had three Net-30 vendor accounts reporting. The roadmap they gave me was flawless."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=120&h=120&fit=crop&crop=faces" alt="Ethan G." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Ethan G.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">E-Commerce Founder</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The Skool community alone is worth 10x the price. The digital products are pure gold for anyone serious about credit."</p>
+                  </article>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 2 */}
+            <div data-scroll-column="2" className="hidden md:flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Michael G.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Real Estate Investor</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners fixed my credit when no one else could. My score is up 115 points and I just closed on my first investment property."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=faces" alt="Rachel A." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Rachel A.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Product Manager</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"I was skeptical at first, but the team walked me through every step. $150K in business funding secured in under 45 days."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces" alt="Liam O." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Liam O.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Agency Owner</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Support is outstanding. Every question had a thoughtful answer within minutes. I now refer all my clients here."</p>
+                  </article>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 3 */}
+            <div data-scroll-column="3" className="hidden md:flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Carlos R.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">CEO, Rivera Ventures</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop&crop=faces" alt="Sofia M." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Sofia M.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Analytics Lead</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Total transparency removed all doubt. I always knew exactly where my credit stood and what the next move was."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=faces" alt="Noah B." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-base font-semibold text-zinc-100">Noah B.</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p className="text-sm text-zinc-400">Strategy Director</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The predictive funding models helped us spot opportunities early and act faster. It's like a compass for business growth."</p>
+                  </article>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
