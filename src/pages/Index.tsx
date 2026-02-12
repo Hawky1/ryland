@@ -678,25 +678,27 @@ const Index = () => {
               { icon: iconPartner, title: "Become A Partner", desc: "Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join.", cta: "Partner Up", href: "/partners" },
               { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "#cta" },
             ].map((card, i) => (
-              <motion.div
+            <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 whileHover={{ y: -4 }}
-                className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+                className="relative overflow-hidden border border-[#004E8C] rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
               >
-                <img src={card.icon} alt={card.title} className="w-28 h-28 mx-auto mb-6 object-contain" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3 font-manrope">{card.title}</h3>
-                <p className="text-sm text-slate-500 mb-6 leading-relaxed">{card.desc}</p>
-                <a
-                  href={card.href}
-                  className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-white rounded-full py-3 px-8 items-center justify-center"
-                  style={{ background: 'linear-gradient(to bottom, #003A70, #0060A9)' }}
-                >
-                  {card.cta}
-                </a>
+                <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+                <div className="relative z-10 flex flex-col items-center text-center flex-1">
+                  <img src={card.icon} alt={card.title} className="w-28 h-28 mx-auto mb-6 object-contain" />
+                  <h3 className="text-xl font-bold text-white mb-3 font-manrope">{card.title}</h3>
+                  <p className="text-sm text-zinc-300 mb-6 leading-relaxed">{card.desc}</p>
+                  <a
+                    href={card.href}
+                    className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center"
+                  >
+                    {card.cta}
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>
