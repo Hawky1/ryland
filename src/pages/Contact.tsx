@@ -144,7 +144,7 @@ const Contact = () => {
       </header>
 
       {/* HERO */}
-      <section className="relative max-w-7xl mx-auto mt-4 sm:mt-8 pt-16 pb-20 px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
