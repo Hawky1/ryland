@@ -1,28 +1,27 @@
 
+# Make the Infinite Grid Background More Visible
 
-# Add Video Background to Wealth Ecosystem Service Cards
-
-## Why
-The service cards currently use white backgrounds with slate borders, which blend into the white page and feel flat compared to the bold dark blue cards used throughout the rest of the site (Hero, Funding Journey, FAQ, CTA, About page). Switching them to the dark video background creates visual consistency and makes this key conversion section more impactful.
+## Problem
+The InfiniteGrid is set as a fixed background but its grid lines are very faint (12% opacity), and the white gradient overlays on the testimonials section further obscure it. The grid is barely noticeable while scrolling.
 
 ## Changes
 
 ### File: `src/pages/Index.tsx`
 
-1. **Add `HlsVideoBackground` to each service card**
-   - Wrap each card's content in a `relative z-10` container
-   - Add the `HlsVideoBackground` component with the standard `bg-[#003A70]/90` overlay inside each card
-   - Add `overflow-hidden` to the card container so the video stays clipped to the rounded corners
+1. **Increase InfiniteGrid opacity** (line ~390-391)
+   - Change `baseGridColor` from `rgba(148, 163, 184, 0.12)` to `rgba(148, 163, 184, 0.20)` -- nearly double the visibility
+   - Change `activeGridColor` from `rgba(59, 130, 246, 0.3)` to `rgba(59, 130, 246, 0.45)` -- brighter mouse-follow glow
 
-2. **Update card styling**
-   - Replace `bg-white border-slate-200` with `border-[#004E8C]` to match other dark cards
-   - Change text colors from `text-slate-900` / `text-slate-500` to `text-white` / `text-zinc-300` for readability
+2. **Reduce testimonials white fade overlays** (lines ~740-741)
+   - Change `from-white/60` to `from-white/30` on both top and bottom gradient divs so the grid shows through better at the edges of the testimonials section
 
-3. **Update CTA button styling**
-   - Change button background from the blue gradient to white (`bg-white text-[#003A70]`) so it stands out against the dark card -- or keep the gradient with a lighter border accent
+3. **Remove the gradient-blur div** (lines ~396-403)
+   - This stacked blur overlay at the top of the page creates a heavy white wash that hides the grid behind the navbar area -- remove it entirely since the navbar already has its own `bg-white/70 backdrop-blur-xl`
 
-## Technical Notes
-- The `HlsVideoBackground` component is already imported in `Index.tsx`
-- Each card gets its own video instance; since these are lightweight HLS streams with `enableWorker: false`, performance should remain smooth
-- The `relative` + `z-10` pattern on content is already established throughout the codebase
+### File: `src/components/ui/infinite-grid.tsx`
 
+4. **Remove the ambient glow blobs** (lines ~96-102)
+   - The three large blurred circles (`rgba(59,130,246,0.08)` etc.) add a subtle white/blue haze that competes with the grid lines -- removing them will make the grid itself more prominent
+
+## Result
+The subtle moving grid pattern will be noticeably more visible across all sections of the homepage while still maintaining a clean, professional look. The mouse-follow reveal effect will also be more pronounced.
