@@ -1,85 +1,90 @@
 
-# Redesign Partners Page to Match Homepage Styling
+# Store Page Redesign — Premium E-Commerce Homepage
 
-## Problem
-The Partners page has a different visual language from the homepage:
-- **Navbar**: No `bg-white/70 backdrop-blur-xl border-b` styling; uses `logoWhite` instead of `logoDark`
-- **Background grid**: Lower opacity (`0.12` / `0.3`) vs homepage (`0.20` / `0.45`)
-- **Gradient blur**: Still present (removed from homepage)
-- **Cards**: Use `bg-slate-900` with `border-white/10` instead of `HlsVideoBackground` with `border-[#004E8C]`
-- **Hero**: Uses a raw `<video>` tag with black gradient overlay instead of `HlsVideoBackground` with the Chase blue overlay
-- **Section headings**: Dark text on white (`text-slate-900`) -- this is fine and matches homepage sections
-- **"Perfect For" persona grid**: White cards with `border-slate-200` instead of dark video cards
-- **FAQ**: White cards with slate borders instead of dark video cards
-- **Final CTA**: Simple `bg-slate-900` box instead of the homepage's large hero-style CTA with `HlsVideoBackground`, gradient text, shiny-cta button, and trust signals
-- **Footer**: Missing `bg-white/70 backdrop-blur` treatment; has mask gradients
+## Overview
 
-## Changes
+Transform the current store page from a simple product listing into a high-converting e-commerce homepage that feels like a professional digital storefront. The redesign will match the premium aesthetic of the main site (dark blue cards, motion animations, gradient typography) while following proven e-commerce conversion patterns.
 
-### File: `src/pages/Partners.tsx`
+## Current Problems
+- The store feels like a "product listing page," not a storefront homepage
+- The hero is generic — no urgency, no social proof, no value proposition
+- No trust signals, testimonials, or conversion triggers
+- The bundle navigation bar and flat product grid lack visual hierarchy
+- Missing key e-commerce patterns: urgency, benefits strip, value stacking
 
-**1. Navbar -- match homepage exactly**
-- Import `logoDark` and use it instead of `logoWhite`
-- Add `bg-white/70 backdrop-blur-xl border-b border-slate-100` to the `<header>` tag
-- Add `Partners` link to nav alongside Home, About, Services, Community, Store
+## New Page Architecture
 
-**2. Background grid -- match homepage opacity**
-- Change `baseGridColor` to `rgba(148, 163, 184, 0.20)`
-- Change `activeGridColor` to `rgba(59, 130, 246, 0.45)`
+The redesigned page will flow through these sections (top to bottom):
 
-**3. Remove gradient-blur div**
-- Delete the gradient-blur overlay (already removed from homepage)
+1. **Sticky Navbar** — Keep current, add mobile hamburger menu
+2. **Hero Section** — Full-width dark gradient with bold headline, stats bar, and primary CTA
+3. **Trust/Benefits Strip** — Horizontal bar with key value props (Instant Download, Secure Checkout, etc.)
+4. **Featured Bundles Showcase** — Keep the existing FeaturedBundles component (already premium)
+5. **Sticky Category Navigation** — Redesigned as a sleeker tab bar
+6. **Product Grid Sections** — Redesigned product cards with better visual hierarchy
+7. **Value Proposition / Why Choose Us** — Mid-page conversion section
+8. **Footer** — Existing shared footer
 
-**4. Hero section -- use HlsVideoBackground**
-- Replace the raw `<video>` tag + black gradient overlay with the `HlsVideoBackground` component using the same `bg-[#003A70]/90` overlay
-- Change the card border to `border-[#004E8C]` to match homepage hero
-- Keep the gradient text and content the same
-- Replace the blue gradient CTA button with the `shiny-cta` animated button
+## Detailed Design
 
-**5. Value Pillars (3 cards) -- add video backgrounds**
-- Replace `bg-slate-900` with `HlsVideoBackground` + `border-[#004E8C]` + `overflow-hidden`
-- Wrap content in `relative z-10`
+### 1. Hero Section (Complete Redesign)
+- Full-width dark gradient background (from-slate-950 via-blue-950 to-slate-900) with InfiniteGrid overlay
+- Split layout: left side with headline + stats, right side with a floating bundle mockup image
+- Headline: "Your Blueprint to Financial Freedom" with gradient text accent
+- Stats bar below headline: "40+ Expert Guides | 10,000+ Entrepreneurs Served | Instant Digital Delivery"
+- Primary CTA button using the shiny-cta style: "Browse Collections"
+- Secondary text: "Trusted by entrepreneurs nationwide"
 
-**6. Copy Block ("Here's How...") -- add video background**
-- Same treatment: `HlsVideoBackground` + `border-[#004E8C]`
+### 2. Trust/Benefits Strip
+- Slim horizontal section with 4 value propositions in a row
+- Icons + text: "Instant Download" / "Secure Checkout" / "Expert-Crafted" / "Money-Back Guarantee"
+- Light background with subtle border, clean professional feel
 
-**7. 3-Step Process cards -- add video backgrounds**
-- Same treatment as homepage service cards
+### 3. Featured Bundles
+- Keep the existing FeaturedBundles component as-is (already well-designed)
 
-**8. "Perfect For" persona grid -- add video backgrounds**
-- Replace `bg-white border-slate-200` with dark video cards (`HlsVideoBackground` + `border-[#004E8C]`)
-- Update text colors from `text-slate-700` to `text-white`
-- Replace the blue gradient CTA button with `shiny-cta`
+### 4. Category Navigation (Refined)
+- Sticky below navbar, cleaner pill-style tabs
+- Active state with gradient fill, smooth scroll behavior preserved
 
-**9. Support & Resources cards -- add video backgrounds**
-- Same dark video card treatment
+### 5. Product Cards (Redesign)
+- Slightly smaller aspect ratio (4:5 instead of 3:4) for tighter grid
+- Hover: subtle lift + shadow expansion (no image clipping)
+- Quick "Add to Cart" button with shopping bag icon
+- Price displayed more prominently with a "was/now" style if applicable
+- Product title limited to 2 lines with line-clamp
 
-**10. "Easiest Money" CTA block -- add video background**
-- Replace `bg-slate-900` with `HlsVideoBackground`
-- Replace blue gradient button with `shiny-cta`
+### 6. Mid-Page Conversion Section ("Why Our Guides?")
+- Dark blue card section (matching site's card strategy)
+- 3-column grid with icons: "Actionable Strategies" / "Expert Authors" / "Proven Results"
+- Reinforces value before user continues scrolling through products
 
-**11. "How We Service Referrals" cards -- add video backgrounds**
-- Same dark video card treatment
-- Keep the blue info banner below as-is (it's a light accent)
+## Technical Details
 
-**12. FAQ section -- add video backgrounds to each item**
-- Replace `bg-white border-slate-200` with dark video cards
-- Update text colors: questions to `text-white`, answers to `text-zinc-300`
-- Update chevron color to `text-zinc-400`
+### Files Modified
+- **src/pages/Store.tsx** — Complete rewrite of the page layout and sections
+- **src/components/FeaturedBundles.tsx** — No changes (keep as-is)
 
-**13. Final CTA section -- match homepage CTA redesign**
-- Replace the simple `bg-slate-900` box with `HlsVideoBackground` + `border-[#004E8C]`
-- Use large gradient text (`text-4xl md:text-5xl lg:text-6xl bg-gradient-to-b from-white via-white to-zinc-400`)
-- Replace the blue gradient button with `shiny-cta` animated button
-- Add trust signals row (matching homepage: "No credit check required", "48-hour approval", "10,000+ entrepreneurs funded")
-- Increase padding to `md:py-24`
+### Files Created
+- **src/components/store/StoreHero.tsx** — New hero section component
+- **src/components/store/TrustStrip.tsx** — Benefits/trust bar component
+- **src/components/store/WhyChooseUs.tsx** — Mid-page conversion section
+- **src/components/store/ProductCard.tsx** — Reusable product card component
 
-**14. Footer -- keep as-is**
-- The footer styling is consistent across pages and works fine
+### Dependencies
+- No new dependencies needed
+- Uses existing: framer-motion, lucide-react, react-router-dom, Shopify integration
 
-## Technical Notes
-- Import `HlsVideoBackground` and `logoDark` at the top of the file
-- Import `motion` from framer-motion if needed for card animations
-- The `shiny-cta` CSS is already included in the page's `<style>` block -- just needs to be added since Partners currently lacks it
-- Copy the `shiny-cta` CSS from `Index.tsx` into the Partners `<style>` block
-- Each dark card gets its own `HlsVideoBackground` instance with `overflow-hidden` on the parent and `relative z-10` on the content
+### Key Patterns Followed
+- Dark blue card sections for high-impact areas (matching homepage strategy)
+- framer-motion for scroll-triggered animations
+- Manrope font family consistency
+- Mobile-first responsive grid (1 col -> 2 col -> 3 col)
+- All Shopify cart/checkout logic preserved exactly as-is
+- Existing FeaturedBundles component reused without modification
+
+### Mobile Considerations
+- Hero becomes single-column stacked layout
+- Trust strip wraps to 2x2 grid on mobile
+- Product grid goes to single column on small screens
+- Sticky nav remains horizontally scrollable with hidden scrollbar
