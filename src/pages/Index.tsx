@@ -443,7 +443,7 @@ const Index = () => {
             </div>
             <a href="#features" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
             <a href="/store" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</a>
-            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
+            <a href="/contact" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
               <span>Contact</span>
             </a>
           </nav>
