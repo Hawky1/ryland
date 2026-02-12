@@ -402,7 +402,45 @@ const Index = () => {
           <nav className="hidden gap-8 md:flex items-center">
             <a href="/" className="nav-link relative text-sm text-slate-900 font-medium">Home</a>
             <a href="/about" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">About</a>
-            <a href="#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
+            <div className="relative group">
+              <a href="#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1">
+                Services
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+              </a>
+              {/* Invisible bridge so hover doesn't break */}
+              <div className="absolute left-1/2 -translate-x-1/2 top-full w-[540px] h-4" />
+              <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.75rem)] w-[540px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 z-50">
+                <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,58,112,0.25)] p-2 ring-1 ring-black/5">
+                  <div className="grid grid-cols-2 gap-1">
+                    {[
+                      { icon: "💰", title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines", href: "#cta" },
+                      { icon: "📊", title: "Repair My Credit", desc: "Done-for-you credit restoration in 35–90 days", href: "#cta" },
+                      { icon: "🎓", title: "Join The Community", desc: "Private Skool network & digital business training", href: "#features" },
+                      { icon: "📚", title: "Shop Digital Products", desc: "eBooks & resources to accelerate your growth", href: "/store" },
+                      { icon: "🤝", title: "Become A Partner", desc: "Earn uncapped commissions — free to join", href: "/partners" },
+                      { icon: "📅", title: "Schedule A Consultation", desc: "1-on-1 strategy session with funding experts", href: "#cta" },
+                    ].map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        className="flex items-start gap-3 rounded-xl px-4 py-3 hover:bg-slate-50 transition-colors group/item"
+                      >
+                        <span className="text-xl mt-0.5 shrink-0">{item.icon}</span>
+                        <div>
+                          <p className="text-sm font-semibold text-slate-900 group-hover/item:text-[#0060A9] transition-colors">{item.title}</p>
+                          <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-1 border-t border-slate-100 pt-2 px-4 pb-2">
+                    <a href="#services" className="text-xs font-medium text-[#0060A9] hover:text-[#003A70] transition-colors inline-flex items-center gap-1">
+                      View all services →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <a href="#features" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
             <a href="/store" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</a>
             <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
