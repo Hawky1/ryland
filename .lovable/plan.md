@@ -1,57 +1,98 @@
 
-# Update Header Navigation Links
+
+# Redesign Testimonials: 3-Column Vertical Scroll Layout
 
 ## Overview
-Replace the current nav links (Features, Services, Results, About, Get Started) with the new set: **Home, About, Services, Community, Store, Contact**. This applies to both the desktop nav and mobile drawer on the Index page, About page, and any other pages with the same header pattern.
+Replace the current horizontal marquee testimonials with a 3-column vertically auto-scrolling grid. Column 1 scrolls up, column 2 scrolls down, column 3 scrolls up -- creating a dynamic "wall of love" effect. The cards use the existing Chase blue gradient styling. A star rating badge and review count anchor the header.
 
-## Link Mapping
+## Layout
 
-| Nav Item | Target | Notes |
-|----------|--------|-------|
-| Home | `/` | Links to homepage |
-| About | `/about` | Existing About page |
-| Services | `#services` (or `/#services` on non-index pages) | Scrolls to Funding Journey section |
-| Community | `#features` (or `/#features` on non-index pages) | Scrolls to Wealth Ecosystem section (the community/partner features area) |
-| Store | `/store` | Existing Store page |
-| Contact | `#cta` (or `/#cta` on non-index pages) | Scrolls to CTA/contact section |
+```text
+[Header]
+  "Trusted by entrepreneurs"
+  "Testimonials"                    [stars] 4.9/5 - 2,431 reviews
 
-## Changes
+[3-Column Grid with vertical scroll]
+  Column 1 (scrolls UP)    Column 2 (scrolls DOWN)    Column 3 (scrolls UP)
+  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
+  │  Bradley A.      │     │  Michael G.      │       │  Carlos R.       │
+  │  quote...        │     │  quote...        │       │  quote...        │
+  └──────────────────┘     └──────────────────┘       └──────────────────┘
+  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
+  │  Aisha G.        │     │  Rachel A.       │       │  Sofia M.        │
+  │  quote...        │     │  quote...        │       │  quote...        │
+  └──────────────────┘     └──────────────────┘       └──────────────────┘
+  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
+  │  Ethan G.        │     │  Liam O.         │       │  Noah B.         │
+  │  quote...        │     │  quote...        │       │  quote...        │
+  └──────────────────┘     └──────────────────┘       └──────────────────┘
+  (duplicated for loop)    (duplicated for loop)      (duplicated for loop)
 
-### 1. Index.tsx -- Desktop Nav (line 411-418)
-- Replace the 4 anchor links + "Get Started" shiny button with 6 clean nav links
-- Style: same `text-sm text-slate-600 hover:text-slate-900` pattern, with `gap-8` spacing
-- "Contact" becomes the CTA button using the existing `shiny-cta` style (replaces "Get Started")
+[Top + bottom fade overlays to mask edges]
+```
 
-### 2. Index.tsx -- Mobile Drawer (lines 433-441)
-- Replace the 4 list items + "Get Started" link with the 6 new nav items
-- "Contact" gets the CTA styling at the bottom
+## Design Details
 
-### 3. About.tsx -- Desktop Nav (lines 108-115) and Mobile Drawer (lines 128-136)
-- Same link changes, but prefixed with `/#` for anchor links since we're on a different page
-- "About" link gets active/bold styling since we're on the About page
+### Header
+- Left side: "Trusted by entrepreneurs" subtitle + "Testimonials" heading (keep existing mask-image gradient style)
+- Right side: 5 gold stars + "4.9/5 . 2,431 reviews" in slate text, vertically centered
 
-### 4. Store.tsx -- Check and update header if it has nav links
-- Will update to match the same pattern
+### Cards
+- All cards use `bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C]` (existing brand style)
+- Each card shows: avatar, name, role/title, verified badge, and quote text
+- Rounded corners `rounded-2xl`, padding `p-5`
 
-### 5. Partners.tsx -- Update header nav (lines 88-120)
-- Same link changes with `/#` prefixes
+### Scroll Animation
+- CSS keyframes: `scrollUp` moves `translateY(0)` to `translateY(-33.33%)`, `scrollDown` does the reverse
+- Column 1 and 3: scroll up at 25s linear infinite
+- Column 2: scrolls down at 25s linear infinite
+- Hover pauses animation (`animation-play-state: paused`)
+- Each column's content is duplicated (cards repeated) for seamless infinite loop
 
-## Visual Polish
-- Keep the existing glassmorphism header style (`bg-white/70 backdrop-blur-xl border-b border-slate-100`)
-- Maintain `gap-8` between links for comfortable spacing
-- "Contact" button uses the `shiny-cta` styling as the primary CTA
-- Active page link gets `text-slate-900 font-medium` styling
-- All other links use `text-slate-600 hover:text-slate-900` with smooth transitions
+### Fade Overlays
+- Top and bottom gradient masks using `bg-gradient-to-b from-white` and `bg-gradient-to-t from-white` to fade cards into the page background
+- Container has `overflow-hidden` with a fixed height (~600px on desktop, ~400px on mobile)
+
+### Testimonial Content (9 people, 3 per column)
+- Reuse existing: Bradley A., Michael G., Ethan G.
+- Add from reference (adapted to credit/funding context):
+  - Aisha Green, Head of Business Intelligence
+  - Priya Patel, Marketing Director  
+  - Jonas Weber, Operations Lead
+  - Rachel Adams, Product Manager
+  - Sofia Martinez, Analytics Lead
+  - Noah Bennett, Strategy Director
+- Quotes will be rewritten to fit the credit/funding brand voice
+
+### Mobile
+- On small screens, show 1 column scrolling up (hide columns 2 and 3)
+- On `md` breakpoint, show all 3 columns
 
 ## Technical Details
 
-### Files Modified
-- `src/pages/Index.tsx` -- lines 411-441 (desktop nav + mobile drawer)
-- `src/pages/About.tsx` -- lines 108-136 (desktop nav + mobile drawer)
-- `src/pages/Partners.tsx` -- lines 88-120 (header area)
-- `src/pages/Store.tsx` -- header section if applicable
+### File: `src/pages/Index.tsx`
 
-### React Router Integration
-- Page links (`/`, `/about`, `/store`) will use standard `<a>` tags (consistent with existing pattern)
-- Anchor links (`#services`, `#features`, `#cta`) remain as hash anchors for smooth scroll
-- Cross-page anchors use `/#services` format
+**Replace lines 669-768** (entire Testimonials section) with:
+- A `<style>` tag containing `scrollUp` and `scrollDown` keyframe animations
+- Updated header with star rating badge on the right
+- A 3-column grid (`grid-cols-1 md:grid-cols-3`) with `overflow-hidden` and fixed height
+- Each column contains a `div` with `data-scroll-column` attribute for CSS animation targeting
+- Cards duplicated once per column for seamless looping
+- Top/bottom fade overlay divs with `pointer-events-none`
+
+### Animations (CSS in JSX `<style>` tag)
+```
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes scrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+```
+
+### No new dependencies or files needed
+- Everything stays within `Index.tsx`
+- Uses existing avatar images where available, Unsplash placeholders for new people
+
