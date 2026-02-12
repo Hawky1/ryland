@@ -1,98 +1,39 @@
 
 
-# Redesign Testimonials: 3-Column Vertical Scroll Layout
+# Testimonials Upgrade and Site-Wide Font Change
 
 ## Overview
-Replace the current horizontal marquee testimonials with a 3-column vertically auto-scrolling grid. Column 1 scrolls up, column 2 scrolls down, column 3 scrolls up -- creating a dynamic "wall of love" effect. The cards use the existing Chase blue gradient styling. A star rating badge and review count anchor the header.
+Three changes: (1) add Inter as the site-wide body font for a more professional look, (2) increase testimonial card font sizes, and (3) move the entire Testimonials section below the Wealth Ecosystem (services) section.
 
-## Layout
+## Changes
 
-```text
-[Header]
-  "Trusted by entrepreneurs"
-  "Testimonials"                    [stars] 4.9/5 - 2,431 reviews
+### 1. Add Inter Font Site-Wide
+- Add the Inter Google Font import to `index.html`
+- Update `src/index.css` to set `font-family: 'Inter', sans-serif` on the body
+- This gives all body text a clean, professional look while keeping Manrope for headings where already applied
 
-[3-Column Grid with vertical scroll]
-  Column 1 (scrolls UP)    Column 2 (scrolls DOWN)    Column 3 (scrolls UP)
-  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
-  │  Bradley A.      │     │  Michael G.      │       │  Carlos R.       │
-  │  quote...        │     │  quote...        │       │  quote...        │
-  └──────────────────┘     └──────────────────┘       └──────────────────┘
-  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
-  │  Aisha G.        │     │  Rachel A.       │       │  Sofia M.        │
-  │  quote...        │     │  quote...        │       │  quote...        │
-  └──────────────────┘     └──────────────────┘       └──────────────────┘
-  ┌──────────────────┐     ┌──────────────────┐       ┌──────────────────┐
-  │  Ethan G.        │     │  Liam O.         │       │  Noah B.         │
-  │  quote...        │     │  quote...        │       │  quote...        │
-  └──────────────────┘     └──────────────────┘       └──────────────────┘
-  (duplicated for loop)    (duplicated for loop)      (duplicated for loop)
+### 2. Improve Testimonial Card Typography
+- Increase quote text from `text-sm` to `text-base` for better readability
+- Increase name text from `text-sm` to `text-base font-semibold`
+- Increase role/title from `text-xs` to `text-sm`
+- Add slightly more padding to cards (`p-6` instead of `p-5`)
 
-[Top + bottom fade overlays to mask edges]
-```
+### 3. Move Testimonials Under Services
+Currently the section order is:
+1. Who This Is For
+2. Testimonials
+3. Wealth Ecosystem (Services)
+4. FAQ
 
-## Design Details
+New order:
+1. Who This Is For
+2. Wealth Ecosystem (Services)
+3. Testimonials
+4. FAQ
 
-### Header
-- Left side: "Trusted by entrepreneurs" subtitle + "Testimonials" heading (keep existing mask-image gradient style)
-- Right side: 5 gold stars + "4.9/5 . 2,431 reviews" in slate text, vertically centered
+This means cutting the entire Testimonials block (style tag + section, roughly lines 665-844) and pasting it after the Wealth Ecosystem section (after line 885).
 
-### Cards
-- All cards use `bg-gradient-to-br from-[#0060A9] to-[#003A70] border border-[#004E8C]` (existing brand style)
-- Each card shows: avatar, name, role/title, verified badge, and quote text
-- Rounded corners `rounded-2xl`, padding `p-5`
-
-### Scroll Animation
-- CSS keyframes: `scrollUp` moves `translateY(0)` to `translateY(-33.33%)`, `scrollDown` does the reverse
-- Column 1 and 3: scroll up at 25s linear infinite
-- Column 2: scrolls down at 25s linear infinite
-- Hover pauses animation (`animation-play-state: paused`)
-- Each column's content is duplicated (cards repeated) for seamless infinite loop
-
-### Fade Overlays
-- Top and bottom gradient masks using `bg-gradient-to-b from-white` and `bg-gradient-to-t from-white` to fade cards into the page background
-- Container has `overflow-hidden` with a fixed height (~600px on desktop, ~400px on mobile)
-
-### Testimonial Content (9 people, 3 per column)
-- Reuse existing: Bradley A., Michael G., Ethan G.
-- Add from reference (adapted to credit/funding context):
-  - Aisha Green, Head of Business Intelligence
-  - Priya Patel, Marketing Director  
-  - Jonas Weber, Operations Lead
-  - Rachel Adams, Product Manager
-  - Sofia Martinez, Analytics Lead
-  - Noah Bennett, Strategy Director
-- Quotes will be rewritten to fit the credit/funding brand voice
-
-### Mobile
-- On small screens, show 1 column scrolling up (hide columns 2 and 3)
-- On `md` breakpoint, show all 3 columns
-
-## Technical Details
-
-### File: `src/pages/Index.tsx`
-
-**Replace lines 669-768** (entire Testimonials section) with:
-- A `<style>` tag containing `scrollUp` and `scrollDown` keyframe animations
-- Updated header with star rating badge on the right
-- A 3-column grid (`grid-cols-1 md:grid-cols-3`) with `overflow-hidden` and fixed height
-- Each column contains a `div` with `data-scroll-column` attribute for CSS animation targeting
-- Cards duplicated once per column for seamless looping
-- Top/bottom fade overlay divs with `pointer-events-none`
-
-### Animations (CSS in JSX `<style>` tag)
-```
-@keyframes scrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-@keyframes scrollDown {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
-}
-```
-
-### No new dependencies or files needed
-- Everything stays within `Index.tsx`
-- Uses existing avatar images where available, Unsplash placeholders for new people
-
+## Files Modified
+- `index.html` -- add Inter font link
+- `src/index.css` -- set Inter as default body font
+- `src/pages/Index.tsx` -- reorder sections and increase testimonial font sizes
