@@ -1,71 +1,75 @@
 
-# Revert White Cards to Blue Theme + Mobile Optimize Step Navigation
+
+# Fix Credit Analysis White Cards + Make It Feel Like a Real App
 
 ## Overview
-Two main changes: (1) Convert the white-background cards in GetFundedVisual and LenderMatchVisual back to the translucent blue style matching the dark video background, and (2) make the 1-2-3-4-5 step navigation mobile-friendly so it never causes a horizontal scrollbar.
+Fix the remaining white cards that were missed, and redesign the Credit Analysis visual to feel more like an actual credit monitoring dashboard (think Credit Karma / Experian app).
 
-## 1. GetFundedVisual.tsx - Revert White Cards to Blue Theme
+## 1. Fix White Cards (missed from last round)
 
-### Total Funded hero card (line 35)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- Text: `text-slate-500` --> `text-neutral-400`
-- The gradient text on the dollar amount stays as-is (already cyan-to-blue gradient)
+### Big Score card (line 39)
+- `bg-white border border-slate-200 shadow-sm` -> `bg-white/5 border border-white/10`
+- `text-slate-500` -> `text-neutral-400`
 
-### Funding Highlights card (line 146)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- `text-slate-500` --> `text-neutral-400`
-- `text-cyan-600` icon --> `text-cyan-400`
-- Badge items: `bg-cyan-50 border border-cyan-200` --> `bg-cyan-500/10 border border-cyan-500/30`
-- Badge text: `text-cyan-700` --> `text-cyan-300`
-- Badge icon: `text-cyan-600` --> `text-cyan-400`
+### Bureau score cards (line 68)
+- `bg-white border border-slate-200 shadow-sm` -> `bg-white/5 border border-white/10`
+- `text-slate-900` -> `text-white`
 
-## 2. LenderMatchVisual.tsx - Revert White Cards to Blue Theme
+## 2. Make It Look Like a Real Credit App
 
-### Credit Lines card (line 28)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- `text-slate-500` --> `text-neutral-400`
-- `text-slate-900` --> `text-white`
+### Add a top "app bar" inside the visual
+- A thin bar at the top with a subtle "Credit Dashboard" label on the left and a pulsing green "Live" indicator dot on the right
+- Gives the feel of a real monitoring tool UI
 
-### Total Available card (line 37)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- `text-slate-500` --> `text-neutral-400`
-- `text-cyan-600` --> `text-cyan-400`
+### Redesign the score card with a circular gauge
+- Replace the plain big number with a semi-circular arc/gauge (SVG) that fills from red (low) through yellow to green (high)
+- The score number sits inside the gauge center
+- Color of the arc reflects the score range (720 = green zone)
+- Animated fill on mount
 
-## 3. Also revert AssessmentVisual.tsx and RestorationVisual.tsx white cards
+### Add a "Last Updated" timestamp
+- Below the score gauge: "Last updated: Just now" in small neutral text
+- Adds realism
 
-### AssessmentVisual - 3 stat cards (line 24)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- `text-slate-500` --> `text-neutral-400`
-- `text-slate-900` --> `text-white`
-- Icon bg: `bg-cyan-50` --> `bg-cyan-500/10`
-- Icon: `text-cyan-600` --> `text-cyan-400`
+### Improve bureau cards with mini progress bars
+- Each bureau card gets a thin horizontal progress bar showing where the score falls on a 300-850 range
+- Bar gradient: red -> yellow -> green
+- Fill animates to the correct position
 
-### RestorationVisual - Progress ring card (line 34)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- SVG stroke bg: `rgba(0,0,0,0.06)` --> `rgba(255,255,255,0.1)`
-- `text-slate-900` --> `text-white`
-- `text-slate-500` --> `text-neutral-400`
+### Add subtle grid overlay to the entire visual
+- A faint dot-grid pattern across the whole component background
+- Gives a "data dashboard" tech feel
 
-### RestorationVisual - 2 summary badges (lines 69, 79)
-- `bg-white border border-slate-200 shadow-sm` --> `bg-white/5 border border-white/10`
-- `text-slate-900` --> `text-white`
-- `text-slate-500` --> `text-neutral-400`
-
-## 4. FundingJourney.tsx - Mobile-Optimize Step Navigation
-
-### Step bar (lines 99-132)
-- Remove `overflow-x-auto` to prevent scrollbar
-- On mobile, hide the step title text labels (show only the numbered circles)
-- Use responsive classes: `hidden sm:block` on the `<span>` with the step title
-- Reduce circle size on mobile: `w-7 h-7 sm:w-9 sm:h-9`
-- Reduce connector width on mobile: `w-4 sm:w-8` for the line between circles
-- Reduce horizontal padding: `px-3 sm:px-6`
-
-This ensures the 5 numbered circles fit comfortably on any screen width without scrolling, while the full labels still appear on tablet/desktop.
+## 3. Mobile Optimization
+- On mobile, switch from 3-column to single-column stack
+- Score gauge and bureau cards stack on top, bar chart in middle, negative items at bottom
+- Already using `grid-cols-1 md:grid-cols-3` so this should work, just verify spacing
 
 ## Files Changed
-- `src/components/funding-visuals/GetFundedVisual.tsx`
-- `src/components/funding-visuals/LenderMatchVisual.tsx`
-- `src/components/funding-visuals/AssessmentVisual.tsx`
-- `src/components/funding-visuals/RestorationVisual.tsx`
-- `src/components/FundingJourney.tsx`
+- `src/components/funding-visuals/CreditAnalysisVisual.tsx` (all changes in this single file)
+
+## Technical Details
+
+### SVG Gauge Implementation
+```
+- Semi-circle arc using SVG path with stroke-dasharray/dashoffset animation
+- Score range 300-850, current score 720 maps to ~76% fill
+- Arc color: gradient from red through amber to emerald
+- Framer Motion animates the dashoffset from 0 to target
+```
+
+### Bureau Progress Bars
+```
+- Each bar is a 4px tall rounded div
+- Background: subtle gradient track
+- Fill width calculated as: ((score - 300) / 550) * 100%
+- Animated with framer-motion width transition
+```
+
+### App Bar
+```
+- Flex row, justify-between, px-3 py-2
+- Left: "Credit Dashboard" in text-xs uppercase tracking-widest text-neutral-500
+- Right: green pulsing dot + "Live" text
+```
+
