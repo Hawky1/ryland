@@ -734,9 +734,9 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl bg-gradient-to-b from-[#003A70] to-[#0060A9] border border-[#004E8C]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#003A70] to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0060A9] to-transparent z-10" />
+        <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent z-10" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
             {/* Column 1 */}
