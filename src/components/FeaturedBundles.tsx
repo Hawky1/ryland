@@ -11,7 +11,7 @@ const FEATURED = [
     id: "ultimate-bundle",
     image: bundleUltimate,
     title: "The Ultimate Credit Stack Bundle",
-    subtitle: "16 Resources — Total Credit Transformation",
+    subtitle: "18 Resources — Total Credit Transformation",
     price: "$147",
     highlight: true,
   },
