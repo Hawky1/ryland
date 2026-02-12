@@ -52,7 +52,7 @@ interface FeaturedBundlesProps {
 
 const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden">
+    <section className="relative pt-12 sm:pt-16 pb-16 sm:pb-24 overflow-hidden">
       <HlsVideoBackground overlay="bg-[#003A70]/90" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
