@@ -629,7 +629,7 @@ const Index = () => {
               {
                 icon: "ShieldCheck",
                 title: "The Credit Restarter",
-                desc: "Visionaries who need to clear the path to capital through TSR-compliant restoration.",
+                desc: "Visionaries who need to clear the path to capital through CROA-compliant restoration.",
               },
               {
                 icon: "Handshake",
@@ -1043,6 +1043,34 @@ const Index = () => {
             <div className="flex items-center gap-6">
               <a href="/privacy-policy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a>
               <a href="/terms-of-service" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a>
+            </div>
+          </div>
+
+          {/* Consumer Disclosure */}
+          <div className="border-t border-slate-200 mt-8 pt-8">
+            <div className="flex items-center gap-3 mb-4">
+              <h4 className="text-sm font-semibold text-slate-900">Consumer Disclosure</h4>
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                CROA Compliant
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700 uppercase tracking-wider">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                TSR Compliant
+              </span>
+            </div>
+            <div className="space-y-3 text-xs text-slate-500 leading-relaxed max-w-4xl">
+              <p><span className="font-semibold text-slate-700">Credit Repair Organizations Act (CROA) Notice:</span> You have a right to dispute inaccurate information in your credit report by contacting the credit bureau directly. However, neither you nor any credit repair company or credit repair organization has the right to have accurate, current, and verifiable information removed from your credit report.</p>
+              <p>You have a right to cancel this contract within 3 business days from the date you signed it. If you cancel, we cannot charge you any fees or collect any money for the services that have not yet been performed.</p>
+              <p><span className="font-semibold text-slate-700">No Guarantee:</span> We cannot guarantee specific results. Improvement in credit scores depends on the unique circumstances of each individual.</p>
+              <p><span className="font-semibold text-slate-700">FTC Telemarketing Sales Rule (TSR) Compliance:</span> In accordance with the TSR, no fees are charged or collected until services are fully performed.</p>
+            </div>
+            <div className="flex items-center gap-2 mt-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-[10px] text-slate-400">All systems normal</span>
             </div>
           </div>
         </div>

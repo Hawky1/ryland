@@ -236,7 +236,7 @@ const About = () => {
             </div>
             <h3 className="text-xl font-semibold tracking-tight mb-3 font-manrope">Strategic Restoration</h3>
             <p className="text-white/70 text-sm leading-relaxed">
-              TSR-compliant credit optimization that removes negative items, disputes inaccuracies, and rebuilds your credit profile. Most clients see significant results within 35–90 days — with no advance fees charged until work is completed.
+              CROA-compliant credit optimization that removes negative items, disputes inaccuracies, and rebuilds your credit profile. Most clients see significant results within 35–90 days — with no advance fees charged until work is completed.
             </p>
           </div>
           {/* Card 2 */}
