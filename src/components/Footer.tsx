@@ -12,7 +12,7 @@ const Footer = () => {
               <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
             </Link>
             <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
-              Ryland Partners helps entrepreneurs secure $50K–$250K in business funding at 0% APR. With 8+ years of experience, $150M+ in funding secured, and 10,000+ entrepreneurs served, we bridge the gap between ambitious business owners and the capital they need to build, scale, and grow.
+              Helping entrepreneurs secure $50K–$250K in business funding at 0% APR — no tax returns or revenue required.
             </p>
             <div className="flex items-center gap-3">
               <a href="https://www.facebook.com/gene.ryland.2025" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
