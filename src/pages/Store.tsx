@@ -1,24 +1,25 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Loader2, BookOpen, ShoppingBag, ArrowRight } from "lucide-react";
+import { Loader2, BookOpen } from "lucide-react";
 import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
-import logoWhite from "@/assets/logo-white.png";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
-import InfiniteGrid from "@/components/ui/infinite-grid";
 import { motion } from "framer-motion";
-import { NavLink } from "@/components/NavLink";
 import Footer from "@/components/Footer";
 import FeaturedBundles from "@/components/FeaturedBundles";
+import StoreHero from "@/components/store/StoreHero";
+import TrustStrip from "@/components/store/TrustStrip";
+import WhyChooseUs from "@/components/store/WhyChooseUs";
+import ProductCard from "@/components/store/ProductCard";
 
 const BUNDLES = [
   { id: "credit-authority", tag: "Credit Authority Bundle", name: "Credit Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
   { id: "credit-accelerator", tag: "Credit Business Accelerator", name: "Credit Business Accelerator", tagline: "Essential DIY guides and workbooks for credit mastery" },
   { id: "credit-funding", tag: "Credit Business Funding", name: "Credit Business Funding", tagline: "Advanced strategies to secure $50K–$250K+ in business capital" },
   { id: "credit-quickstart", tag: "Credit Business Quickstart", name: "Credit Business Quickstart", tagline: "Get started with business credit in days, not months" },
-  { id: "ultimate-bundle", tag: "Ultimate Credit Business Bundle", name: "Ultimate Credit Business Bundle", tagline: "The complete 16-resource library for total credit transformation" },
+  { id: "ultimate-bundle", tag: "Ultimate Credit Business Bundle", name: "Ultimate Credit Business Bundle", tagline: "The complete 18-resource library for total credit transformation" },
   { id: "standalone", tag: "Standalone", name: "Standalone Guides", tagline: "Specialized guides for homebuying and credit optimization" },
 ];
 
@@ -29,6 +30,7 @@ const Store = () => {
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const productGridRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -63,6 +65,10 @@ const Store = () => {
     sectionRefs.current[bundleId]?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const scrollToProducts = () => {
+    productGridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const getProductsForBundle = (tag: string) =>
     products.filter(p => p.node.tags.includes(tag));
 
@@ -91,39 +97,18 @@ const Store = () => {
       </header>
 
       {/* Hero */}
-      <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 opacity-20">
-          <InfiniteGrid />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/20 text-blue-300 rounded-full px-5 py-2 text-sm font-medium mb-8">
-              <ShoppingBag className="w-4 h-4" />
-              Digital Products & Resources
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
-              Expert Guides to Master
-              <span className="block bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">
-                Credit, Funding & Growth
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-              Actionable playbooks and proven strategies from industry experts. Build credit, secure funding, and scale your business.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <StoreHero onBrowse={scrollToProducts} />
+
+      {/* Trust Strip */}
+      <TrustStrip />
 
       {/* Featured Bundles Showcase */}
-      <FeaturedBundles onScrollToBundle={scrollToBundle} />
+      <div className="mt-16">
+        <FeaturedBundles onScrollToBundle={scrollToBundle} />
+      </div>
 
       {/* Bundle Navigation */}
-      <div className="sticky top-[65px] z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/60">
+      <div ref={productGridRef} className="sticky top-[65px] z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/60 scroll-mt-[65px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
             {BUNDLES.map(bundle => (
@@ -143,7 +128,7 @@ const Store = () => {
         </div>
       </div>
 
-      {/* Product Bundles */}
+      {/* Product Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {loading ? (
           <div className="flex justify-center py-20">
@@ -156,7 +141,7 @@ const Store = () => {
             <p className="text-slate-500">Check back soon for new ebooks and guides.</p>
           </div>
         ) : (
-          <div className="space-y-20">
+          <div className="space-y-24">
             {BUNDLES.map((bundle) => {
               const bundleProducts = getProductsForBundle(bundle.tag);
               if (bundleProducts.length === 0) return null;
@@ -184,56 +169,16 @@ const Store = () => {
                     </p>
                   </motion.div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {bundleProducts.map((product, idx) => {
-                      const image = product.node.images.edges[0]?.node;
-                      const price = product.node.priceRange.minVariantPrice;
-                      return (
-                        <motion.div
-                          key={product.node.id}
-                          initial={{ opacity: 0, y: 24 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, margin: "-50px" }}
-                          transition={{ duration: 0.4, delay: idx * 0.06 }}
-                          whileHover={{ y: -4 }}
-                          className="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
-                        >
-                          <Link to={`/product/${product.node.handle}`}>
-                            <div className="aspect-[3/4] bg-gradient-to-b from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center p-4">
-                              {image ? (
-                                <img
-                                  src={image.url}
-                                  alt={image.altText || product.node.title}
-                                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <BookOpen className="w-16 h-16 text-slate-300" />
-                              )}
-                            </div>
-                          </Link>
-                          <div className="p-5">
-                            <Link to={`/product/${product.node.handle}`}>
-                              <h3 className="font-bold text-slate-900 text-base leading-snug mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                                {product.node.title}
-                              </h3>
-                            </Link>
-                            <div className="flex items-center justify-between">
-                              <span className="inline-flex items-center bg-blue-50 text-blue-700 font-bold text-lg px-3 py-1 rounded-lg">
-                                ${parseFloat(price.amount).toFixed(0)}
-                              </span>
-                              <button
-                                onClick={() => handleAddToCart(product)}
-                                disabled={isLoading}
-                                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 disabled:opacity-50 shadow-sm shadow-blue-500/20"
-                              >
-                                {isLoading ? "Adding..." : "Add to Cart"}
-                              </button>
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {bundleProducts.map((product, idx) => (
+                      <ProductCard
+                        key={product.node.id}
+                        product={product}
+                        index={idx}
+                        onAddToCart={handleAddToCart}
+                        isLoading={isLoading}
+                      />
+                    ))}
                   </div>
                 </section>
               );
@@ -241,6 +186,9 @@ const Store = () => {
           </div>
         )}
       </div>
+
+      {/* Why Choose Us */}
+      <WhyChooseUs />
 
       <Footer />
     </div>
