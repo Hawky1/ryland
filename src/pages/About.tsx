@@ -90,7 +90,7 @@ const About = () => {
 
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.12)" activeGridColor="rgba(59, 130, 246, 0.3)" />
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.25)" activeGridColor="rgba(59, 130, 246, 0.50)" />
       </div>
 
       {/* Gradient blur */}
