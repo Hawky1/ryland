@@ -195,18 +195,16 @@ const Store = () => {
                           className="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
                         >
                           <Link to={`/product/${product.node.handle}`}>
-                            <div className="aspect-[3/4] bg-gradient-to-b from-slate-50 to-slate-100 overflow-hidden">
+                            <div className="aspect-[3/4] bg-gradient-to-b from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center p-4">
                               {image ? (
                                 <img
                                   src={image.url}
                                   alt={image.altText || product.node.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                                   loading="lazy"
                                 />
                               ) : (
-                                <div className="w-full h-full flex items-center justify-center">
-                                  <BookOpen className="w-16 h-16 text-slate-300" />
-                                </div>
+                                <BookOpen className="w-16 h-16 text-slate-300" />
                               )}
                             </div>
                           </Link>
