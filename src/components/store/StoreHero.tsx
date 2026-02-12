@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowDown } from "lucide-react";
-import bundleUltimate from "@/assets/bundle-ultimate-credit-stack.png";
+import geneRyland from "@/assets/gene-ryland-store-hero.png";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 
 interface StoreHeroProps {
@@ -75,11 +75,10 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
             className="hidden lg:flex justify-center"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-3xl blur-2xl" />
               <img
-                src={bundleUltimate}
-                alt="Premium ebook bundle collection"
-                className="relative w-full max-w-md rounded-2xl shadow-2xl shadow-blue-900/30"
+                src={geneRyland}
+                alt="Gene Ryland - Financial Expert"
+                className="relative w-full max-w-md"
               />
             </div>
           </motion.div>
