@@ -1,16 +1,14 @@
 
 
-# Remove Blue Background from Testimonials Section
+# Reduce White Fade on Testimonials Section
 
-## What Changed
-The last edit added a dark blue gradient background (`bg-gradient-to-b from-[#003A70] to-[#0060A9]`) and border to the testimonials container. You want that removed so the container blends with the white page background again.
+## Problem
+The top and bottom white gradient overlays on the Testimonials section are too strong, washing out the blue testimonial cards and making them less visible.
 
 ## Changes
 
 ### File: `src/pages/Index.tsx`
-- Remove `bg-gradient-to-b from-[#003A70] to-[#0060A9] border border-[#004E8C]` from the testimonials container div
-- Revert the top fade overlay back to `from-white to-transparent`
-- Revert the bottom fade overlay back to `from-white to-transparent`
-
-This restores the testimonials section to sit naturally on the white page background while keeping all other improvements (font sizes, card styling, section order).
+- Change the top fade overlay from `from-white` to `from-white/60` (60% opacity white) so it fades more gently
+- Change the bottom fade overlay from `from-white` to `from-white/60` (60% opacity white) to match
+- This lets the blue cards show through more clearly at the edges while still providing a smooth scroll fade effect
 
