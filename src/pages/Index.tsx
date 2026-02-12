@@ -112,8 +112,8 @@ const Index = () => {
         .accordion-icon { transition: transform 0.3s; }
         .accordion-icon.open { transform: rotate(90deg); }
         .review-active { transform: scale(1.02); transition: transform 0.3s; }
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out; }
-        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out, visibility 0s 0.3s; visibility: hidden; }
+        .mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform 0.3s ease-out, visibility 0s 0s; }
 
         .rotate-x-5 { --tw-rotate-x: 5deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
         .perspective-none { perspective: none !important; }
