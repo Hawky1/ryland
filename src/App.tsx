@@ -15,6 +15,7 @@ import TSRCompliance from "./pages/TSRCompliance";
 import Disclaimers from "./pages/Disclaimers";
 import CookiePolicy from "./pages/CookiePolicy";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -40,6 +41,7 @@ const AppContent = () => {
           <Route path="/tsr-compliance" element={<TSRCompliance />} />
           <Route path="/disclaimers" element={<Disclaimers />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
