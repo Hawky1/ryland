@@ -165,7 +165,7 @@ const About = () => {
             <div className="relative flex flex-col items-center gap-4 sm:gap-6 w-full max-w-sm sm:max-w-md lg:max-w-xl">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
               <img
-                src={heroPortrait}
+                src={geneRylandAbout}
                 alt="Gene Ryland — Founder of Ryland Partners"
                 className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[24rem] lg:max-w-[28rem] object-cover drop-shadow-2xl"
               />
