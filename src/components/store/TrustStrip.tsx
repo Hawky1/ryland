@@ -10,7 +10,7 @@ const TRUST_ITEMS = [
 
 const TrustStrip = () => {
   return (
-    <section className="relative z-10 -mt-8">
+    <section className="relative z-10 -mt-8 -mb-4">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
