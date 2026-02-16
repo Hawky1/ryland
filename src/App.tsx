@@ -23,6 +23,9 @@ import FunnelCoreOffer from "./pages/funnel/FunnelCoreOffer";
 import FunnelDownsell from "./pages/funnel/FunnelDownsell";
 import FunnelConsultation from "./pages/funnel/FunnelConsultation";
 import Assessment from "./pages/Assessment";
+import Funding from "./pages/Funding";
+import CreditRepair from "./pages/CreditRepair";
+import Community from "./pages/Community";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +55,9 @@ const AppContent = () => {
           <Route path="/funnel/founders" element={<FunnelDownsell />} />
           <Route path="/funnel/consultation" element={<FunnelConsultation />} />
           <Route path="/assessment" element={<Assessment />} />
+          <Route path="/funding" element={<Funding />} />
+          <Route path="/credit-repair" element={<CreditRepair />} />
+          <Route path="/community" element={<Community />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
