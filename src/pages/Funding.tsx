@@ -264,7 +264,7 @@ export default function Funding() {
             <p className="text-slate-500 leading-relaxed mb-8">
               Traditional banks say no. We say yes. Our funding model is built around your credit strength — not your revenue history. Whether you're pre-revenue or scaling to 7 figures, we match you with lenders who want to fund ambitious founders.
             </p>
-            <a href="/assessment" className="shiny-cta !py-3.5 !px-8 !text-sm"><span>Get Started</span></a>
+            <a href="/assessment" className="inline-flex items-center justify-center rounded-full py-3.5 px-8 text-sm font-medium text-white bg-gradient-to-r from-[#003A70] to-[#0060A9] hover:opacity-90 transition-opacity">Get Started</a>
           </div>
           <div className="space-y-3">
             {BENEFITS.map((b) => (
