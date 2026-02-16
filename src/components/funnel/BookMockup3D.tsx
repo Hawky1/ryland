@@ -23,25 +23,20 @@ export default function BookMockup3D(props: Props) {
         className="flex justify-center"
         style={{ perspective: "1000px" }}
       >
-        <div
-          className="relative w-full max-w-md mx-auto"
-          style={{
-            transform: "rotateY(-8deg) rotateX(3deg)",
-            transformStyle: "preserve-3d",
-          }}
-        >
-          <img
-            src={props.src}
-            alt={props.alt || "Ebook cover"}
-            className="w-full rounded-lg shadow-2xl shadow-black/40"
-          />
-          {/* Spine shadow */}
-          <div
-            className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/30 to-transparent rounded-l-lg"
-            style={{ transform: "translateZ(-2px)" }}
-          />
-        </div>
-      </motion.div>
+      <div
+        className="relative w-full mx-auto"
+        style={{
+          transform: "rotateY(-5deg) rotateX(2deg)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <img
+          src={props.src}
+          alt={props.alt || "Ebook cover"}
+          className="w-full rounded-lg"
+        />
+      </div>
+    </motion.div>
     );
   }
 
