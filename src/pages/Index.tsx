@@ -404,10 +404,10 @@ const Index = () => {
             <a href="/" className="nav-link relative text-sm text-slate-900 font-medium">Home</a>
             <a href="/about" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">About</a>
             <div className="relative group">
-              <a href="#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1">
+              <button type="button" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1 cursor-default bg-transparent border-none p-0">
                 Services
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-              </a>
+              </button>
               {/* Invisible bridge so hover doesn't break */}
               <div className="absolute left-1/2 -translate-x-1/2 top-full w-[540px] h-4" />
               <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.75rem)] w-[540px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 z-50">
