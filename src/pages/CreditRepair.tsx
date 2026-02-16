@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Shield, TrendingUp, FileSearch, Scale, Clock, ArrowRight, BadgeCheck } from "lucide-react";
+import { CheckCircle2, Shield, TrendingUp, FileSearch, Scale, Clock, BadgeCheck } from "lucide-react";
 import logoDark from "@/assets/logo-dark.png";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
@@ -33,6 +33,43 @@ export default function CreditRepair() {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+      <style dangerouslySetInnerHTML={{ __html: `
+        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
+        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
+        .shiny-cta {
+          --gradient-angle: 0deg; --gradient-angle-offset: 0deg; --gradient-percent: 20%; --gradient-shine: #8484ff; --shadow-size: 2px;
+          position: relative; overflow: hidden; border-radius: 9999px; padding: 1.25rem 2.5rem; font-size: 1.125rem; line-height: 1.2; font-weight: 500; color: #ffffff;
+          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #3b82f6 5%, var(--gradient-shine) 15%, #3b82f6 30%, transparent 40%, transparent 100%) border-box;
+          border: 2px solid transparent; box-shadow: inset 0 0 0 1px #1e293b; outline: none;
+          transition: --gradient-angle-offset 800ms cubic-bezier(0.25,1,0.5,1), --gradient-percent 800ms cubic-bezier(0.25,1,0.5,1), --gradient-shine 800ms cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s;
+          cursor: pointer; isolation: isolate; outline-offset: 4px; font-family: 'Inter','Helvetica Neue',sans-serif; z-index: 0; animation: border-spin 2.5s linear infinite;
+        }
+        @keyframes border-spin { to { --gradient-angle: 360deg; } }
+        .shiny-cta:active { transform: translateY(1px); }
+        .shiny-cta::before {
+          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:0;
+          --size:calc(100% - 6px); --position:2px; --space:4px; width:var(--size); height:var(--size);
+          background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
+          background-size:var(--space) var(--space); background-repeat:space;
+          mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black); border-radius:inherit; opacity:0.4;
+        }
+        .shiny-cta::after {
+          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1;
+          width:100%; aspect-ratio:1; background:linear-gradient(-50deg,transparent,#3b82f6,transparent);
+          mask-image:radial-gradient(circle at bottom,transparent 40%,black); opacity:0.6; animation:shimmer 4s linear infinite; animation-play-state:running;
+        }
+        .shiny-cta span { position:relative; z-index:2; display:inline-block; }
+        .shiny-cta span::before {
+          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:-1;
+          --size:calc(100% + 1rem); width:var(--size); height:var(--size);
+          box-shadow:inset 0 -1ex 2rem 4px #3b82f6; opacity:0; border-radius:inherit;
+          transition:opacity 800ms cubic-bezier(0.25,1,0.5,1); animation:breathe 4.5s linear infinite;
+        }
+        @keyframes shimmer { to { transform:translate(-50%,-50%) rotate(360deg); } }
+        @keyframes breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.20); } }
+      `}} />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
@@ -64,7 +101,7 @@ export default function CreditRepair() {
               Done-for-you credit repair with CROA-compliant dispute methods. Most clients see significant improvements within 35–90 days.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span className="flex items-center gap-2">Get Your Free Credit Audit <ArrowRight className="w-4 h-4" /></span></a>
+              <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span>Get Your Free Credit Audit</span></a>
               <a href="/funnel/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</a>
             </div>
           </motion.div>
@@ -101,7 +138,7 @@ export default function CreditRepair() {
             <p className="text-slate-500 leading-relaxed mb-8">
               Our team uses legally compliant dispute strategies under the Fair Credit Reporting Act (FCRA) and Fair Debt Collection Practices Act (FDCPA) to challenge inaccurate, unverifiable, and outdated information on your credit reports.
             </p>
-            <a href="/assessment" className="shiny-cta !py-3.5 !px-8 !text-sm"><span className="flex items-center gap-2">Start My Restoration <ArrowRight className="w-4 h-4" /></span></a>
+            <a href="/assessment" className="shiny-cta !py-3.5 !px-8 !text-sm"><span>Start My Restoration</span></a>
           </div>
           <div className="space-y-3">
             {WHAT_WE_REMOVE.map((item) => (
