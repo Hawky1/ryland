@@ -24,7 +24,7 @@ export default function BookMockup3D(props: Props) {
         style={{ perspective: "1000px" }}
       >
         <div
-          className="relative w-56 sm:w-64 md:w-72"
+          className="relative w-full max-w-md mx-auto"
           style={{
             transform: "rotateY(-8deg) rotateX(3deg)",
             transformStyle: "preserve-3d",
