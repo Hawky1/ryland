@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, DollarSign, Clock, Shield, TrendingUp, Building2, CreditCard, FileText, ArrowRight } from "lucide-react";
+import { CheckCircle2, DollarSign, Clock, Shield, TrendingUp, Building2, CreditCard, FileText } from "lucide-react";
 import logoDark from "@/assets/logo-dark.png";
 import logoWhite from "@/assets/logo-white.png";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
@@ -190,7 +190,7 @@ export default function Funding() {
               0% APR business credit lines with no revenue requirements, no tax returns, and no personal collateral. Funding in as little as 30 days.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span className="flex items-center gap-2">Take the Free Assessment <ArrowRight className="w-4 h-4" /></span></a>
+              <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span>Take the Free Assessment</span></a>
               <a href="/funnel/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</a>
             </div>
           </motion.div>
@@ -263,7 +263,7 @@ export default function Funding() {
             <p className="text-slate-500 leading-relaxed mb-8">
               Traditional banks say no. We say yes. Our funding model is built around your credit strength — not your revenue history. Whether you're pre-revenue or scaling to 7 figures, we match you with lenders who want to fund ambitious founders.
             </p>
-            <a href="/assessment" className="shiny-cta !py-3.5 !px-8 !text-sm"><span className="flex items-center gap-2">Get Started <ArrowRight className="w-4 h-4" /></span></a>
+            <a href="/assessment" className="shiny-cta !py-3.5 !px-8 !text-sm"><span>Get Started</span></a>
           </div>
           <div className="space-y-3">
             {BENEFITS.map((b) => (
