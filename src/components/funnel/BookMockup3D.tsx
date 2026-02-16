@@ -17,59 +17,38 @@ export default function BookMockup3D(props: Props) {
   if (props.variant === "single") {
     return (
       <motion.div
-        initial={{ opacity: 0, rotateY: -15 }}
-        animate={{ opacity: 1, rotateY: 0 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex justify-center"
-        style={{ perspective: "1000px" }}
-      >
-      <div
-        className="relative w-full mx-auto"
-        style={{
-          transform: "rotateY(-5deg) rotateX(2deg)",
-          transformStyle: "preserve-3d",
-        }}
+        className="flex items-center justify-center h-full"
       >
         <img
           src={props.src}
           alt={props.alt || "Ebook cover"}
-          className="w-full rounded-lg"
+          className="w-full max-w-lg xl:max-w-xl rounded-xl"
         />
-      </div>
-    </motion.div>
+      </motion.div>
     );
   }
 
-  // Stacked variant — show 6-8 covers fanned out
+  // Stacked variant — grid display for clarity
   const visibleCovers = props.covers.slice(0, 8);
-  const count = visibleCovers.length;
   return (
-    <div className="relative w-full max-w-3xl mx-auto h-[280px] sm:h-[420px] md:h-[480px] overflow-hidden" style={{ perspective: "1200px" }}>
-      {visibleCovers.map((cover, i) => {
-        const rotation = -(count * 1.5) + i * 3.5;
-        const translateX = -(count * 10) + i * 28;
-        const translateZ = -i * 10;
-        return (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="absolute top-4 left-1/2 w-32 sm:w-56 md:w-64"
-            style={{
-              transform: `translateX(${translateX}px) rotateY(-6deg) rotateZ(${rotation}deg) translateZ(${translateZ}px)`,
-              transformStyle: "preserve-3d",
-              zIndex: visibleCovers.length - i,
-            }}
-          >
-            <img
-              src={cover}
-              alt={`Ebook ${i + 1}`}
-              className="w-full rounded-lg shadow-2xl shadow-black/40"
-            />
-          </motion.div>
-        );
-      })}
+    <div className="grid grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+      {visibleCovers.map((cover, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: i * 0.06 }}
+        >
+          <img
+            src={cover}
+            alt={`Ebook ${i + 1}`}
+            className="w-full rounded-lg hover:scale-105 transition-transform duration-300"
+          />
+        </motion.div>
+      ))}
     </div>
   );
 }
