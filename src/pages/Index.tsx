@@ -414,9 +414,9 @@ const Index = () => {
                 <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,58,112,0.25)] p-2 ring-1 ring-black/5">
                   <div className="grid grid-cols-2 gap-1">
                     {[
-                      { icon: "💰", title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines", href: "#cta" },
-                      { icon: "📊", title: "Repair My Credit", desc: "Done-for-you credit restoration in 35–90 days", href: "#cta" },
-                      { icon: "🎓", title: "Join The Community", desc: "Private Skool network & digital business training", href: "#features" },
+                      { icon: "💰", title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines", href: "/funding" },
+                      { icon: "📊", title: "Repair My Credit", desc: "Done-for-you credit restoration in 35–90 days", href: "/credit-repair" },
+                      { icon: "🎓", title: "Join The Community", desc: "Private Skool network & digital business training", href: "/community" },
                       { icon: "📚", title: "Shop Digital Products", desc: "eBooks & resources to accelerate your growth", href: "/store" },
                       { icon: "🤝", title: "Become A Partner", desc: "Earn uncapped commissions — free to join", href: "/partners" },
                       { icon: "📅", title: "Schedule A Consultation", desc: "1-on-1 strategy session with funding experts", href: "#cta" },
@@ -701,9 +701,9 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: iconFunding, title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines with no revenue or tax returns required.", cta: "Get Funded", href: "#cta" },
-              { icon: iconCredit, title: "Repair My Credit", desc: "Done-for-you credit restoration with negative item removals and dispute management in 35–90 days.", cta: "Repair Credit", href: "#cta" },
-              { icon: iconCommunity, title: "Join The Community", desc: "Access our private Skool network and learn to invest your funding into high-ROI digital businesses.", cta: "Join Now", href: "#cta" },
+              { icon: iconFunding, title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines with no revenue or tax returns required.", cta: "Get Funded", href: "/funding" },
+              { icon: iconCredit, title: "Repair My Credit", desc: "Done-for-you credit restoration with negative item removals and dispute management in 35–90 days.", cta: "Repair Credit", href: "/credit-repair" },
+              { icon: iconCommunity, title: "Join The Community", desc: "Access our private Skool network and learn to invest your funding into high-ROI digital businesses.", cta: "Join Now", href: "/community" },
               { icon: iconProducts, title: "Shop Digital Products", desc: "Browse our curated collection of eBooks and digital resources to accelerate your business growth.", cta: "Shop Now", href: "/store" },
               { icon: iconPartner, title: "Become A Partner", desc: "Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join.", cta: "Partner Up", href: "/partners" },
               { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "#cta" },
