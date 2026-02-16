@@ -25,7 +25,7 @@ export default function BookMockup3D(props: Props) {
         <img
           src={props.src}
           alt={props.alt || "Ebook cover"}
-          className="w-full max-w-lg xl:max-w-xl rounded-xl"
+          className="w-full h-auto max-h-[600px] object-contain rounded-xl"
         />
       </motion.div>
     );

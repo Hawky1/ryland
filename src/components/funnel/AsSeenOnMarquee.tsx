@@ -2,7 +2,7 @@ import asSeenOn from "@/assets/as-seen-on.png";
 
 export default function AsSeenOnMarquee() {
   return (
-    <div className="w-full bg-[#001228] border-t border-white/5 py-8">
+    <div className="w-full bg-[#001228] py-6">
       <p className="text-center text-xs text-blue-300/50 uppercase tracking-widest font-[Inter,sans-serif] mb-5">
         As Seen On
       </p>
