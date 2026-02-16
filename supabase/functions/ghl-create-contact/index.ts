@@ -37,12 +37,13 @@ serve(async (req) => {
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
-    // Create contact in GHL v1 API
-    const ghlRes = await fetch("https://rest.gohighlevel.com/v1/contacts/", {
+    // Create contact using GHL v2 API
+    const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        Version: "2021-07-28",
       },
       body: JSON.stringify({
         firstName,
