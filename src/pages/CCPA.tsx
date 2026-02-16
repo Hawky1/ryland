@@ -8,11 +8,11 @@ const CCPA = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900 relative z-10 bg-transparent">
+    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
 
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-white">
+      <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
