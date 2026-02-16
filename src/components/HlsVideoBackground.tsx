@@ -1,47 +1,23 @@
-import { useEffect, useRef } from "react";
-
-const HLS_URL = "https://customer-cbeadsgr09pnsezs.cloudflarestream.com/3dd32fd909c65a8d1218e727da59f1d2/manifest/video.m3u8";
-
 interface Props {
   overlay?: string;
   className?: string;
 }
 
-export default function HlsVideoBackground({ overlay = "bg-[#003A70]/90", className = "" }: Props) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<any>(null);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-
-    import("hls.js").then(({ default: Hls }) => {
-      if (Hls.isSupported()) {
-        const hls = new Hls({ enableWorker: false });
-        hls.loadSource(HLS_URL);
-        hls.attachMedia(el);
-        hlsRef.current = hls;
-      } else if (el.canPlayType("application/vnd.apple.mpegurl")) {
-        el.src = HLS_URL;
-      }
-    });
-
-    return () => {
-      hlsRef.current?.destroy();
-    };
-  }, []);
-
+export default function HlsVideoBackground({ className = "" }: Props) {
   return (
     <div className={`absolute inset-0 z-0 overflow-hidden ${className}`}>
       <video
-        ref={videoRef}
+        src="/videos/card-bg.mp4"
         autoPlay
         loop
         muted
         playsInline
         className="w-full h-full object-cover"
       />
-      <div className={`absolute inset-0 ${overlay}`} />
+      {/* Dark-to-light blue gradient shading */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#001228]/95 via-[#002952]/90 to-[#003A70]/85" />
+      {/* Vignette for depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,18,40,0.45)_100%)]" />
     </div>
   );
 }
