@@ -55,7 +55,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
+    <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900 relative z-10 bg-transparent">
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -104,7 +104,7 @@ const Contact = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
 
       {/* Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-white">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
