@@ -190,7 +190,7 @@ const Partners = () => {
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.20)" activeGridColor="rgba(59, 130, 246, 0.45)" />
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
       {/* NAVBAR */}

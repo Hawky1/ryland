@@ -13,7 +13,7 @@ const Disclaimers = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
 
       <div className="fixed inset-0 -z-10 overflow-hidden" style={{ background: '#ffffff' }}>
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.12)" activeGridColor="rgba(59, 130, 246, 0.3)" />
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
       <header className="sticky z-20 top-0 backdrop-blur-md bg-white/80 border-b border-slate-200">
