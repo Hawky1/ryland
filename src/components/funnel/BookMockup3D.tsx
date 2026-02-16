@@ -20,12 +20,12 @@ export default function BookMockup3D(props: Props) {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex items-center justify-center h-full"
+        className="flex items-center justify-center h-full w-full"
       >
         <img
           src={props.src}
           alt={props.alt || "Ebook cover"}
-          className="w-full h-auto max-h-[600px] object-contain rounded-xl"
+          className="w-full h-full object-contain rounded-xl"
         />
       </motion.div>
     );

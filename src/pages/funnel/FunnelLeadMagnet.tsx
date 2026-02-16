@@ -6,7 +6,6 @@ import { FileText, Building2, CreditCard } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
 import BookMockup3D from "@/components/funnel/BookMockup3D";
-import AsSeenOnMarquee from "@/components/funnel/AsSeenOnMarquee";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -71,7 +70,7 @@ export default function FunnelLeadMagnet() {
       {/* Hero */}
       <section className="relative flex items-center">
         <HlsVideoBackground overlay="bg-[#001F3F]/92" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Copy side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -127,19 +126,18 @@ export default function FunnelLeadMagnet() {
             </form>
           </motion.div>
 
-          {/* Book mockup + As Seen On underneath */}
+          {/* Book mockup — matches left column height */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden lg:flex flex-col items-center"
+            className="hidden lg:flex items-center justify-center"
           >
             <BookMockup3D
               variant="single"
               src="/covers/ultimate-business-credit-blueprint.png"
               alt="The Ultimate Business Credit Blueprint"
             />
-            <AsSeenOnMarquee />
           </motion.div>
         </div>
       </section>
