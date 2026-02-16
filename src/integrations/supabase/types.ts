@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      assessment_leads: {
+        Row: {
+          business_name: string | null
+          business_status: string
+          created_at: string
+          credit_score_range: string
+          denied_recently: boolean
+          email: string
+          funding_timeline: string
+          id: string
+          name: string
+          phone: string | null
+          primary_goal: string
+          qualification: string
+        }
+        Insert: {
+          business_name?: string | null
+          business_status: string
+          created_at?: string
+          credit_score_range: string
+          denied_recently?: boolean
+          email: string
+          funding_timeline: string
+          id?: string
+          name: string
+          phone?: string | null
+          primary_goal: string
+          qualification?: string
+        }
+        Update: {
+          business_name?: string | null
+          business_status?: string
+          created_at?: string
+          credit_score_range?: string
+          denied_recently?: boolean
+          email?: string
+          funding_timeline?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          primary_goal?: string
+          qualification?: string
+        }
+        Relationships: []
+      }
       funnel_leads: {
         Row: {
           created_at: string

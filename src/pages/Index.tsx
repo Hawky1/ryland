@@ -491,11 +491,11 @@ const Index = () => {
             </p>
 
             <div className="flex flex-col mt-6 sm:mt-8 xl:mt-10 gap-4 items-center lg:items-start">
-              <div className="inline-block bg-transparent">
+              <a href="/assessment" className="inline-block bg-transparent">
                 <button className="shiny-cta !py-3 !px-6 sm:!py-5 sm:!px-10 !text-sm sm:!text-lg focus:outline-none">
                   <span>Take the Free Funding Assessment</span>
                 </button>
-              </div>
+              </a>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-3 text-[11px] sm:text-sm text-zinc-500">
                 <span>Results in 2 minutes</span>
                 <span className="text-zinc-600">•</span>

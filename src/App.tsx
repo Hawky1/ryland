@@ -22,6 +22,7 @@ import FunnelLeadMagnet from "./pages/funnel/FunnelLeadMagnet";
 import FunnelCoreOffer from "./pages/funnel/FunnelCoreOffer";
 import FunnelDownsell from "./pages/funnel/FunnelDownsell";
 import FunnelConsultation from "./pages/funnel/FunnelConsultation";
+import Assessment from "./pages/Assessment";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const AppContent = () => {
           <Route path="/funnel/offer" element={<FunnelCoreOffer />} />
           <Route path="/funnel/founders" element={<FunnelDownsell />} />
           <Route path="/funnel/consultation" element={<FunnelConsultation />} />
+          <Route path="/assessment" element={<Assessment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

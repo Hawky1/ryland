@@ -23,7 +23,7 @@ serve(async (req) => {
       );
     }
 
-    const { name, email } = await req.json();
+    const { name, email, phone, businessName, tags, source, customFields } = await req.json();
 
     if (!name || !email) {
       return new Response(
@@ -37,6 +37,22 @@ serve(async (req) => {
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
+    // Build contact payload for GHL v2 API
+    const contactPayload: Record<string, unknown> = {
+      firstName,
+      lastName,
+      email,
+      locationId,
+      source: source || "Funnel Lead Magnet",
+      tags: tags || ["funnel-lead", "blueprint-download"],
+    };
+
+    if (phone) contactPayload.phone = phone;
+    if (businessName) contactPayload.companyName = businessName;
+    if (customFields) contactPayload.customFields = Object.entries(customFields).map(
+      ([key, value]) => ({ key, field_value: value })
+    );
+
     // Create contact using GHL v2 API
     const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
       method: "POST",
@@ -45,14 +61,7 @@ serve(async (req) => {
         "Content-Type": "application/json",
         Version: "2021-07-28",
       },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        locationId,
-        source: "Funnel Lead Magnet",
-        tags: ["funnel-lead", "blueprint-download"],
-      }),
+      body: JSON.stringify(contactPayload),
     });
 
     const ghlData = await ghlRes.json();
