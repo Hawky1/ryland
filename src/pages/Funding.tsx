@@ -120,6 +120,7 @@ export default function Funding() {
           aspect-ratio: 1;
           background: linear-gradient(-50deg, transparent, #3b82f6, transparent);
           mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+          border-radius: inherit;
           opacity: 0.6;
           animation: shimmer 4s linear infinite;
           animation-play-state: running;
