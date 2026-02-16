@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logoWhite from "@/assets/logo-white.png";
 import FunnelProgressBar from "./FunnelProgressBar";
-import AsSeenOnMarquee from "./AsSeenOnMarquee";
-import { CartDrawer } from "@/components/CartDrawer";
 
 interface Props {
   step: number;
@@ -74,16 +72,12 @@ export default function FunnelLayout({ step, label, children }: Props) {
                 <CountdownTimer />
               </div>
             </div>
-            <CartDrawer />
           </div>
         </div>
       </header>
 
       {/* Progress bar */}
       <FunnelProgressBar currentStep={step} label={label} />
-
-      {/* As Seen On — trust signal right after progress */}
-      <AsSeenOnMarquee />
 
       {/* Page content */}
       <main className="flex-1">{children}</main>

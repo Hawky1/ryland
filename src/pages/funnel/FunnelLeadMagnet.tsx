@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { CheckCircle, FileText, Building2, CreditCard } from "lucide-react";
+import { FileText, Building2, CreditCard } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
 import BookMockup3D from "@/components/funnel/BookMockup3D";
+import AsSeenOnMarquee from "@/components/funnel/AsSeenOnMarquee";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -49,7 +50,6 @@ export default function FunnelLeadMagnet() {
       });
       if (error) throw error;
 
-      // Fire-and-forget: sync lead to GoHighLevel CRM
       supabase.functions
         .invoke("ghl-create-contact", {
           body: { name: result.data.name, email: result.data.email },
@@ -69,31 +69,31 @@ export default function FunnelLeadMagnet() {
   return (
     <FunnelLayout step={1} label="Free Blueprint">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section className="relative flex items-center">
         <HlsVideoBackground overlay="bg-[#001F3F]/92" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Copy side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/20 rounded-full px-4 py-1.5 text-xs font-semibold text-cyan-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif]">
+            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/20 rounded-full px-4 py-1.5 text-xs font-semibold text-cyan-300 uppercase tracking-wider mb-4 font-[Inter,sans-serif]">
               Free Download — Limited Time
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 font-[Geist,sans-serif] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif] tracking-tight">
               GET THE BLUEPRINT: How to Build a{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
                 $250,000
               </span>{" "}
               Business Credit Profile from Scratch.
             </h1>
-            <p className="text-blue-100/70 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+            <p className="text-blue-100/70 text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
               Stop using your personal social security number to fund your business. Download the exact roadmap we've used for 10,000+ entrepreneurs to secure 0% APR capital.
             </p>
 
             {/* Email form */}
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+            <form onSubmit={handleSubmit} className="space-y-3 max-w-md">
               <div>
                 <input
                   type="text"
@@ -127,30 +127,31 @@ export default function FunnelLeadMagnet() {
             </form>
           </motion.div>
 
-          {/* Book mockup side */}
+          {/* Book mockup + As Seen On underneath */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden lg:block"
+            className="hidden lg:flex flex-col items-center"
           >
             <BookMockup3D
               variant="single"
               src="/covers/ultimate-business-credit-blueprint.png"
               alt="The Ultimate Business Credit Blueprint"
             />
+            <AsSeenOnMarquee />
           </motion.div>
         </div>
       </section>
 
       {/* What's Inside */}
-      <section className="relative bg-[#00152B] py-16 sm:py-24">
+      <section className="relative bg-[#00152B] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl font-bold text-white text-center mb-12 font-[Geist,sans-serif]"
+            className="text-2xl sm:text-3xl font-bold text-white text-center mb-10 font-[Geist,sans-serif]"
           >
             What's Inside Your Free Blueprint
           </motion.h2>
