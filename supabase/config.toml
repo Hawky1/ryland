@@ -2,3 +2,6 @@ project_id = "gkowxzoadsljkpdzrlue"
 
 [functions.ghl-create-contact]
 verify_jwt = false
+
+[functions.ghl-calendar]
+verify_jwt = false
