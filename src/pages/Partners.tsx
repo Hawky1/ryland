@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
@@ -11,8 +11,66 @@ import {
   Link2, Share2, Wallet, Megaphone, GraduationCap,
   Briefcase, Calculator, LineChart, UserCheck,
   Building2, ChevronDown, CheckCircle2, FileText,
-  Video, CreditCard, MessagesSquare
+  Video, CreditCard, MessagesSquare, Check
 } from "lucide-react";
+
+/* ── Shared animation variants ── */
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" } as const,
+  transition: { duration: 0.6, ease: EASE },
+};
+
+const stagger = (delay: number) => ({
+  ...fadeUp,
+  transition: { duration: 0.6, ease: EASE, delay },
+});
+
+/* ── Timeline step sub-component ── */
+const TimelineStep = ({ step, icon: Icon, title, desc, index, total }: {
+  step: string; icon: React.ElementType; title: string; desc: string; index: number; total: number;
+}) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <div ref={ref} className="relative flex flex-col items-center text-center md:flex-1">
+      {/* Connecting line (desktop only, not on last) */}
+      {index < total - 1 && (
+        <div className="hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-[2px] bg-slate-200 overflow-hidden">
+          <motion.div
+            className="h-full bg-[#3b82f6]"
+            initial={{ width: "0%" }}
+            animate={inView ? { width: "100%" } : {}}
+            transition={{ duration: 0.8, delay: 0.3 + index * 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          />
+        </div>
+      )}
+
+      {/* Large background number */}
+      <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-[80px] font-bold text-slate-100 font-manrope leading-none select-none pointer-events-none">
+        {step}
+      </span>
+
+      <motion.div
+        className="relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: index * 0.15 }}
+      >
+        {/* Icon circle */}
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#003A70] to-[#0060A9] shadow-lg shadow-blue-500/20">
+          <Icon className="h-7 w-7 text-white" />
+        </div>
+        <h3 className="text-lg font-semibold text-slate-900 mb-2 font-manrope">{title}</h3>
+        <p className="text-[15px] text-slate-500 leading-relaxed max-w-[280px] mx-auto">{desc}</p>
+      </motion.div>
+    </div>
+  );
+};
 
 const Partners = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -39,6 +97,18 @@ const Partners = () => {
     { icon: Building2, label: "Real Estate Agents" },
   ];
 
+  const processSteps = [
+    { step: "01", icon: Link2, title: "Get Your Partner Link", desc: "Apply and get approved. You'll receive your unique referral link — the engine of your money-making machine." },
+    { step: "02", icon: Share2, title: "Refer Business Owners", desc: "Follow our proven step-by-step strategy. Our trainings, live calls, and done-for-you marketing assets guide you to maximize profits." },
+    { step: "03", icon: Wallet, title: "Get Paid", desc: "You get paid for every client you refer who qualifies. Even if they don't take the funding — you still keep your share." },
+  ];
+
+  const serviceSteps = [
+    { step: "01", icon: UserCheck, title: "Get Approved", desc: "The businesses you refer fill out a quick questionnaire and get approved in less than 2 minutes." },
+    { step: "02", icon: LineChart, title: "Find The Best Terms", desc: "They choose terms tailored to their budget so they can comfortably manage their funding." },
+    { step: "03", icon: DollarSign, title: "Ready To Scale", desc: "They can immediately access funds up to $250,000 after linking their business checking account." },
+  ];
+
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <PageMeta
@@ -47,282 +117,407 @@ const Partners = () => {
       />
       <SharedHead />
 
-      {/* Background */}
+      {/* Background grid — only visible behind light sections */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
-        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
+        <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.20)" activeGridColor="rgba(59, 130, 246, 0.45)" />
       </div>
 
       <Navbar />
 
-      {/* ===================== HERO ===================== */}
-      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto pt-12 sm:pt-16 pb-20 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
+      {/* ═══════════════════════ 1. HERO ═══════════════════════ */}
+      <section className="relative mx-4 sm:mx-6 lg:mx-auto max-w-7xl min-h-[85vh] flex items-center justify-center overflow-hidden rounded-2xl border border-[#004E8C]">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
 
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h1 className="text-[38px] leading-[0.95] sm:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 animate-fade-in-up">
-            Get Paid To Help Business Owners Access The Capital They Need To Scale
-          </h1>
-          <p className="mt-5 text-lg md:text-xl text-blue-300/90 font-medium italic animate-fade-in-up animate-delay-200">
+        <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32">
+          {/* Floating badge */}
+          <motion.div {...stagger(0)} className="mb-8">
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-400/20 px-5 py-2 text-[13px] font-medium tracking-[0.05em] uppercase text-blue-300 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+              Free To Join — No Selling Required
+            </span>
+          </motion.div>
+
+          <motion.h1
+            {...stagger(0.1)}
+            className="text-[42px] leading-[0.95] sm:text-[60px] lg:text-[76px] font-medium tracking-[-0.04em] font-geist bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500"
+          >
+            Get Paid To Help Business Owners Access Capital
+          </motion.h1>
+
+          <motion.p {...stagger(0.2)} className="mt-6 text-lg md:text-xl text-blue-300/90 font-medium italic">
             even if they don't take the funding
-          </p>
-          <p className="mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto leading-relaxed animate-fade-in-up animate-delay-200">
+          </motion.p>
+
+          <motion.p {...stagger(0.25)} className="mt-5 text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
             Welcome to the Ryland Partners Program. Ready to start earning?
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up animate-delay-300">
+          </motion.p>
+
+          {/* CTA */}
+          <motion.div {...stagger(0.35)} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
             <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
               <span>Become A Partner Now</span>
             </a>
-            <a href="#" className="inline-flex items-center justify-center border border-white/20 hover:bg-white/5 text-white text-base font-medium rounded-full py-4 px-10 transition-all">
-              Partner Login
+            <a href="#" className="text-white/60 hover:text-white text-sm font-medium tracking-wide transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50">
+              Partner Login →
             </a>
-          </div>
+          </motion.div>
+
+          {/* Trust strip */}
+          <motion.div {...stagger(0.45)} className="mt-14 flex flex-wrap justify-center gap-x-8 gap-y-3 text-[13px] tracking-[0.04em] uppercase text-slate-400">
+            {["100% Free", "Get Paid on Qualification", "No Cap on Earnings"].map((t) => (
+              <span key={t} className="flex items-center gap-2">
+                <Check className="h-3.5 w-3.5 text-blue-400" />
+                {t}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* ===================== VALUE PILLARS ===================== */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* ═══════════════════════ 2. VALUE PILLARS — Asymmetric Grid ═══════════════════════ */}
+      <section className="max-w-6xl mx-auto px-6 py-[120px] md:py-[140px]">
+        <motion.div {...fadeUp} className="text-center mb-16">
+          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">Why Partner With Us</p>
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900">
+            Three Reasons To Join Today
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* Featured large card */}
+          <motion.div
+            {...stagger(0.1)}
+            className="md:row-span-2 bg-slate-50 border-l-4 border-l-[#3b82f6] rounded-2xl p-10 md:p-12 flex flex-col justify-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group"
+          >
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#003A70] to-[#0060A9] shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <DollarSign className="h-7 w-7 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-3 font-manrope">Get Paid For Introductions</h3>
+            <p className="text-[16px] text-slate-500 leading-[1.7]">
+              You don't need to close the deal. Just refer a business that qualifies for funding — and you get paid. It's fast, easy, and completely hands-off.
+            </p>
+          </motion.div>
+
+          {/* Stacked right cards */}
           {[
-            { icon: DollarSign, title: "Get Paid For Introductions", desc: "You don't need to close the deal. Just refer a business that qualifies for funding — and you get paid. It's fast, easy, and completely hands-off." },
             { icon: LineChart, title: "$10M+ Funded And Counting", desc: "Backed by real results and proven infrastructure. You'll get full support, access to our marketing system, and earn unlimited commissions." },
             { icon: Handshake, title: "Strengthen Your Network", desc: "Help people in your network get the capital they need — and profit while doing it. Position yourself as the go-to person for business funding." },
           ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-center text-white">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
-              <div className="relative z-10">
-                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                  <item.icon className="h-7 w-7 text-blue-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+            <motion.div
+              key={i}
+              {...stagger(0.2 + i * 0.1)}
+              className="bg-slate-50 border-l-4 border-l-[#3b82f6] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#003A70] to-[#0060A9] shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                <item.icon className="h-6 w-6 text-white" />
               </div>
-            </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2 font-manrope">{item.title}</h3>
+              <p className="text-[15px] text-slate-500 leading-[1.7]">{item.desc}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ===================== HOW IT WORKS / COPY BLOCK ===================== */}
-      <section className="max-w-4xl mx-auto px-6 pb-24" id="how-it-works">
-        <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 md:p-12 text-white">
-          <HlsVideoBackground overlay="bg-[#003A70]/90" />
-          <div className="relative z-10">
-            <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
-              Here's How Ryland Partners Is Going To Turn Your Connections Into Commissions
-            </h2>
-            <div className="space-y-4 text-slate-300 text-base leading-relaxed">
-              <p>Most affiliate programs only pay you if someone buys. If a deal closes. If they say yes.</p>
-              <p className="text-white font-medium">Not us.</p>
-              <p>We'll put money in your pocket as soon as your referral qualifies — not when they fund.</p>
-              <p>If you want to bring in extra cash without:</p>
-              <ul className="space-y-2 pl-1">
-                {["Hard selling anyone", "Spending time on funnels, sales, or tech", "Chasing commissions"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-blue-400 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-white font-semibold text-lg pt-2">The Ryland Partners Program Is Perfect For You…</p>
-            </div>
+      {/* ═══════════════════════ 3. COPY BLOCK — Editorial ═══════════════════════ */}
+      <section className="pb-[120px]" id="how-it-works">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Gradient divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-[#3b82f6]/30 to-transparent mb-[120px]" />
+        </div>
+
+        <div className="max-w-3xl mx-auto px-6 md:px-0">
+          <motion.h2
+            {...fadeUp}
+            className="font-manrope text-[32px] md:text-[40px] font-bold tracking-[-0.03em] text-slate-900 mb-8"
+          >
+            Here's How Ryland Partners Turns Your Connections Into Commissions
+          </motion.h2>
+
+          <div className="space-y-5 text-[17px] text-slate-600 leading-[1.8]">
+            <motion.p {...stagger(0.1)}>
+              Most affiliate programs only pay you if someone buys. If a deal closes. If they say yes.
+            </motion.p>
+            <motion.p {...stagger(0.15)} className="text-[32px] font-bold text-[#3b82f6] leading-tight">
+              Not us.
+            </motion.p>
+            <motion.p {...stagger(0.2)}>
+              We'll put money in your pocket as soon as your referral qualifies — not when they fund.
+            </motion.p>
+            <motion.p {...stagger(0.25)}>
+              If you want to bring in extra cash without:
+            </motion.p>
+
+            <ul className="space-y-3 pl-1">
+              {["Hard selling anyone", "Spending time on funnels, sales, or tech", "Chasing commissions"].map((item, i) => (
+                <motion.li
+                  key={i}
+                  {...stagger(0.3 + i * 0.1)}
+                  className="flex items-center gap-3"
+                >
+                  <CheckCircle2 className="h-5 w-5 text-[#3b82f6] shrink-0" />
+                  <span className="text-slate-700">{item}</span>
+                </motion.li>
+              ))}
+            </ul>
+
+            <motion.p {...stagger(0.6)} className="text-slate-900 font-semibold text-xl pt-2">
+              The Ryland Partners Program Is Perfect For You…
+            </motion.p>
           </div>
         </div>
+
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-[#3b82f6]/30 to-transparent mt-[120px]" />
+        </div>
       </section>
 
-      {/* ===================== 3-STEP PROCESS ===================== */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
-          Monetize Your Network In 3 Simple Steps
-        </h2>
-        <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">Follow our proven system and start earning commissions with zero selling.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { step: "01", icon: Link2, title: "Get Your Partner Link", desc: "Apply and get approved. You'll receive your unique referral link — the engine of your money-making machine." },
-            { step: "02", icon: Share2, title: "Refer Business Owners", desc: "Follow our proven step-by-step strategy. Our trainings, live calls, and done-for-you marketing assets guide you to maximize profits." },
-            { step: "03", icon: Wallet, title: "Get Paid", desc: "You get paid for every client you refer who qualifies. Even if they don't take the funding — you still keep your share." },
-          ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-white">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
-              <div className="relative z-10">
-                <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                  <item.icon className="h-6 w-6 text-blue-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
-              </div>
-            </div>
+      {/* ═══════════════════════ 4. 3-STEP PROCESS — Timeline ═══════════════════════ */}
+      <section className="max-w-6xl mx-auto px-6 pb-[120px]">
+        <motion.div {...fadeUp} className="text-center mb-16">
+          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">How It Works</p>
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900 mb-4">
+            Monetize Your Network In 3 Simple Steps
+          </h2>
+          <p className="text-slate-500 text-[17px] max-w-xl mx-auto leading-relaxed">
+            Follow our proven system and start earning commissions with zero selling.
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row gap-12 md:gap-0">
+          {processSteps.map((s, i) => (
+            <TimelineStep key={i} {...s} index={i} total={processSteps.length} />
           ))}
         </div>
       </section>
 
-      {/* ===================== PERFECT FOR GRID ===================== */}
-      <section className="max-w-5xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
-          The Ryland Partners Program Is Perfect For
-        </h2>
-        <p className="text-center text-slate-500 mb-12">Professionals who already have a network of business owners.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {/* ═══════════════════════ 5. PERFECT FOR — Pill Tags ═══════════════════════ */}
+      <section className="max-w-5xl mx-auto px-6 pb-[120px]">
+        <motion.div {...fadeUp} className="text-center mb-12">
+          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">Who It's For</p>
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900">
+            The Ryland Partners Program Is Perfect For
+          </h2>
+        </motion.div>
+
+        <motion.div {...stagger(0.1)} className="flex flex-wrap justify-center gap-3 md:gap-4">
           {personas.map((p, i) => (
-            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-5 flex flex-col items-center text-center gap-3">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
-              <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                  <p.icon className="h-5 w-5 text-blue-400" />
-                </div>
-                <span className="text-sm font-medium text-white">{p.label}</span>
-              </div>
-            </div>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              className="inline-flex items-center gap-2.5 rounded-full bg-slate-100 px-5 py-3 text-[15px] font-medium text-slate-800 border border-slate-200 hover:border-[#3b82f6]/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-blue-500/10 transition-all duration-300 cursor-default"
+            >
+              <p.icon className="h-4.5 w-4.5 text-[#3b82f6]" />
+              {p.label}
+            </motion.div>
           ))}
-        </div>
-        <p className="text-center text-slate-500 mt-8 text-sm font-medium">OR anyone who knows business owners!</p>
-        <div className="text-center mt-8">
+        </motion.div>
+
+        <motion.p {...stagger(0.5)} className="text-center text-slate-500 mt-10 text-[15px] font-medium italic">
+          OR anyone who knows business owners!
+        </motion.p>
+
+        <motion.div {...stagger(0.6)} className="text-center mt-12">
           <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
             <span>Become A Partner Now</span>
           </a>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ===================== SUPPORT & RESOURCES ===================== */}
-      <section className="pb-24">
+      {/* ═══════════════════════ 6. SUPPORT & RESOURCES — Icon Grid ═══════════════════════ */}
+      <section className="pb-[120px]">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
-            We Provide All The Direction, Guidance & Support You Need
-          </h2>
-          <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">Everything you need to succeed as a Ryland Partner.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">Your Success Toolkit</p>
+            <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900 mb-4">
+              Everything You Need To Succeed
+            </h2>
+            <p className="text-slate-500 text-[17px] max-w-xl mx-auto leading-relaxed">
+              We provide all the direction, guidance, and support you need.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: FileText, title: "Done-For-You Marketing Assets", desc: "We hand you ad creatives, email swipes, templates, and PDFs. Just plug, play, and start earning." },
+              { icon: FileText, title: "Done-For-You Marketing", desc: "Ad creatives, email swipes, templates, and PDFs. Just plug, play, and start earning." },
               { icon: Video, title: "Live Monthly Trainings", desc: "Join monthly trainings with ongoing support. Never feel stuck — we'll guide you step-by-step." },
-              { icon: CreditCard, title: "Get Paid Fast & On Time", desc: "Most partners start seeing commissions within just a few days — not weeks. Quick results keep your momentum going." },
-              { icon: MessagesSquare, title: "Community Support", desc: "Join our members-only community where you can share wins, ask questions, and stay connected." },
+              { icon: CreditCard, title: "Get Paid Fast", desc: "Most partners start seeing commissions within just a few days — not weeks." },
+              { icon: MessagesSquare, title: "Community Support", desc: "Join our members-only community to share wins, ask questions, and stay connected." },
             ].map((item, i) => (
-              <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-6 text-white">
-                <HlsVideoBackground overlay="bg-[#003A70]/90" />
-                <div className="relative z-10">
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                    <item.icon className="h-5 w-5 text-blue-400" />
-                  </div>
-                  <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center pt-8 border-t border-slate-200 group"
+              >
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#003A70] to-[#0060A9] shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="h-6 w-6 text-white" />
                 </div>
-              </div>
+                <h3 className="text-base font-semibold text-slate-900 mb-2 font-manrope">{item.title}</h3>
+                <p className="text-[15px] text-slate-500 leading-relaxed">{item.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===================== EASIEST MONEY CTA ===================== */}
-      <section className="max-w-4xl mx-auto px-6 pb-24">
-        <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 md:p-12 text-center text-white">
-          <HlsVideoBackground overlay="bg-[#003A70]/90" />
-          <div className="relative z-10">
-            <h2 className="font-manrope text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent">
-              This Is The Easiest Money You've Never Made
-            </h2>
-            <div className="space-y-3 text-slate-300 text-base max-w-lg mx-auto mb-8">
-              <p>And the business owners you know? <span className="text-white font-medium">They already need this!</span></p>
-              <p>You already know the business owners.</p>
-              <p>They already trust you.</p>
-              <p>You just need a partner link to send over to them.</p>
-            </div>
+      {/* ═══════════════════════ 7. EASIEST MONEY CTA — Full-Bleed Dark ═══════════════════════ */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#001228] via-[#002040] to-[#001228] py-[120px]">
+        {/* Radial glow behind CTA */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#3b82f6]/8 rounded-full blur-[120px]" />
+        </div>
+
+        <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
+          <motion.h2
+            {...fadeUp}
+            className="font-manrope text-[36px] md:text-[52px] font-bold tracking-[-0.03em] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500 mb-8"
+          >
+            This Is The Easiest Money You've Never Made
+          </motion.h2>
+
+          <div className="space-y-4 text-[17px] text-slate-400 leading-relaxed">
+            <motion.p {...stagger(0.1)}>
+              And the business owners you know? <span className="text-white font-medium">They already need this!</span>
+            </motion.p>
+            <motion.p {...stagger(0.2)}>You already know the business owners.</motion.p>
+            <motion.p {...stagger(0.3)}>They already trust you.</motion.p>
+            <motion.p {...stagger(0.4)}>You just need a partner link to send over to them.</motion.p>
+          </div>
+
+          <motion.div {...stagger(0.5)} className="mt-12">
             <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
               <span>Become A Partner Now</span>
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ===================== HOW WE SERVICE REFERRALS ===================== */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-4 text-slate-900">
-          Here Is How We Service The Business Owners You Refer
-        </h2>
-        <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">A seamless experience for your referrals — from application to funded.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { step: "01", icon: UserCheck, title: "Get Approved", desc: "The businesses you refer fill out a quick questionnaire and get approved in less than 2 minutes." },
-            { step: "02", icon: LineChart, title: "Find The Best Terms", desc: "They choose terms tailored to their budget so they can comfortably manage their funding." },
-            { step: "03", icon: DollarSign, title: "Ready To Scale", desc: "They can immediately access funds up to $250,000 after linking their business checking account." },
-          ].map((item, i) => (
-            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-8 text-white">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
-              <div className="relative z-10">
-                <span className="absolute top-4 right-5 text-4xl font-bold text-white/5 font-manrope">{item.step}</span>
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
-                  <item.icon className="h-6 w-6 text-blue-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
-              </div>
-            </div>
+      {/* ═══════════════════════ 8. HOW WE SERVICE REFERRALS — Timeline ═══════════════════════ */}
+      <section className="max-w-6xl mx-auto px-6 py-[120px]">
+        <motion.div {...fadeUp} className="text-center mb-16">
+          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">The Client Experience</p>
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900 mb-4">
+            How We Service The Business Owners You Refer
+          </h2>
+          <p className="text-slate-500 text-[17px] max-w-xl mx-auto leading-relaxed">
+            A seamless experience for your referrals — from application to funded.
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row gap-12 md:gap-0">
+          {serviceSteps.map((s, i) => (
+            <TimelineStep key={i} {...s} index={i} total={serviceSteps.length} />
           ))}
         </div>
-        <div className="mt-8 rounded-2xl border border-blue-400/20 bg-blue-50 p-5 text-center">
-          <p className="text-blue-700 font-medium">And remember, as long as they qualify (even if they don't take the funding), <span className="text-blue-900 font-semibold">you get paid!</span></p>
-        </div>
+
+        {/* Info banner */}
+        <motion.div
+          {...stagger(0.3)}
+          className="mt-12 rounded-xl bg-blue-50 border border-blue-200 p-5 text-center"
+        >
+          <p className="text-blue-700 font-medium text-[15px]">
+            And remember, as long as they qualify (even if they don't take the funding),{" "}
+            <span className="text-blue-900 font-semibold">you get paid!</span>
+          </p>
+        </motion.div>
       </section>
 
-      {/* ===================== FAQ ===================== */}
-      <section className="max-w-3xl mx-auto px-6 pb-24" id="faq">
-        <h2 className="font-manrope text-2xl md:text-3xl font-bold text-center mb-12 text-slate-900">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-3">
+      {/* ═══════════════════════ 9. FAQ — Clean Accordion ═══════════════════════ */}
+      <section className="max-w-3xl mx-auto px-6 pb-[120px]" id="faq">
+        <motion.div {...fadeUp} className="text-center mb-14">
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900">
+            Frequently Asked Questions
+          </h2>
+        </motion.div>
+
+        <div className="divide-y divide-slate-200 border-t border-b border-slate-200">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+            <motion.div
+              key={i}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+            >
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="relative z-10 w-full flex items-center justify-between p-5 text-left"
+                className="w-full flex items-center justify-between py-5 text-left group"
               >
-                <span className="text-sm font-medium text-white pr-4">{faq.q}</span>
-                <ChevronDown className={`h-5 w-5 text-zinc-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
+                <span className="text-[15px] font-semibold text-slate-900 pr-6 group-hover:text-[#0060A9] transition-colors">
+                  {faq.q}
+                </span>
+                <ChevronDown
+                  className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-300 ${
+                    openFaq === i ? "rotate-180" : ""
+                  }`}
+                />
               </button>
-              {openFaq === i && (
-                <div className="relative z-10 px-5 pb-5">
-                  <p className="text-sm text-zinc-300 leading-relaxed">{faq.a}</p>
-                </div>
-              )}
-            </div>
+              <AnimatePresence initial={false}>
+                {openFaq === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-5 text-[15px] text-slate-500 leading-[1.7]">{faq.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ===================== FINAL CTA ===================== */}
-      <section className="overflow-hidden my-10 relative" id="cta">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+      {/* ═══════════════════════ 10. FINAL CTA — Full-Bleed Hero ═══════════════════════ */}
+      <section className="relative overflow-hidden" id="cta">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
           <div className="border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden">
             <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
 
-            <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
+            {/* Radial glow */}
+            <div className="absolute inset-0 pointer-events-none z-[1]">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-[#3b82f6]/10 rounded-full blur-[100px]" />
+            </div>
+
+            <div className="relative z-10 text-center mx-auto max-w-3xl py-20 px-6 md:py-28 md:px-16">
+              <motion.h3
+                {...fadeUp}
+                className="text-[36px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.03em] bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-manrope"
+              >
                 Click Below. Become A Partner. Get Paid To Be A Connector.
-              </h3>
-              <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              </motion.h3>
+
+              <motion.p
+                {...stagger(0.15)}
+                className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed"
+              >
                 Join thousands of partners already earning commissions with Ryland Partners. No cost to join. No selling required.
-              </p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              </motion.p>
+
+              <motion.div {...stagger(0.3)} className="mt-10">
                 <a href="#" className="shiny-cta !py-4 !px-10 !text-lg">
                   <span>Start Earning Now</span>
                 </a>
-                <a href="#faq" className="hover:bg-white/10 transition-colors text-base text-white border-white/20 border rounded-full py-3 px-6">
-                  Read FAQs
-                </a>
-              </div>
-              <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  100% free to join
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  Get paid even if they don't fund
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  No cap on earnings
-                </span>
-              </div>
+              </motion.div>
+
+              {/* Trust chips */}
+              <motion.div
+                {...stagger(0.4)}
+                className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-[13px] tracking-[0.04em] uppercase text-slate-400"
+              >
+                {["100% free to join", "Get paid even if they don't fund", "No cap on earnings"].map((t) => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <Check className="h-3.5 w-3.5 text-blue-400" />
+                    {t}
+                  </span>
+                ))}
+              </motion.div>
             </div>
           </div>
         </div>
