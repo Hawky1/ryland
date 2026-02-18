@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Users, Clock, DollarSign, Shield, Lock, Zap } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
-import bundleImage from "@/assets/bundle-ultimate-credit-stack.png";
+import bundleImage from "@/assets/bundle-offer-hero.webp";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -149,7 +149,7 @@ export default function FunnelCoreOffer() {
             <img
               src={bundleImage}
               alt="Ultimate Business Credit Bundle — 18 Ebooks"
-              className="max-w-md sm:max-w-lg mx-auto w-full rounded-xl"
+              className="max-w-2xl mx-auto w-full rounded-xl"
             />
           </motion.div>
         </div>
@@ -198,15 +198,15 @@ export default function FunnelCoreOffer() {
           </motion.div>
 
           {/* Covers grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-14">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 mb-14">
             {EBOOKS.map((ebook, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: (i % 6) * 0.05 }}
-                className="bg-white/5 border border-white/10 rounded-xl overflow-hidden group hover:border-cyan-400/30 hover:scale-[1.03] transition-all duration-300"
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ delay: (i % 6) * 0.04 }}
+                className="bg-white/5 border border-white/8 rounded-lg overflow-hidden group hover:border-cyan-400/30 hover:scale-[1.04] transition-all duration-300"
               >
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
@@ -216,8 +216,8 @@ export default function FunnelCoreOffer() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-3">
-                  <p className="text-xs sm:text-sm text-white/80 font-medium line-clamp-2 text-center">{ebook.title}</p>
+                <div className="px-1.5 py-1.5">
+                  <p className="text-[10px] sm:text-xs text-white/70 font-medium line-clamp-2 text-center leading-tight">{ebook.title}</p>
                 </div>
               </motion.div>
             ))}
