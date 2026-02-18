@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle, Users, Clock, DollarSign } from "lucide-react";
+import { Users, Clock, DollarSign, Shield, Lock, Zap } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
 import bundleImage from "@/assets/bundle-ultimate-credit-stack.png";
@@ -8,33 +8,52 @@ import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const EBOOKS = [
-  "100 Dispute Letters That Work",
-  "13 Ways to Pay Off Debt Fast",
-  "How to Get $150K+ Funding for a New LLC",
-  "23 Money-Wasting Habits to Break",
-  "AI Credit Dispute Prompts",
-  "Bankruptcy Removal Blueprint",
-  "Business Credit Basics 101",
-  "Business Funding Checklist",
-  "Credit Building Resource Library",
-  "Credit Inquiry Phone Script",
-  "Credit Repair ChatGPT Prompts",
-  "Credit Repair Legal Rights Guide",
-  "DIY Credit Master Guide",
-  "DIY Credit Repair Workbook",
-  "Essential Business Credit Checklist",
-  "Fast-Track Vendor Accounts",
-  "Inquiry Removal Guide",
-  "Late Payment Removal Guide",
+  { title: "100 Dispute Letters That Work", cover: "/covers/100-dispute-letters.png" },
+  { title: "13 Ways to Pay Off Debt Fast", cover: "/covers/13-ways-pay-off-debt.png" },
+  { title: "How to Get $150K+ Funding for a New LLC", cover: "/covers/150k-funding-new-llc.png" },
+  { title: "23 Money-Wasting Habits to Break", cover: "/covers/23-money-wasting-habits.png" },
+  { title: "AI Credit Dispute Prompts", cover: "/covers/ai-credit-dispute-prompts.png" },
+  { title: "Bankruptcy Removal Blueprint", cover: "/covers/bankruptcy-removal-blueprint.png" },
+  { title: "Business Credit Basics 101", cover: "/covers/business-credit-basics-101.png" },
+  { title: "Business Funding Checklist", cover: "/covers/business-funding-checklist.png" },
+  { title: "Credit Building Resource Library", cover: "/covers/credit-building-resource-library.png" },
+  { title: "Credit Inquiry Phone Script", cover: "/covers/credit-inquiry-phone-script.png" },
+  { title: "Credit Repair ChatGPT Prompts", cover: "/covers/credit-repair-chatgpt-prompts.png" },
+  { title: "Credit Repair Legal Rights Guide", cover: "/covers/credit-repair-legal-rights.png" },
+  { title: "DIY Credit Master Guide", cover: "/covers/diy-credit-master-guide.png" },
+  { title: "DIY Credit Repair Workbook", cover: "/covers/diy-credit-repair-workbook.png" },
+  { title: "Essential Business Credit Checklist", cover: "/covers/essential-business-credit-checklist.png" },
+  { title: "Fast-Track Vendor Accounts", cover: "/covers/fast-track-vendor-accounts.png" },
+  { title: "Inquiry Removal Guide", cover: "/covers/inquiry-removal-guide.png" },
+  { title: "Late Payment Removal Guide", cover: "/covers/late-payment-removal-guide.png" },
 ];
-
 
 const STATS = [
   { icon: Users, value: "10,000+", label: "Entrepreneurs Served" },
   { icon: Clock, value: "8+", label: "Years of Expertise" },
   { icon: DollarSign, value: "$150M+", label: "Capital Funded" },
+];
+
+const FAQS = [
+  {
+    q: "Is this just generic advice I can find online?",
+    a: "No. These are proprietary templates, scripts, and strategies refined over 8+ years working with real clients. You won't find our exact dispute letters, lender lists, or funding playbooks anywhere else.",
+  },
+  {
+    q: "What if I have bad credit right now?",
+    a: "That's exactly who this is for. The bundle includes step-by-step dispute letters, removal guides, and credit-building strategies designed to help you rebuild from any starting point.",
+  },
+  {
+    q: "Do I get instant access?",
+    a: "Yes. The moment your order is confirmed, you'll receive immediate digital access to all 18 resources. No waiting, no shipping — start today.",
+  },
+  {
+    q: "Is there a guarantee?",
+    a: "Absolutely. We offer a 100% money-back guarantee. If you don't find massive value in these resources, we'll refund your $47 — no questions asked.",
+  },
 ];
 
 export default function FunnelCoreOffer() {
@@ -78,9 +97,26 @@ export default function FunnelCoreOffer() {
     if (checkoutUrl) window.open(checkoutUrl, "_blank");
   };
 
+  const CtaBlock = () => (
+    <div className="text-center space-y-3">
+      <button
+        onClick={handleAddToCart}
+        disabled={isLoading}
+        className="shiny-cta !text-base sm:!text-lg !py-4 !px-10 disabled:opacity-50"
+      >
+        <span>{isLoading ? "Adding..." : "Add to My Order for $47"}</span>
+      </button>
+      <div className="flex items-center justify-center gap-4 text-blue-200/40 text-xs">
+        <span className="flex items-center gap-1"><Lock className="w-3 h-3" /> Secure checkout</span>
+        <span className="flex items-center gap-1"><Zap className="w-3 h-3" /> Instant delivery</span>
+        <span className="flex items-center gap-1"><Shield className="w-3 h-3" /> Money-back guarantee</span>
+      </div>
+    </div>
+  );
+
   return (
     <FunnelLayout step={2} label="Special Offer">
-      {/* Hook Banner */}
+      {/* Hero */}
       <section className="relative overflow-hidden">
         <HlsVideoBackground overlay="bg-[#001F3F]/94" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
@@ -95,9 +131,12 @@ export default function FunnelCoreOffer() {
                 but do you want the unfair advantage?
               </span>
             </h1>
-            <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-10">
+            <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-8">
               I'm giving you my entire library of playbooks. This is every secret, every bank hack, and every dispute template we've refined over 8 years.
             </p>
+
+            {/* Hero CTA */}
+            <CtaBlock />
           </motion.div>
 
           {/* Bundle Image */}
@@ -105,7 +144,7 @@ export default function FunnelCoreOffer() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12"
+            className="mt-12"
           >
             <img
               src={bundleImage}
@@ -116,66 +155,8 @@ export default function FunnelCoreOffer() {
         </div>
       </section>
 
-      {/* Value Stack + Checklist */}
-      <section className="bg-[#00152B] py-16 sm:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          {/* Value Stack */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-blue-300/50 text-sm uppercase tracking-wider mb-2 font-[Inter,sans-serif]">
-              The Ultimate Business Credit Bundle
-            </p>
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <span className="text-2xl text-red-400/60 line-through font-bold">$447</span>
-              <span className="text-5xl sm:text-6xl font-black text-white font-[Geist,sans-serif]">$47</span>
-            </div>
-            <p className="text-blue-200/40 text-sm">One-time payment • Instant access • 18 resources</p>
-          </motion.div>
-
-          {/* 18-resource checklist */}
-          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-12">
-            {EBOOKS.map((title, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.03 }}
-                className="flex items-start gap-3 py-2"
-              >
-                <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                <span className="text-blue-100/80 text-sm">{title}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="text-center space-y-4">
-            <button
-              onClick={handleAddToCart}
-              disabled={isLoading}
-              className="shiny-cta !text-base sm:!text-lg !py-4 !px-10 disabled:opacity-50"
-            >
-              <span>{isLoading ? "Adding..." : "Add to My Order for $47"}</span>
-            </button>
-            <div>
-              <Link
-                to="/funnel/founders"
-                className="text-blue-300/40 hover:text-blue-300/60 text-sm underline underline-offset-4 transition-colors font-[Inter,sans-serif]"
-              >
-                No thanks, I'll pass
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Social Proof */}
-      <section className="bg-[#001228] border-t border-white/5 py-12">
+      {/* Social Proof Stats — moved above value stack */}
+      <section className="bg-[#001228] border-y border-white/5 py-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-3 gap-6">
             {STATS.map((s, i) => (
@@ -192,6 +173,104 @@ export default function FunnelCoreOffer() {
                 <p className="text-blue-200/40 text-xs sm:text-sm mt-1">{s.label}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Value Stack + Covers Grid */}
+      <section className="bg-[#00152B] py-16 sm:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Price anchor */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-blue-300/50 text-sm uppercase tracking-wider mb-2 font-[Inter,sans-serif]">
+              Everything Inside the Bundle
+            </p>
+            <div className="flex items-center justify-center gap-4 mb-2">
+              <span className="text-2xl text-red-400/60 line-through font-bold">$447</span>
+              <span className="text-5xl sm:text-6xl font-black text-white font-[Geist,sans-serif]">$47</span>
+            </div>
+            <p className="text-blue-200/40 text-sm">One-time payment • Instant access • 18 resources</p>
+          </motion.div>
+
+          {/* Covers grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-14">
+            {EBOOKS.map((ebook, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: (i % 6) * 0.05 }}
+                className="bg-white/5 border border-white/10 rounded-xl overflow-hidden group hover:border-cyan-400/30 hover:scale-[1.03] transition-all duration-300"
+              >
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={ebook.cover}
+                    alt={ebook.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-3">
+                  <p className="text-xs sm:text-sm text-white/80 font-medium line-clamp-2 text-center">{ebook.title}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA after covers */}
+          <CtaBlock />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-[#001228] py-16 sm:py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white font-[Geist,sans-serif] mb-2">
+              Got Questions?
+            </h2>
+            <p className="text-blue-200/40 text-sm">We've got answers.</p>
+          </motion.div>
+
+          <Accordion type="single" collapsible className="space-y-3">
+            {FAQS.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="bg-white/5 border border-white/10 rounded-xl px-5 overflow-hidden"
+              >
+                <AccordionTrigger className="text-white text-sm sm:text-base font-medium hover:no-underline py-4">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-blue-100/60 text-sm leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          {/* Final CTA */}
+          <div className="mt-12">
+            <CtaBlock />
+            <div className="text-center mt-4">
+              <Link
+                to="/funnel/founders"
+                className="text-blue-300/40 hover:text-blue-300/60 text-sm underline underline-offset-4 transition-colors font-[Inter,sans-serif]"
+              >
+                No thanks, I'll pass
+              </Link>
+            </div>
           </div>
         </div>
       </section>
