@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Shield, TrendingUp, FileSearch, Scale, Clock, BadgeCheck } from "lucide-react";
-import logoDark from "@/assets/logo-dark.png";
+import { Link } from "react-router-dom";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
+import Navbar from "@/components/Navbar";
+import SharedHead from "@/components/SharedHead";
 
 const WHAT_WE_REMOVE = [
   "Late payments & missed payments",
@@ -30,98 +32,13 @@ const STATS = [
 export default function CreditRepair() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-      <style dangerouslySetInnerHTML={{ __html: `
-        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
-        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
-        .shiny-cta {
-          --gradient-angle: 0deg; --gradient-angle-offset: 0deg; --gradient-percent: 20%; --gradient-shine: #8484ff; --shadow-size: 2px;
-          position: relative; overflow: hidden; border-radius: 9999px; padding: 1.25rem 2.5rem; font-size: 1.125rem; line-height: 1.2; font-weight: 500; color: #ffffff;
-          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #3b82f6 5%, var(--gradient-shine) 15%, #3b82f6 30%, transparent 40%, transparent 100%) border-box;
-          border: 2px solid transparent; box-shadow: inset 0 0 0 1px #1e293b; outline: none;
-          transition: --gradient-angle-offset 800ms cubic-bezier(0.25,1,0.5,1), --gradient-percent 800ms cubic-bezier(0.25,1,0.5,1), --gradient-shine 800ms cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s;
-          cursor: pointer; isolation: isolate; outline-offset: 4px; font-family: 'Inter','Helvetica Neue',sans-serif; z-index: 0; animation: border-spin 2.5s linear infinite;
-        }
-        @keyframes border-spin { to { --gradient-angle: 360deg; } }
-        .shiny-cta:active { transform: translateY(1px); }
-        .shiny-cta::before {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:0;
-          --size:calc(100% - 6px); --position:2px; --space:4px; width:var(--size); height:var(--size);
-          background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
-          background-size:var(--space) var(--space); background-repeat:space;
-          mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black); border-radius:inherit; opacity:0.4;
-        }
-        .shiny-cta::after {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1;
-          width:100%; aspect-ratio:1; background:linear-gradient(-50deg,transparent,#3b82f6,transparent);
-          mask-image:radial-gradient(circle at bottom,transparent 40%,black); opacity:0.6; animation:shimmer 4s linear infinite; animation-play-state:running;
-        }
-        .shiny-cta span { position:relative; z-index:2; display:inline-block; }
-        .shiny-cta span::before {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:-1;
-          --size:calc(100% + 1rem); width:var(--size); height:var(--size);
-          box-shadow:inset 0 -1ex 2rem 4px #3b82f6; opacity:0; border-radius:inherit;
-          transition:opacity 800ms cubic-bezier(0.25,1,0.5,1); animation:breathe 4.5s linear infinite;
-        }
-        @keyframes shimmer { to { transform:translate(-50%,-50%) rotate(360deg); } }
-        @keyframes breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.20); } }
-      `}} />
+      <SharedHead />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
-      {/* Nav */}
-      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
-        <div className="flex max-w-7xl mr-auto ml-auto pt-4 pr-4 sm:pr-6 pb-4 pl-4 sm:pl-6 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <a href="/"><img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" /></a>
-          </div>
-          <nav className="hidden gap-8 md:flex items-center">
-            <a href="/" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</a>
-            <a href="/about" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">About</a>
-            <div className="relative group">
-              <a href="/#services" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1">
-                Services
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-              </a>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full w-[540px] h-4" />
-              <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.75rem)] w-[540px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 z-50">
-                <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,58,112,0.25)] p-2 ring-1 ring-black/5">
-                  <div className="grid grid-cols-2 gap-1">
-                    {[
-                      { icon: "💰", title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines", href: "/funding" },
-                      { icon: "📊", title: "Repair My Credit", desc: "Done-for-you credit restoration in 35–90 days", href: "/credit-repair" },
-                      { icon: "🎓", title: "Join The Community", desc: "Private Skool network & digital business training", href: "/community" },
-                      { icon: "📚", title: "Shop Digital Products", desc: "eBooks & resources to accelerate your growth", href: "/store" },
-                      { icon: "🤝", title: "Become A Partner", desc: "Earn uncapped commissions — free to join", href: "/partners" },
-                      { icon: "📅", title: "Schedule A Consultation", desc: "1-on-1 strategy session with funding experts", href: "/funnel/consultation" },
-                    ].map((item) => (
-                      <a key={item.title} href={item.href} className="flex items-start gap-3 rounded-xl px-4 py-3 hover:bg-slate-50 transition-colors group/item">
-                        <span className="text-xl mt-0.5 shrink-0">{item.icon}</span>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900 group-hover/item:text-[#0060A9] transition-colors">{item.title}</p>
-                          <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{item.desc}</p>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                  <div className="mt-1 border-t border-slate-100 pt-2 px-4 pb-2">
-                    <a href="/#services" className="text-xs font-medium text-[#0060A9] hover:text-[#003A70] transition-colors inline-flex items-center gap-1">View all services →</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a href="/#features" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
-            <a href="/store" className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</a>
-            <a href="/contact" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none"><span>Contact</span></a>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-16 sm:pt-24 pb-16 sm:pb-24 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
@@ -136,8 +53,8 @@ export default function CreditRepair() {
               Done-for-you credit repair with CROA-compliant dispute methods. Most clients see significant improvements within 35–90 days.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span>Get Your Free Credit Audit</span></a>
-              <a href="/funnel/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</a>
+              <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span>Get Your Free Credit Audit</span></Link>
+              <Link to="/funnel/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</Link>
             </div>
           </motion.div>
         </div>
@@ -147,17 +64,8 @@ export default function CreditRepair() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-3 gap-6">
           {STATS.map((s, i) => (
-            <motion.div
-              key={s.desc}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center"
-            >
-              <p className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tighter font-[Geist,sans-serif]">
-                {s.value}<span className="text-lg text-slate-400 ml-1">{s.unit}</span>
-              </p>
+            <motion.div key={s.desc} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
+              <p className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tighter font-[Geist,sans-serif]">{s.value}<span className="text-lg text-slate-400 ml-1">{s.unit}</span></p>
               <p className="text-xs sm:text-sm text-slate-500 mt-2">{s.desc}</p>
             </motion.div>
           ))}
@@ -170,10 +78,8 @@ export default function CreditRepair() {
           <div>
             <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mb-3">What We Remove</p>
             <h2 className="text-2xl sm:text-4xl font-medium text-slate-900 tracking-tighter font-[Manrope,sans-serif] mb-6">Negative Items Holding You Back</h2>
-            <p className="text-slate-500 leading-relaxed mb-8">
-              Our team uses legally compliant dispute strategies under the Fair Credit Reporting Act (FCRA) and Fair Debt Collection Practices Act (FDCPA) to challenge inaccurate, unverifiable, and outdated information on your credit reports.
-            </p>
-            <a href="/assessment" className="inline-flex items-center justify-center rounded-full py-3.5 px-8 text-sm font-medium text-white bg-gradient-to-r from-[#003A70] to-[#0060A9] hover:opacity-90 transition-opacity">Start My Restoration</a>
+            <p className="text-slate-500 leading-relaxed mb-8">Our team uses legally compliant dispute strategies under the Fair Credit Reporting Act (FCRA) and Fair Debt Collection Practices Act (FDCPA) to challenge inaccurate, unverifiable, and outdated information on your credit reports.</p>
+            <Link to="/assessment" className="inline-flex items-center justify-center rounded-full py-3.5 px-8 text-sm font-medium text-white bg-gradient-to-r from-[#003A70] to-[#0060A9] hover:opacity-90 transition-opacity">Start My Restoration</Link>
           </div>
           <div className="space-y-3">
             {WHAT_WE_REMOVE.map((item) => (
@@ -196,14 +102,8 @@ export default function CreditRepair() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PROCESS_STEPS.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6"
-              >
+              <motion.div key={step.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="bg-white/5 border border-white/10 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-xs font-bold text-blue-400 bg-blue-400/10 rounded-full w-7 h-7 flex items-center justify-center">{i + 1}</span>
                   <step.icon className="w-5 h-5 text-white/70" />
@@ -223,9 +123,7 @@ export default function CreditRepair() {
             <Shield className="w-6 h-6 text-emerald-600" />
             <h3 className="text-xl font-semibold text-slate-900 font-[Geist,sans-serif]">Fully Compliant & Transparent</h3>
           </div>
-          <p className="text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed mb-4">
-            We operate in full compliance with the Credit Repair Organizations Act (CROA) and the FTC Telemarketing Sales Rule (TSR). No fees are charged until services are fully performed. You have the right to cancel within 3 business days.
-          </p>
+          <p className="text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed mb-4">We operate in full compliance with the Credit Repair Organizations Act (CROA) and the FTC Telemarketing Sales Rule (TSR). No fees are charged until services are fully performed. You have the right to cancel within 3 business days.</p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-semibold text-emerald-700 uppercase tracking-wider">CROA Compliant</span>
             <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-xs font-semibold text-blue-700 uppercase tracking-wider">TSR Compliant</span>
@@ -238,14 +136,10 @@ export default function CreditRepair() {
       <section className="max-w-7xl mx-4 sm:mx-6 lg:mx-auto mb-10 rounded-3xl border border-[#004E8C] overflow-hidden relative">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
         <div className="relative z-10 text-center max-w-3xl mx-auto py-16 px-6 md:py-24 md:px-16">
-          <h3 className="text-3xl md:text-5xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-[Geist,sans-serif]">
-            Your Credit Comeback Starts Here
-          </h3>
-          <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Take the first step toward a stronger credit profile. Our team is ready to fight for your financial future.
-          </p>
+          <h3 className="text-3xl md:text-5xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-[Geist,sans-serif]">Your Credit Comeback Starts Here</h3>
+          <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">Take the first step toward a stronger credit profile. Our team is ready to fight for your financial future.</p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/assessment" className="shiny-cta !py-4 !px-10 !text-lg"><span>Get Started Today</span></a>
+            <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-lg"><span>Get Started Today</span></Link>
           </div>
         </div>
       </section>
