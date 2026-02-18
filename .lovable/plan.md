@@ -1,87 +1,54 @@
 
+# Auto-Fill Lead Data + Unify Funnel Accent Colors
 
-# Custom GHL Calendar for Consultation Page
-
-Replace the iframe-based GoHighLevel booking widget with a fully custom, branded calendar UI that fetches real availability from the GHL API and books appointments directly.
-
-## What Changes
-
-### 1. New Edge Function: `ghl-calendar`
-A backend function that proxies two GHL Calendar API v2 endpoints, keeping the API key secure on the server:
-
-- **GET free slots** -- Calls `GET /calendars/:calendarId/free-slots` with `startDate`, `endDate`, and `timezone` query params. Returns an availability map like `{ "2026-02-20": { "slots": ["2026-02-20T10:00:00-05:00", ...] } }`.
-- **Book appointment** -- First creates/upserts a GHL contact (reuses existing logic), then calls `POST /calendars/events/appointments` with `calendarId`, `locationId`, `contactId`, `startTime`, and `endTime`.
-
-Uses the existing `GHL_API_KEY`, `GHL_LOCATION_ID`, and `GHL_CALENDAR_ID` secrets (all already configured).
-
-### 2. New Component: `ConsultationCalendar.tsx`
-A multi-step booking widget replacing the iframe:
-
-- **Step 1 -- Pick a Date**: Uses the existing shadcn `Calendar` component. On mount, fetches the current month's free slots from the edge function. Days with no availability are disabled. Navigating months fetches the next month's slots.
-- **Step 2 -- Pick a Time**: Shows available time slots for the selected date as a scrollable grid of buttons (e.g., "10:00 AM", "11:00 AM").
-- **Step 3 -- Enter Details**: A compact form collecting name, email, phone, and an optional note.
-- **Step 4 -- Confirmation**: Success state with a checkmark animation and booking summary.
-
-The component is styled with a white card aesthetic matching the current design (white background, rounded corners, shadow).
-
-### 3. Updated `FunnelConsultation.tsx`
-- Remove the iframe and `GHL_CALENDAR_URL` constant
-- Import and render `ConsultationCalendar` in its place
-- No changes to the left-side hero copy or trust badges
-
-### 4. Register Edge Function
-Add `ghl-calendar` to `supabase/config.toml` with `verify_jwt = false`.
+## Overview
+Two changes: (1) Auto-populate the consultation calendar's name and email fields from what the user already entered in the lead magnet form, and (2) Replace all emerald/green accent colors across the funnel with the cyan-to-blue palette used on the homepage and the other funnel pages.
 
 ---
 
-## Technical Details
+## 1. Auto-Fill Name & Email from Lead Magnet
 
-### Edge Function: `supabase/functions/ghl-calendar/index.ts`
+The lead magnet page (`/funnel`) collects name, email, and phone. Currently this data is only saved to the database -- there's no way for downstream funnel pages to access it.
 
-Handles two actions via a POST body `{ action: "get-slots" | "book" }`:
+**How it works:**
+- When the lead magnet form submits successfully, save `{ name, email, phone }` to `sessionStorage` under a key like `funnel_lead`.
+- On the consultation calendar component, read `funnel_lead` from `sessionStorage` on mount and pre-fill the name, email, and phone fields.
+- The fields remain editable in case the user wants to change them.
 
-**get-slots action:**
-```text
-POST /ghl-calendar
-{ action: "get-slots", startDate: 1740000000000, endDate: 1742000000000, timezone: "America/New_York" }
+**Files changed:**
+- `src/pages/funnel/FunnelLeadMagnet.tsx` -- After successful submit, write to `sessionStorage`.
+- `src/components/funnel/ConsultationCalendar.tsx` -- On mount, read from `sessionStorage` and set initial state.
 
---> Proxies to: GET https://services.leadconnectorhq.com/calendars/{GHL_CALENDAR_ID}/free-slots
-    ?startDate={startDate}&endDate={endDate}&timezone={timezone}
-    Headers: Authorization: Bearer {GHL_API_KEY}, Version: 2021-04-15
+---
 
-Returns: { "2026-02-20": { "slots": [...] }, ... }
-```
+## 2. Unify Accent Colors to Cyan/Blue
 
-**book action:**
-```text
-POST /ghl-calendar
-{ action: "book", name, email, phone, notes, startTime, endTime, timezone }
+The homepage and first two funnel pages consistently use `cyan-400` / `blue-400` as the accent palette. The consultation page and its calendar incorrectly use `emerald` (green) accents. The downsell page uses orange/yellow which is intentional for urgency and will remain as-is.
 
-Step 1: Create/upsert contact via existing GHL contacts API
-Step 2: POST https://services.leadconnectorhq.com/calendars/events/appointments
-        Body: { calendarId, locationId, contactId, startTime, endTime, title, appointmentStatus: "new" }
-        Headers: Authorization: Bearer {GHL_API_KEY}, Version: 2021-04-15
+**Color replacements on the Consultation page (`FunnelConsultation.tsx`):**
+- Badge: `bg-emerald-500/10 border-emerald-400/20 text-emerald-300` becomes `bg-cyan-500/10 border-cyan-400/20 text-cyan-300`
+- Headline gradient: `from-emerald-400 to-cyan-400` becomes `from-cyan-400 to-blue-400` (matches all other funnel pages)
 
-Returns: { success: true, appointmentId: "..." }
-```
+**Color replacements in the Calendar component (`ConsultationCalendar.tsx`):**
+- Step indicator active: `bg-emerald-500/20 text-emerald-300 border-emerald-400/30` becomes `bg-cyan-500/20 text-cyan-300 border-cyan-400/30`
+- Step indicator done: `bg-emerald-500/10 text-emerald-400` becomes `bg-cyan-500/10 text-cyan-400`
+- Step connector done: `bg-emerald-400` becomes `bg-cyan-400`
+- Calendar selected day: `bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30 hover:text-emerald-200` becomes `bg-cyan-500/20 text-cyan-300 border-cyan-400/40 hover:bg-cyan-500/30 hover:text-cyan-200`
+- Selected time slot: `bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30` becomes `bg-cyan-500/20 text-cyan-300 border-cyan-400/40 hover:bg-cyan-500/30`
+- Continue/Book buttons: `from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400` becomes `from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400`
+- Input focus rings: `focus-visible:ring-emerald-400/40` becomes `focus-visible:ring-cyan-400/40`
+- Confirmation checkmark: `text-emerald-400` becomes `text-cyan-400`
 
-### Component: `src/components/funnel/ConsultationCalendar.tsx`
+**Files changed:**
+- `src/pages/funnel/FunnelConsultation.tsx` -- Badge and headline gradient colors.
+- `src/components/funnel/ConsultationCalendar.tsx` -- All emerald references replaced with cyan/blue.
 
-```text
-State machine: "select-date" -> "select-time" -> "details" -> "confirmed"
+---
 
-- Fetches slots on mount and on month navigation
-- Disables past dates and dates with no slots
-- Time slots rendered as pill buttons
-- Form validated with basic required field checks
-- Loading and error states handled throughout
-- Uses supabase.functions.invoke("ghl-calendar", { body: {...} })
-```
+## Technical Summary
 
-### Files Created
-- `supabase/functions/ghl-calendar/index.ts`
-- `src/components/funnel/ConsultationCalendar.tsx`
-
-### Files Modified
-- `supabase/config.toml` (add `[functions.ghl-calendar]`)
-- `src/pages/funnel/FunnelConsultation.tsx` (swap iframe for new component)
+| File | Change |
+|------|--------|
+| `src/pages/funnel/FunnelLeadMagnet.tsx` | Save lead data to `sessionStorage` after successful submit |
+| `src/pages/funnel/FunnelConsultation.tsx` | Replace emerald badge/gradient with cyan/blue |
+| `src/components/funnel/ConsultationCalendar.tsx` | Read lead data from `sessionStorage` for auto-fill; replace all emerald colors with cyan/blue |
