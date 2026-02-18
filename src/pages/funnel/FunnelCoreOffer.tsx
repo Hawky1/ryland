@@ -121,9 +121,6 @@ export default function FunnelCoreOffer() {
         <HlsVideoBackground overlay="bg-[#001F3F]/94" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-400/20 rounded-full px-4 py-1.5 text-xs font-bold text-yellow-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif]">
-              ⚡ One-Time Offer — Don't Miss This
-            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif]">
               WAIT! Your Blueprint is on the way...
               <br />
