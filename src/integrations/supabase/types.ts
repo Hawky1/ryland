@@ -116,6 +116,39 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_submissions: {
+        Row: {
+          business_name: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          referral_source: string | null
+        }
+        Insert: {
+          business_name?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          referral_source?: string | null
+        }
+        Update: {
+          business_name?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          referral_source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
