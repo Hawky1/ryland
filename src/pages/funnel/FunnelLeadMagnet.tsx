@@ -72,7 +72,7 @@ export default function FunnelLeadMagnet() {
       {/* Hero */}
       <section className="relative flex items-center">
         <HlsVideoBackground overlay="bg-[#001F3F]/92" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Copy side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -83,13 +83,13 @@ export default function FunnelLeadMagnet() {
               Free Download — Available for a Limited Time
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif] tracking-tight">
-              The $250K Business Credit Blueprint: Fund Your Business Without Risking Your{" "}
+              Build a $250K Business Credit Profile —{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-                Personal Credit Score.
+                Without Touching Your Personal Score.
               </span>
             </h1>
             <p className="text-blue-100/70 text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
-              Your SSN was never meant to fund your business. This step-by-step blueprint shows you how to build a bankable business credit profile, unlock 0% APR capital, and stop personally guaranteeing every dollar.
+              The step-by-step blueprint 10,000+ entrepreneurs used to unlock 0% APR capital on their business's merit alone.
             </p>
 
             {/* Email form */}
