@@ -65,6 +65,7 @@ export type Database = {
           email: string
           id: string
           name: string
+          phone: string | null
           source: string
         }
         Insert: {
@@ -72,6 +73,7 @@ export type Database = {
           email: string
           id?: string
           name: string
+          phone?: string | null
           source?: string
         }
         Update: {
@@ -79,6 +81,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string
+          phone?: string | null
           source?: string
         }
         Relationships: []
