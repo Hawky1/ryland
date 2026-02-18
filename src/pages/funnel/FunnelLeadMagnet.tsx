@@ -12,6 +12,7 @@ import { toast } from "sonner";
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Enter a valid email").max(255),
+  phone: z.string().trim().min(1, "Phone number is required").max(20),
 });
 
 const FEATURES = [
@@ -22,7 +23,7 @@ const FEATURES = [
 
 export default function FunnelLeadMagnet() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -45,13 +46,14 @@ export default function FunnelLeadMagnet() {
       const { error } = await supabase.from("funnel_leads" as any).insert({
         name: result.data.name,
         email: result.data.email,
+        phone: result.data.phone,
         source: "blueprint",
       });
       if (error) throw error;
 
       supabase.functions
         .invoke("ghl-create-contact", {
-          body: { name: result.data.name, email: result.data.email },
+          body: { name: result.data.name, email: result.data.email, phone: result.data.phone },
         })
         .then(({ error: ghlErr }) => {
           if (ghlErr) console.error("GHL sync failed:", ghlErr);
@@ -113,6 +115,16 @@ export default function FunnelLeadMagnet() {
                 />
                 {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
               </div>
+              <div>
+                <input
+                  type="tel"
+                  placeholder="Your phone number"
+                  value={form.phone}
+                  onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))}
+                  className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder:text-blue-200/40 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 font-[Inter,sans-serif]"
+                />
+                {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+              </div>
               <button
                 type="submit"
                 disabled={submitting}
@@ -171,6 +183,39 @@ export default function FunnelLeadMagnet() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+      {/* Final CTA */}
+      <section className="relative bg-[#001228] py-16 sm:py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 font-[Geist,sans-serif]">
+              Ready to Build Your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                $250K Credit Profile?
+              </span>
+            </h2>
+            <p className="text-blue-100/60 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
+              Join 10,000+ entrepreneurs who stopped using their personal credit and started building real business funding.
+            </p>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="shiny-cta !text-base sm:!text-lg !py-4 !px-10"
+            >
+              <span>Get Your Free Blueprint Now</span>
+            </button>
+            <div className="flex items-center justify-center gap-6 mt-6 text-blue-200/40 text-xs font-[Inter,sans-serif]">
+              <span className="flex items-center gap-1.5">✓ 100% Free</span>
+              <span className="flex items-center gap-1.5">✓ Instant Download</span>
+              <span className="flex items-center gap-1.5">✓ No Credit Card</span>
+            </div>
+          </motion.div>
         </div>
       </section>
     </FunnelLayout>
