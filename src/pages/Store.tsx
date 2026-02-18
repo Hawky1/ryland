@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Loader2, BookOpen } from "lucide-react";
 import { toast } from "sonner";
-import logoDark from "@/assets/logo-dark.png";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
@@ -14,6 +13,9 @@ import StoreHero from "@/components/store/StoreHero";
 import TrustStrip from "@/components/store/TrustStrip";
 import WhyChooseUs from "@/components/store/WhyChooseUs";
 import ProductCard from "@/components/store/ProductCard";
+import Navbar from "@/components/Navbar";
+import SharedHead from "@/components/SharedHead";
+import PageMeta from "@/components/PageMeta";
 
 const BUNDLES = [
   { id: "credit-authority", tag: "Credit Authority Bundle", name: "Credit Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
