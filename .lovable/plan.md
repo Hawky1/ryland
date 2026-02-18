@@ -1,35 +1,33 @@
 
 
-# Update Text Content on Funnel Lead Magnet Page
+# Shorten Hero Copy and Match Column Heights
 
-This plan updates **only the text strings** on the `/funnel` page. No layout, styling, colors, fonts, spacing, animations, or component structure will be changed.
+## Text Changes
 
-## File to modify
+**Headline** (shorter, punchier):
+"Build a $250K Business Credit Profile —
+**Without Touching Your Personal Score.**"
 
-`src/pages/funnel/FunnelLeadMagnet.tsx`
+**Subheadline** (one line, high impact):
+"The step-by-step blueprint 10,000+ entrepreneurs used to unlock 0% APR capital on their business's merit alone."
 
-## Changes
+This cuts the headline nearly in half and compresses the subheadline from 3 lines to 1, making the left column significantly shorter so it aligns with the book mockup on the right.
 
-### Hero Section
-- Eyebrow tag: "Free Download — Limited Time" → "Free Download — Available for a Limited Time"
-- Headline: "GET THE BLUEPRINT: How to Build a $250,000 Business Credit Profile from Scratch." → "The $250K Business Credit Blueprint: Fund Your Business Without Risking Your Personal Credit Score."
-- Subheadline: updated to the new copy about SSN and bankable business credit profile
-- CTA button: "Download For Free" → "Send Me the Free Blueprint"
-- Privacy microcopy: "We respect your privacy. Unsubscribe anytime." → "No spam. No credit card. Unsubscribe anytime."
+## Height Alignment
 
-### What's Inside Section
-- Section headline: "What's Inside Your Free Blueprint" → "Here's Exactly What You'll Get Inside"
-- Card 1 title stays the same; description updated to the "9 things banks quietly check" copy
-- Card 2 title: "The Net-30 Vendor List" → "The Net-30 Vendor Starter Kit"; description updated
-- Card 3 title stays the same; description updated to the "sequence matters" copy
+The grid currently uses `items-stretch`, which stretches containers but doesn't vertically center their inner content. The fix:
+- Change the grid from `items-stretch` to `items-center` so both columns vertically center their content at the same midpoint
+- This ensures the book mockup and the text/form sit at the same visual height regardless of content length
 
-### Bottom CTA Section
-- Headline: "Ready to Build Your $250K Credit Profile?" → "Your Business Deserves Its Own Credit Profile. Build It Today."
-- Supporting text updated to the "stop mixing personal and business finances" copy
-- CTA button: "Get Your Free Blueprint Now" → "Get the Free Blueprint Now"
-- Trust badge: "No Credit Card" → "No Credit Card Required"
+## File Modified
+
+`src/pages/funnel/FunnelLeadMagnet.tsx` — text replacements on lines 85-92 and a class change on line 75.
 
 ## Technical Details
 
-All changes are simple string replacements in `src/pages/funnel/FunnelLeadMagnet.tsx`. The FEATURES array constants and the JSX template text will be updated. No other files are affected.
+1. Line 75: Change `items-stretch` to `items-center` on the grid container
+2. Lines 85-89: Replace headline with shorter version, keeping the gradient span on "Without Touching Your Personal Score."
+3. Lines 91-92: Replace subheadline with the single-line version
+
+No layout, styling, color, font, or component structure changes beyond the grid alignment tweak.
 
