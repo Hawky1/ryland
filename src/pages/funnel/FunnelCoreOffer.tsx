@@ -131,26 +131,26 @@ export default function FunnelCoreOffer() {
                 but do you want the unfair advantage?
               </span>
             </h1>
+            {/* Bundle Image — immediately after headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="my-8"
+            >
+              <img
+                src={bundleImage}
+                alt="Ultimate Business Credit Bundle — 18 Ebooks"
+                className="max-w-2xl mx-auto w-full rounded-xl"
+              />
+            </motion.div>
+
             <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-8">
               I'm giving you my entire library of playbooks. This is every secret, every bank hack, and every dispute template we've refined over 8 years.
             </p>
 
             {/* Hero CTA */}
             <CtaBlock />
-          </motion.div>
-
-          {/* Bundle Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12"
-          >
-            <img
-              src={bundleImage}
-              alt="Ultimate Business Credit Bundle — 18 Ebooks"
-              className="max-w-2xl mx-auto w-full rounded-xl"
-            />
           </motion.div>
         </div>
       </section>
@@ -206,7 +206,7 @@ export default function FunnelCoreOffer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ delay: (i % 6) * 0.04 }}
-                className="bg-white/5 border border-white/8 rounded-lg overflow-hidden group hover:border-cyan-400/30 hover:scale-[1.04] transition-all duration-300"
+                className="rounded-lg overflow-hidden group hover:scale-[1.04] transition-all duration-300"
               >
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
