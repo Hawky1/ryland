@@ -34,72 +34,83 @@ const Navbar = ({ active, showServicesDropdown = true }: NavbarProps) => {
     `nav-link relative text-sm transition-colors ${isActive(path) ? "text-slate-900 font-medium" : "text-slate-600 hover:text-slate-900"}`;
 
   return (
-    <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
-      <div className="flex max-w-7xl mx-auto py-4 px-4 sm:px-6 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-        </Link>
+    <>
+      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
+        <div className="flex max-w-7xl mx-auto py-4 px-4 sm:px-6 items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
+          </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <Link to="/" className={navLinkClass("/")}>Home</Link>
-          <Link to="/about" className={navLinkClass("/about")}>About</Link>
+          <nav className="hidden md:flex items-center gap-8">
+            <Link to="/" className={navLinkClass("/")}>Home</Link>
+            <Link to="/about" className={navLinkClass("/about")}>About</Link>
 
-          {showServicesDropdown ? (
-            <div className="relative group">
-              <button
-                type="button"
-                className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1 cursor-default bg-transparent border-none p-0"
-              >
-                Services
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full w-[540px] h-4" />
-              <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.75rem)] w-[540px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 z-50">
-                <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,58,112,0.25)] p-2 ring-1 ring-black/5">
-                  <div className="grid grid-cols-2 gap-1">
-                    {SERVICE_ITEMS.map((item) => (
-                      <Link
-                        key={item.title}
-                        to={item.href}
-                        className="flex items-start gap-3 rounded-xl px-4 py-3 hover:bg-slate-50 transition-colors group/item"
-                      >
-                        <span className="text-xl mt-0.5 shrink-0">{item.icon}</span>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900 group-hover/item:text-[#0060A9] transition-colors">{item.title}</p>
-                          <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{item.desc}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="mt-1 border-t border-slate-100 pt-2 px-4 pb-2">
-                    <Link to="/funding" className="text-xs font-medium text-[#0060A9] hover:text-[#003A70] transition-colors inline-flex items-center gap-1">View all services →</Link>
+            {showServicesDropdown ? (
+              <div className="relative group">
+                <button
+                  type="button"
+                  className="nav-link relative text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-1 cursor-default bg-transparent border-none p-0"
+                >
+                  Services
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div className="absolute left-1/2 -translate-x-1/2 top-full w-[540px] h-4" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.75rem)] w-[540px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 z-50">
+                  <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,58,112,0.25)] p-2 ring-1 ring-black/5">
+                    <div className="grid grid-cols-2 gap-1">
+                      {SERVICE_ITEMS.map((item) => (
+                        <Link
+                          key={item.title}
+                          to={item.href}
+                          className="flex items-start gap-3 rounded-xl px-4 py-3 hover:bg-slate-50 transition-colors group/item"
+                        >
+                          <span className="text-xl mt-0.5 shrink-0">{item.icon}</span>
+                          <div>
+                            <p className="text-sm font-semibold text-slate-900 group-hover/item:text-[#0060A9] transition-colors">{item.title}</p>
+                            <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-1 border-t border-slate-100 pt-2 px-4 pb-2">
+                      <Link to="/funding" className="text-xs font-medium text-[#0060A9] hover:text-[#003A70] transition-colors inline-flex items-center gap-1">View all services →</Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <Link to="/funding" className={navLinkClass("/funding")}>Services</Link>
-          )}
+            ) : (
+              <Link to="/funding" className={navLinkClass("/funding")}>Services</Link>
+            )}
 
-          <Link to="/community" className={navLinkClass("/community")}>Community</Link>
-          <Link to="/store" className={navLinkClass("/store")}>Store</Link>
-          <Link to="/contact" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
-            <span>Contact</span>
-          </Link>
-        </nav>
+            <Link to="/community" className={navLinkClass("/community")}>Community</Link>
+            <Link to="/store" className={navLinkClass("/store")}>Store</Link>
+            <Link to="/contact" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
+              <span>Contact</span>
+            </Link>
+          </nav>
 
-        <button
-          onClick={() => setMobileOpen(true)}
-          className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-      </div>
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+      </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile overlay — rendered outside header for full-viewport coverage */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile drawer — rendered outside header */}
       <aside
-        className={`mobile-menu fixed z-50 bg-white/95 w-[80%] max-w-sm border-slate-200 border-l p-6 top-0 right-0 bottom-0 backdrop-blur ${mobileOpen ? "open" : ""}`}
+        className={`mobile-menu fixed z-50 bg-white w-[80%] max-w-sm border-slate-200 border-l p-6 top-0 right-0 bottom-0 ${mobileOpen ? "open" : ""}`}
         aria-label="Mobile menu"
       >
         <div className="flex items-center justify-between">
@@ -146,7 +157,7 @@ const Navbar = ({ active, showServicesDropdown = true }: NavbarProps) => {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
         </Link>
       </aside>
-    </header>
+    </>
   );
 };
 
