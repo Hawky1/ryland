@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import logoDark from "@/assets/logo-dark.png";
-import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
-import { Menu, X, Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import SharedHead from "@/components/SharedHead";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -19,7 +20,6 @@ const contactSchema = z.object({
 type ContactForm = z.infer<typeof contactSchema>;
 
 const Contact = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [form, setForm] = useState<ContactForm>({ name: "", email: "", phone: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactForm, string>>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -48,100 +48,56 @@ const Contact = () => {
       return;
     }
     setSending(true);
-    // Simulate send delay
-    await new Promise(r => setTimeout(r, 1500));
-    setSending(false);
-    setSubmitted(true);
+
+    try {
+      // Save to database
+      const { error: dbError } = await supabase.from("contact_submissions" as any).insert({
+        name: result.data.name,
+        email: result.data.email,
+        phone: result.data.phone || null,
+        subject: result.data.subject,
+        message: result.data.message,
+      });
+      if (dbError) throw dbError;
+
+      // Fire-and-forget: sync to GoHighLevel
+      supabase.functions
+        .invoke("ghl-create-contact", {
+          body: {
+            name: result.data.name,
+            email: result.data.email,
+            phone: result.data.phone || undefined,
+            tags: ["contact-form", `subject-${result.data.subject}`],
+            source: "Contact Page",
+            customFields: {
+              contact_subject: result.data.subject,
+              contact_message: result.data.message,
+            },
+          },
+        })
+        .then(({ error: ghlErr }) => {
+          if (ghlErr) console.error("GHL sync failed:", ghlErr);
+        });
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Contact submission failed:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
-        .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
-        .font-geist { font-family: 'Geist', sans-serif !important; }
-        .font-manrope { font-family: 'Manrope', sans-serif !important; }
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out, visibility 0s 0.3s; visibility: hidden; }
-        .mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform 0.3s ease-out, visibility 0s 0s; }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
-        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
-        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
-
-        .shiny-cta {
-          --gradient-angle: 0deg; --gradient-angle-offset: 0deg; --gradient-percent: 20%; --gradient-shine: #8484ff; --shadow-size: 2px;
-          position: relative; overflow: hidden; border-radius: 9999px; padding: 1.25rem 2.5rem; font-size: 1.125rem; line-height: 1.2; font-weight: 500; color: #ffffff;
-          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #3b82f6 5%, var(--gradient-shine) 15%, #3b82f6 30%, transparent 40%, transparent 100%) border-box;
-          border: 2px solid transparent; box-shadow: inset 0 0 0 1px #1e293b; outline: none;
-          transition: --gradient-angle-offset 800ms cubic-bezier(0.25,1,0.5,1), --gradient-percent 800ms cubic-bezier(0.25,1,0.5,1), --gradient-shine 800ms cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s;
-          cursor: pointer; isolation: isolate; outline-offset: 4px; font-family: 'Inter','Helvetica Neue',sans-serif; z-index: 0; animation: border-spin 2.5s linear infinite;
-        }
-        @keyframes border-spin { to { --gradient-angle: 360deg; } }
-        .shiny-cta:active { transform: translateY(1px); }
-        .shiny-cta::before {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:0;
-          --size:calc(100% - 6px); --position:2px; --space:4px; width:var(--size); height:var(--size);
-          background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box; background-size:var(--space) var(--space); background-repeat:space;
-          mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black); border-radius:inherit; opacity:0.4;
-        }
-        .shiny-cta::after {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1;
-          width:100%; aspect-ratio:1; background:linear-gradient(-50deg,transparent,#3b82f6,transparent);
-          mask-image:radial-gradient(circle at bottom,transparent 40%,black); opacity:0.6; animation:shimmer 4s linear infinite;
-        }
-        .shiny-cta span { position:relative; z-index:2; display:inline-block; }
-        @keyframes shimmer { to { transform:translate(-50%,-50%) rotate(360deg); } }
-      `}} />
-
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
+      <SharedHead />
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
-      {/* NAVBAR */}
-      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
-        <div className="flex max-w-7xl mx-auto pt-4 px-4 sm:px-6 pb-4 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-          </Link>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
-            <Link to="/about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">About</Link>
-            <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
-            <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
-            <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</Link>
-            <Link to="/contact" className="text-sm text-slate-900 font-medium">Contact</Link>
-          </nav>
-          <button onClick={() => setMobileOpen(true)} className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-        <aside className={`mobile-menu fixed z-50 bg-white/95 w-[80%] max-w-sm border-slate-200 border-l p-6 top-0 right-0 bottom-0 backdrop-blur ${mobileOpen ? 'open' : ''}`}>
-          <div className="flex items-center justify-between">
-            <span className="font-semibold text-slate-900">Ryland Partners</span>
-            <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Close menu">
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-          <ul className="mt-6 space-y-4">
-            <li><Link to="/" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Home</Link></li>
-            <li><Link to="/about" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">About</Link></li>
-            <li><a href="/#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
-            <li><Link to="/store" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Store</Link></li>
-            <li><Link to="/contact" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-900 font-medium hover:bg-slate-100 transition-colors">Contact</Link></li>
-          </ul>
-        </aside>
-      </header>
+      <Navbar />
 
       {/* HERO */}
       <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto mt-4 sm:mt-8 pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
@@ -159,7 +115,6 @@ const Contact = () => {
       {/* MAIN CONTENT */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-
           {/* LEFT - Contact Info Cards */}
           <div className="lg:col-span-2 space-y-6">
             <div>
@@ -217,20 +172,16 @@ const Contact = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label htmlFor="name" className="block text-xs font-medium text-zinc-300 mb-1.5">Full Name *</label>
-                          <input
-                            id="name" name="name" type="text" value={form.name} onChange={handleChange} maxLength={100}
+                          <input id="name" name="name" type="text" value={form.name} onChange={handleChange} maxLength={100}
                             className={`w-full rounded-xl bg-white/5 border ${errors.name ? 'border-red-400/60' : 'border-white/10'} px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition-all`}
-                            placeholder="John Smith"
-                          />
+                            placeholder="John Smith" />
                           {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
                         </div>
                         <div>
                           <label htmlFor="email" className="block text-xs font-medium text-zinc-300 mb-1.5">Email Address *</label>
-                          <input
-                            id="email" name="email" type="email" value={form.email} onChange={handleChange} maxLength={255}
+                          <input id="email" name="email" type="email" value={form.email} onChange={handleChange} maxLength={255}
                             className={`w-full rounded-xl bg-white/5 border ${errors.email ? 'border-red-400/60' : 'border-white/10'} px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition-all`}
-                            placeholder="john@company.com"
-                          />
+                            placeholder="john@company.com" />
                           {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
                         </div>
                       </div>
@@ -238,16 +189,13 @@ const Contact = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label htmlFor="phone" className="block text-xs font-medium text-zinc-300 mb-1.5">Phone Number</label>
-                          <input
-                            id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20}
+                          <input id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20}
                             className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition-all"
-                            placeholder="(555) 123-4567"
-                          />
+                            placeholder="(555) 123-4567" />
                         </div>
                         <div>
                           <label htmlFor="subject" className="block text-xs font-medium text-zinc-300 mb-1.5">Subject *</label>
-                          <select
-                            id="subject" name="subject" value={form.subject} onChange={handleChange}
+                          <select id="subject" name="subject" value={form.subject} onChange={handleChange}
                             className={`w-full rounded-xl bg-white/5 border ${errors.subject ? 'border-red-400/60' : 'border-white/10'} px-4 py-3 text-sm text-white outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition-all appearance-none`}
                             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center' }}
                           >
@@ -265,22 +213,17 @@ const Contact = () => {
 
                       <div>
                         <label htmlFor="message" className="block text-xs font-medium text-zinc-300 mb-1.5">Message *</label>
-                        <textarea
-                          id="message" name="message" value={form.message} onChange={handleChange} maxLength={2000} rows={5}
+                        <textarea id="message" name="message" value={form.message} onChange={handleChange} maxLength={2000} rows={5}
                           className={`w-full rounded-xl bg-white/5 border ${errors.message ? 'border-red-400/60' : 'border-white/10'} px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition-all resize-none`}
-                          placeholder="Tell us how we can help you..."
-                        />
+                          placeholder="Tell us how we can help you..." />
                         <div className="flex items-center justify-between mt-1">
                           {errors.message ? <p className="text-xs text-red-400">{errors.message}</p> : <span />}
                           <p className="text-xs text-zinc-500">{form.message.length}/2000</p>
                         </div>
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={sending}
-                        className="shiny-cta !py-3.5 !px-8 !text-base w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
+                      <button type="submit" disabled={sending}
+                        className="shiny-cta !py-3.5 !px-8 !text-base w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed">
                         <span className="inline-flex items-center gap-2">
                           {sending ? (
                             <>
