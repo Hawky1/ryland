@@ -1,46 +1,35 @@
 
 
-## Funnel Page Redesign
+# Update Text Content on Funnel Lead Magnet Page
 
-### Problems Identified
+This plan updates **only the text strings** on the `/funnel` page. No layout, styling, colors, fonts, spacing, animations, or component structure will be changed.
 
-1. **Red urgency header** -- Clashes with the premium dark-blue brand. Red feels cheap and alarmist for a financial services brand.
-2. **"As Seen On" is buried at the very bottom** -- It should appear near the top as a trust signal, right after the hero, not as a footer afterthought.
-3. **Book mockup still constrained** -- The single book variant caps at `max-w-xl` which doesn't fill the right column to match the left side's height.
-4. **Shiny-cta button** still has rotating shimmer pseudo-elements that have caused visual artifacts before.
+## File to modify
 
-### What Will Change
+`src/pages/funnel/FunnelLeadMagnet.tsx`
 
-**1. Urgency Header -- Replace Red with Dark Navy/Gold**
+## Changes
 
-Swap the `from-red-600 via-red-500 to-orange-500` gradient to a dark navy bar (`bg-[#001228]/95 backdrop-blur-lg border-b border-white/10`) with a subtle gold accent for the countdown timer and "Offer expires in" text. This matches the brand's premium feel while still conveying urgency.
+### Hero Section
+- Eyebrow tag: "Free Download — Limited Time" → "Free Download — Available for a Limited Time"
+- Headline: "GET THE BLUEPRINT: How to Build a $250,000 Business Credit Profile from Scratch." → "The $250K Business Credit Blueprint: Fund Your Business Without Risking Your Personal Credit Score."
+- Subheadline: updated to the new copy about SSN and bankable business credit profile
+- CTA button: "Download For Free" → "Send Me the Free Blueprint"
+- Privacy microcopy: "We respect your privacy. Unsubscribe anytime." → "No spam. No credit card. Unsubscribe anytime."
 
-**2. Move "As Seen On" from Bottom to Directly Below the Hero**
+### What's Inside Section
+- Section headline: "What's Inside Your Free Blueprint" → "Here's Exactly What You'll Get Inside"
+- Card 1 title stays the same; description updated to the "9 things banks quietly check" copy
+- Card 2 title: "The Net-30 Vendor List" → "The Net-30 Vendor Starter Kit"; description updated
+- Card 3 title stays the same; description updated to the "sequence matters" copy
 
-In `FunnelLayout.tsx`, remove the `AsSeenOnMarquee` from below `main` and instead render it between the progress bar and the main content. This places the trust signal right after the hero on every funnel page, boosting credibility before the visitor scrolls further.
+### Bottom CTA Section
+- Headline: "Ready to Build Your $250K Credit Profile?" → "Your Business Deserves Its Own Credit Profile. Build It Today."
+- Supporting text updated to the "stop mixing personal and business finances" copy
+- CTA button: "Get Your Free Blueprint Now" → "Get the Free Blueprint Now"
+- Trust badge: "No Credit Card" → "No Credit Card Required"
 
-**3. Make the Book Fill the Right Column**
+## Technical Details
 
-In `BookMockup3D.tsx`, remove the `max-w-lg xl:max-w-xl` constraints on the single variant. Set the image to `w-full h-full object-contain` so it stretches to match the full height of its grid column, creating visual balance with the left-side copy.
-
-**4. Clean Up Button Styles**
-
-Remove the `::before` and `::after` pseudo-elements from the `.shiny-cta` class entirely. Replace with a clean gradient + subtle hover glow. No more rotating shimmer animations that cause visual artifacts.
-
-### Technical Details
-
-**File: `src/components/funnel/FunnelLayout.tsx`**
-- Change header background from red gradient to `bg-[#001228]/95 backdrop-blur-lg border-b border-white/10`
-- Change timer label color from `text-red-100/80` to `text-amber-300/80`
-- Change countdown pill background to `bg-amber-500/15 border border-amber-400/20`
-- Move `<AsSeenOnMarquee />` from after `<main>` to between `<FunnelProgressBar>` and `<main>`
-- Replace the entire `.shiny-cta` inline style block: remove `::before`, `::after`, `@keyframes border-spin`, `@keyframes shimmer`. Replace with a simple class that uses `background: linear-gradient(180deg, #1e40af, #1e3a8a)` and a hover state with `box-shadow: 0 0 30px rgba(59,130,246,0.3)`. No pseudo-elements.
-
-**File: `src/components/funnel/BookMockup3D.tsx`**
-- Single variant: change container to `flex items-center justify-center h-full`
-- Change image class from `w-full max-w-lg xl:max-w-xl rounded-xl` to `w-full h-auto max-h-[600px] object-contain rounded-xl` so it can grow taller to match the left column
-
-**File: `src/components/funnel/AsSeenOnMarquee.tsx`**
-- Remove `border-t` since it will no longer be at the page bottom
-- Reduce vertical padding from `py-8` to `py-6` for tighter integration
+All changes are simple string replacements in `src/pages/funnel/FunnelLeadMagnet.tsx`. The FEATURES array constants and the JSX template text will be updated. No other files are affected.
 
