@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
+import PartnerSignupForm from "@/components/PartnerSignupForm";
 import {
   DollarSign, ShieldCheck, Users, Handshake,
   Link2, Share2, Wallet, Megaphone, GraduationCap,
@@ -74,6 +75,7 @@ const TimelineStep = ({ step, icon: Icon, title, desc, index, total }: {
 
 const Partners = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formOpen, setFormOpen] = useState(false);
 
   const faqs = [
     { q: "Do I get paid even if the business owner doesn't take the funding?", a: "Yes! As long as the business owner you refer qualifies for our funding, you get paid — even if they decide not to take the funding. You're rewarded for the introduction, not the close." },
@@ -153,9 +155,9 @@ const Partners = () => {
 
           {/* CTA */}
           <motion.div {...stagger(0.35)} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+            <button onClick={() => setFormOpen(true)} className="shiny-cta !py-4 !px-10 !text-lg">
               <span>Become A Partner Now</span>
-            </a>
+            </button>
             <a href="#" className="text-white/60 hover:text-white text-sm font-medium tracking-wide transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50">
               Partner Login →
             </a>
@@ -319,9 +321,9 @@ const Partners = () => {
         </motion.p>
 
         <motion.div {...stagger(0.6)} className="text-center mt-12">
-          <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+          <button onClick={() => setFormOpen(true)} className="shiny-cta !py-4 !px-10 !text-lg">
             <span>Become A Partner Now</span>
-          </a>
+          </button>
         </motion.div>
       </section>
 
@@ -389,9 +391,9 @@ const Partners = () => {
           </div>
 
           <motion.div {...stagger(0.5)} className="mt-12">
-            <a href="#cta" className="shiny-cta !py-4 !px-10 !text-lg">
+            <button onClick={() => setFormOpen(true)} className="shiny-cta !py-4 !px-10 !text-lg">
               <span>Become A Partner Now</span>
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>
@@ -501,9 +503,9 @@ const Partners = () => {
               </motion.p>
 
               <motion.div {...stagger(0.3)} className="mt-10">
-                <a href="#" className="shiny-cta !py-4 !px-10 !text-lg">
+                <button onClick={() => setFormOpen(true)} className="shiny-cta !py-4 !px-10 !text-lg">
                   <span>Start Earning Now</span>
-                </a>
+                </button>
               </motion.div>
 
               {/* Trust chips */}
@@ -523,6 +525,7 @@ const Partners = () => {
         </div>
       </section>
 
+      <PartnerSignupForm open={formOpen} onOpenChange={setFormOpen} />
       <Footer />
     </div>
   );
