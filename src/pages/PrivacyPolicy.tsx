@@ -1,29 +1,21 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import SharedHead from "@/components/SharedHead";
+import PageMeta from "@/components/PageMeta";
 
 const PrivacyPolicy = () => {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
-
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
+      <SharedHead />
+      <PageMeta title="Privacy Policy | Ryland Partners" description="Learn how Ryland Partners collects, uses, and protects your personal information." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
-      <header className="sticky z-20 top-0 backdrop-blur-md bg-white/80 border-b border-slate-200">
-        <div className="flex max-w-7xl mx-auto py-4 px-6 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
-          </Link>
-          <Link to="/" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">← Back to Home</Link>
-        </div>
-      </header>
+      <Navbar showServicesDropdown={false} />
 
       <main className="max-w-4xl mx-auto px-6 py-16">
         <p className="text-sm text-slate-500 mb-2">Last Updated: February 10, 2026</p>

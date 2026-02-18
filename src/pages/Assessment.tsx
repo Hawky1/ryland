@@ -19,6 +19,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
+import PageMeta from "@/components/PageMeta";
 
 /* ── Quiz Data ─────────────────────────────────────────────── */
 const STEPS = [
@@ -190,6 +191,7 @@ export default function Assessment() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8fafc] via-white to-[#f1f5f9] font-[Inter,sans-serif]">
+      <PageMeta title="Funding Assessment | Ryland Partners" description="Take our free 2-minute assessment to discover your business funding eligibility." />
       {/* Header */}
       <header className="border-b border-slate-100 bg-white/80 backdrop-blur-xl">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">

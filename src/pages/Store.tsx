@@ -77,57 +77,9 @@ const Store = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-[Manrope,sans-serif]">
-      {/* Shiny CTA styles */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
-        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
-
-        .shiny-cta {
-          --gradient-angle: 0deg; --gradient-angle-offset: 0deg; --gradient-percent: 20%; --gradient-shine: #8484ff; --shadow-size: 2px;
-          position: relative; overflow: hidden; border-radius: 9999px; padding: 1.25rem 2.5rem; font-size: 1.125rem; line-height: 1.2; font-weight: 500; color: #ffffff;
-          background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
-          box-shadow: inset 0 var(--shadow-size) 0 0 rgba(96,165,250,0.4), inset 0 calc(var(--shadow-size)*-1) 0 0 rgba(30,58,138,0.6), 0 8px 30px -6px rgba(30,64,175,0.5);
-          animation: border-spin 2.5s linear infinite;
-        }
-        @keyframes border-spin { to { --gradient-angle: 360deg; } }
-        .shiny-cta:active { transform: translateY(1px); }
-        .shiny-cta::before {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:0;
-          --size:calc(100% - 6px); --position:2px; --space:4px; width:var(--size); height:var(--size);
-          background:conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,var(--gradient-shine),transparent);
-          mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black); border-radius:inherit; opacity:0.4;
-        }
-        .shiny-cta::after {
-          content:''; pointer-events:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1;
-          width:100%; aspect-ratio:1; background:linear-gradient(-50deg,transparent,#3b82f6,transparent);
-          mask-image:radial-gradient(circle at bottom,transparent 40%,black); opacity:0.6; animation:shimmer 4s linear infinite;
-        }
-        .shiny-cta span { position:relative; z-index:2; display:inline-block; }
-        @keyframes shimmer { to { transform:translate(-50%,-50%) rotate(360deg); } }
-      `}} />
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-          </Link>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
-            <Link to="/about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">About</Link>
-            <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
-            <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
-            <Link to="/store" className="text-sm text-slate-900 font-medium">Store</Link>
-            <a href="/#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
-              <span>Contact</span>
-            </a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <CartDrawer />
-          </div>
-        </div>
-      </header>
+      <SharedHead />
+      <PageMeta title="Digital Products Store | Ryland Partners" description="Browse eBooks, guides, and resources for credit repair, business funding, and financial education." />
+      <Navbar />
 
       {/* Hero */}
       <StoreHero onBrowse={scrollToProducts} />
