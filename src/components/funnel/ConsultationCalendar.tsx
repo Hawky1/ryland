@@ -11,20 +11,20 @@ import { ArrowLeft, CheckCircle2, Loader2, Clock, CalendarDays, User } from "luc
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-type Step = "select-date" | "select-time" | "details" | "confirmed";
+type Step = "select" | "details" | "confirmed";
 
 interface SlotMap {
   [date: string]: { slots: string[] };
 }
 
 export default function ConsultationCalendar() {
-  const [step, setStep] = useState<Step>("select-date");
+  const [step, setStep] = useState<Step>("select");
   const [month, setMonth] = useState(startOfMonth(new Date()));
   const [slots, setSlots] = useState<SlotMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
 
   const [name, setName] = useState("");
@@ -82,7 +82,6 @@ export default function ConsultationCalendar() {
     if (!date) return;
     setSelectedDate(date);
     setSelectedSlot(null);
-    setStep("select-time");
   };
 
   const timeSlotsForDate = selectedDate
@@ -130,11 +129,10 @@ export default function ConsultationCalendar() {
   const stepIndicator = (
     <div className="flex items-center gap-2 px-6 pt-5 pb-2">
       {[
-        { key: "select-date", icon: CalendarDays, label: "Date" },
-        { key: "select-time", icon: Clock, label: "Time" },
+        { key: "select", icon: CalendarDays, label: "Date & Time" },
         { key: "details", icon: User, label: "Details" },
       ].map((s, i) => {
-        const steps: Step[] = ["select-date", "select-time", "details", "confirmed"];
+        const steps: Step[] = ["select", "details", "confirmed"];
         const currentIdx = steps.indexOf(step);
         const thisIdx = i;
         const isActive = thisIdx === currentIdx;
@@ -177,15 +175,15 @@ export default function ConsultationCalendar() {
 
       {step !== "confirmed" && stepIndicator}
 
-      <AnimatePresence mode="wait"><div className="flex-1 flex flex-col justify-center">
-        {/* ── STEP 1: DATE ── */}
-        {step === "select-date" && (
+      <AnimatePresence mode="wait">
+        {/* ── STEP 1: DATE & TIME SIDE-BY-SIDE ── */}
+        {step === "select" && (
           <motion.div
-            key="date"
+            key="select"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="p-4"
+            className="flex-1 flex flex-col p-4"
           >
             {loading ? (
               <div className="space-y-3 p-4">
@@ -205,108 +203,106 @@ export default function ConsultationCalendar() {
                 </Button>
               </div>
             ) : (
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={handleDateSelect}
-                month={month}
-                onMonthChange={(m) => setMonth(startOfMonth(m))}
-                disabled={isDayDisabled}
-                fromDate={today}
-                toDate={endOfMonth(addMonths(today, 2))}
-                className="p-3 pointer-events-auto mx-auto"
-                classNames={{
-                  months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-                  month: "space-y-4",
-                  caption: "flex justify-center pt-1 relative items-center",
-                  caption_label: "text-sm font-medium text-white",
-                  nav: "space-x-1 flex items-center",
-                  nav_button:
-                    "h-7 w-7 bg-white/5 border border-white/10 rounded-md p-0 text-white/60 hover:text-white hover:bg-white/10 inline-flex items-center justify-center",
-                  nav_button_previous: "absolute left-1",
-                  nav_button_next: "absolute right-1",
-                  table: "w-full border-collapse space-y-1",
-                  head_row: "flex",
-                  head_cell: "text-blue-200/40 rounded-md w-9 font-normal text-[0.8rem]",
-                  row: "flex w-full mt-2",
-                  cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
-                  day: "h-9 w-9 p-0 font-normal rounded-md text-white/70 hover:bg-white/10 hover:text-white inline-flex items-center justify-center transition-colors aria-selected:opacity-100",
-                  day_range_end: "day-range-end",
-                  day_selected:
-                    "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 hover:bg-emerald-500/30 hover:text-emerald-200",
-                  day_today: "bg-cyan-500/10 text-cyan-300 border border-cyan-400/20",
-                  day_outside: "day-outside text-white/20 opacity-50",
-                  day_disabled: "text-white/10 opacity-30 hover:bg-transparent hover:text-white/10 cursor-not-allowed",
-                  day_range_middle: "aria-selected:bg-white/5 aria-selected:text-white/70",
-                  day_hidden: "invisible",
-                }}
-              />
-            )}
-          </motion.div>
-        )}
+              <div className="flex flex-col lg:flex-row gap-4 flex-1">
+                {/* Calendar */}
+                <div className="lg:border-r lg:border-white/10 lg:pr-4">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={handleDateSelect}
+                    month={month}
+                    onMonthChange={(m) => setMonth(startOfMonth(m))}
+                    disabled={isDayDisabled}
+                    fromDate={today}
+                    toDate={endOfMonth(addMonths(today, 2))}
+                    className="p-3 pointer-events-auto mx-auto"
+                    classNames={{
+                      months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                      month: "space-y-4",
+                      caption: "flex justify-center pt-1 relative items-center",
+                      caption_label: "text-sm font-medium text-white",
+                      nav: "space-x-1 flex items-center",
+                      nav_button:
+                        "h-7 w-7 bg-white/5 border border-white/10 rounded-md p-0 text-white/60 hover:text-white hover:bg-white/10 inline-flex items-center justify-center",
+                      nav_button_previous: "absolute left-1",
+                      nav_button_next: "absolute right-1",
+                      table: "w-full border-collapse space-y-1",
+                      head_row: "flex",
+                      head_cell: "text-blue-200/40 rounded-md w-9 font-normal text-[0.8rem]",
+                      row: "flex w-full mt-2",
+                      cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
+                      day: "h-9 w-9 p-0 font-normal rounded-md text-white/70 hover:bg-white/10 hover:text-white inline-flex items-center justify-center transition-colors aria-selected:opacity-100",
+                      day_range_end: "day-range-end",
+                      day_selected:
+                        "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 hover:bg-emerald-500/30 hover:text-emerald-200",
+                      day_today: "bg-cyan-500/10 text-cyan-300 border border-cyan-400/20",
+                      day_outside: "day-outside text-white/20 opacity-50",
+                      day_disabled: "text-white/10 opacity-30 hover:bg-transparent hover:text-white/10 cursor-not-allowed",
+                      day_range_middle: "aria-selected:bg-white/5 aria-selected:text-white/70",
+                      day_hidden: "invisible",
+                    }}
+                  />
+                </div>
 
-        {/* ── STEP 2: TIME ── */}
-        {step === "select-time" && (
-          <motion.div
-            key="time"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="p-6"
-          >
-            <button
-              onClick={() => setStep("select-date")}
-              className="flex items-center gap-1 text-sm text-blue-200/50 hover:text-white mb-4 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              {selectedDate && format(selectedDate, "EEEE, MMMM d")}
-            </button>
+                {/* Time Slots */}
+                <div className="flex-1 flex flex-col min-w-0">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Clock className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm font-medium text-white">
+                      {selectedDate ? format(selectedDate, "EEEE, MMM d") : "Select a date"}
+                    </span>
+                  </div>
 
-            {timeSlotsForDate.length === 0 ? (
-              <p className="text-white/30 text-sm text-center py-8">No slots available for this date.</p>
-            ) : (
-              <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto pr-1">
-                {timeSlotsForDate.map((slot) => (
-                  <Button
-                    key={slot}
-                    variant="outline"
-                    size="sm"
-                    className={cn(
-                      "text-sm border-white/10 transition-all",
-                      selectedSlot === slot
-                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30"
-                        : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-                    )}
-                    onClick={() => setSelectedSlot(slot)}
-                  >
-                    {formatSlotTime(slot)}
-                  </Button>
-                ))}
+                  {!selectedDate ? (
+                    <p className="text-white/30 text-sm text-center py-8">← Pick a date to see times</p>
+                  ) : timeSlotsForDate.length === 0 ? (
+                    <p className="text-white/30 text-sm text-center py-8">No slots available for this date.</p>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 max-h-[280px] overflow-y-auto pr-1 flex-1">
+                      {timeSlotsForDate.map((slot) => (
+                        <Button
+                          key={slot}
+                          variant="outline"
+                          size="sm"
+                          className={cn(
+                            "text-sm border-white/10 transition-all",
+                            selectedSlot === slot
+                              ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30"
+                              : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                          )}
+                          onClick={() => setSelectedSlot(slot)}
+                        >
+                          {formatSlotTime(slot)}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+
+                  {selectedSlot && (
+                    <Button
+                      className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
+                      onClick={() => setStep("details")}
+                    >
+                      Continue
+                    </Button>
+                  )}
+                </div>
               </div>
             )}
-
-            {selectedSlot && (
-              <Button
-                className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
-                onClick={() => setStep("details")}
-              >
-                Continue
-              </Button>
-            )}
           </motion.div>
         )}
 
-        {/* ── STEP 3: DETAILS ── */}
+        {/* ── STEP 2: DETAILS ── */}
         {step === "details" && (
           <motion.div
             key="details"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="p-6 space-y-4"
+            className="p-6 space-y-4 flex-1"
           >
             <button
-              onClick={() => setStep("select-time")}
+              onClick={() => setStep("select")}
               className="flex items-center gap-1 text-sm text-blue-200/50 hover:text-white mb-2 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -391,13 +387,13 @@ export default function ConsultationCalendar() {
           </motion.div>
         )}
 
-        {/* ── STEP 4: CONFIRMED ── */}
+        {/* ── STEP 3: CONFIRMED ── */}
         {step === "confirmed" && (
           <motion.div
             key="confirmed"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="p-8 text-center space-y-4"
+            className="p-8 text-center space-y-4 flex-1 flex flex-col items-center justify-center"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -416,7 +412,7 @@ export default function ConsultationCalendar() {
             </p>
           </motion.div>
         )}
-      </div></AnimatePresence>
+      </AnimatePresence>
     </div>
   );
 }
