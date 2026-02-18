@@ -56,9 +56,9 @@ export default function FunnelDownsell() {
 
   return (
     <FunnelLayout step={3} label="Founder Discount">
-      <section className="relative min-h-[80vh] flex items-center">
+      <section className="relative">
         <HlsVideoBackground overlay="bg-[#001F3F]/94" />
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-24 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-400/20 rounded-full px-4 py-1.5 text-xs font-bold text-orange-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif]">
               <AlertTriangle className="w-3.5 h-3.5" /> Last Chance — Founders Only
