@@ -119,7 +119,7 @@ export default function FunnelCoreOffer() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <HlsVideoBackground overlay="bg-[#001F3F]/94" />
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-24 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif]">
               WAIT! Your Blueprint is on the way...
