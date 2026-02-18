@@ -50,7 +50,6 @@ export default function ConsultationCalendar() {
         },
       });
       if (fnError) throw fnError;
-      // The GHL API nests slots inside a root key or returns them flat
       const slotData: SlotMap = data || {};
       setSlots(slotData);
     } catch (e: any) {
@@ -101,7 +100,6 @@ export default function ConsultationCalendar() {
     setError(null);
 
     try {
-      // Assume 30-min slots
       const startTime = selectedSlot;
       const endDate = new Date(new Date(selectedSlot).getTime() + 30 * 60 * 1000);
       const endTime = endDate.toISOString();
@@ -143,13 +141,15 @@ export default function ConsultationCalendar() {
         const isDone = thisIdx < currentIdx;
         return (
           <div key={s.key} className="flex items-center gap-2">
-            {i > 0 && <div className={cn("w-6 h-px", isDone ? "bg-emerald-400" : "bg-slate-200")} />}
+            {i > 0 && (
+              <div className={cn("w-6 h-px", isDone ? "bg-emerald-400" : "bg-white/10")} />
+            )}
             <div
               className={cn(
                 "flex items-center gap-1.5 text-xs font-medium rounded-full px-3 py-1 transition-colors",
-                isActive && "bg-slate-900 text-white",
-                isDone && "bg-emerald-50 text-emerald-600",
-                !isActive && !isDone && "bg-slate-100 text-slate-400"
+                isActive && "bg-emerald-500/20 text-emerald-300 border border-emerald-400/30",
+                isDone && "bg-emerald-500/10 text-emerald-400",
+                !isActive && !isDone && "bg-white/5 text-white/30"
               )}
             >
               <s.icon className="w-3.5 h-3.5" />
@@ -162,13 +162,17 @@ export default function ConsultationCalendar() {
   );
 
   return (
-    <div className="flex flex-col bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
+    <div className="flex flex-col rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10"
+      style={{
+        background: "linear-gradient(180deg, hsl(210 100% 8%) 0%, hsl(210 100% 14%) 100%)",
+      }}
+    >
       {/* Header */}
-      <div className="p-6 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
-        <h3 className="text-lg font-bold text-slate-900 font-[Geist,sans-serif]">
+      <div className="p-6 border-b border-white/10">
+        <h3 className="text-lg font-bold text-white font-[Geist,sans-serif]">
           Book Your Free Strategy Session
         </h3>
-        <p className="text-slate-500 text-sm mt-1">Choose a time that works for you</p>
+        <p className="text-blue-200/50 text-sm mt-1">Choose a time that works for you</p>
       </div>
 
       {step !== "confirmed" && stepIndicator}
@@ -185,13 +189,18 @@ export default function ConsultationCalendar() {
           >
             {loading ? (
               <div className="space-y-3 p-4">
-                <Skeleton className="h-8 w-48" />
-                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-8 w-48 bg-white/5" />
+                <Skeleton className="h-64 w-full bg-white/5" />
               </div>
             ) : error ? (
               <div className="p-6 text-center">
-                <p className="text-red-500 text-sm mb-3">{error}</p>
-                <Button variant="outline" size="sm" onClick={() => fetchSlots(month)}>
+                <p className="text-red-400 text-sm mb-3">{error}</p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/10 text-white/70 hover:bg-white/5"
+                  onClick={() => fetchSlots(month)}
+                >
                   Retry
                 </Button>
               </div>
@@ -206,6 +215,31 @@ export default function ConsultationCalendar() {
                 fromDate={today}
                 toDate={endOfMonth(addMonths(today, 2))}
                 className="p-3 pointer-events-auto mx-auto"
+                classNames={{
+                  months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                  month: "space-y-4",
+                  caption: "flex justify-center pt-1 relative items-center",
+                  caption_label: "text-sm font-medium text-white",
+                  nav: "space-x-1 flex items-center",
+                  nav_button:
+                    "h-7 w-7 bg-white/5 border border-white/10 rounded-md p-0 text-white/60 hover:text-white hover:bg-white/10 inline-flex items-center justify-center",
+                  nav_button_previous: "absolute left-1",
+                  nav_button_next: "absolute right-1",
+                  table: "w-full border-collapse space-y-1",
+                  head_row: "flex",
+                  head_cell: "text-blue-200/40 rounded-md w-9 font-normal text-[0.8rem]",
+                  row: "flex w-full mt-2",
+                  cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
+                  day: "h-9 w-9 p-0 font-normal rounded-md text-white/70 hover:bg-white/10 hover:text-white inline-flex items-center justify-center transition-colors aria-selected:opacity-100",
+                  day_range_end: "day-range-end",
+                  day_selected:
+                    "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 hover:bg-emerald-500/30 hover:text-emerald-200",
+                  day_today: "bg-cyan-500/10 text-cyan-300 border border-cyan-400/20",
+                  day_outside: "day-outside text-white/20 opacity-50",
+                  day_disabled: "text-white/10 opacity-30 hover:bg-transparent hover:text-white/10 cursor-not-allowed",
+                  day_range_middle: "aria-selected:bg-white/5 aria-selected:text-white/70",
+                  day_hidden: "invisible",
+                }}
               />
             )}
           </motion.div>
@@ -222,24 +256,26 @@ export default function ConsultationCalendar() {
           >
             <button
               onClick={() => setStep("select-date")}
-              className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 mb-4 transition-colors"
+              className="flex items-center gap-1 text-sm text-blue-200/50 hover:text-white mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               {selectedDate && format(selectedDate, "EEEE, MMMM d")}
             </button>
 
             {timeSlotsForDate.length === 0 ? (
-              <p className="text-slate-400 text-sm text-center py-8">No slots available for this date.</p>
+              <p className="text-white/30 text-sm text-center py-8">No slots available for this date.</p>
             ) : (
               <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto pr-1">
                 {timeSlotsForDate.map((slot) => (
                   <Button
                     key={slot}
-                    variant={selectedSlot === slot ? "default" : "outline"}
+                    variant="outline"
                     size="sm"
                     className={cn(
-                      "text-sm",
-                      selectedSlot === slot && "bg-slate-900 text-white hover:bg-slate-800"
+                      "text-sm border-white/10 transition-all",
+                      selectedSlot === slot
+                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30"
+                        : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
                     )}
                     onClick={() => setSelectedSlot(slot)}
                   >
@@ -251,7 +287,7 @@ export default function ConsultationCalendar() {
 
             {selectedSlot && (
               <Button
-                className="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white"
+                className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
                 onClick={() => setStep("details")}
               >
                 Continue
@@ -271,7 +307,7 @@ export default function ConsultationCalendar() {
           >
             <button
               onClick={() => setStep("select-time")}
-              className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 mb-2 transition-colors"
+              className="flex items-center gap-1 text-sm text-blue-200/50 hover:text-white mb-2 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               {selectedDate && format(selectedDate, "MMM d")} at{" "}
@@ -280,7 +316,7 @@ export default function ConsultationCalendar() {
 
             <div className="space-y-3">
               <div>
-                <Label htmlFor="cal-name" className="text-slate-700 text-sm">
+                <Label htmlFor="cal-name" className="text-white/70 text-sm">
                   Full Name *
                 </Label>
                 <Input
@@ -288,12 +324,12 @@ export default function ConsultationCalendar() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Smith"
-                  className="mt-1"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
                   maxLength={100}
                 />
               </div>
               <div>
-                <Label htmlFor="cal-email" className="text-slate-700 text-sm">
+                <Label htmlFor="cal-email" className="text-white/70 text-sm">
                   Email *
                 </Label>
                 <Input
@@ -302,12 +338,12 @@ export default function ConsultationCalendar() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="john@example.com"
-                  className="mt-1"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
                   maxLength={255}
                 />
               </div>
               <div>
-                <Label htmlFor="cal-phone" className="text-slate-700 text-sm">
+                <Label htmlFor="cal-phone" className="text-white/70 text-sm">
                   Phone
                 </Label>
                 <Input
@@ -316,12 +352,12 @@ export default function ConsultationCalendar() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="(555) 123-4567"
-                  className="mt-1"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
                   maxLength={20}
                 />
               </div>
               <div>
-                <Label htmlFor="cal-notes" className="text-slate-700 text-sm">
+                <Label htmlFor="cal-notes" className="text-white/70 text-sm">
                   Anything we should know?
                 </Label>
                 <Textarea
@@ -329,17 +365,17 @@ export default function ConsultationCalendar() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Current credit score, funding goals, etc."
-                  className="mt-1"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
                   rows={3}
                   maxLength={500}
                 />
               </div>
             </div>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-400 text-sm">{error}</p>}
 
             <Button
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
               disabled={!name.trim() || !email.trim() || booking}
               onClick={handleBook}
             >
@@ -368,14 +404,14 @@ export default function ConsultationCalendar() {
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
             >
-              <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto" />
+              <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto" />
             </motion.div>
-            <h4 className="text-xl font-bold text-slate-900">You're Booked!</h4>
-            <p className="text-slate-500 text-sm max-w-xs mx-auto">
+            <h4 className="text-xl font-bold text-white">You're Booked!</h4>
+            <p className="text-blue-200/60 text-sm max-w-xs mx-auto">
               {selectedDate && format(selectedDate, "EEEE, MMMM d, yyyy")} at{" "}
               {selectedSlot && formatSlotTime(selectedSlot)}
             </p>
-            <p className="text-slate-400 text-xs">
+            <p className="text-white/30 text-xs">
               Check your email for confirmation details. We look forward to speaking with you!
             </p>
           </motion.div>
