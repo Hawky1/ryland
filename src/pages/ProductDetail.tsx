@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Loader2, BookOpen, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import logoDark from "@/assets/logo-dark.png";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
-
+import Navbar from "@/components/Navbar";
+import PageMeta from "@/components/PageMeta";
+import SharedHead from "@/components/SharedHead";
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
@@ -68,17 +69,12 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900">Store</Link>
-            <CartDrawer />
-          </div>
-        </div>
-      </header>
+      <PageMeta title={`${product.title} | Ryland Partners Store`} description={product.description?.slice(0, 160) || "Digital product from Ryland Partners."} />
+      <SharedHead />
+      <Navbar />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-end">
+        <CartDrawer />
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <Link to="/store" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 mb-8">

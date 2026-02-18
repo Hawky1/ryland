@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import logoDark from "@/assets/logo-dark.png";
-import logoWhite from "@/assets/logo-white.png";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import SharedHead from "@/components/SharedHead";
+import PageMeta from "@/components/PageMeta";
 import {
-  DollarSign, ShieldCheck, Users, Handshake, Calendar,
-  Link2, Share2, Wallet, Megaphone, GraduationCap, Clock,
-  HeartHandshake, Briefcase, Calculator, LineChart, UserCheck,
-  Building2, Home, ChevronDown, Menu, X, CheckCircle2, FileText,
+  DollarSign, ShieldCheck, Users, Handshake,
+  Link2, Share2, Wallet, Megaphone, GraduationCap,
+  Briefcase, Calculator, LineChart, UserCheck,
+  Building2, ChevronDown, CheckCircle2, FileText,
   Video, CreditCard, MessagesSquare
 } from "lucide-react";
 
 const Partners = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const faqs = [
     { q: "Do I get paid even if the business owner doesn't take the funding?", a: "Yes! As long as the business owner you refer qualifies for our funding, you get paid — even if they decide not to take the funding. You're rewarded for the introduction, not the close." },
@@ -45,196 +41,18 @@ const Partners = () => {
 
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
-        .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
-
-        .font-geist { font-family: 'Geist', sans-serif !important; }
-        .font-manrope { font-family: 'Manrope', sans-serif !important; }
-
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-out, visibility 0s 0.3s; visibility: hidden; }
-        .mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform 0.3s ease-out, visibility 0s 0s; }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
-        @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-        @property --gradient-percent { syntax: "<percentage>"; initial-value: 20%; inherits: false; }
-        @property --gradient-shine { syntax: "<color>"; initial-value: #8484ff; inherits: false; }
-
-        .shiny-cta {
-          --gradient-angle: 0deg;
-          --gradient-angle-offset: 0deg;
-          --gradient-percent: 20%;
-          --gradient-shine: #8484ff;
-          --shadow-size: 2px;
-          position: relative;
-          overflow: hidden;
-          border-radius: 9999px;
-          padding: 1.25rem 2.5rem;
-          font-size: 1.125rem;
-          line-height: 1.2;
-          font-weight: 500;
-          color: #ffffff;
-          background: linear-gradient(#003A70, #0060A9) padding-box, conic-gradient(
-            from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
-            transparent 0%,
-            #3b82f6 5%,
-            var(--gradient-shine) 15%,
-            #3b82f6 30%,
-            transparent 40%,
-            transparent 100%
-          ) border-box;
-          border: 2px solid transparent;
-          box-shadow: inset 0 0 0 1px #1e293b;
-          outline: none;
-          transition: --gradient-angle-offset 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-percent 800ms cubic-bezier(0.25, 1, 0.5, 1), --gradient-shine 800ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
-          cursor: pointer;
-          isolation: isolate;
-          outline-offset: 4px;
-          font-family: 'Inter', 'Helvetica Neue', sans-serif;
-          z-index: 0;
-          animation: border-spin 2.5s linear infinite;
-        }
-
-        @keyframes border-spin {
-          to { --gradient-angle: 360deg; }
-        }
-
-        .shiny-cta:active { transform: translateY(1px); }
-
-        .shiny-cta::before {
-          content: '';
-          pointer-events: none;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 0;
-          --size: calc(100% - 6px);
-          --position: 2px;
-          --space: 4px;
-          width: var(--size);
-          height: var(--size);
-          background: radial-gradient(circle at var(--position) var(--position), white 0.5px, transparent 0) padding-box;
-          background-size: var(--space) var(--space);
-          background-repeat: space;
-          mask-image: conic-gradient(
-            from calc(var(--gradient-angle) + 45deg),
-            black,
-            transparent 10% 90%,
-            black
-          );
-          border-radius: inherit;
-          opacity: 0.4;
-          pointer-events: none;
-        }
-
-        .shiny-cta::after {
-          content: '';
-          pointer-events: none;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 1;
-          width: 100%;
-          aspect-ratio: 1;
-          background: linear-gradient(-50deg, transparent, #3b82f6, transparent);
-          mask-image: radial-gradient(circle at bottom, transparent 40%, black);
-          opacity: 0.6;
-          animation: shimmer 4s linear infinite;
-          animation-play-state: running;
-        }
-
-        .shiny-cta span {
-          position: relative;
-          z-index: 2;
-          display: inline-block;
-        }
-
-        .shiny-cta span::before {
-          content: '';
-          pointer-events: none;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          z-index: -1;
-          --size: calc(100% + 1rem);
-          width: var(--size);
-          height: var(--size);
-          box-shadow: inset 0 -1ex 2rem 4px #3b82f6;
-          opacity: 0;
-          border-radius: inherit;
-          transition: opacity 800ms cubic-bezier(0.25, 1, 0.5, 1);
-          animation: breathe 4.5s linear infinite;
-        }
-
-        @keyframes shimmer {
-          to { transform: translate(-50%, -50%) rotate(360deg);}
-        }
-
-        @keyframes breathe {
-          0%, 100% { transform: translate(-50%, -50%) scale(1);}
-          50% { transform: translate(-50%, -50%) scale(1.20);}
-        }
-      `}} />
-
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" />
+      <PageMeta
+        title="Become A Partner | Ryland Partners"
+        description="Join the Ryland Partners program and earn uncapped commissions by referring business owners to our funding services. 100% free to join."
+      />
+      <SharedHead />
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />
       </div>
 
-      {/* NAVBAR */}
-      <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
-        <div className="flex max-w-7xl mx-auto pt-4 px-4 sm:px-6 pb-4 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
-          </Link>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Home</Link>
-            <Link to="/about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">About</Link>
-            <a href="/#services" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Services</a>
-            <a href="/#features" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Community</a>
-            <Link to="/store" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">Store</Link>
-            <Link to="/partners" className="text-sm text-slate-900 font-medium">Partners</Link>
-            <a href="#cta" className="shiny-cta !py-2 !px-5 !text-sm whitespace-nowrap focus:outline-none">
-              <span>Contact</span>
-            </a>
-          </nav>
-          <button onClick={() => setMobileOpen(true)} className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Open menu">
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-        {/* Mobile drawer */}
-        <aside className={`mobile-menu fixed z-50 bg-white/95 w-[80%] max-w-sm border-slate-200 border-l p-6 top-0 right-0 bottom-0 backdrop-blur ${mobileOpen ? 'open' : ''}`}>
-          <div className="flex items-center justify-between">
-            <span className="font-semibold text-slate-900">Ryland Partners</span>
-            <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Close menu">
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-          <ul className="mt-6 space-y-4">
-            <li><Link to="/" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Home</Link></li>
-            <li><Link to="/about" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">About</Link></li>
-            <li><a href="/#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Services</a></li>
-            <li><a href="/#features" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Community</a></li>
-            <li><Link to="/store" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Store</Link></li>
-            <li><Link to="/partners" onClick={() => setMobileOpen(false)} className="block rounded-lg px-2 py-2 text-slate-900 font-medium hover:bg-slate-100 transition-colors">Partners</Link></li>
-          </ul>
-          <a href="#cta" onClick={() => setMobileOpen(false)} className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-200 text-slate-900 transition-colors">
-            Contact <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-          </a>
-        </aside>
-      </header>
+      <Navbar />
 
       {/* ===================== HERO ===================== */}
       <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto pt-12 sm:pt-16 pb-20 sm:pb-36 px-4 sm:px-8 lg:px-20 overflow-hidden rounded-2xl border border-[#004E8C]">
