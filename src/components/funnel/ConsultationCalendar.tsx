@@ -27,9 +27,15 @@ export default function ConsultationCalendar() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState(() => {
+    try { return JSON.parse(sessionStorage.getItem("funnel_lead") || "{}").name || ""; } catch { return ""; }
+  });
+  const [email, setEmail] = useState(() => {
+    try { return JSON.parse(sessionStorage.getItem("funnel_lead") || "{}").email || ""; } catch { return ""; }
+  });
+  const [phone, setPhone] = useState(() => {
+    try { return JSON.parse(sessionStorage.getItem("funnel_lead") || "{}").phone || ""; } catch { return ""; }
+  });
   const [notes, setNotes] = useState("");
   const [booking, setBooking] = useState(false);
 
@@ -140,13 +146,13 @@ export default function ConsultationCalendar() {
         return (
           <div key={s.key} className="flex items-center gap-2">
             {i > 0 && (
-              <div className={cn("w-6 h-px", isDone ? "bg-emerald-400" : "bg-white/10")} />
+              <div className={cn("w-6 h-px", isDone ? "bg-cyan-400" : "bg-white/10")} />
             )}
             <div
               className={cn(
                 "flex items-center gap-1.5 text-xs font-medium rounded-full px-3 py-1 transition-colors",
-                isActive && "bg-emerald-500/20 text-emerald-300 border border-emerald-400/30",
-                isDone && "bg-emerald-500/10 text-emerald-400",
+                isActive && "bg-cyan-500/20 text-cyan-300 border border-cyan-400/30",
+                isDone && "bg-cyan-500/10 text-cyan-400",
                 !isActive && !isDone && "bg-white/5 text-white/30"
               )}
             >
@@ -234,7 +240,7 @@ export default function ConsultationCalendar() {
                       day: "h-9 w-9 p-0 font-normal rounded-md text-white/70 hover:bg-white/10 hover:text-white inline-flex items-center justify-center transition-colors aria-selected:opacity-100",
                       day_range_end: "day-range-end",
                       day_selected:
-                        "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 hover:bg-emerald-500/30 hover:text-emerald-200",
+                        "bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 hover:bg-cyan-500/30 hover:text-cyan-200",
                       day_today: "bg-cyan-500/10 text-cyan-300 border border-cyan-400/20",
                       day_outside: "day-outside text-white/20 opacity-50",
                       day_disabled: "text-white/10 opacity-30 hover:bg-transparent hover:text-white/10 cursor-not-allowed",
@@ -267,7 +273,7 @@ export default function ConsultationCalendar() {
                           className={cn(
                             "text-sm border-white/10 transition-all",
                             selectedSlot === slot
-                              ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30"
+                              ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/40 hover:bg-cyan-500/30"
                               : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
                           )}
                           onClick={() => setSelectedSlot(slot)}
@@ -280,7 +286,7 @@ export default function ConsultationCalendar() {
 
                   {selectedSlot && (
                     <Button
-                      className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
+                      className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-400 hover:to-blue-400 border-0"
                       onClick={() => setStep("details")}
                     >
                       Continue
@@ -320,7 +326,7 @@ export default function ConsultationCalendar() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Smith"
-                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-cyan-400/40"
                   maxLength={100}
                 />
               </div>
@@ -334,7 +340,7 @@ export default function ConsultationCalendar() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="john@example.com"
-                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-cyan-400/40"
                   maxLength={255}
                 />
               </div>
@@ -348,7 +354,7 @@ export default function ConsultationCalendar() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="(555) 123-4567"
-                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-cyan-400/40"
                   maxLength={20}
                 />
               </div>
@@ -361,7 +367,7 @@ export default function ConsultationCalendar() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Current credit score, funding goals, etc."
-                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-emerald-400/40"
+                  className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-cyan-400/40"
                   rows={3}
                   maxLength={500}
                 />
@@ -371,7 +377,7 @@ export default function ConsultationCalendar() {
             {error && <p className="text-red-400 text-sm">{error}</p>}
 
             <Button
-              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border-0"
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-400 hover:to-blue-400 border-0"
               disabled={!name.trim() || !email.trim() || booking}
               onClick={handleBook}
             >
@@ -400,7 +406,7 @@ export default function ConsultationCalendar() {
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
             >
-              <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto" />
+              <CheckCircle2 className="w-16 h-16 text-cyan-400 mx-auto" />
             </motion.div>
             <h4 className="text-xl font-bold text-white">You're Booked!</h4>
             <p className="text-blue-200/60 text-sm max-w-xs mx-auto">
