@@ -81,6 +81,17 @@ export default function FunnelLayout({ step, label, children }: Props) {
 
       {/* Page content */}
       <main className="flex-1">{children}</main>
+
+      {/* Minimal funnel footer */}
+      <footer className="border-t border-white/10 py-6">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-blue-200/40">
+          <span>© {new Date().getFullYear()} Ryland Partners. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <Link to="/privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-white/60 transition-colors">Terms of Service</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
