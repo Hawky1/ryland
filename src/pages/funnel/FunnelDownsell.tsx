@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
-import bundleImage from "@/assets/bundle-starter.png";
+import bundleImage from "@/assets/bundle-founders.webp";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -63,38 +63,30 @@ export default function FunnelDownsell() {
             <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-400/20 rounded-full px-4 py-1.5 text-xs font-bold text-orange-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif]">
               <AlertTriangle className="w-3.5 h-3.5" /> Last Chance — Founders Only
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif]">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3 font-[Geist,sans-serif]">
               I get it — you're just starting.
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
                 How about this?
               </span>
             </h1>
-            <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              I'd rather you have the information than stay stuck. This is the{" "}
-              <strong className="text-white">last time you'll see this price.</strong>{" "}
-              No fluff, just the roadmap to $250K.
-            </p>
 
-            {/* Value breakdown */}
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="text-xl text-red-400/50 line-through">$447</span>
-              <span className="text-xl text-red-400/50 line-through">$47</span>
-              <span className="text-5xl sm:text-6xl font-black text-white font-[Geist,sans-serif]">$27</span>
-            </div>
-            <p className="text-blue-200/40 text-sm mb-10">One-time payment • Same 18 resources • Instant access</p>
-
-            {/* Bundle Image */}
-            <div className="mb-12">
+            {/* Bundle Image — right after headline */}
+            <div className="mb-4">
               <img
                 src={bundleImage}
-                alt="Starter Bundle — 9 Ebooks"
-                className="max-w-md sm:max-w-lg mx-auto w-full rounded-xl"
+                alt="Master Your Credit — Complete Bundle"
+                className="max-w-lg sm:max-w-xl mx-auto w-full rounded-xl"
               />
             </div>
 
+            <p className="text-blue-100/60 text-sm sm:text-base max-w-2xl mx-auto mb-4">
+              I'd rather you have the information than stay stuck. This is the{" "}
+              <strong className="text-white">last time you'll see this price.</strong>
+            </p>
+
             {/* CTA */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <button
                 onClick={handleAddToCart}
                 disabled={isLoading}
