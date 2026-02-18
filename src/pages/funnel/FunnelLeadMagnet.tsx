@@ -59,6 +59,7 @@ export default function FunnelLeadMagnet() {
           if (ghlErr) console.error("GHL sync failed:", ghlErr);
         });
 
+      sessionStorage.setItem("funnel_lead", JSON.stringify({ name: result.data.name, email: result.data.email, phone: result.data.phone }));
       navigate("/funnel/offer");
     } catch {
       toast.error("Something went wrong. Please try again.");
