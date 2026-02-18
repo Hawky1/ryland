@@ -8,7 +8,7 @@ const TRUST_BADGES = [
   { icon: ShieldCheck, label: "No Hard Credit Pull" },
   { icon: Percent, label: "0% APR Focus" },
   { icon: Building2, label: "Trusted Banking Partners" },
-  { icon: Scale, label: "TSR Compliant" },
+  { icon: Scale, label: "100% Transparent Pricing" },
 ];
 
 const GHL_CALENDAR_URL = "https://api.leadconnectorhq.com/widget/booking/SCgFhVZJmkZBDLyiDGTl";
