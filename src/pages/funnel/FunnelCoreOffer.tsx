@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, Users, Clock, DollarSign } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
-import BookMockup3D from "@/components/funnel/BookMockup3D";
+import bundleImage from "@/assets/bundle-ultimate-credit-stack.png";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -30,16 +30,6 @@ const EBOOKS = [
   "Late Payment Removal Guide",
 ];
 
-const COVERS = [
-  "/covers/ultimate-business-credit-blueprint.png",
-  "/covers/100-dispute-letters.png",
-  "/covers/150k-funding-new-llc.png",
-  "/covers/credit-score-accelerator.png",
-  "/covers/secret-lenders-database.png",
-  "/covers/diy-credit-master-guide.png",
-  "/covers/financial-playbook.png",
-  "/covers/master-your-credit.png",
-];
 
 const STATS = [
   { icon: Users, value: "10,000+", label: "Entrepreneurs Served" },
@@ -110,14 +100,18 @@ export default function FunnelCoreOffer() {
             </p>
           </motion.div>
 
-          {/* 3D Stacked Covers */}
+          {/* Bundle Image */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12"
           >
-            <BookMockup3D variant="stacked" covers={COVERS} />
+            <img
+              src={bundleImage}
+              alt="Ultimate Business Credit Bundle — 18 Ebooks"
+              className="max-w-md sm:max-w-lg mx-auto w-full rounded-xl"
+            />
           </motion.div>
         </div>
       </section>

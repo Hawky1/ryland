@@ -3,22 +3,12 @@ import { motion } from "framer-motion";
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
-import BookMockup3D from "@/components/funnel/BookMockup3D";
+import bundleImage from "@/assets/bundle-starter.png";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
-const COVERS = [
-  "/covers/ultimate-business-credit-blueprint.png",
-  "/covers/100-dispute-letters.png",
-  "/covers/150k-funding-new-llc.png",
-  "/covers/diy-credit-master-guide.png",
-  "/covers/credit-score-accelerator.png",
-  "/covers/secret-lenders-database.png",
-  "/covers/business-credit-basics-101.png",
-  "/covers/financial-playbook.png",
-];
 
 export default function FunnelDownsell() {
   const addItem = useCartStore((s) => s.addItem);
@@ -94,9 +84,13 @@ export default function FunnelDownsell() {
             </div>
             <p className="text-blue-200/40 text-sm mb-10">One-time payment • Same 18 resources • Instant access</p>
 
-            {/* Stacked covers */}
+            {/* Bundle Image */}
             <div className="mb-12">
-              <BookMockup3D variant="stacked" covers={COVERS} />
+              <img
+                src={bundleImage}
+                alt="Starter Bundle — 9 Ebooks"
+                className="max-w-md sm:max-w-lg mx-auto w-full rounded-xl"
+              />
             </div>
 
             {/* CTA */}
