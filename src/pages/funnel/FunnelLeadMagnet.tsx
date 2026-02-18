@@ -16,9 +16,9 @@ const schema = z.object({
 });
 
 const FEATURES = [
-  { icon: FileText, title: "The 'Lender-Ready' Checklist", desc: "Exactly what banks want to see before they approve your business for credit lines." },
-  { icon: Building2, title: "The Net-30 Vendor List", desc: "12 starter vendors that report to Dun & Bradstreet, Experian Business, and Equifax Business." },
-  { icon: CreditCard, title: "The 0% APR Bank Sequence", desc: "The exact order to apply for business credit cards to maximize approvals at 0% intro APR." },
+  { icon: FileText, title: "The 'Lender-Ready' Checklist", desc: "The 9 things banks quietly check before approving a business credit line. Most entrepreneurs miss at least 4 of them. You won't." },
+  { icon: Building2, title: "The Net-30 Vendor Starter Kit", desc: "12 vetted vendors that report directly to Dun & Bradstreet, Experian Business, and Equifax Business. Open these accounts first to start building trade lines immediately." },
+  { icon: CreditCard, title: "The 0% APR Bank Sequence", desc: "The exact order to apply for business credit cards so you maximize approvals and lock in 0% introductory rates. Sequence matters. This gets it right." },
 ];
 
 export default function FunnelLeadMagnet() {
@@ -80,17 +80,16 @@ export default function FunnelLeadMagnet() {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/20 rounded-full px-4 py-1.5 text-xs font-semibold text-cyan-300 uppercase tracking-wider mb-4 font-[Inter,sans-serif]">
-              Free Download — Limited Time
+              Free Download — Available for a Limited Time
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif] tracking-tight">
-              GET THE BLUEPRINT: How to Build a{" "}
+              The $250K Business Credit Blueprint: Fund Your Business Without Risking Your{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-                $250,000
-              </span>{" "}
-              Business Credit Profile from Scratch.
+                Personal Credit Score.
+              </span>
             </h1>
             <p className="text-blue-100/70 text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
-              Stop using your personal social security number to fund your business. Download the exact roadmap we've used for 10,000+ entrepreneurs to secure 0% APR capital.
+              Your SSN was never meant to fund your business. This step-by-step blueprint shows you how to build a bankable business credit profile, unlock 0% APR capital, and stop personally guaranteeing every dollar.
             </p>
 
             {/* Email form */}
@@ -130,10 +129,10 @@ export default function FunnelLeadMagnet() {
                 disabled={submitting}
                 className="shiny-cta w-full !text-base sm:!text-lg !py-4 disabled:opacity-50"
               >
-                <span>{submitting ? "Sending..." : "Download For Free"}</span>
+                <span>{submitting ? "Sending..." : "Send Me the Free Blueprint"}</span>
               </button>
               <p className="text-blue-300/40 text-xs text-center font-[Inter,sans-serif]">
-                We respect your privacy. Unsubscribe anytime.
+                No spam. No credit card. Unsubscribe anytime.
               </p>
             </form>
           </motion.div>
@@ -163,7 +162,7 @@ export default function FunnelLeadMagnet() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-white text-center mb-10 font-[Geist,sans-serif]"
           >
-            What's Inside Your Free Blueprint
+            Here's Exactly What You'll Get Inside
           </motion.h2>
           <div className="grid md:grid-cols-3 gap-6">
             {FEATURES.map((f, i) => (
@@ -195,25 +194,25 @@ export default function FunnelLeadMagnet() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 font-[Geist,sans-serif]">
-              Ready to Build Your{" "}
+              Your Business Deserves Its Own Credit Profile.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-                $250K Credit Profile?
+                Build It Today.
               </span>
             </h2>
             <p className="text-blue-100/60 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-              Join 10,000+ entrepreneurs who stopped using their personal credit and started building real business funding.
+              Thousands of entrepreneurs have used this blueprint to stop mixing personal and business finances and start accessing real capital on their business's own merit.
             </p>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="shiny-cta !text-base sm:!text-lg !py-4 !px-10"
             >
-              <span>Get Your Free Blueprint Now</span>
+              <span>Get the Free Blueprint Now</span>
             </button>
             <div className="flex items-center justify-center gap-6 mt-6 text-blue-200/40 text-xs font-[Inter,sans-serif]">
               <span className="flex items-center gap-1.5">✓ 100% Free</span>
               <span className="flex items-center gap-1.5">✓ Instant Download</span>
-              <span className="flex items-center gap-1.5">✓ No Credit Card</span>
+              <span className="flex items-center gap-1.5">✓ No Credit Card Required</span>
             </div>
           </motion.div>
         </div>
