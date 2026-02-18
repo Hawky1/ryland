@@ -4,7 +4,7 @@ import logoDark from "@/assets/logo-dark.png";
 const Footer = () => {
   return (
     <footer className="border-slate-200 border-t pt-16 pb-10">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="space-y-4">
@@ -77,7 +77,7 @@ const Footer = () => {
 
         {/* Consumer Disclosure */}
         <div className="border-t border-slate-200 mt-8 pt-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-4">
             <h4 className="text-sm font-semibold text-slate-900">Consumer Disclosure</h4>
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>

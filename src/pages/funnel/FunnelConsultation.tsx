@@ -21,17 +21,17 @@ export default function FunnelConsultation() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 items-center">
           {/* Copy */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/20 rounded-full px-4 py-1.5 text-xs font-bold text-cyan-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif]">
+            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/20 rounded-full px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 uppercase tracking-wider mb-6 font-[Inter,sans-serif] flex-wrap">
               Final Step — Your Personalized Plan
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif]">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 font-[Geist,sans-serif]">
               You have the tools.
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
                 Now, let us do the heavy lifting.
               </span>
             </h1>
-            <h2 className="text-xl sm:text-2xl font-semibold text-white/90 mb-4 font-[Geist,sans-serif]">
+            <h2 className="text-lg sm:text-2xl font-semibold text-white/90 mb-4 font-[Geist,sans-serif]">
               Speak with a Funding Specialist
             </h2>
             <p className="text-blue-100/60 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
@@ -40,7 +40,7 @@ export default function FunnelConsultation() {
             </p>
 
             {/* Trust badges */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {TRUST_BADGES.map((badge, i) => (
                 <motion.div
                   key={i}
