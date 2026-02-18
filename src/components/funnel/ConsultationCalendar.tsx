@@ -162,7 +162,7 @@ export default function ConsultationCalendar() {
   );
 
   return (
-    <div className="flex flex-col rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10"
+    <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10"
       style={{
         background: "linear-gradient(180deg, hsl(210 100% 8%) 0%, hsl(210 100% 14%) 100%)",
       }}
@@ -177,7 +177,7 @@ export default function ConsultationCalendar() {
 
       {step !== "confirmed" && stepIndicator}
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait"><div className="flex-1 flex flex-col justify-center">
         {/* ── STEP 1: DATE ── */}
         {step === "select-date" && (
           <motion.div
@@ -416,7 +416,7 @@ export default function ConsultationCalendar() {
             </p>
           </motion.div>
         )}
-      </AnimatePresence>
+      </div></AnimatePresence>
     </div>
   );
 }
