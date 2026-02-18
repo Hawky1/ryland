@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Percent, Building2, Scale } from "lucide-react";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import FunnelLayout from "@/components/funnel/FunnelLayout";
+import ConsultationCalendar from "@/components/funnel/ConsultationCalendar";
 import geneRyland from "@/assets/gene-ryland-about.png";
 
 const TRUST_BADGES = [
@@ -10,8 +11,6 @@ const TRUST_BADGES = [
   { icon: Building2, label: "Trusted Banking Partners" },
   { icon: Scale, label: "100% Transparent Pricing" },
 ];
-
-const GHL_CALENDAR_URL = "https://api.leadconnectorhq.com/widget/booking/SCgFhVZJmkZBDLyiDGTl";
 
 export default function FunnelConsultation() {
   return (
@@ -70,25 +69,13 @@ export default function FunnelConsultation() {
             </div>
           </motion.div>
 
-          {/* Calendly Embed */}
+          {/* Custom Calendar */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/30"
           >
-            <div className="p-6 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
-              <h3 className="text-lg font-bold text-slate-900 font-[Geist,sans-serif]">Book Your Free Strategy Session</h3>
-              <p className="text-slate-500 text-sm mt-1">Choose a time that works for you</p>
-            </div>
-            <div className="relative" style={{ minHeight: "500px" }}>
-              <iframe
-                src={GHL_CALENDAR_URL}
-                title="Book a consultation"
-                className="w-full border-0"
-                style={{ height: "500px" }}
-              />
-            </div>
+            <ConsultationCalendar />
           </motion.div>
         </div>
       </section>
