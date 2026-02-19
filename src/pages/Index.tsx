@@ -18,6 +18,12 @@ import iconCredit from "@/assets/icon-credit.png";
 import iconCommunity from "@/assets/icon-community.png";
 import iconProducts from "@/assets/icon-products.png";
 import iconPartner from "@/assets/icon-partner.png";
+import proofSouthstate from "@/assets/proof-southstate.webp";
+import proofTruist from "@/assets/proof-truist.webp";
+import proofUsbank from "@/assets/proof-usbank.webp";
+import proofBoa from "@/assets/proof-boa.webp";
+import proofAmex from "@/assets/proof-amex.webp";
+import proofIbc from "@/assets/proof-ibc.webp";
 import iconConsultation from "@/assets/icon-consultation.png";
 import { motion } from "framer-motion";
 import successFunding from "@/assets/success-funding.jpg";
@@ -295,6 +301,9 @@ const Index = () => {
             <div data-scroll-column="1" className="flex flex-col gap-4">
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofSouthstate} alt="SouthState Visa Business Card — $9,000 credit limit approved" className="w-full object-cover" />
+                  </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
@@ -302,19 +311,8 @@ const Index = () => {
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The funding process was seamless. I got $24k at 0% interest for 12 months. Changed my entire business trajectory."</p>
                   </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&h=120&fit=crop&crop=faces" alt="Aisha G." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Aisha G.</span></div><p className="text-sm text-zinc-400">Head of Business Intelligence</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Within 60 days my business credit was established and I had three Net-30 vendor accounts reporting. The roadmap they gave me was flawless."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=120&h=120&fit=crop&crop=faces" alt="Ethan G." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Ethan G.</span></div><p className="text-sm text-zinc-400">E-Commerce Founder</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The Skool community alone is worth 10x the price. The digital products are pure gold for anyone serious about credit."</p>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofBoa} alt="Bank of America — approved for $12,000 business credit card" className="w-full object-cover" />
                   </article>
                 </div>
               ))}
@@ -323,6 +321,9 @@ const Index = () => {
             <div data-scroll-column="2" className="hidden md:flex flex-col gap-4">
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofTruist} alt="Truist Business credit card approved" className="w-full object-cover" />
+                  </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
@@ -330,19 +331,8 @@ const Index = () => {
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners fixed my credit when no one else could. My score is up 115 points and I just closed on my first investment property."</p>
                   </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=faces" alt="Rachel A." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Rachel A.</span></div><p className="text-sm text-zinc-400">Product Manager</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"I was skeptical at first, but the team walked me through every step. $150K in business funding secured in under 45 days."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces" alt="Liam O." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Liam O.</span></div><p className="text-sm text-zinc-400">Agency Owner</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Support is outstanding. Every question had a thoughtful answer within minutes. I now refer all my clients here."</p>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofAmex} alt="American Express approved — client celebration" className="w-full object-cover" />
                   </article>
                 </div>
               ))}
@@ -351,6 +341,9 @@ const Index = () => {
             <div data-scroll-column="3" className="hidden md:flex flex-col gap-4">
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofUsbank} alt="U.S. Bank — congratulations on your new credit card" className="w-full object-cover" />
+                  </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
@@ -358,19 +351,8 @@ const Index = () => {
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
                   </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop&crop=faces" alt="Sofia M." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Sofia M.</span></div><p className="text-sm text-zinc-400">Analytics Lead</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Total transparency removed all doubt. I always knew exactly where my credit stood and what the next move was."</p>
-                  </article>
-                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
-                    <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=faces" alt="Noah B." className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Noah B.</span></div><p className="text-sm text-zinc-400">Strategy Director</p></div>
-                    </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The predictive funding models helped us spot opportunities early and act faster. It's like a compass for business growth."</p>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofIbc} alt="IBC Visa credit card application approved" className="w-full object-cover" />
                   </article>
                 </div>
               ))}
