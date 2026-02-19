@@ -14,6 +14,7 @@ const FEATURED = [
     title: "The Ultimate Credit Stack Bundle",
     subtitle: "18 Resources — Total Credit Transformation",
     price: "$147",
+    originalPrice: "$347",
     highlight: true,
   },
   {
@@ -22,6 +23,7 @@ const FEATURED = [
     title: "Business Funding Mastery Bundle",
     subtitle: "6 Advanced Business Funding E-Books",
     price: "$147",
+    originalPrice: "$294",
   },
   {
     id: "credit-accelerator",
@@ -29,6 +31,7 @@ const FEATURED = [
     title: "The Credit Accelerator Bundle",
     subtitle: "6 E-Books to Kick-Start Credit Knowledge",
     price: "$97",
+    originalPrice: "$194",
   },
   {
     id: "credit-authority",
@@ -36,6 +39,7 @@ const FEATURED = [
     title: "Master Your Credit Bundle Pack",
     subtitle: "9 E-Books to Guide You Every Step",
     price: "$67",
+    originalPrice: "$153",
   },
   {
     id: "credit-quickstart",
@@ -43,6 +47,7 @@ const FEATURED = [
     title: "Business Credit Starter Bundle",
     subtitle: "3 E-Books to Kick-Start Your Journey",
     price: "$47",
+    originalPrice: "$87",
   },
 ];
 
@@ -95,7 +100,7 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
               </div>
               <div className="lg:w-[45%] w-full text-center lg:text-left py-4">
                 <div className="inline-flex items-center gap-1.5 bg-amber-500/15 border border-amber-400/30 text-amber-300 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-5">
-                  ⭐ Most Popular
+                  ⭐ Most Popular — Chosen by 2,400+ entrepreneurs
                 </div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
                   {FEATURED[0].title}
@@ -103,10 +108,20 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                 <p className="text-slate-400 text-lg mb-6">
                   {FEATURED[0].subtitle}
                 </p>
-                <div className="flex items-center gap-4 justify-center lg:justify-start">
+                <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-6">
                   <span className="text-3xl font-extrabold text-white">{FEATURED[0].price}</span>
-                  <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-3 rounded-xl text-sm font-bold group-hover:from-blue-500 group-hover:to-blue-600 transition-all shadow-lg shadow-blue-600/25">
-                    View Bundle <ArrowRight className="w-4 h-4" />
+                  <span className="text-lg text-slate-500 line-through">{FEATURED[0].originalPrice}</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onScrollToBundle(FEATURED[0].id); }}
+                    className="shiny-cta !py-3 !px-8 !text-sm whitespace-nowrap focus:outline-none"
+                  >
+                    <span>Get This Bundle</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 text-slate-400 text-sm">
+                    <ArrowRight className="w-3.5 h-3.5" />
+                    View Details
                   </span>
                 </div>
               </div>
@@ -137,12 +152,16 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                     {bundle.title}
                   </h3>
                   <p className="text-slate-400 text-sm mb-4">{bundle.subtitle}</p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 mb-4">
                     <span className="text-xl font-extrabold text-white">{bundle.price}</span>
-                    <span className="inline-flex items-center gap-1 text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors">
-                      View Bundle <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+                    <span className="text-sm text-slate-500 line-through">{bundle.originalPrice}</span>
                   </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onScrollToBundle(bundle.id); }}
+                    className="w-full inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200"
+                  >
+                    Get This Bundle <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
             </motion.div>

@@ -45,18 +45,26 @@ const ProductCard = ({ product, index, onAddToCart, isLoading }: ProductCardProp
             </h3>
           </Link>
 
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-xl font-extrabold text-white">
-              ${parseFloat(price.amount).toFixed(0)}
-            </span>
-            <button
-              onClick={() => onAddToCart(product)}
-              disabled={isLoading}
-              className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/20 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 disabled:opacity-50 backdrop-blur-sm"
-            >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              {isLoading ? "Adding..." : "Add to Cart"}
-            </button>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <span className="text-xl font-extrabold text-white">
+                  ${parseFloat(price.amount).toFixed(0)}
+                </span>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="text-emerald-300/80 text-[10px] font-semibold uppercase tracking-wider">Instant Download</span>
+                </div>
+              </div>
+              <button
+                onClick={() => onAddToCart(product)}
+                disabled={isLoading}
+                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/20 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 disabled:opacity-50 backdrop-blur-sm"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                {isLoading ? "Adding..." : "Get Instant Access"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
