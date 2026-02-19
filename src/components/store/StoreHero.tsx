@@ -51,12 +51,15 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
             </div>
 
             <div className="flex flex-wrap gap-4 items-center">
-              <button
-                onClick={onBrowse}
-                className="shiny-cta !py-3 !px-6 sm:!py-5 sm:!px-10 !text-sm sm:!text-lg whitespace-nowrap focus:outline-none"
-              >
-                <span>Browse Collections</span>
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={onBrowse}
+                  className="shiny-cta !py-3 !px-6 sm:!py-5 sm:!px-10 !text-sm sm:!text-lg whitespace-nowrap focus:outline-none"
+                >
+                  <span>Get Your Blueprint</span>
+                </button>
+                <span className="text-slate-400 text-xs sm:text-sm">Instant digital delivery — start reading in minutes</span>
+              </div>
               <button
                 onClick={onBrowse}
                 className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"

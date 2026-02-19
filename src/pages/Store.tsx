@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Loader2, BookOpen } from "lucide-react";
+import { Loader2, BookOpen, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
@@ -11,7 +11,9 @@ import Footer from "@/components/Footer";
 import FeaturedBundles from "@/components/FeaturedBundles";
 import StoreHero from "@/components/store/StoreHero";
 import TrustStrip from "@/components/store/TrustStrip";
+import SocialProofStrip from "@/components/store/SocialProofStrip";
 import WhyChooseUs from "@/components/store/WhyChooseUs";
+import PreFooterCTA from "@/components/store/PreFooterCTA";
 import ProductCard from "@/components/store/ProductCard";
 import Navbar from "@/components/Navbar";
 import SharedHead from "@/components/SharedHead";
@@ -32,6 +34,8 @@ const Store = () => {
   const [activeBundle, setActiveBundle] = useState(BUNDLES[0].id);
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
+  const cartItems = useCartStore(state => state.items);
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const productGridRef = useRef<HTMLDivElement | null>(null);
 
@@ -87,28 +91,34 @@ const Store = () => {
       {/* Trust Strip */}
       <TrustStrip />
 
-      {/* Featured Bundles Showcase */}
-      <div>
-        <FeaturedBundles onScrollToBundle={scrollToBundle} />
-      </div>
+      {/* Social Proof Strip */}
+      <SocialProofStrip />
 
-      {/* Bundle Navigation */}
+      {/* Featured Bundles Showcase */}
+      <FeaturedBundles onScrollToBundle={scrollToBundle} />
+
+      {/* Bundle Navigation with Cart CTA */}
       <div ref={productGridRef} className="sticky top-[65px] z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/60 scroll-mt-[65px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
-            {BUNDLES.map(bundle => (
-              <button
-                key={bundle.id}
-                onClick={() => scrollToBundle(bundle.id)}
-                className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex-shrink-0 ${
-                  activeBundle === bundle.id
-                    ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md shadow-blue-500/25"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
-                }`}
-              >
-                {bundle.name}
-              </button>
-            ))}
+          <div className="flex items-center gap-2 py-3">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide flex-1">
+              {BUNDLES.map(bundle => (
+                <button
+                  key={bundle.id}
+                  onClick={() => scrollToBundle(bundle.id)}
+                  className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex-shrink-0 ${
+                    activeBundle === bundle.id
+                      ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md shadow-blue-500/25"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                  }`}
+                >
+                  {bundle.name}
+                </button>
+              ))}
+            </div>
+            {totalCartItems > 0 && (
+              <CartDrawer />
+            )}
           </div>
         </div>
       </div>
@@ -177,8 +187,11 @@ const Store = () => {
       </div>
       </div>
 
-      {/* Why Choose Us */}
-      <WhyChooseUs />
+      {/* FAQ + Guarantee */}
+      <WhyChooseUs onBrowse={scrollToProducts} />
+
+      {/* Pre-Footer CTA */}
+      <PreFooterCTA onBrowse={scrollToProducts} />
 
       <Footer />
     </div>
