@@ -409,40 +409,36 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <section className="overflow-hidden my-10 relative" id="cta">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden">
-            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
-            <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
-                Ready to Scale Your Empire?
-              </h3>
-              <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Get $50K–$250K in business funding at 0% APR. No revenue required. No tax returns. Start in under 48 hours.
-              </p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-lg">
-                  <span>Take the Free Assessment</span>
-                </Link>
-                <Link to="/store" className="hover:bg-white/10 transition-colors text-base text-white border-white/20 border rounded-full py-3 px-6">
-                  Explore Products
-                </Link>
-              </div>
-              <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  No credit check required
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  48-hour approval
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-                  10,000+ entrepreneurs funded
-                </span>
-              </div>
-            </div>
+      <section className="my-10 max-w-7xl mx-4 sm:mx-auto border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden" id="cta">
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+        <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
+            Ready to Scale Your Empire?
+          </h3>
+          <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Get $50K–$250K in business funding at 0% APR. No revenue required. No tax returns. Start in under 48 hours.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-lg">
+              <span>Take the Free Assessment</span>
+            </Link>
+            <Link to="/store" className="hover:bg-white/10 transition-colors text-base text-white border-white/20 border rounded-full py-3 px-6">
+              Explore Products
+            </Link>
+          </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
+            <span className="flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+              No credit check required
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+              48-hour approval
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
+              10,000+ entrepreneurs funded
+            </span>
           </div>
         </div>
       </section>
