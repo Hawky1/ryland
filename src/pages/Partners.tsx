@@ -1,5 +1,19 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import proofSouthstate from "@/assets/proof-southstate.webp";
+import proofTruist from "@/assets/proof-truist.webp";
+import proofUsbank from "@/assets/proof-usbank.webp";
+import proofBoa from "@/assets/proof-boa.webp";
+import proofAmex from "@/assets/proof-amex.webp";
+import proofIbc from "@/assets/proof-ibc.webp";
+import proofBoa12k from "@/assets/proof-boa-12k.webp";
+import proofBoa24k from "@/assets/proof-boa-24k.webp";
+import proofCitizens7k from "@/assets/proof-citizens-7k.webp";
+import proofBankUnited16k from "@/assets/proof-bankunited-16k.webp";
+import proofNihfcu38k from "@/assets/proof-nihfcu-38k.webp";
+import proofFnbo15k from "@/assets/proof-fnbo-15k.webp";
+import proofFnbo45k from "@/assets/proof-fnbo-45k.webp";
+import proofAmexBbc from "@/assets/proof-amex-bbc.webp";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
@@ -123,6 +137,15 @@ const Partners = () => {
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.20)" activeGridColor="rgba(59, 130, 246, 0.45)" />
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes scrollUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        @keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+        [data-scroll-column="1"] { animation: scrollUp 25s linear infinite; }
+        [data-scroll-column="2"] { animation: scrollDown 25s linear infinite; }
+        [data-scroll-column="3"] { animation: scrollUp 25s linear infinite; }
+        [data-scroll-column]:hover { animation-play-state: paused; }
+      `}} />
 
       <Navbar />
 
@@ -428,7 +451,123 @@ const Partners = () => {
         </motion.div>
       </section>
 
-      {/* ═══════════════════════ 9. FAQ — Clean Accordion ═══════════════════════ */}
+      {/* ═══════════════════════ 9. REAL RESULTS — Scrolling Wall of Love ═══════════════════════ */}
+      <section className="max-w-6xl mx-auto px-6 pb-[120px]">
+        <motion.div {...fadeUp} className="text-center mb-12">
+          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-[#3b82f6] mb-3">Real Proof. Real Clients.</p>
+          <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900 mb-4">
+            These Are The Results Your Referrals Get
+          </h2>
+          <p className="text-slate-500 text-[17px] max-w-xl mx-auto leading-relaxed">
+            When you refer a business owner to Ryland Partners, this is what happens next.
+          </p>
+        </motion.div>
+
+        {/* 3-column vertical scroll wall */}
+        <div className="relative overflow-hidden h-[420px] md:h-[600px] rounded-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+            {/* Column 1 — scrolls up */}
+            <div data-scroll-column="1" className="flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofBoa12k} alt="Bank of America $12K Business Credit Approval" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <span className="text-base font-semibold text-zinc-100">Bradley A.</span>
+                        <p className="text-sm text-zinc-400">Business Owner</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The funding process was seamless. I got $24k at 0% interest for 12 months. Changed my entire business trajectory."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofCitizens7k} alt="Citizens Bank $7K Business Card Approval" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofSouthstate} alt="SouthState Visa Business Card — $9,000 approved" className="w-full object-cover" loading="lazy" />
+                  </article>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 2 — scrolls down */}
+            <div data-scroll-column="2" className="hidden md:flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofFnbo45k} alt="FNBO $45K 0% Business Credit in 3 Days" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <span className="text-base font-semibold text-zinc-100">Michael G.</span>
+                        <p className="text-sm text-zinc-400">Real Estate Investor</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners fixed my credit when no one else could. My score is up 115 points and I just closed on my first investment property."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofBankUnited16k} alt="BankUnited $16K Visa Business Card Approval" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofTruist} alt="Truist Business credit card approved" className="w-full object-cover" loading="lazy" />
+                  </article>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 3 — scrolls up */}
+            <div data-scroll-column="3" className="hidden md:flex flex-col gap-4">
+              {[...Array(2)].map((_, dup) => (
+                <div key={dup} className="flex flex-col gap-4">
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofNihfcu38k} alt="NIHFCU $38K Total CC Funding" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
+                    <div className="flex items-center gap-3">
+                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
+                      <div>
+                        <span className="text-base font-semibold text-zinc-100">Carlos R.</span>
+                        <p className="text-sm text-zinc-400">CEO, Rivera Ventures</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Fully transparent, and measurable results from day one."</p>
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofAmexBbc} alt="American Express Blue Business Cash Card Approval" className="w-full object-cover" loading="lazy" />
+                  </article>
+                  <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
+                    <img src={proofFnbo15k} alt="FNBO $15K 0% Business Credit Approval" className="w-full object-cover" loading="lazy" />
+                  </article>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Key stat strip */}
+        <motion.div
+          {...stagger(0.3)}
+          className="mt-10 grid grid-cols-3 gap-4 text-center"
+        >
+          {[
+            { stat: "$150M+", label: "Funding Secured" },
+            { stat: "10K+", label: "Entrepreneurs Helped" },
+            { stat: "0%", label: "Intro APR" },
+          ].map((item, i) => (
+            <div key={i} className="rounded-2xl bg-slate-50 border border-slate-200 py-6 px-4">
+              <p className="text-3xl md:text-4xl font-bold text-[#0060A9] font-manrope tracking-tight">{item.stat}</p>
+              <p className="text-sm text-slate-500 mt-1 font-medium">{item.label}</p>
+            </div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* ═══════════════════════ 10. FAQ — Clean Accordion ═══════════════════════ */}
       <section className="max-w-3xl mx-auto px-6 pb-[120px]" id="faq">
         <motion.div {...fadeUp} className="text-center mb-14">
           <h2 className="font-manrope text-[32px] md:text-[44px] font-bold tracking-[-0.03em] text-slate-900">
