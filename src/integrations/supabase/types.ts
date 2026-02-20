@@ -118,9 +118,11 @@ export type Database = {
       }
       partner_submissions: {
         Row: {
+          affiliate_link: string | null
           business_name: string | null
           created_at: string
           email: string
+          ghl_contact_id: string | null
           id: string
           message: string | null
           name: string
@@ -128,9 +130,11 @@ export type Database = {
           referral_source: string | null
         }
         Insert: {
+          affiliate_link?: string | null
           business_name?: string | null
           created_at?: string
           email: string
+          ghl_contact_id?: string | null
           id?: string
           message?: string | null
           name: string
@@ -138,9 +142,11 @@ export type Database = {
           referral_source?: string | null
         }
         Update: {
+          affiliate_link?: string | null
           business_name?: string | null
           created_at?: string
           email?: string
+          ghl_contact_id?: string | null
           id?: string
           message?: string | null
           name?: string
