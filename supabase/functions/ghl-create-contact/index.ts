@@ -74,10 +74,60 @@ serve(async (req) => {
       );
     }
 
-    console.log("GHL contact created:", ghlData.contact?.id || ghlData.id);
+    const contactId = ghlData.contact?.id || ghlData.id;
+    console.log("GHL contact created:", contactId);
+
+    // --- Affiliate enrollment (only for Partner Signup Form) ---
+    let affiliateLink: string | null = null;
+
+    if (source === "Partner Signup Form" && contactId) {
+      const campaignId = Deno.env.get("GHL_AFFILIATE_CAMPAIGN_ID");
+
+      if (!campaignId) {
+        console.warn("GHL_AFFILIATE_CAMPAIGN_ID not set — skipping affiliate enrollment");
+      } else {
+        try {
+          const affiliateRes = await fetch("https://services.leadconnectorhq.com/affiliates/", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+              "Content-Type": "application/json",
+              Version: "2021-07-28",
+            },
+            body: JSON.stringify({
+              contactId,
+              campaignId,
+              locationId,
+            }),
+          });
+
+          const affiliateData = await affiliateRes.json();
+
+          if (!affiliateRes.ok) {
+            console.error("GHL affiliate enrollment error:", JSON.stringify(affiliateData));
+          } else {
+            // GHL returns the referral link in various possible fields
+            affiliateLink =
+              affiliateData.affiliate?.referralLink ||
+              affiliateData.affiliate?.referral_link ||
+              affiliateData.referralLink ||
+              affiliateData.referral_link ||
+              null;
+
+            console.log("GHL affiliate enrolled:", affiliateData.affiliate?.id || affiliateData.id, "link:", affiliateLink);
+          }
+        } catch (affiliateErr) {
+          console.error("Affiliate enrollment request failed:", affiliateErr);
+        }
+      }
+    }
 
     return new Response(
-      JSON.stringify({ success: true, contactId: ghlData.contact?.id || ghlData.id }),
+      JSON.stringify({
+        success: true,
+        contactId,
+        affiliateLink,
+      }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
