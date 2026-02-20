@@ -1,138 +1,83 @@
 
+# Partner → GHL Affiliate Enrollment
 
-# Store Page Conversion Optimization Plan
+## What's Working Today
 
-## Current Page Flow (Top to Bottom)
+When someone submits the partner form, two things happen:
 
-1. Hero (dark, 85vh) -- CTA: "Browse Collections"
-2. TrustStrip (dark navy bar)
-3. FeaturedBundles (dark, video bg) -- 5 bundle cards, click scrolls to product grid
-4. Sticky Bundle Nav (tab bar)
-5. Product Grid -- individual e-books by category
-6. WhyChooseUs (dark, video bg)
-7. Footer
+1. Their data is saved to the `partner_submissions` database table
+2. The `ghl-create-contact` edge function creates them as a **Contact** in GHL's CRM, tagged `partner-signup` and `referral-partner`
 
-## Problems Identified
+## The Gap
 
-- **Bundle cards don't sell.** They click-to-scroll to the product grid below, but there's no price anchoring, no "Add to Cart", and no urgency. They're navigation elements disguised as product cards.
-- **No social proof near CTAs.** The proof images (approvals) exist on the homepage but are completely absent from the store page.
-- **No objection handling.** No FAQ, no guarantee callout, no risk reducers anywhere on the page.
-- **CTA appears only once above the fold.** "Browse Collections" is the only CTA in the hero -- it scrolls down, it doesn't sell. No repeated buy CTAs throughout the page.
-- **WhyChooseUs is generic.** "Actionable Strategies / Expert Authors / Proven Results" doesn't handle objections or drive conversion.
-- **No urgency elements anywhere.**
-- **FeaturedBundles section is massive but passive.** Large visual footprint with no conversion mechanism -- clicking just scrolls to products further down.
+GHL has two separate systems that don't automatically talk to each other:
 
----
+- **CRM Contacts** — what the current code creates. This is just a record in your database with tags. It does NOT give the person an affiliate link, commission tracking, or access to a referral dashboard.
+- **Affiliate Manager** — a separate GHL module where you create Affiliate Campaigns, and each enrolled affiliate gets a unique referral link, commission percentage, and payout tracking.
 
-## Proposed Changes (Section by Section)
+Right now, partner signups are sitting in your CRM as tagged contacts, but your team would have to manually go into GHL Affiliates and enroll each one. This plan automates that step.
 
-### 1. Hero -- Sharpen the CTA
+## How GHL Affiliates API Works
 
-**What changes:**
-- Change CTA text from "Browse Collections" to "Get Your Blueprint" (action-oriented, benefit-driven)
-- Add a secondary line under the CTA: "Instant digital delivery -- start reading in minutes"
-- Keep everything else (portrait, stats, layout) as-is
+The GHL v2 API has an Affiliates endpoint. The flow is:
 
-**Rationale:** The hero value prop is solid but the CTA is browsing-oriented, not buying-oriented.
+1. Create the contact (already done) — get back a `contactId`
+2. Call `POST /affiliates/` with the `contactId` and your `campaignId` to enroll them as an affiliate
+3. GHL generates a unique referral link for that contact and begins tracking commissions
 
----
+You'll need one thing from your GHL account before this can be implemented: your **Affiliate Campaign ID**. This is found in GHL under:
+`Marketing → Affiliate Manager → [Your Campaign] → Settings`
 
-### 2. Social Proof Bar (NEW) -- Add proof images below TrustStrip
+## Plan
 
-**What changes:**
-- Add a new horizontal scrolling strip of the 6 approval proof images (already in `src/assets/proof-*.webp`) directly below TrustStrip
-- Small heading: "Real Results From Real Clients"
-- Auto-scrolling marquee on mobile, static row on desktop
+### Step 1 — Store the Affiliate Campaign ID as a secret
 
-**Rationale:** Social proof is the #1 missing conversion element on this page. Placing it before the bundles creates trust before the ask.
+Add a new secret `GHL_AFFILIATE_CAMPAIGN_ID` to the project so the edge function can access it securely.
 
----
+### Step 2 — Update the `ghl-create-contact` edge function
 
-### 3. FeaturedBundles -- Convert from navigation to sales
+After successfully creating the contact in GHL and getting back a `contactId`, make a second API call to enroll them as an affiliate:
 
-**What changes:**
-- Add an "Add to Cart" / "Get This Bundle" shiny-cta button directly on each bundle card (the hero bundle and the 4 grid cards)
-- Add a crossed-out "original value" price next to the bundle price (e.g., ~~$347~~ $147) to anchor value
-- Add a subtle urgency line on the hero bundle: "Most popular -- chosen by 2,400+ entrepreneurs"
-- Keep the existing click-to-scroll behavior as secondary (clicking the card image/title still scrolls)
+```
+POST https://services.leadconnectorhq.com/affiliates/
+Authorization: Bearer {GHL_API_KEY}
+Version: 2021-07-28
 
-**Rationale:** Currently these cards do zero selling. Adding a direct purchase path + price anchoring turns passive browsing into active conversion.
+{
+  "contactId": "<id from step 1>",
+  "campaignId": "<GHL_AFFILIATE_CAMPAIGN_ID>",
+  "locationId": "<GHL_LOCATION_ID>"
+}
+```
 
----
+This enrollment is conditional — it only runs when the `source` passed to the function is `"Partner Signup Form"`, so other forms (contact page, assessment, etc.) are not affected.
 
-### 4. Sticky Bundle Nav -- Add a floating cart CTA
+### Step 3 — Return the affiliate link in the response
 
-**What changes:**
-- Add a small cart indicator/CTA on the right side of the sticky nav bar that shows item count and links to checkout
-- This ensures a CTA is always visible while browsing products
+GHL returns a unique referral URL for the new affiliate. The edge function will pass this back to the frontend so it can be stored in the database alongside the partner submission.
 
-**Rationale:** As users scroll through 40+ products, the CTA disappears. A persistent cart reminder reduces abandonment.
+### Step 4 — Store the affiliate link + GHL contact ID in the database
 
----
+Add two new columns to the `partner_submissions` table:
+- `ghl_contact_id` — for cross-referencing the GHL contact record
+- `affiliate_link` — the unique referral URL GHL generates (so your team has it on hand without logging into GHL)
 
-### 5. Product Cards -- Strengthen micro-conversions
+### Step 5 — Show the affiliate link in the success screen
 
-**What changes:**
-- Change "Add to Cart" button text to "Get Instant Access"
-- Add a small "Instant Download" micro-badge below the price on each card
+After the form submits, the "You're In!" confirmation screen currently just says "Check your email." We can enhance it to display the affiliate's unique referral link directly, so they can start sharing immediately — no waiting for an email.
 
-**Rationale:** "Add to Cart" is transactional. "Get Instant Access" is benefit-oriented and implies immediacy.
-
----
-
-### 6. Replace WhyChooseUs with FAQ + Guarantee Section
-
-**What changes:**
-- Replace the 3-card "Why Our Guides" section with a two-column layout:
-  - Left column: FAQ accordion (4-5 questions addressing top objections)
-    - "What format are the guides in?"
-    - "Will this work for my situation?"
-    - "How quickly will I see results?"
-    - "Is there a refund policy?"
-    - "Do I get lifetime access?"
-  - Right column: Guarantee card with a final CTA
-    - Satisfaction guarantee badge
-    - "Start reading in 2 minutes" promise
-    - "Browse All Guides" shiny-cta button (scrolls to product grid)
-- Keep the dark video background for visual continuity
-
-**Rationale:** This section currently adds no conversion value. FAQ handles objections; guarantee reduces risk; final CTA catches users who scrolled the entire page.
-
----
-
-### 7. Pre-Footer CTA Banner (NEW)
-
-**What changes:**
-- Add a full-width dark banner between FAQ and Footer with:
-  - Headline: "Ready to Take Control of Your Financial Future?"
-  - Subtext: "Join 10,000+ entrepreneurs who transformed their credit and funding."
-  - Shiny-cta button: "Start Your Journey"
-- This is the 3rd CTA on the page (hero, sticky nav, pre-footer)
-
-**Rationale:** Users who scroll to the bottom are highly engaged but haven't converted. A final CTA captures this intent.
-
----
-
-## Files That Will Be Modified
+## Files That Will Change
 
 | File | Change |
 |------|--------|
-| `src/components/store/StoreHero.tsx` | Update CTA text + add sub-CTA line |
-| `src/pages/Store.tsx` | Add social proof strip, pre-footer CTA banner, wire new components |
-| `src/components/FeaturedBundles.tsx` | Add "Get This Bundle" buttons + price anchoring + urgency copy |
-| `src/components/store/WhyChooseUs.tsx` | Replace with FAQ accordion + guarantee card + final CTA |
-| `src/components/store/ProductCard.tsx` | Update button text + add instant download badge |
+| `supabase/functions/ghl-create-contact/index.ts` | Add affiliate enrollment API call after contact creation, conditional on source |
+| `src/components/PartnerSignupForm.tsx` | Receive and display the affiliate link on the success screen |
+| Database migration | Add `ghl_contact_id` and `affiliate_link` columns to `partner_submissions` |
 
-No new dependencies required. Uses existing `framer-motion`, `lucide-react`, Radix `Accordion`, and `shiny-cta` class.
+## One Thing Needed From You
 
----
+Before implementation, you'll need to provide:
 
-## What Stays the Same
+**Your GHL Affiliate Campaign ID** — found in GHL under `Marketing → Affiliate Manager → [Your Campaign] → Settings`. It looks like a string ID (e.g., `abc123xyz`). This gets added as a secret and the edge function uses it to enroll each partner into the right campaign automatically.
 
-- Overall design system (colors, typography, spacing)
-- TrustStrip (recently redesigned)
-- Product grid structure and Shopify data fetching
-- CartDrawer checkout flow
-- Navbar and Footer
-- All existing animations and motion patterns
-
+Would you like to proceed? Once you confirm the Campaign ID is ready, the implementation can run fully automatically with no manual steps in GHL.
