@@ -1,83 +1,134 @@
 
-# Partner → GHL Affiliate Enrollment
+# Launch Checklist: Main Site & Shopify Store
 
-## What's Working Today
+This is a comprehensive breakdown of everything needed to take both the main marketing site (rylandpartners.com) and the Shopify digital products store live.
 
-When someone submits the partner form, two things happen:
+---
 
-1. Their data is saved to the `partner_submissions` database table
-2. The `ghl-create-contact` edge function creates them as a **Contact** in GHL's CRM, tagged `partner-signup` and `referral-partner`
+## MAIN SITE (ryland.lovable.app → custom domain)
 
-## The Gap
+### 1. Custom Domain Setup
+- Connect your real domain (e.g. rylandpartners.com) in Project Settings → Domains
+- Add two A records pointing to 185.158.133.1: one for @ (root) and one for www
+- Add the TXT verification record Lovable provides
+- Set one as primary (root redirects to www or vice versa)
+- DNS propagation can take up to 72 hours
+- Update sitemap.xml to use the real domain (currently hardcoded to ryland.lovable.app)
+- Update robots.txt to reference the real domain sitemap URL
 
-GHL has two separate systems that don't automatically talk to each other:
+### 2. Partner Login Link
+- The Partners page hero has a "Partner Login →" anchor tag linking to `href="#"` — this is a dead link
+- Either connect it to a real GHL affiliate portal URL or remove it until ready
 
-- **CRM Contacts** — what the current code creates. This is just a record in your database with tags. It does NOT give the person an affiliate link, commission tracking, or access to a referral dashboard.
-- **Affiliate Manager** — a separate GHL module where you create Affiliate Campaigns, and each enrolled affiliate gets a unique referral link, commission percentage, and payout tracking.
+### 3. GHL Affiliate Enrollment (In Progress)
+- The `POST /affiliates/` API route does not exist in GHL's public API, so affiliate links cannot be auto-generated via code
+- The GHL Workflow automation (triggered by the `partner-signup` tag) must be set up manually inside GoHighLevel
+- Until that workflow is live, new partner signups will see "Check your email for your referral link" — which is correct, but the email needs to actually be configured in GHL to send the affiliate link
 
-Right now, partner signups are sitting in your CRM as tagged contacts, but your team would have to manually go into GHL Affiliates and enroll each one. This plan automates that step.
+### 4. Assessment → GHL Sync
+- Confirm the `ghl-create-contact` edge function is being called when an assessment is submitted (not just on partner signups)
+- Verify the assessment lead tags (e.g. `assessment-lead`) are showing up correctly in GHL
 
-## How GHL Affiliates API Works
+### 5. Consultation Calendar
+- The `/funnel/consultation` page renders the `ConsultationCalendar` component via the `ghl-calendar` edge function
+- Verify the calendar loads real available slots and that bookings appear in GHL
 
-The GHL v2 API has an Affiliates endpoint. The flow is:
+### 6. Contact Form
+- The `/contact` page submits to Supabase (`contact_submissions` table) and invokes `ghl-create-contact`
+- Confirm contacts created from the Contact page are tagged and routed correctly in GHL
 
-1. Create the contact (already done) — get back a `contactId`
-2. Call `POST /affiliates/` with the `contactId` and your `campaignId` to enroll them as an affiliate
-3. GHL generates a unique referral link for that contact and begins tracking commissions
+### 7. Funnel Pages
+- The 4-step funnel (/funnel, /funnel/offer, /funnel/founders, /funnel/consultation) needs to be tested end-to-end as a real user flow
+- Confirm the lead magnet opt-in on `/funnel` triggers GHL contact creation
 
-You'll need one thing from your GHL account before this can be implemented: your **Affiliate Campaign ID**. This is found in GHL under:
-`Marketing → Affiliate Manager → [Your Campaign] → Settings`
+### 8. Legal Pages Review
+- All legal pages exist: Privacy Policy, Terms, CCPA, TSR Compliance, Disclaimers, Cookie Policy
+- Review copy on each for accuracy before going live — especially the CROA/TSR disclosures in the footer
 
-## Plan
+### 9. Meta Tags & SEO
+- `PageMeta` is implemented on all major pages
+- Confirm Open Graph image (og:image) is set for social sharing previews
+- Verify the canonical URL will be the real domain after publishing
 
-### Step 1 — Store the Affiliate Campaign ID as a secret
+### 10. Mobile QA
+- Test the Navbar mobile drawer across all pages
+- Test all forms (Contact, Partner Signup, Assessment) on mobile
+- Test the video backgrounds (hero + About section) on mobile — autoplay is muted, verify iOS behavior
 
-Add a new secret `GHL_AFFILIATE_CAMPAIGN_ID` to the project so the edge function can access it securely.
+### 11. Publish
+- Click Publish in Lovable to deploy the latest build to the live domain
+- Frontend changes require clicking "Update" in the publish dialog — backend (edge functions) deploys automatically
 
-### Step 2 — Update the `ghl-create-contact` edge function
+---
 
-After successfully creating the contact in GHL and getting back a `contactId`, make a second API call to enroll them as an affiliate:
+## SHOPIFY STORE (/store + /product/:handle)
 
-```
-POST https://services.leadconnectorhq.com/affiliates/
-Authorization: Bearer {GHL_API_KEY}
-Version: 2021-07-28
+### 1. Claim Your Store (REQUIRED to go live)
+- The Shopify store is currently a sandbox/development store
+- To accept real payments, you must **claim the store** by typing "Claim Store" in the chat — this starts your 30-day free trial
+- After the trial, a paid Shopify plan is required to keep selling
 
-{
-  "contactId": "<id from step 1>",
-  "campaignId": "<GHL_AFFILIATE_CAMPAIGN_ID>",
-  "locationId": "<GHL_LOCATION_ID>"
-}
-```
+### 2. Verify Products Are Live in Shopify Admin
+- All products must be set to "Active" status in the Shopify admin dashboard
+- Confirm product images, prices, titles, tags, and descriptions are correct
+- The store page groups products by these tags: "Credit Authority Bundle", "Credit Business Accelerator", "Credit Business Funding", "Credit Business Quickstart", "Ultimate Credit Business Bundle", "Standalone" — confirm all products have the correct tag assigned
 
-This enrollment is conditional — it only runs when the `source` passed to the function is `"Partner Signup Form"`, so other forms (contact page, assessment, etc.) are not affected.
+### 3. Test the Full Purchase Flow
+- Add a product to cart → verify CartDrawer opens with correct item
+- Verify the checkout URL opens in a new tab with `?channel=online_store` in the URL
+- Complete a real test purchase to confirm Shopify processes payment and delivers the digital product
 
-### Step 3 — Return the affiliate link in the response
+### 4. Digital Product Delivery
+- Confirm Shopify is configured to send the digital download link to customers after purchase
+- This is typically done via a Shopify app (e.g. Digital Downloads, SendOwl, or Sky Pilot) — verify one is installed and the files are attached
 
-GHL returns a unique referral URL for the new affiliate. The edge function will pass this back to the frontend so it can be stored in the database alongside the partner submission.
+### 5. Cart Drawer Only Shows on /store
+- Currently the CartDrawer icon only appears in the sticky nav of `/store` when items are in the cart, and on `/product/:handle`
+- Confirm this behavior is correct — if you want the cart icon in the main Navbar across all pages, that would need to be added
 
-### Step 4 — Store the affiliate link + GHL contact ID in the database
+### 6. Product Detail Page (/product/:handle)
+- Confirm the product detail page loads correctly for all products
+- Verify the "Add to Cart" button and variant selector work
+- The page currently has no footer — confirm this is intentional
 
-Add two new columns to the `partner_submissions` table:
-- `ghl_contact_id` — for cross-referencing the GHL contact record
-- `affiliate_link` — the unique referral URL GHL generates (so your team has it on hand without logging into GHL)
+### 7. Shopify Payments / Billing Setup
+- After claiming the store, set up your payment gateway in the Shopify admin (Shopify Payments, Stripe, PayPal, etc.)
+- Configure payout bank account for receiving funds
+- Set shipping settings to "No shipping" (digital products only)
 
-### Step 5 — Show the affiliate link in the success screen
+### 8. Post-Purchase GHL Sync (Optional but Recommended)
+- Consider setting up a Shopify → GHL webhook or Zapier automation so that customers who purchase are automatically added as contacts in GHL with a "customer" tag
+- This would enable post-purchase email sequences, upsells, and community onboarding
 
-After the form submits, the "You're In!" confirmation screen currently just says "Check your email." We can enhance it to display the affiliate's unique referral link directly, so they can start sharing immediately — no waiting for an email.
+### 9. Sitemap Update for Products
+- After going live, consider adding `/store` and individual product handles to `sitemap.xml` for SEO
+- Shopify also generates its own sitemap at `yourstore.myshopify.com/sitemap.xml`
 
-## Files That Will Change
+### 10. Store Domain Decision
+- Currently the store is embedded within the main Lovable site at `/store`
+- The Shopify checkout happens on Shopify's domain (not yours)
+- If you want a fully custom checkout URL, that requires a Shopify Plus plan
 
-| File | Change |
-|------|--------|
-| `supabase/functions/ghl-create-contact/index.ts` | Add affiliate enrollment API call after contact creation, conditional on source |
-| `src/components/PartnerSignupForm.tsx` | Receive and display the affiliate link on the success screen |
-| Database migration | Add `ghl_contact_id` and `affiliate_link` columns to `partner_submissions` |
+---
 
-## One Thing Needed From You
+## PRIORITY ORDER SUMMARY
 
-Before implementation, you'll need to provide:
+**Do first (blockers):**
+1. Claim Shopify store
+2. Connect real custom domain
+3. Set up digital product delivery in Shopify
+4. Configure GHL affiliate enrollment workflow for partner-signup tag
+5. Update sitemap.xml with real domain
 
-**Your GHL Affiliate Campaign ID** — found in GHL under `Marketing → Affiliate Manager → [Your Campaign] → Settings`. It looks like a string ID (e.g., `abc123xyz`). This gets added as a secret and the edge function uses it to enroll each partner into the right campaign automatically.
+**Do before launch (important):**
+6. Test full purchase flow end-to-end with a real card
+7. Test all forms on mobile
+8. Verify GHL contact creation from all form touchpoints (Assessment, Contact, Partner, Funnel)
+9. Fix the "Partner Login →" dead link
+10. Review all legal page copy
 
-Would you like to proceed? Once you confirm the Campaign ID is ready, the implementation can run fully automatically with no manual steps in GHL.
+**Can do post-launch (nice to have):**
+11. Shopify → GHL post-purchase automation
+12. Add og:image for social sharing previews
+13. Add product pages to sitemap
+14. Partner dashboard page for affiliates to log in and view stats
