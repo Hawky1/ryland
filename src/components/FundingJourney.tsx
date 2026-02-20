@@ -63,8 +63,8 @@ export default function FundingJourney() {
   const Visual = VISUALS[active];
 
   return (
-    <section className="sm:pt-12 md:pt-8 max-w-7xl mx-auto pt-12 pb-20 relative" id="services">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="pt-12 pb-20 relative" id="services">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* header */}
         <div className="text-center mb-14">
           <h2

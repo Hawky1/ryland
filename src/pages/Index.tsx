@@ -151,7 +151,7 @@ const Index = () => {
       </section>
 
       {/* Logos Section */}
-      <section className="sm:px-6 lg:px-8 lg:pt-6 max-w-7xl z-10 mt-8 mr-auto mb-16 ml-auto pt-16 pr-4 pb-6 pl-4 relative">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 mb-16 pt-8 pb-6 relative">
         <div className="text-center">
           <p className="uppercase text-sm font-medium text-slate-500 tracking-wide">TRUSTED BANKING PARTNERS</p>
         </div>
@@ -180,7 +180,7 @@ const Index = () => {
       {/* About section */}
       <section className="overflow-hidden mt-4 sm:mt-8 mb-8 sm:mb-12 pt-16 sm:pt-24 pb-16 sm:pb-24 relative" id="about">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10 mix-blend-screen"></div>
-        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <p className="text-xs sm:text-sm text-slate-500 mb-4">Meet The Founder</p>
             <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-slate-900 mb-6" style={{ maskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, rgba(0,0,0,0.5))' }}>Gene Ryland</h2>
@@ -217,7 +217,7 @@ const Index = () => {
 
       {/* Who This Is For */}
       <section className="sm:pt-24 md:pt-20 pt-24 pb-20 relative" id="showcase">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mb-3">Who This Is For</p>
             <h2 className="text-2xl sm:text-5xl font-medium text-slate-900 tracking-tighter">Designed for the Ambitious</h2>
@@ -249,7 +249,7 @@ const Index = () => {
 
       {/* Wealth ecosystem section */}
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
-        <div className="sm:px-6 lg:px-8 lg:pb-0 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-5xl font-medium tracking-tighter text-slate-900 font-manrope">The Wealth Ecosystem</h2>
             <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">Everything you need to build, fund, and scale your business</p>
@@ -280,7 +280,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="sm:px-6 sm:py-10 md:py-12 lg:px-8 max-w-7xl mt-20 mx-auto pt-8 px-4 pb-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-20 pt-8 pb-10 sm:py-12">
         <div className="flex items-center justify-between mb-8">
           <div className="space-y-1">
             <p className="text-xs sm:text-sm text-slate-500">Trusted by entrepreneurs</p>
