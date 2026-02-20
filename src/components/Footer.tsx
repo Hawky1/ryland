@@ -3,7 +3,7 @@ import logoDark from "@/assets/logo-dark.png";
 
 const Footer = () => {
   return (
-    <footer className="border-slate-200 border-t pt-16 pb-10">
+    <footer className="border-slate-200/40 border-t pt-16 pb-10 bg-white/60 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
