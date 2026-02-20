@@ -101,20 +101,36 @@ serve(async (req) => {
             }),
           });
 
-          const affiliateData = await affiliateRes.json();
+          // Safely parse response — GHL may return empty body on success
+          const rawText = await affiliateRes.text();
+          console.log("GHL affiliate raw response:", affiliateRes.status, rawText?.slice(0, 500));
+
+          let affiliateData: Record<string, unknown> = {};
+          try {
+            if (rawText && rawText.trim().length > 0) {
+              affiliateData = JSON.parse(rawText);
+            }
+          } catch {
+            // Non-JSON response — treat as success if status is ok
+          }
 
           if (!affiliateRes.ok) {
-            console.error("GHL affiliate enrollment error:", JSON.stringify(affiliateData));
+            console.error("GHL affiliate enrollment error:", affiliateRes.status, rawText);
           } else {
             // GHL returns the referral link in various possible fields
             affiliateLink =
-              affiliateData.affiliate?.referralLink ||
-              affiliateData.affiliate?.referral_link ||
-              affiliateData.referralLink ||
-              affiliateData.referral_link ||
+              (affiliateData.affiliate as Record<string, unknown>)?.referralLink as string ||
+              (affiliateData.affiliate as Record<string, unknown>)?.referral_link as string ||
+              affiliateData.referralLink as string ||
+              affiliateData.referral_link as string ||
               null;
 
-            console.log("GHL affiliate enrolled:", affiliateData.affiliate?.id || affiliateData.id, "link:", affiliateLink);
+            const affiliateId =
+              (affiliateData.affiliate as Record<string, unknown>)?.id ||
+              affiliateData.id ||
+              "enrolled";
+
+            console.log("GHL affiliate enrolled:", affiliateId, "link:", affiliateLink);
           }
         } catch (affiliateErr) {
           console.error("Affiliate enrollment request failed:", affiliateErr);
