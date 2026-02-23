@@ -40,7 +40,7 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
             <div className="flex flex-wrap gap-x-8 gap-y-3 mb-10">
               {[
                 { value: "40+", label: "Expert Guides" },
-                { value: "10K+", label: "Entrepreneurs Served" },
+                { value: "Thousands", label: "of Entrepreneurs Helped" },
                 { value: "Instant", label: "Digital Delivery" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-baseline gap-2">
