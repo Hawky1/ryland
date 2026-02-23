@@ -181,7 +181,7 @@ const Partners = () => {
             <button onClick={() => setFormOpen(true)} className="shiny-cta !py-4 !px-10 !text-lg">
               <span>Become A Partner Now</span>
             </button>
-            <a href="#" className="text-white/60 hover:text-white text-sm font-medium tracking-wide transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50">
+            <a href="https://app.rylandpartners.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white text-sm font-medium tracking-wide transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50">
               Partner Login →
             </a>
           </motion.div>
