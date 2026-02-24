@@ -126,7 +126,7 @@ const Contact = () => {
             </div>
 
             {[
-              { icon: Mail, title: "Email Us", detail: "support@rylandpartners.com", sub: "We respond within 24 hours" },
+              { icon: Mail, title: "Email Us", detail: "info@rylandpartners.com", sub: "We respond within 24 hours" },
               { icon: Phone, title: "Call Us", detail: "(888) 555-0199", sub: "Mon–Fri, 9am–6pm EST" },
               { icon: MapPin, title: "Visit Us", detail: "Atlanta, Georgia", sub: "By appointment only" },
               { icon: Clock, title: "Business Hours", detail: "Monday – Friday", sub: "9:00 AM – 6:00 PM EST" },
