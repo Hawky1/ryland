@@ -128,7 +128,7 @@ const Contact = () => {
             {[
               { icon: Mail, title: "Email Us", detail: "info@rylandpartners.com", sub: "We respond within 24 hours" },
               { icon: Phone, title: "Call Us", detail: "(786) 706-1479", sub: "Mon–Fri, 9am–6pm EST" },
-              { icon: MapPin, title: "Visit Us", detail: "Atlanta, Georgia", sub: "By appointment only" },
+              { icon: MapPin, title: "Visit Us", detail: "ST Petersburg, Florida", sub: "By appointment only" },
               { icon: Clock, title: "Business Hours", detail: "Monday – Friday", sub: "9:00 AM – 6:00 PM EST" },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-5">
