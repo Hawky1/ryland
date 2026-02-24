@@ -106,13 +106,21 @@ serve(async (req) => {
 
     const ghlData = await ghlRes.json();
 
-    if (!ghlRes.ok) {
-      console.error("GHL API error:", ghlRes.status, JSON.stringify(ghlData));
-      return json({ error: "Unable to process your request. Please try again." }, 500);
-    }
+    let contactId: string | null = null;
 
-    const contactId = ghlData.contact?.id || ghlData.id;
-    console.log("GHL contact created:", contactId);
+    if (!ghlRes.ok) {
+      // Handle duplicate contact gracefully — extract existing contactId from meta
+      if (ghlRes.status === 400 && ghlData?.meta?.contactId) {
+        contactId = ghlData.meta.contactId;
+        console.log("GHL duplicate contact, using existing:", contactId);
+      } else {
+        console.error("GHL API error:", ghlRes.status, JSON.stringify(ghlData));
+        return json({ error: "Unable to process your request. Please try again." }, 500);
+      }
+    } else {
+      contactId = ghlData.contact?.id || ghlData.id;
+      console.log("GHL contact created:", contactId);
+    }
 
     // --- Affiliate enrollment (only for Partner Signup Form) ---
     let affiliateLink: string | null = null;
