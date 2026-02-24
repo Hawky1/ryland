@@ -49,19 +49,7 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
   const onSubmit = async (data: PartnerFormData) => {
     setSubmitting(true);
     try {
-      // Save to database
-      const { error } = await supabase.from("partner_submissions").insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone || null,
-        business_name: data.business_name || null,
-        referral_source: data.referral_source || null,
-        message: data.message || null,
-      });
-
-      if (error) throw error;
-
-      // Sync to GHL + enroll as affiliate
+      // Call GHL first to get affiliate link before inserting
       let ghlContactId: string | null = null;
       let ghlAffiliateLink: string | null = null;
 
@@ -82,25 +70,22 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
           ghlAffiliateLink = ghlData.affiliateLink || null;
         }
       } catch {
-        // GHL sync is non-critical
+        // GHL sync is non-critical — continue with insert
       }
 
-      // Update record with GHL data if we got it
-      if (ghlContactId || ghlAffiliateLink) {
-        try {
-          await supabase
-            .from("partner_submissions")
-            .update({
-              ghl_contact_id: ghlContactId,
-              affiliate_link: ghlAffiliateLink,
-            } as Record<string, unknown>)
-            .eq("email", data.email)
-            .order("created_at", { ascending: false })
-            .limit(1);
-        } catch {
-          // Non-critical
-        }
-      }
+      // Insert complete record with GHL data included
+      const { error } = await supabase.from("partner_submissions").insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        business_name: data.business_name || null,
+        referral_source: data.referral_source || null,
+        message: data.message || null,
+        ghl_contact_id: ghlContactId,
+        affiliate_link: ghlAffiliateLink,
+      });
+
+      if (error) throw error;
 
       setAffiliateLink(ghlAffiliateLink);
       setSubmitted(true);

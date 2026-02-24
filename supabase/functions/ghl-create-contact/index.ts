@@ -6,6 +6,13 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+function json(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -17,19 +24,52 @@ serve(async (req) => {
 
     if (!apiKey || !locationId) {
       console.error("Missing GHL_API_KEY or GHL_LOCATION_ID");
-      return new Response(
-        JSON.stringify({ error: "Server configuration error" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      return json({ error: "Server configuration error" }, 500);
     }
 
     const { name, email, phone, businessName, tags, source, customFields } = await req.json();
 
+    // Required field validation
     if (!name || !email) {
-      return new Response(
-        JSON.stringify({ error: "Name and email are required" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      return json({ error: "Name and email are required" }, 400);
+    }
+
+    // Input length validation
+    if (typeof name !== "string" || name.length > 100) {
+      return json({ error: "Invalid name" }, 400);
+    }
+    if (typeof email !== "string" || email.length > 255) {
+      return json({ error: "Invalid email" }, 400);
+    }
+    if (phone && (typeof phone !== "string" || phone.length > 20)) {
+      return json({ error: "Invalid phone" }, 400);
+    }
+    if (businessName && (typeof businessName !== "string" || businessName.length > 150)) {
+      return json({ error: "Invalid business name" }, 400);
+    }
+    if (source && (typeof source !== "string" || source.length > 100)) {
+      return json({ error: "Invalid source" }, 400);
+    }
+
+    // Custom fields validation
+    if (customFields) {
+      if (typeof customFields !== "object" || Array.isArray(customFields)) {
+        return json({ error: "Invalid custom fields" }, 400);
+      }
+      const fieldCount = Object.keys(customFields).length;
+      if (fieldCount > 20) {
+        return json({ error: "Too many custom fields" }, 400);
+      }
+      for (const [key, value] of Object.entries(customFields)) {
+        if (typeof key !== "string" || key.length > 50 || String(value).length > 500) {
+          return json({ error: "Custom field too long" }, 400);
+        }
+      }
+    }
+
+    // Tags validation
+    if (tags && (!Array.isArray(tags) || tags.length > 20 || tags.some((t: unknown) => typeof t !== "string" || (t as string).length > 50))) {
+      return json({ error: "Invalid tags" }, 400);
     }
 
     // Split name into first/last
@@ -67,11 +107,8 @@ serve(async (req) => {
     const ghlData = await ghlRes.json();
 
     if (!ghlRes.ok) {
-      console.error("GHL API error:", JSON.stringify(ghlData));
-      return new Response(
-        JSON.stringify({ error: "Failed to create GHL contact", details: ghlData }),
-        { status: ghlRes.status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      console.error("GHL API error:", ghlRes.status, JSON.stringify(ghlData));
+      return json({ error: "Unable to process your request. Please try again." }, 500);
     }
 
     const contactId = ghlData.contact?.id || ghlData.id;
@@ -101,7 +138,6 @@ serve(async (req) => {
             }),
           });
 
-          // Safely parse response — GHL may return empty body on success
           const rawText = await affiliateRes.text();
           console.log("GHL affiliate raw response:", affiliateRes.status, rawText?.slice(0, 500));
 
@@ -111,13 +147,12 @@ serve(async (req) => {
               affiliateData = JSON.parse(rawText);
             }
           } catch {
-            // Non-JSON response — treat as success if status is ok
+            // Non-JSON response
           }
 
           if (!affiliateRes.ok) {
             console.error("GHL affiliate enrollment error:", affiliateRes.status, rawText);
           } else {
-            // GHL returns the referral link in various possible fields
             affiliateLink =
               (affiliateData.affiliate as Record<string, unknown>)?.referralLink as string ||
               (affiliateData.affiliate as Record<string, unknown>)?.referral_link as string ||
@@ -138,19 +173,13 @@ serve(async (req) => {
       }
     }
 
-    return new Response(
-      JSON.stringify({
-        success: true,
-        contactId,
-        affiliateLink,
-      }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return json({
+      success: true,
+      contactId,
+      affiliateLink,
+    });
   } catch (err) {
     console.error("Unexpected error:", err);
-    return new Response(
-      JSON.stringify({ error: "Internal server error" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return json({ error: "Internal server error" }, 500);
   }
 });

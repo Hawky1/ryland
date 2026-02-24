@@ -44,6 +44,11 @@ serve(async (req) => {
         return json({ error: "startDate, endDate, and timezone are required" }, 400);
       }
 
+      // Input length validation
+      if (String(startDate).length > 30 || String(endDate).length > 30 || String(timezone).length > 50) {
+        return json({ error: "Invalid input" }, 400);
+      }
+
       const url = new URL(
         `https://services.leadconnectorhq.com/calendars/${calendarId}/free-slots`
       );
@@ -56,7 +61,7 @@ serve(async (req) => {
 
       if (!res.ok) {
         console.error("GHL free-slots error:", JSON.stringify(data));
-        return json({ error: "Failed to fetch slots", details: data }, res.status);
+        return json({ error: "Unable to fetch available slots. Please try again." }, 500);
       }
 
       return json(data);
@@ -68,6 +73,26 @@ serve(async (req) => {
 
       if (!name || !email || !startTime || !endTime) {
         return json({ error: "name, email, startTime, endTime are required" }, 400);
+      }
+
+      // Input length validation
+      if (typeof name !== "string" || name.length > 100) {
+        return json({ error: "Invalid name" }, 400);
+      }
+      if (typeof email !== "string" || email.length > 255) {
+        return json({ error: "Invalid email" }, 400);
+      }
+      if (phone && (typeof phone !== "string" || phone.length > 20)) {
+        return json({ error: "Invalid phone" }, 400);
+      }
+      if (notes && (typeof notes !== "string" || notes.length > 1000)) {
+        return json({ error: "Notes too long" }, 400);
+      }
+      if (String(startTime).length > 30 || String(endTime).length > 30) {
+        return json({ error: "Invalid time format" }, 400);
+      }
+      if (timezone && (typeof timezone !== "string" || timezone.length > 50)) {
+        return json({ error: "Invalid timezone" }, 400);
       }
 
       // Step 1: Create/upsert contact
@@ -94,7 +119,7 @@ serve(async (req) => {
 
       if (!contactRes.ok) {
         console.error("GHL contact error:", JSON.stringify(contactData));
-        return json({ error: "Failed to create contact", details: contactData }, contactRes.status);
+        return json({ error: "Unable to process your request. Please try again." }, 500);
       }
 
       const contactId = contactData.contact?.id || contactData.id;
@@ -125,7 +150,7 @@ serve(async (req) => {
 
       if (!apptRes.ok) {
         console.error("GHL appointment error:", JSON.stringify(apptData));
-        return json({ error: "Failed to book appointment", details: apptData }, apptRes.status);
+        return json({ error: "Unable to book appointment. Please try again." }, 500);
       }
 
       console.log("Appointment booked:", apptData.id);
