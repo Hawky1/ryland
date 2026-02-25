@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { format, startOfMonth, endOfMonth, addMonths, isBefore, startOfDay } from "date-fns";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,9 @@ interface SlotMap {
 }
 
 export default function ConsultationCalendar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isFunnel = location.pathname.startsWith("/funnel");
   const [step, setStep] = useState<Step>("select");
   const [month, setMonth] = useState(startOfMonth(new Date()));
   const [slots, setSlots] = useState<SlotMap>({});
@@ -123,7 +127,17 @@ export default function ConsultationCalendar() {
       });
       if (fnError) throw fnError;
       if (data?.error) throw new Error(data.error);
-      setStep("confirmed");
+      if (!isFunnel && selectedDate && selectedSlot) {
+        navigate("/booking-confirmed", {
+          state: {
+            date: format(selectedDate, "EEEE, MMMM d, yyyy"),
+            time: formatSlotTime(selectedSlot),
+            name: name.trim(),
+          },
+        });
+      } else {
+        setStep("confirmed");
+      }
     } catch (e: any) {
       console.error("Booking failed:", e);
       setError("Booking failed. Please try again or contact us directly.");
