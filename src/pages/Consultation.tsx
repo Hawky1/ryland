@@ -124,7 +124,7 @@ export default function Consultation() {
                 <img
                   src={geneRyland}
                   alt="Gene Ryland"
-                  className="w-16 h-16 rounded-full object-cover ring-2 ring-cyan-400/20"
+                  className="w-20 h-20 rounded-2xl object-cover object-top ring-2 ring-cyan-400/20"
                 />
                 <div>
                   <p className="text-white font-semibold font-[Geist,sans-serif]">Gene Ryland</p>
