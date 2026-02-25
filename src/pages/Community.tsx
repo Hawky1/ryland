@@ -49,7 +49,7 @@ export default function Community() {
               A private Skool network where funded entrepreneurs learn to invest their capital into high-ROI digital businesses — with direct access to Gene Ryland and our expert team.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/funnel/consultation" className="shiny-cta !py-4 !px-10 !text-base"><span className="flex items-center gap-2">Apply to Join <ArrowRight className="w-4 h-4" /></span></Link>
+              <Link to="/consultation" className="shiny-cta !py-4 !px-10 !text-base"><span className="flex items-center gap-2">Apply to Join <ArrowRight className="w-4 h-4" /></span></Link>
               <Link to="/assessment" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Take the Assessment First</Link>
             </div>
           </motion.div>
@@ -86,7 +86,7 @@ export default function Community() {
             <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mb-3">The Curriculum</p>
             <h2 className="text-2xl sm:text-4xl font-medium text-slate-900 tracking-tighter font-[Manrope,sans-serif] mb-6">Turn Funding Into Freedom</h2>
             <p className="text-slate-500 leading-relaxed mb-8">Most entrepreneurs get funded but don't know what to do next. Our community teaches you how to deploy your capital into digital businesses that generate real, recurring revenue — so your funding works for you.</p>
-            <Link to="/funnel/consultation" className="shiny-cta !py-3.5 !px-8 !text-sm"><span className="flex items-center gap-2">Apply Now <ArrowRight className="w-4 h-4" /></span></Link>
+            <Link to="/consultation" className="shiny-cta !py-3.5 !px-8 !text-sm"><span className="flex items-center gap-2">Apply Now <ArrowRight className="w-4 h-4" /></span></Link>
           </div>
           <div className="space-y-3">
             {WHAT_YOU_LEARN.map((item) => (
@@ -106,7 +106,7 @@ export default function Community() {
           <h3 className="text-3xl md:text-5xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-[Geist,sans-serif]">Build Your Empire with Us</h3>
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">Join a community of funded founders who are turning business credit into real, revenue-generating digital businesses.</p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/funnel/consultation" className="shiny-cta !py-4 !px-10 !text-lg"><span>Apply to Join</span></Link>
+            <Link to="/consultation" className="shiny-cta !py-4 !px-10 !text-lg"><span>Apply to Join</span></Link>
             <Link to="/assessment" className="hover:bg-white/10 transition-colors text-base text-white border-white/20 border rounded-full py-3 px-6">Take the Assessment</Link>
           </div>
         </div>
