@@ -9,7 +9,7 @@ const SERVICE_ITEMS = [
   { icon: "🎓", title: "Join The Community", desc: "Private Skool network & digital business training", href: "/community" },
   { icon: "📚", title: "Shop Digital Products", desc: "eBooks & resources to accelerate your growth", href: "/store" },
   { icon: "🤝", title: "Become A Partner", desc: "Earn uncapped commissions — free to join", href: "/partners" },
-  { icon: "📅", title: "Schedule A Consultation", desc: "1-on-1 strategy session with funding experts", href: "/funnel/consultation" },
+  { icon: "📅", title: "Schedule A Consultation", desc: "1-on-1 strategy session with funding experts", href: "/consultation" },
 ];
 
 interface NavbarProps {

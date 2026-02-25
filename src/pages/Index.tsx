@@ -261,7 +261,7 @@ const Index = () => {
               { icon: iconCommunity, title: "Join The Community", desc: "Access our private Skool network and learn to invest your funding into high-ROI digital businesses.", cta: "Join Now", href: "/community" },
               { icon: iconProducts, title: "Shop Digital Products", desc: "Browse our curated collection of eBooks and digital resources to accelerate your business growth.", cta: "Shop Now", href: "/store" },
               { icon: iconPartner, title: "Become A Partner", desc: "Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join.", cta: "Partner Up", href: "/partners" },
-              { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "/funnel/consultation" },
+              { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "/consultation" },
             ].map((card, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: i * 0.08 }} whileHover={{ y: -4 }} className="relative overflow-hidden border border-[#004E8C] rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
                 <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />

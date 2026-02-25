@@ -54,7 +54,7 @@ export default function CreditRepair() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-base"><span>Get Your Free Credit Audit</span></Link>
-              <Link to="/funnel/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</Link>
+              <Link to="/consultation" className="hover:bg-white/10 transition-colors text-sm font-medium text-white border border-white/20 rounded-full py-3.5 px-8 inline-flex items-center justify-center">Book a Strategy Call</Link>
             </div>
           </motion.div>
         </div>

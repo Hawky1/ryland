@@ -417,7 +417,7 @@ export default function Assessment() {
                     ))}
                   </ul>
                   <button
-                    onClick={() => navigate("/funnel/consultation")}
+                    onClick={() => navigate("/consultation")}
                     className="shiny-cta w-full !text-base !py-4"
                   >
                     <span className="flex items-center justify-center gap-2">
@@ -450,7 +450,7 @@ export default function Assessment() {
                     ))}
                   </ul>
                   <button
-                    onClick={() => navigate("/funnel/consultation")}
+                    onClick={() => navigate("/consultation")}
                     className="shiny-cta w-full !text-base !py-4"
                   >
                     <span className="flex items-center justify-center gap-2">
