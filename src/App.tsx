@@ -27,6 +27,7 @@ import Funding from "./pages/Funding";
 import CreditRepair from "./pages/CreditRepair";
 import Community from "./pages/Community";
 import Consultation from "./pages/Consultation";
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const AppContent = () => {
           <Route path="/funding" element={<Funding />} />
           <Route path="/credit-repair" element={<CreditRepair />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/booking-confirmed" element={<BookingConfirmation />} />
           <Route path="/consultation" element={<Consultation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
