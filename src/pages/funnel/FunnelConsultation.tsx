@@ -60,7 +60,7 @@ export default function FunnelConsultation() {
               <img
                 src={geneRyland}
                 alt="Gene Ryland"
-                className="w-14 h-14 rounded-full object-cover"
+                className="w-20 h-20 rounded-2xl object-cover object-top"
               />
               <div>
                 <p className="text-white font-semibold text-sm">Gene Ryland</p>
