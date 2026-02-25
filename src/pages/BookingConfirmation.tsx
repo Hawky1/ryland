@@ -180,7 +180,7 @@ export default function BookingConfirmation() {
             </Button>
             <Button
               variant="outline"
-              className="border-white/10 text-white/70 hover:bg-white/5 hover:text-white px-6"
+              className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white px-6"
               onClick={() => navigate("/")}
             >
               Back to Home
