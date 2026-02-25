@@ -1,12 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle2, CalendarDays, Clock, Mail, ArrowRight, Phone } from "lucide-react";
+import { CheckCircle2, CalendarDays, Clock, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
 import geneRyland from "@/assets/gene-ryland-about.png";
+import logoWhite from "@/assets/logo-white.png";
 
 export default function BookingConfirmation() {
   const location = useLocation();
@@ -20,8 +19,17 @@ export default function BookingConfirmation() {
         title="Booking Confirmed | Ryland Partners"
         description="Your consultation has been booked. We look forward to speaking with you."
       />
-      <Navbar />
-
+      {/* Minimal dark header */}
+      <header className="sticky top-0 z-20 bg-[#001228]/80 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 sm:px-6">
+          <Link to="/">
+            <img src={logoWhite} alt="Ryland Partners" className="h-8 w-auto" />
+          </Link>
+          <Link to="/" className="text-sm text-blue-200/50 hover:text-white transition-colors">
+            ← Back to Home
+          </Link>
+        </div>
+      </header>
       <main className="relative pt-32 pb-24">
         {/* Subtle background accents */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -181,7 +189,10 @@ export default function BookingConfirmation() {
         </div>
       </main>
 
-      <Footer />
+      {/* Minimal dark footer */}
+      <footer className="border-t border-white/5 py-8 text-center">
+        <p className="text-xs text-blue-200/30">© {new Date().getFullYear()} Ryland Partners. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
