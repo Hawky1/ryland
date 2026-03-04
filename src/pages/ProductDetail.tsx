@@ -234,6 +234,44 @@ const ProductDetail = () => {
             </div>
           </section>
 
+          {/* Why You Need This */}
+          {content.whyYouNeedThis && content.whyYouNeedThis.length > 0 && (
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-10 tracking-tight">
+                  Why You Need This
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {content.whyYouNeedThis.map((reason, i) => {
+                    const [bold, ...rest] = reason.split(" – ");
+                    const desc = rest.join(" – ");
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: i * 0.08 }}
+                        className="flex items-start gap-3 bg-blue-50 rounded-xl p-5 border border-blue-100"
+                      >
+                        <Zap className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900">{bold}</span>
+                          {desc && <span className="text-slate-500"> – {desc}</span>}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </section>
+          )}
+
           {/* Product Details */}
           <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
             <motion.div

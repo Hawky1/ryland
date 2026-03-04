@@ -2,6 +2,7 @@ export interface ProductContent {
   headline: string;
   description: string;
   benefits: string[];
+  whyYouNeedThis?: string[];
   details: {
     format: string;
     length: string;
@@ -443,5 +444,109 @@ export const productContentMap: Record<string, ProductContent> = {
       "Insights to help improve your credit score and financial habits – Make smarter decisions.",
     ],
     details: { format: "PDF eBook", length: "19 pages", category: "" },
+  },
+
+  "ultimate-business-funding-credit-bundle": {
+    headline: "Empower Your Business. Secure Funding. Take Control of Credit and Growth.",
+    description:
+      "Empower your business and take control of funding, credit, and growth! The Ultimate Business Funding & Credit Bundle gives you everything you need to secure funding, manage credit, and grow your business without the guesswork.",
+    benefits: [
+      "How to Get Vehicle Financing with an EIN Only – Secure vehicles using business credit.",
+      "How to Get Up to $150,000 in Funding — Even with a New LLC – Unlock capital fast.",
+      "The Ultimate Business Credit Card Playbook – Master business credit cards.",
+      "Fast-Track Vendor Accounts for New Businesses – Build credit with vendors.",
+      "The Business Funding Application Success Checklist – Apply with confidence.",
+      "The Fundability Factor Business Assessment & Scorecard – Know your funding readiness.",
+    ],
+    whyYouNeedThis: [
+      "All-in-One solution for business funding – Everything in one bundle.",
+      "Covers vendor credit, loans, credit cards, and vehicles – Complete coverage.",
+      "Clear step-by-step strategies – No guesswork required.",
+      "Perfect for entrepreneurs and business owners – Built for you.",
+    ],
+    details: { format: "PDF Bundle", length: "6 Guides", category: "Business Funding" },
+  },
+
+  "business-funding-checklist": {
+    headline: "Secure Funding Faster. Submit Stronger Applications. Get Approved.",
+    description:
+      "Secure funding faster and with less stress. This checklist gives business owners and entrepreneurs a proven roadmap to prepare strong funding applications.",
+    benefits: [
+      "27 pages of step-by-step funding application guidance – A complete roadmap.",
+      "Help choosing the right funding product – Pick the best option for your needs.",
+      "Instructions to assemble required documents – Get organized fast.",
+      "Tips for communicating with lenders – Speak their language.",
+    ],
+    whyYouNeedThis: [
+      "Reduce errors and delays – Submit clean applications the first time.",
+      "Improve funding approval chances – Stand out to lenders.",
+      "Submit stronger applications – Confidence in every submission.",
+    ],
+    details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
+  },
+
+  "150k-funding-new-llc": {
+    headline: "Secure Up to $150,000 in Funding — Even with a Brand-New LLC.",
+    description:
+      "Learn how entrepreneurs secure large funding amounts even with brand-new businesses. This guide reveals funding strategies and lender insights to help new companies access capital faster.",
+    benefits: [
+      "How lenders evaluate new businesses – Understand what they look for.",
+      "Steps to qualify for funding quickly – Fast-track your application.",
+      "Strategies to increase approval chances – Maximize your odds.",
+      "How to structure your business for funding – Set up for success.",
+    ],
+    details: { format: "PDF eBook", length: "", category: "Business Funding" },
+  },
+
+  "fundability-factor": {
+    headline: "Stop Guessing. Start Building a Business Lenders Want to Fund.",
+    description:
+      "Stop guessing and start building a business lenders want to fund. This assessment provides a clear roadmap to evaluate and improve your company's fundability.",
+    benefits: [
+      "27-page fundability scoring system – Know exactly where you stand.",
+      "Evaluation of the 5 key lender factors – Understand what matters most.",
+      "Tools to identify weaknesses – Fix issues before applying.",
+      "Strategies to increase approval chances – Improve your score.",
+    ],
+    details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
+  },
+
+  "fast-track-vendor-accounts": {
+    headline: "Build Business Credit Faster with Vendor Accounts.",
+    description:
+      "Build business credit faster with vendor accounts that report to credit bureaus. This guide explains how new businesses can establish trade lines and improve PAYDEX scores quickly.",
+    benefits: [
+      "How vendor accounts build business credit – Understand the system.",
+      "Which vendors report to business credit bureaus – Target the right ones.",
+      "How to structure purchases to boost credit scores – Strategic spending.",
+      "Strategies to grow business credit quickly – Accelerate your progress.",
+    ],
+    details: { format: "PDF eBook", length: "", category: "Business Funding" },
+  },
+
+  "vehicle-financing-ein": {
+    headline: "Secure Vehicle Financing Using Only Your Business EIN.",
+    description:
+      "Secure vehicle financing using only your business EIN without risking personal credit. This guide explains how businesses qualify for vehicle loans and leases using business credit.",
+    benefits: [
+      "34 pages of EIN-only financing strategies – Complete guidance.",
+      "Steps to build a fundable business profile – Set up for approval.",
+      "Methods to separate personal and business liability – Protect yourself.",
+      "Insider lender approval tips – Know what lenders look for.",
+    ],
+    details: { format: "PDF eBook", length: "34 pages", category: "Business Funding" },
+  },
+
+  "ultimate-business-credit-card-playbook": {
+    headline: "Unlock Business Credit Cards. Maximize Benefits. Scale Your Business.",
+    description:
+      "Unlock the secrets to building business credit and maximizing card benefits. This playbook shows entrepreneurs how to select and manage business credit cards strategically.",
+    benefits: [
+      "38 pages of step-by-step guidance – Everything you need to know.",
+      "Strategy for applying in the right order – Maximize approvals.",
+      "Tips for managing utilization and limits – Keep your profile strong.",
+      "Techniques for graduating to larger bank cards – Level up over time.",
+    ],
+    details: { format: "PDF eBook", length: "38 pages", category: "Business Funding" },
   },
 };
