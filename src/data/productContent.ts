@@ -549,4 +549,53 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     details: { format: "PDF eBook", length: "38 pages", category: "Business Funding" },
   },
+
+  "first-net-30-account": {
+    headline: "Get Your First Business Tradeline. Start Building Real Business Credit.",
+    description:
+      "Get your first business tradeline and start building real business credit.\n\nIf you've been stuck watching everyone else get approved for Net-30 accounts and you don't know where to start, this playbook walks you through it step-by-step in plain English.",
+    benefits: [
+      "Understand what a Net-30 account actually is – No jargon, just clarity.",
+      "Set your business up to get approved – Proper setup before applying.",
+      "Learn how vendors verify your business – Know what they check.",
+      "Open your first reporting tradeline – Start building credit history.",
+      "Simple breakdown of Net-30 accounts – Everything explained clearly.",
+      "Step-by-step application workflow – Follow the exact process.",
+      "Common mistakes that delay approvals – Avoid costly errors.",
+      "How to use your Net-30 account correctly – Maximize your credit impact.",
+    ],
+    details: { format: "PDF eBook", length: "34 pages", category: "Business Credit Quickstart Kit" },
+  },
+
+  "essential-business-credit-checklist": {
+    headline: "Build a Fundable Business Profile from Day One.",
+    description:
+      "Build a fundable business profile from day one.\n\nIf you want business credit and funding approvals, your business needs to look credible to lenders. This checklist gives you a simple roadmap to set your business up correctly.",
+    benefits: [
+      "Look credible to banks and vendors – Present a professional business identity.",
+      "Build a fundable business foundation – Set up the right way from the start.",
+      "Understand how business credit files work – Know the system.",
+      "Start building trade credit strategically – Grow your credit profile.",
+      "Step-by-step business credit checklist – A clear action plan.",
+      "A reusable evergreen setup guide – Reference it anytime.",
+      "A simple roadmap for building business credit – No guesswork.",
+    ],
+    details: { format: "PDF eBook", length: "32 pages", category: "Business Credit Quickstart Kit" },
+  },
+
+  "business-credit-basics-101": {
+    headline: "Build Business Credit the Right Way. Become Fundable Faster.",
+    description:
+      "Build business credit the right way and become fundable faster.\n\nWhether you're starting a new business or trying to get approved for funding, this guide explains how business credit works and how to set it up correctly.",
+    benefits: [
+      "Step-by-step business credit setup – Build from scratch with confidence.",
+      "Guidance for building a fundable business identity – Look legit to lenders.",
+      "Foundation for establishing business credit history – Start strong.",
+      "Clear breakdown of business credit – Understand the full picture.",
+      "Setup steps that make your business verifiable – Pass lender checks.",
+      "The foundation lenders expect – Meet requirements before applying.",
+      "A roadmap for building credit correctly – Follow the proven path.",
+    ],
+    details: { format: "PDF eBook", length: "33 pages", category: "Business Credit Quickstart Kit" },
+  },
 };
