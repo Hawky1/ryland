@@ -225,7 +225,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "", category: "" },
   },
 
-  "inquiry-removal-guide": {
+  "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit": {
     headline: "Remove Hard Inquiries. Protect Your Score. Take Control of Your Credit.",
     description:
       "Too many credit inquiries can drag down your score—but you don't have to live with them. Inquiry Removal Guide: Step-by-Step Directions to Remove Inquiries from Your Credit gives you the exact strategies you need to take control.\n\nThis 28-page guide walks you through proven dispute methods, expert tips, and clear step-by-step instructions to successfully remove hard inquiries from your credit report.",
@@ -251,7 +251,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "31 pages", category: "" },
   },
 
-  "bankruptcy-removal-blueprint": {
+  "bankruptcy-removal-blueprint-your-step-by-step-guide-to-clean-credit": {
     headline: "Challenge Bankruptcy Records. Rebuild Your Credit. Reclaim Your Future.",
     description:
       "A past bankruptcy doesn't have to define your financial future. Bankruptcy Removal Blueprint gives you tools and strategies to challenge bankruptcy records and rebuild your credit profile.",
@@ -264,7 +264,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "16 pages", category: "" },
   },
 
-  "credit-repair-mistakes": {
+  "credit-repair-mistakes-to-avoid-guide": {
     headline: "Avoid Costly Mistakes. Fast-Track Your Credit Repair Journey.",
     description:
       "Avoid costly mistakes and fast-track your credit repair journey with this guide that reveals the most common errors people make when trying to fix their credit.",
@@ -277,7 +277,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "27 pages", category: "" },
   },
 
-  "credit-repair-mindset": {
+  "credit-repair-success-mindset-guide": {
     headline: "Build the Mindset to Repair Your Credit and Transform Your Finances.",
     description:
       "Repairing your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
@@ -290,7 +290,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "27 pages", category: "" },
   },
 
-  "100-dispute-letters": {
+  "100-dispute-letters-templates": {
     headline: "100 Professional Dispute Letter Templates. Challenge Errors Fast.",
     description:
       "100 professionally written dispute letter templates designed to challenge errors on your credit report quickly and easily.",
@@ -303,7 +303,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF Toolkit", length: "9 pages", category: "" },
   },
 
-  "credit-repair-legal-rights": {
+  "credit-repair-legal-rights-cheat-sheet": {
     headline: "Know Your Legal Rights. Protect Your Credit. Fight Back with Confidence.",
     description:
       "A quick-reference guide explaining important consumer credit laws like the FCRA and FDCPA.",
@@ -316,7 +316,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF Guide", length: "27 pages", category: "" },
   },
 
-  "credit-repair-planner": {
+  "credit-repair-success-planner": {
     headline: "Organize Your Disputes. Track Your Progress. Stay Motivated.",
     description:
       "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit repair journey.",
@@ -329,7 +329,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF Planner", length: "27 pages", category: "" },
   },
 
-  "unlocking-business-credit": {
+  "unlocking-business-credit-step-by-step-success": {
     headline: "Build Strong Business Credit. Unlock Funding. Grow Your Business.",
     description:
       "A complete 42-page guide that teaches entrepreneurs how to build strong business credit and unlock funding opportunities.",
@@ -342,7 +342,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "42 pages", category: "" },
   },
 
-  "credit-score-accelerator": {
+  "credit-score-accelerator-the-90-day-credit-comeback-plan": {
     headline: "Repair, Rebuild, and Improve Your Credit in 90 Days.",
     description:
       "A 90-day blueprint designed to repair, rebuild, and improve your credit quickly using proven tactics and dispute strategies.",
@@ -381,7 +381,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "16 pages", category: "" },
   },
 
-  "repo-eraser": {
+  "repo-eraser-how-to-delete-repossessions-from-your-credit-fast": {
     headline: "Remove Repossessions from Your Credit Report Fast.",
     description:
       "Repo Eraser shows you how to remove repossessions from your credit report using proven dispute strategies and step-by-step guidance.",
@@ -394,7 +394,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "26 pages", category: "" },
   },
 
-  "ultimate-homebuyers-handbook": {
+  "the-ultimate-homebuyers-handbook": {
     headline: "Your Step-by-Step Guide to Buying a Home with Confidence.",
     description:
       "The Ultimate Homebuyers Handbook is your step-by-step guide to navigating the home buying process, from financial preparation to closing day.",
@@ -420,7 +420,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "43 pages", category: "" },
   },
 
-  "master-your-credit": {
+  "master-your-credit-a-practical-step-by-step-guide-to-boosting-your-score": {
     headline: "Read Your Reports. Dispute Errors. Boost Your Score.",
     description:
       "Master Your Credit is a practical guide that teaches you how to read credit reports, dispute errors, and improve your credit score step-by-step.",
@@ -433,7 +433,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "18 pages", category: "" },
   },
 
-  "credit-score-tracker": {
+  "credit-score-tracker-printable": {
     headline: "Track Your Credit. Manage Your Finances. Take Control.",
     description:
       "Take control of your credit and spending with the Credit Score Tracker. This 19-page guide makes monitoring your credit and managing your finances simple and actionable.",
@@ -467,7 +467,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF Bundle", length: "6 Guides", category: "Business Funding" },
   },
 
-  "business-funding-checklist": {
+  "the-business-funding-application-success-checklist": {
     headline: "Secure Funding Faster. Submit Stronger Applications. Get Approved.",
     description:
       "Secure funding faster and with less stress. This checklist gives business owners and entrepreneurs a proven roadmap to prepare strong funding applications.",
@@ -485,7 +485,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
   },
 
-  "150k-funding-new-llc": {
+  "how-to-get-up-to-150-000-in-funding-even-with-a-new-llc": {
     headline: "Secure Up to $150,000 in Funding — Even with a Brand-New LLC.",
     description:
       "Learn how entrepreneurs secure large funding amounts even with brand-new businesses. This guide reveals funding strategies and lender insights to help new companies access capital faster.",
@@ -498,7 +498,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "", category: "Business Funding" },
   },
 
-  "fundability-factor": {
+  "the-fundability-factor-business-assessment-scorecard": {
     headline: "Stop Guessing. Start Building a Business Lenders Want to Fund.",
     description:
       "Stop guessing and start building a business lenders want to fund. This assessment provides a clear roadmap to evaluate and improve your company's fundability.",
@@ -511,7 +511,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
   },
 
-  "fast-track-vendor-accounts": {
+  "fast-track-vendor-accounts-for-new-businesses": {
     headline: "Build Business Credit Faster with Vendor Accounts.",
     description:
       "Build business credit faster with vendor accounts that report to credit bureaus. This guide explains how new businesses can establish trade lines and improve PAYDEX scores quickly.",
@@ -524,7 +524,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "", category: "Business Funding" },
   },
 
-  "vehicle-financing-ein": {
+  "how-to-get-vehicle-financing-with-ein-only": {
     headline: "Secure Vehicle Financing Using Only Your Business EIN.",
     description:
       "Secure vehicle financing using only your business EIN without risking personal credit. This guide explains how businesses qualify for vehicle loans and leases using business credit.",
@@ -537,7 +537,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "34 pages", category: "Business Funding" },
   },
 
-  "ultimate-business-credit-card-playbook": {
+  "the-ultimate-business-credit-card-playbook": {
     headline: "Unlock Business Credit Cards. Maximize Benefits. Scale Your Business.",
     description:
       "Unlock the secrets to building business credit and maximizing card benefits. This playbook shows entrepreneurs how to select and manage business credit cards strategically.",
@@ -550,7 +550,7 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "38 pages", category: "Business Funding" },
   },
 
-  "first-net-30-account": {
+  "how-to-get-your-first-net-30-account": {
     headline: "Get Your First Business Tradeline. Start Building Real Business Credit.",
     description:
       "Get your first business tradeline and start building real business credit.\n\nIf you've been stuck watching everyone else get approved for Net-30 accounts and you don't know where to start, this playbook walks you through it step-by-step in plain English.",
