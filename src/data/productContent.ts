@@ -340,4 +340,108 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     details: { format: "PDF eBook", length: "42 pages", category: "" },
   },
+
+  "credit-score-accelerator": {
+    headline: "Repair, Rebuild, and Improve Your Credit in 90 Days.",
+    description:
+      "A 90-day blueprint designed to repair, rebuild, and improve your credit quickly using proven tactics and dispute strategies.",
+    benefits: [
+      "How to pull and review your credit reports – Know exactly where you stand.",
+      "Dispute strategies to remove damaging items – Take action on negative marks.",
+      "Ways to build new credit – Establish positive credit history.",
+      "Tactics to boost your credit score faster – See results in 90 days.",
+    ],
+    details: { format: "PDF eBook", length: "27 pages", category: "" },
+  },
+
+  "credit-repair-chatgpt-prompts": {
+    headline: "Speed Up Your Credit Repair with the Power of AI.",
+    description:
+      "Speed up your credit repair with the power of AI. Credit Repair ChatGPT Prompts gives you ready-to-use prompts to write dispute letters, negotiate with creditors, and get personalized guidance.",
+    benefits: [
+      "37 pages of AI-powered ChatGPT prompts – Ready to use immediately.",
+      "Templates for dispute letters and negotiations – Professional and effective.",
+      "Faster ways to generate dispute letters – Save hours of work.",
+      "Tools to simplify credit repair workflows – Streamline the entire process.",
+    ],
+    details: { format: "PDF eBook", length: "37 pages", category: "" },
+  },
+
+  "credit-building-resource-library": {
+    headline: "Rebuild Your Credit. Open New Financial Opportunities.",
+    description:
+      "Rebuild your credit and open new financial opportunities with the Credit Building Resource Library. This guide provides practical tools and curated offers to help people with poor credit start fresh.",
+    benefits: [
+      "16 pages of credit-building resources – Everything you need in one place.",
+      "Access to auto loans and second-chance banking – Options for rebuilding.",
+      "Tools to rebuild credit faster – Accelerate your progress.",
+      "Practical guidance for improving credit profiles – Actionable steps.",
+    ],
+    details: { format: "PDF eBook", length: "16 pages", category: "" },
+  },
+
+  "repo-eraser": {
+    headline: "Remove Repossessions from Your Credit Report Fast.",
+    description:
+      "Repo Eraser shows you how to remove repossessions from your credit report using proven dispute strategies and step-by-step guidance.",
+    benefits: [
+      "Steps to remove repossessions – Clear, actionable instructions.",
+      "Proven dispute strategies – Methods that actually work.",
+      "How to rebuild your credit afterward – Start fresh with confidence.",
+      "Ways to restore financial confidence – Take back control.",
+    ],
+    details: { format: "PDF eBook", length: "26 pages", category: "" },
+  },
+
+  "ultimate-homebuyers-handbook": {
+    headline: "Your Step-by-Step Guide to Buying a Home with Confidence.",
+    description:
+      "The Ultimate Homebuyers Handbook is your step-by-step guide to navigating the home buying process, from financial preparation to closing day.",
+    benefits: [
+      "How to prepare your credit for buying a home – Get mortgage-ready.",
+      "House hunting strategies – Find the right property smarter.",
+      "What to know before making an offer – Negotiate with confidence.",
+      "Steps for closing successfully – Navigate the final steps with ease.",
+    ],
+    details: { format: "PDF eBook", length: "31 pages", category: "" },
+  },
+
+  "manufactured-spending-techniques": {
+    headline: "Maximize Credit Card Rewards with Smart Spending Strategies.",
+    description:
+      "Manufactured Spending Techniques teaches strategies for maximizing credit card rewards using smart spending methods.",
+    benefits: [
+      "Manufactured spending strategies – Learn the techniques insiders use.",
+      "How to earn more credit card points and miles – Maximize every dollar.",
+      "Ways to maximize rewards without overspending – Stay in control.",
+      "Tips to leverage credit card benefits – Get more from your cards.",
+    ],
+    details: { format: "PDF eBook", length: "43 pages", category: "" },
+  },
+
+  "master-your-credit": {
+    headline: "Read Your Reports. Dispute Errors. Boost Your Score.",
+    description:
+      "Master Your Credit is a practical guide that teaches you how to read credit reports, dispute errors, and improve your credit score step-by-step.",
+    benefits: [
+      "How to read your credit reports correctly – Understand every detail.",
+      "Step-by-step credit repair actions – Know exactly what to do next.",
+      "Legal tips for disputing credit report errors – Use the law to your advantage.",
+      "Tools to improve your credit independently – Take full control.",
+    ],
+    details: { format: "PDF eBook", length: "18 pages", category: "" },
+  },
+
+  "credit-score-tracker": {
+    headline: "Track Your Credit. Manage Your Finances. Take Control.",
+    description:
+      "Take control of your credit and spending with the Credit Score Tracker. This 19-page guide makes monitoring your credit and managing your finances simple and actionable.",
+    benefits: [
+      "19 pages of credit tracking and budgeting tools – Everything in one place.",
+      "Monthly budget inserts for income and expenses – Stay on top of your money.",
+      "Easy-to-use printable format – Print and use immediately.",
+      "Insights to help improve your credit score and financial habits – Make smarter decisions.",
+    ],
+    details: { format: "PDF eBook", length: "19 pages", category: "" },
+  },
 };
