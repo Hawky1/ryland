@@ -27,7 +27,7 @@ const FEATURED = [
   },
   {
     id: "credit-accelerator",
-    image: bundleAccelerator,
+    image: bundleMaster,
     title: "The Credit Accelerator Bundle",
     subtitle: "6 E-Books to Kick-Start Credit Knowledge",
     price: "$97",
@@ -35,7 +35,7 @@ const FEATURED = [
   },
   {
     id: "credit-authority",
-    image: bundleMaster,
+    image: bundleAccelerator,
     title: "Master Your Credit Bundle Pack",
     subtitle: "9 E-Books to Guide You Every Step",
     price: "$67",
