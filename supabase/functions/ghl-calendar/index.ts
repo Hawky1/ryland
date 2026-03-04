@@ -20,7 +20,18 @@ serve(async (req) => {
 
   const apiKey = Deno.env.get("GHL_API_KEY");
   const locationId = Deno.env.get("GHL_LOCATION_ID");
-  const calendarId = Deno.env.get("GHL_CALENDAR_ID");
+
+  // Support multiple calendars via calendarType
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch {
+    return json({ error: "Invalid request body" }, 400);
+  }
+
+  const calendarId = body.calendarType === "partner"
+    ? Deno.env.get("GHL_PARTNER_CALENDAR_ID")
+    : Deno.env.get("GHL_CALENDAR_ID");
 
   if (!apiKey || !locationId || !calendarId) {
     console.error("Missing GHL env vars");
@@ -34,7 +45,7 @@ serve(async (req) => {
   };
 
   try {
-    const body = await req.json();
+    // body already parsed above for calendarType
     const { action } = body;
 
     // ── GET FREE SLOTS ──
@@ -100,13 +111,14 @@ serve(async (req) => {
       const firstName = nameParts[0] || "";
       const lastName = nameParts.slice(1).join(" ") || "";
 
+      const isPartner = body.calendarType === "partner";
       const contactPayload: Record<string, unknown> = {
         firstName,
         lastName,
         email,
         locationId,
-        source: "Consultation Booking",
-        tags: ["consultation-booking", "funnel-lead"],
+        source: isPartner ? "Partner Onboarding" : "Consultation Booking",
+        tags: isPartner ? ["partner-onboarding", "referral-partner"] : ["consultation-booking", "funnel-lead"],
       };
       if (phone) contactPayload.phone = phone;
 
