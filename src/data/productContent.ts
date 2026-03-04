@@ -93,4 +93,121 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     details: { format: "PDF eBook", length: "60 pages", category: "Credit Authority Bundle" },
   },
+
+  "unlock-credit-potential": {
+    headline: "Ready to take charge of your financial future?",
+    description:
+      "The Unlock Your Credit Potential – Credit Repair Guide 2025 is designed to help you build stronger credit, fix mistakes, and open the door to better financial opportunities.",
+    benefits: [
+      "Build a stronger credit profile – Proven strategies to elevate your credit standing.",
+      "Learn how to correct errors on your credit report – Step-by-step dispute guidance.",
+      "Unlock access to better financial opportunities – Open doors to loans, cards, and more.",
+    ],
+    details: { format: "PDF eBook", length: "24 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "diy-credit-repair-workbook": {
+    headline: "Stay organized and take charge of your financial future.",
+    description:
+      "Stay organized and take charge of your financial future with the DIY Credit Repair Workbook. This workbook includes practical exercises, step-by-step guidance, and easy-to-use tools to help you repair your credit smarter.",
+    benefits: [
+      "Worksheets to track your credit repair progress – Monitor every step of your journey.",
+      "Goal-setting pages for your credit journey – Define and hit your credit milestones.",
+      "Action steps for disputing credit report errors – Clear guidance on what to do next.",
+      "Systems to build positive credit habits – Create lasting financial discipline.",
+      "Structured guidance to stay consistent – Stay on track with a proven framework.",
+    ],
+    details: { format: "Workbook PDF", length: "17 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "money-management-worksheet": {
+    headline: "Take control of your money with ease.",
+    description:
+      "Take control of your money with the Money Management Worksheet. This simple tool makes budgeting easier by helping you track income, expenses, and savings goals.",
+    benefits: [
+      "Simple budgeting system – A clear framework to manage your money.",
+      "Income and expense tracking pages – Know exactly where your money goes.",
+      "Savings goal worksheets – Set targets and watch your savings grow.",
+      "Financial organization tools – Keep your finances neat and structured.",
+    ],
+    details: { format: "Worksheet PDF", length: "9 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "stop-living-paycheck-to-paycheck": {
+    headline: "Break free from the paycheck-to-paycheck cycle.",
+    description:
+      "Break free from the paycheck-to-paycheck cycle with this practical ebook that provides proven strategies to manage money smarter and create financial stability.",
+    benefits: [
+      "12 actionable money management strategies – Practical steps you can use today.",
+      "How to build a savings cushion – Create a financial safety net.",
+      "Practical budgeting systems – Simple frameworks that actually work.",
+      "A roadmap for financial stability – Your step-by-step path to freedom.",
+    ],
+    details: { format: "PDF eBook", length: "17 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "crush-100k-debt-worksheet": {
+    headline: "Tackle large amounts of debt with a structured payoff system.",
+    description:
+      "The Crush $100K Debt Worksheet is designed to help you tackle large amounts of debt with a structured payoff system.",
+    benefits: [
+      "Debt payoff planning framework – A clear system to attack your debt.",
+      "Progress tracking sheets – See your balances shrink over time.",
+      "Milestone markers for motivation – Celebrate wins along the way.",
+      "A simple repeatable system for eliminating debt – Use it again and again.",
+    ],
+    details: { format: "Worksheet PDF", length: "7 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "frugal-living-success-workbook": {
+    headline: "Master the art of saving and build smarter financial habits.",
+    description:
+      "Master the art of saving with this workbook designed to help you reduce expenses, track spending, and build smarter financial habits.",
+    benefits: [
+      "Expense-cutting strategies – Identify and eliminate unnecessary spending.",
+      "Spending habit exercises – Build awareness around where your money goes.",
+      "Grocery and bill saving strategies – Save on everyday essentials.",
+      "Financial goal worksheets – Set and achieve your savings targets.",
+    ],
+    details: { format: "Workbook PDF", length: "8 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "13-ways-to-pay-off-debt": {
+    headline: "Proven strategies to eliminate debt faster and build financial freedom.",
+    description:
+      "A practical guide that teaches proven strategies to eliminate debt faster and build financial freedom.",
+    benefits: [
+      "13 powerful debt payoff strategies – Multiple approaches to fit your situation.",
+      "Debt Snowball method – Build momentum by paying off small debts first.",
+      "Debt Avalanche method – Save the most money by tackling high-interest debt.",
+      "Personalized debt payoff planning – Create a plan that works for you.",
+    ],
+    details: { format: "PDF Guide", length: "14 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "23-money-wasting-habits-to-break": {
+    headline: "Stop overspending and improve your financial discipline.",
+    description:
+      "This guide reveals the most common money-wasting habits and provides practical solutions to stop overspending and improve financial discipline.",
+    benefits: [
+      "23 financial habits that waste money – Identify the leaks in your budget.",
+      "Simple fixes to stop overspending – Practical solutions you can apply today.",
+      "Practical saving strategies – Keep more of what you earn.",
+      "Systems to build better money habits – Create lasting financial discipline.",
+    ],
+    details: { format: "PDF Guide", length: "15 pages", category: "Credit Business Accelerator Pack" },
+  },
+
+  "diy-credit-master-guide": {
+    headline: "Dispute credit report errors and build better financial habits.",
+    description:
+      "A step-by-step credit repair action guide designed to help individuals dispute credit report errors, improve their credit profile, and build better financial habits. This guide also includes resell rights, allowing credit repair businesses to rebrand and sell the guide as their own product.",
+    benefits: [
+      "Step-by-step credit repair system – Clear guidance for disputing errors.",
+      "Improve your credit profile – Actionable steps to raise your score.",
+      "Build better financial habits – Create a foundation for long-term success.",
+      "Resell Rights Included – Rebrand and sell as your own product.",
+    ],
+    details: { format: "PDF eBook", length: "10 pages", category: "Credit Business Accelerator Pack" },
+  },
 };
