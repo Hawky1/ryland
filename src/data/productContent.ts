@@ -454,10 +454,10 @@ export const productContentMap: Record<string, ProductContent> = {
     details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Credit Business Bundle" },
   },
 
-  "ultimate-business-funding-credit-bundle": {
+  "the-ultimate-business-funding-credit-bundle": {
     headline: "Empower Your Business. Secure Funding. Take Control of Credit and Growth.",
     description:
-      "Empower your business and take control of funding, credit, and growth! The Ultimate Business Funding & Credit Bundle gives you everything you need to secure funding, manage credit, and grow your business without the guesswork.",
+      "Empower your business and take control of funding, credit, and growth.\n\nThis bundle gives entrepreneurs the tools to secure funding, manage credit, and grow their business without guesswork.",
     benefits: [
       "How to Get Vehicle Financing with an EIN Only – Secure vehicles using business credit.",
       "How to Get Up to $150,000 in Funding — Even with a New LLC – Unlock capital fast.",
@@ -467,10 +467,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "The Fundability Factor Business Assessment & Scorecard – Know your funding readiness.",
     ],
     whyYouNeedThis: [
-      "All-in-One solution for business funding – Everything in one bundle.",
-      "Covers vendor credit, loans, credit cards, and vehicles – Complete coverage.",
+      "Covers vendor credit, loans, credit cards, and vehicle financing – Complete coverage.",
       "Clear step-by-step strategies – No guesswork required.",
-      "Perfect for entrepreneurs and business owners – Built for you.",
+      "Ready-to-use client resources – Built for entrepreneurs and business owners.",
     ],
     bundleIncludes: [
       { handle: "how-to-get-vehicle-financing-with-ein-only", title: "How to Get Vehicle Financing with EIN Only", price: "$27" },
@@ -614,5 +613,124 @@ export const productContentMap: Record<string, ProductContent> = {
       "A roadmap for building credit correctly – Follow the proven path.",
     ],
     details: { format: "PDF eBook", length: "33 pages", category: "Business Credit Quickstart Kit" },
+  },
+
+  "business-credit-quickstart-kit-bundle": {
+    headline: "Build Business Credit the Right Way, From Day One.",
+    description:
+      "Build business credit the right way, from day one.\n\nIf you want approvals, higher limits, and better funding options, your business has to look credible on paper first. This kit gives you a simple roadmap to set up your business profile, get your first reporting tradeline, and start building real business credit.",
+    benefits: [
+      "Learn how business credit works and what lenders look for – Build on solid ground.",
+      "Get your first Net-30 account step-by-step – Start building credit history.",
+      "Use the checklist to keep your setup clean and fundable – Stay organized.",
+    ],
+    whyYouNeedThis: [
+      "New business owners starting from scratch – Get started right.",
+      "Entrepreneurs who keep getting denied – Fix the root cause.",
+      "Anyone who wants a clean, fundable business profile – Look credible to lenders.",
+    ],
+    bundleIncludes: [
+      { handle: "business-credit-basics-101", title: "Business Credit Basics 101", price: "$17" },
+      { handle: "how-to-get-your-first-net-30-account", title: "How to Get Your First Net-30 Account", price: "$17" },
+      { handle: "essential-business-credit-checklist", title: "Essential Business Credit Checklist", price: "$17" },
+    ],
+    bundleValue: "$51",
+    details: { format: "3 PDF eBooks", length: "3 Guides", category: "Business Credit Quickstart Kit" },
+  },
+
+  "credit-business-accelerator-pack": {
+    headline: "Take Control of Your Finances and Transform Your Credit.",
+    description:
+      "Take control of your finances and transform your credit with this all-in-one bundle.\n\nThis pack includes powerful eBooks and workbooks designed to help repair credit, eliminate debt, and build smarter financial habits.",
+    benefits: [
+      "Credit repair guides and workbooks – Hands-on tools for real progress.",
+      "Debt elimination strategies – Multiple methods to fit your situation.",
+      "Budgeting and savings worksheets – Track every dollar.",
+      "Habit-breaking guides – Stop the leaks in your finances.",
+    ],
+    whyYouNeedThis: [
+      "Complete credit and financial transformation – Everything in one pack.",
+      "Actionable workbooks you can use immediately – Not just theory.",
+      "Covers credit repair, debt payoff, budgeting, and saving – Full coverage.",
+    ],
+    bundleIncludes: [
+      { handle: "unlock-credit-potential", title: "Unlock Your Credit Potential – Credit Repair Guide 2025", price: "$17" },
+      { handle: "diy-credit-master-guide", title: "DIY Credit Repair – Action Guide 2025", price: "$17" },
+      { handle: "diy-credit-repair-workbook", title: "DIY Credit Repair – Workbook", price: "$17" },
+      { handle: "13-ways-to-pay-off-debt", title: "13 Best Ways to Pay Off Debt", price: "$17" },
+      { handle: "frugal-living-success-workbook", title: "Frugal Living Success Workbook", price: "$17" },
+      { handle: "crush-100k-debt-worksheet", title: "Crush $100K Debt Worksheet", price: "$17" },
+      { handle: "stop-living-paycheck-to-paycheck", title: "How to Stop Living Paycheck to Paycheck", price: "$17" },
+      { handle: "money-management-worksheet", title: "Money Management Worksheet", price: "$17" },
+      { handle: "23-money-wasting-habits-to-break", title: "23 Money-Wasting Habits to Break", price: "$17" },
+    ],
+    bundleValue: "$153",
+    details: { format: "9 PDF eBooks", length: "9 Guides", category: "Credit Business Accelerator Pack" },
+  },
+
+  "credit-authority-bundle": {
+    headline: "Take Control of Your Credit. Unlock Funding. Boost Financial Confidence.",
+    description:
+      "Take control of your credit, unlock funding opportunities, and boost financial confidence.\n\nThis bundle includes six powerful eBooks designed to improve credit, remove errors, and access better financial opportunities.",
+    benefits: [
+      "121-page business credit blueprint – The most comprehensive guide in the bundle.",
+      "AI-powered dispute letter prompts – Generate professional letters in minutes.",
+      "Phone scripts for inquiry removal – Know exactly what to say.",
+      "Curated lender list with approval requirements – Apply with confidence.",
+    ],
+    whyYouNeedThis: [
+      "Six premium guides covering credit, funding, and disputes – Complete system.",
+      "Ranges from 33 to 121 pages each – Deep, actionable content.",
+      "Perfect for entrepreneurs and credit-conscious consumers – Built for results.",
+    ],
+    bundleIncludes: [
+      { handle: "ultimate-business-credit-blueprint", title: "Ultimate Business Credit Blueprint", price: "$27" },
+      { handle: "smart-credit-hacks", title: "Smart Credit Hacks", price: "$22" },
+      { handle: "the-financial-playbook-your-ultimate-money-resource-guide", title: "The Financial Playbook: Your Ultimate Money Resource Guide", price: "$22" },
+      { handle: "ai-powered-credit-dispute-letter-prompts", title: "AI-Powered Credit Dispute Letter Prompts", price: "$17" },
+      { handle: "credit-inquiry-phone-script-remove-inquiries-fast", title: "Credit Inquiry Phone Script – Remove Inquiries Fast", price: "$17" },
+      { handle: "ultimate-credit-card-lender-list", title: "Ultimate Credit Card Lender List", price: "$27" },
+    ],
+    bundleValue: "$132",
+    details: { format: "6 Premium PDF eBooks", length: "33–121 pages each", category: "Credit Authority Bundle" },
+  },
+
+  "ultimate-credit-business-vault": {
+    headline: "Fix Your Credit. Rebuild Your Profile. Unlock Real Financial Opportunities.",
+    description:
+      "Fix your credit, rebuild your profile, and unlock real financial opportunities with one complete system.\n\nThis vault includes 18 powerful guides covering credit repair, credit building, dispute strategies, and financial optimization.",
+    benefits: [
+      "18 comprehensive guides in one vault – The most complete credit system available.",
+      "Covers credit repair, disputes, and rebuilding – Every angle covered.",
+      "Includes AI prompts, legal rights guides, and lender databases – Advanced tools.",
+      "From beginner to advanced strategies – Something for every stage.",
+    ],
+    whyYouNeedThis: [
+      "One purchase, complete credit transformation – No gaps in your knowledge.",
+      "Individually valued at $347+ – Massive savings in one bundle.",
+      "Used by 2,400+ entrepreneurs – Proven results.",
+    ],
+    bundleIncludes: [
+      { handle: "the-ultimate-homebuyers-handbook", title: "The Ultimate Homebuyers Handbook", price: "$27" },
+      { handle: "manufactured-spending-techniques", title: "Manufactured Spending Techniques", price: "$27" },
+      { handle: "unlocking-business-credit-step-by-step-success", title: "Unlocking Business Credit: Step-by-Step Success", price: "$27" },
+      { handle: "credit-score-accelerator-the-90-day-credit-comeback-plan", title: "Credit Score Accelerator – 90-Day Plan", price: "$27" },
+      { handle: "secret-lenders-database", title: "Secret Lenders Database", price: "$27" },
+      { handle: "master-your-credit-a-practical-step-by-step-guide-to-boosting-your-score", title: "Master Your Credit Guide", price: "$22" },
+      { handle: "credit-repair-chatgpt-prompts", title: "Credit Repair ChatGPT Prompts", price: "$17" },
+      { handle: "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit", title: "Inquiry Removal Guide", price: "$22" },
+      { handle: "repo-eraser-how-to-delete-repossessions-from-your-credit-fast", title: "Repo Eraser", price: "$22" },
+      { handle: "credit-repair-success-mindset-guide", title: "Credit Repair Success Mindset Guide", price: "$17" },
+      { handle: "credit-repair-success-planner", title: "Credit Repair Success Planner", price: "$17" },
+      { handle: "credit-repair-legal-rights-cheat-sheet", title: "Credit Repair Legal Rights Cheat Sheet", price: "$17" },
+      { handle: "credit-repair-mistakes-to-avoid-guide", title: "Credit Repair Mistakes to Avoid", price: "$17" },
+      { handle: "credit-building-resource-library", title: "Credit Building Resource Library", price: "$22" },
+      { handle: "100-dispute-letters-templates", title: "100 Dispute Letter Templates", price: "$27" },
+      { handle: "credit-score-tracker-printable", title: "Credit Score Tracker", price: "$17" },
+      { handle: "bankruptcy-removal-blueprint-your-step-by-step-guide-to-clean-credit", title: "Bankruptcy Removal Guide", price: "$22" },
+      { handle: "late-payment-removal-guide", title: "Late Payment Removal Guide", price: "$22" },
+    ],
+    bundleValue: "$347",
+    details: { format: "18 PDF eBooks", length: "18 Guides", category: "Ultimate Credit Business Vault" },
   },
 };

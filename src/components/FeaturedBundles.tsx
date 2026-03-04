@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import bundleUltimate from "@/assets/bundle-ultimate-credit-stack.png";
 import bundleMaster from "@/assets/bundle-master-credit.png";
@@ -10,8 +11,9 @@ import bundleFunding from "@/assets/bundle-funding-mastery.png";
 const FEATURED = [
   {
     id: "ultimate-bundle",
+    handle: "ultimate-credit-business-vault",
     image: bundleUltimate,
-    title: "The Ultimate Credit Stack Bundle",
+    title: "Ultimate Credit Business Vault",
     subtitle: "18 Resources — Total Credit Transformation",
     price: "$147",
     originalPrice: "$347",
@@ -19,35 +21,39 @@ const FEATURED = [
   },
   {
     id: "credit-funding",
+    handle: "the-ultimate-business-funding-credit-bundle",
     image: bundleFunding,
-    title: "Business Funding Mastery Bundle",
-    subtitle: "6 Advanced Business Funding E-Books",
+    title: "The Ultimate Business Funding & Credit Bundle",
+    subtitle: "6 Advanced Business Funding Guides",
     price: "$147",
-    originalPrice: "$294",
+    originalPrice: "$162",
   },
   {
     id: "credit-accelerator",
+    handle: "credit-authority-bundle",
     image: bundleMaster,
-    title: "The Credit Accelerator Bundle",
-    subtitle: "6 E-Books to Kick-Start Credit Knowledge",
+    title: "Credit Authority Bundle",
+    subtitle: "6 Premium eBooks for Credit Mastery",
     price: "$97",
-    originalPrice: "$194",
+    originalPrice: "$132",
   },
   {
     id: "credit-authority",
+    handle: "credit-business-accelerator-pack",
     image: bundleAccelerator,
-    title: "Master Your Credit Bundle Pack",
-    subtitle: "9 E-Books to Guide You Every Step",
+    title: "Credit Business Accelerator Pack",
+    subtitle: "9 eBooks & Workbooks to Transform Your Finances",
     price: "$67",
     originalPrice: "$153",
   },
   {
     id: "credit-quickstart",
+    handle: "business-credit-quickstart-kit-bundle",
     image: bundleStarter,
-    title: "Business Credit Starter Bundle",
-    subtitle: "3 E-Books to Kick-Start Your Journey",
+    title: "Business Credit Quickstart Kit",
+    subtitle: "3 eBooks to Kick-Start Your Business Credit",
     price: "$47",
-    originalPrice: "$87",
+    originalPrice: "$51",
   },
 ];
 
@@ -81,12 +87,12 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
         </motion.div>
 
         {/* Top featured — large card */}
+        <Link to={`/product/${FEATURED[0].handle}`}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          onClick={() => onScrollToBundle(FEATURED[0].id)}
           className="cursor-pointer group mb-8"
         >
           <div className="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-950/60 to-slate-900/80 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-500 shadow-2xl shadow-blue-900/20 hover:shadow-blue-800/30">
@@ -113,12 +119,9 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                   <span className="text-lg text-slate-500 line-through">{FEATURED[0].originalPrice}</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
-                  <button
-                    onClick={(e) => { e.stopPropagation(); onScrollToBundle(FEATURED[0].id); }}
-                    className="shiny-cta !py-3 !px-8 !text-sm whitespace-nowrap focus:outline-none"
-                  >
+                  <span className="shiny-cta !py-3 !px-8 !text-sm whitespace-nowrap">
                     <span>Get This Bundle</span>
-                  </button>
+                  </span>
                   <span className="inline-flex items-center gap-1.5 text-slate-400 text-sm">
                     <ArrowRight className="w-3.5 h-3.5" />
                     View Details
@@ -128,43 +131,40 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
             </div>
           </div>
         </motion.div>
+        </Link>
 
         {/* Remaining bundles — 2x2 grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {FEATURED.slice(1).map((bundle, idx) => (
-            <motion.div
-              key={bundle.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.08 }}
-              onClick={() => onScrollToBundle(bundle.id)}
-              className="cursor-pointer group"
-            >
-              <div className="relative rounded-2xl overflow-hidden border border-blue-500/15 bg-gradient-to-br from-slate-900/90 to-blue-950/50 hover:border-blue-400/35 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-900/20 h-full">
-                <div className="p-5">
-                  <img
-                    src={bundle.image}
-                    alt={bundle.title}
-                    className="w-full rounded-xl mb-5 group-hover:scale-[1.02] transition-transform duration-700"
-                  />
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 leading-snug">
-                    {bundle.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm mb-4">{bundle.subtitle}</p>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xl font-extrabold text-white">{bundle.price}</span>
-                    <span className="text-sm text-slate-500 line-through">{bundle.originalPrice}</span>
+            <Link key={bundle.id} to={`/product/${bundle.handle}`} className="group">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+              >
+                <div className="relative rounded-2xl overflow-hidden border border-blue-500/15 bg-gradient-to-br from-slate-900/90 to-blue-950/50 hover:border-blue-400/35 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-900/20 h-full">
+                  <div className="p-5">
+                    <img
+                      src={bundle.image}
+                      alt={bundle.title}
+                      className="w-full rounded-xl mb-5 group-hover:scale-[1.02] transition-transform duration-700"
+                    />
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 leading-snug">
+                      {bundle.title}
+                    </h3>
+                    <p className="text-slate-400 text-sm mb-4">{bundle.subtitle}</p>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-xl font-extrabold text-white">{bundle.price}</span>
+                      <span className="text-sm text-slate-500 line-through">{bundle.originalPrice}</span>
+                    </div>
+                    <span className="w-full inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
+                      Get This Bundle <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); onScrollToBundle(bundle.id); }}
-                    className="w-full inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200"
-                  >
-                    Get This Bundle <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
