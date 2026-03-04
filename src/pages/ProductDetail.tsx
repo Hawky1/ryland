@@ -234,6 +234,54 @@ const ProductDetail = () => {
             </div>
           </section>
 
+          {/* What's Included — Bundle only */}
+          {content.bundleIncludes && content.bundleIncludes.length > 0 && (
+            <section className="bg-gradient-to-br from-blue-50 to-slate-50 border-y border-slate-200">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                    What's Included
+                  </h2>
+                  <p className="text-slate-500 mb-8">
+                    {content.bundleIncludes.length} premium guides — individually valued at {content.bundleValue}
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {content.bundleIncludes.map((item, i) => (
+                      <motion.div
+                        key={item.handle}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: i * 0.06 }}
+                      >
+                        <Link
+                          to={`/product/${item.handle}`}
+                          className="flex items-center gap-4 bg-white rounded-xl p-5 border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
+                            <FileText className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-bold text-slate-900 text-sm leading-snug group-hover:text-blue-700 transition-colors truncate">
+                              {item.title}
+                            </p>
+                            <p className="text-xs text-slate-400 mt-0.5">Individual price: {item.price}</p>
+                          </div>
+                          <ArrowLeft className="w-4 h-4 text-slate-300 rotate-180 group-hover:text-blue-500 transition-colors flex-shrink-0" />
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+          )}
+
           {/* Why You Need This */}
           {content.whyYouNeedThis && content.whyYouNeedThis.length > 0 && (
             <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
