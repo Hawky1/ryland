@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
-import geneRyland from "@/assets/gene-ryland-about.png";
+import brittanyW from "@/assets/brittany-w-partner.png";
 
 const ONBOARDING_ITEMS = [
   { icon: LayoutDashboard, text: "Partner portal walkthrough & login setup" },
@@ -97,15 +97,15 @@ export default function PartnerOnboarding() {
 
               {/* Gene card */}
               <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5">
-                <img
-                  src={geneRyland}
-                  alt="Gene Ryland"
-                  className="w-20 h-20 rounded-2xl object-cover object-top ring-2 ring-cyan-400/20"
-                />
-                <div>
-                  <p className="text-white font-semibold font-[Geist,sans-serif]">Gene Ryland</p>
-                  <p className="text-blue-200/50 text-sm">Founder & Partner Lead</p>
-                  <p className="text-blue-200/30 text-xs mt-0.5">Personally onboards every new partner</p>
+              <img
+                src={brittanyW}
+                alt="Brittany W."
+                className="w-20 h-20 rounded-2xl object-cover object-top ring-2 ring-cyan-400/20"
+              />
+              <div>
+                <p className="text-white font-semibold font-[Geist,sans-serif]">Brittany W.</p>
+                <p className="text-blue-200/50 text-sm">Director of Partner Success</p>
+                <p className="text-blue-200/30 text-xs mt-0.5">Personally onboards every new partner</p>
                 </div>
               </div>
 
