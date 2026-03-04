@@ -210,4 +210,134 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     details: { format: "PDF eBook", length: "10 pages", category: "Credit Business Accelerator Pack" },
   },
+
+  "secret-lenders-database": {
+    headline: "Access the Funding You Need. Grow, Invest, and Achieve Your Financial Goals.",
+    description:
+      "Access the funding you need to grow, invest, and achieve your financial goals with the Secret Lenders Database. This comprehensive resource connects you to over 100 direct lenders, credit cards, and financing options—all in one place.\n\nWhether you're looking for personal funding or business capital, this database gives you the insider knowledge to secure opportunities quickly and confidently. Save time, find the best options, and unlock financial growth with ease.",
+    benefits: [
+      "Instant access to 100+ direct funding sources – Personal and business options in one place.",
+      "Options for personal and business credit – Find the right fit for your goals.",
+      "Insights to find the best lenders and financing deals – Make informed decisions.",
+      "Tools to achieve financial goals faster and smarter – Stop wasting time searching.",
+    ],
+    details: { format: "PDF eBook", length: "", category: "" },
+  },
+
+  "inquiry-removal-guide": {
+    headline: "Remove Hard Inquiries. Protect Your Score. Take Control of Your Credit.",
+    description:
+      "Too many credit inquiries can drag down your score—but you don't have to live with them. Inquiry Removal Guide: Step-by-Step Directions to Remove Inquiries from Your Credit gives you the exact strategies you need to take control.\n\nThis 28-page guide walks you through proven dispute methods, expert tips, and clear step-by-step instructions to successfully remove hard inquiries from your credit report.",
+    benefits: [
+      "How hard inquiries affect your credit score – Understand the real impact.",
+      "Step-by-step instructions to remove inquiries – Clear, actionable guidance.",
+      "Proven dispute strategies that actually work – Tested methods for real results.",
+      "Ways to protect your credit from future negative marks – Stay ahead of the game.",
+    ],
+    details: { format: "PDF eBook", length: "28 pages", category: "" },
+  },
+
+  "late-payment-removal-guide": {
+    headline: "Remove Late Payments. Boost Your Score. Take Back Your Credit.",
+    description:
+      "Late payments don't have to hold you back. Late Payment Removal Guide is your step-by-step roadmap to removing 30-, 60-, and even 90-day late payments from your credit report—fast, legally, and effectively.\n\nInside this 31-page guide, you'll discover proven dispute methods, insider tips, and ethical strategies to erase late payments and boost your credit score.",
+    benefits: [
+      "How to remove late payments the right way – Legal, ethical, and effective methods.",
+      "Strategies for handling 30-, 60-, and 90-day late marks – Tackle every type.",
+      "Legal and ethical dispute techniques – Protect yourself while disputing.",
+      "Steps to improve your credit score – See real results fast.",
+    ],
+    details: { format: "PDF eBook", length: "31 pages", category: "" },
+  },
+
+  "bankruptcy-removal-blueprint": {
+    headline: "Challenge Bankruptcy Records. Rebuild Your Credit. Reclaim Your Future.",
+    description:
+      "A past bankruptcy doesn't have to define your financial future. Bankruptcy Removal Blueprint gives you tools and strategies to challenge bankruptcy records and rebuild your credit profile.",
+    benefits: [
+      "Strategies to challenge bankruptcy records – Know your options.",
+      "Your legal rights as a consumer – Understand the law on your side.",
+      "Step-by-step dispute techniques – Clear guidance for every step.",
+      "How to rebuild credit after bankruptcy – Start fresh with confidence.",
+    ],
+    details: { format: "PDF eBook", length: "16 pages", category: "" },
+  },
+
+  "credit-repair-mistakes": {
+    headline: "Avoid Costly Mistakes. Fast-Track Your Credit Repair Journey.",
+    description:
+      "Avoid costly mistakes and fast-track your credit repair journey with this guide that reveals the most common errors people make when trying to fix their credit.",
+    benefits: [
+      "The top credit repair mistakes people make – Learn what to avoid.",
+      "Why payment history matters most – Focus on what moves the needle.",
+      "How to dispute items correctly – Get it right the first time.",
+      "Smarter strategies to improve your score – Work smarter, not harder.",
+    ],
+    details: { format: "PDF eBook", length: "27 pages", category: "" },
+  },
+
+  "credit-repair-mindset": {
+    headline: "Build the Mindset to Repair Your Credit and Transform Your Finances.",
+    description:
+      "Repairing your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
+    benefits: [
+      "Motivation strategies during credit repair – Stay driven through the process.",
+      "Confidence to overcome setbacks – Push past obstacles with ease.",
+      "Focus to stay consistent – Build discipline that lasts.",
+      "Tools to create lasting financial freedom – Change your life, not just your score.",
+    ],
+    details: { format: "PDF eBook", length: "27 pages", category: "" },
+  },
+
+  "100-dispute-letters": {
+    headline: "100 Professional Dispute Letter Templates. Challenge Errors Fast.",
+    description:
+      "100 professionally written dispute letter templates designed to challenge errors on your credit report quickly and easily.",
+    benefits: [
+      "Templates for late payments – Ready-to-use letters for common issues.",
+      "Templates for collections – Dispute collection accounts effectively.",
+      "Templates for charge-offs – Challenge charge-off entries on your report.",
+      "Templates for inquiries – Remove unauthorized hard inquiries.",
+    ],
+    details: { format: "PDF Toolkit", length: "9 pages", category: "" },
+  },
+
+  "credit-repair-legal-rights": {
+    headline: "Know Your Legal Rights. Protect Your Credit. Fight Back with Confidence.",
+    description:
+      "A quick-reference guide explaining important consumer credit laws like the FCRA and FDCPA.",
+    benefits: [
+      "Your rights under the Fair Credit Reporting Act – Know what the law says.",
+      "How FDCPA protects consumers – Understand your protections against collectors.",
+      "Steps to dispute inaccurate credit data – Use the law to your advantage.",
+      "How to guard against illegal collection practices – Stay protected.",
+    ],
+    details: { format: "PDF Guide", length: "27 pages", category: "" },
+  },
+
+  "credit-repair-planner": {
+    headline: "Organize Your Disputes. Track Your Progress. Stay Motivated.",
+    description:
+      "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit repair journey.",
+    benefits: [
+      "Goal-setting worksheets – Define your credit repair targets.",
+      "Dispute activity tracking – Keep every dispute organized.",
+      "Progress monitoring tools – See how far you've come.",
+      "Motivation checkpoints – Celebrate milestones along the way.",
+    ],
+    details: { format: "PDF Planner", length: "27 pages", category: "" },
+  },
+
+  "unlocking-business-credit": {
+    headline: "Build Strong Business Credit. Unlock Funding. Grow Your Business.",
+    description:
+      "A complete 42-page guide that teaches entrepreneurs how to build strong business credit and unlock funding opportunities.",
+    benefits: [
+      "How to establish business credit – Start building from scratch.",
+      "How to qualify for business funding – Meet lender requirements with confidence.",
+      "Strategies to negotiate better terms – Get the best deals available.",
+      "Steps to grow your business using credit – Leverage credit for expansion.",
+    ],
+    details: { format: "PDF eBook", length: "42 pages", category: "" },
+  },
 };
