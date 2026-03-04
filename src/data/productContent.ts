@@ -1,8 +1,16 @@
+export interface BundleIncludedProduct {
+  handle: string;
+  title: string;
+  price: string;
+}
+
 export interface ProductContent {
   headline: string;
   description: string;
   benefits: string[];
   whyYouNeedThis?: string[];
+  bundleIncludes?: BundleIncludedProduct[];
+  bundleValue?: string;
   details: {
     format: string;
     length: string;
@@ -464,6 +472,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "Clear step-by-step strategies – No guesswork required.",
       "Perfect for entrepreneurs and business owners – Built for you.",
     ],
+    bundleIncludes: [
+      { handle: "how-to-get-vehicle-financing-with-ein-only", title: "How to Get Vehicle Financing with EIN Only", price: "$27" },
+      { handle: "how-to-get-up-to-150-000-in-funding-even-with-a-new-llc", title: "How to Get Up to $150,000 in Funding — Even with a New LLC", price: "$27" },
+      { handle: "the-ultimate-business-credit-card-playbook", title: "The Ultimate Business Credit Card Playbook", price: "$27" },
+      { handle: "fast-track-vendor-accounts-for-new-businesses", title: "Fast-Track Vendor Accounts for New Businesses", price: "$27" },
+      { handle: "the-business-funding-application-success-checklist", title: "The Business Funding Application Success Checklist", price: "$27" },
+      { handle: "the-fundability-factor-business-assessment-scorecard", title: "The \"Fundability Factor\" Business Assessment & Scorecard", price: "$27" },
+    ],
+    bundleValue: "$162",
     details: { format: "PDF Bundle", length: "6 Guides", category: "Business Funding" },
   },
 
