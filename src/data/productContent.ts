@@ -222,7 +222,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Insights to find the best lenders and financing deals – Make informed decisions.",
       "Tools to achieve financial goals faster and smarter – Stop wasting time searching.",
     ],
-    details: { format: "PDF eBook", length: "", category: "" },
+    details: { format: "PDF eBook", length: "", category: "Ultimate Credit Business Bundle" },
   },
 
   "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit": {
@@ -235,7 +235,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Proven dispute strategies that actually work – Tested methods for real results.",
       "Ways to protect your credit from future negative marks – Stay ahead of the game.",
     ],
-    details: { format: "PDF eBook", length: "28 pages", category: "" },
+    details: { format: "PDF eBook", length: "28 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "late-payment-removal-guide": {
@@ -248,7 +248,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Legal and ethical dispute techniques – Protect yourself while disputing.",
       "Steps to improve your credit score – See real results fast.",
     ],
-    details: { format: "PDF eBook", length: "31 pages", category: "" },
+    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "bankruptcy-removal-blueprint-your-step-by-step-guide-to-clean-credit": {
@@ -261,7 +261,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Step-by-step dispute techniques – Clear guidance for every step.",
       "How to rebuild credit after bankruptcy – Start fresh with confidence.",
     ],
-    details: { format: "PDF eBook", length: "16 pages", category: "" },
+    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-repair-mistakes-to-avoid-guide": {
@@ -274,7 +274,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to dispute items correctly – Get it right the first time.",
       "Smarter strategies to improve your score – Work smarter, not harder.",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-repair-success-mindset-guide": {
@@ -287,7 +287,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Focus to stay consistent – Build discipline that lasts.",
       "Tools to create lasting financial freedom – Change your life, not just your score.",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "100-dispute-letters-templates": {
@@ -300,7 +300,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Templates for charge-offs – Challenge charge-off entries on your report.",
       "Templates for inquiries – Remove unauthorized hard inquiries.",
     ],
-    details: { format: "PDF Toolkit", length: "9 pages", category: "" },
+    details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-repair-legal-rights-cheat-sheet": {
@@ -313,7 +313,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Steps to dispute inaccurate credit data – Use the law to your advantage.",
       "How to guard against illegal collection practices – Stay protected.",
     ],
-    details: { format: "PDF Guide", length: "27 pages", category: "" },
+    details: { format: "PDF Guide", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-repair-success-planner": {
@@ -326,7 +326,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Progress monitoring tools – See how far you've come.",
       "Motivation checkpoints – Celebrate milestones along the way.",
     ],
-    details: { format: "PDF Planner", length: "27 pages", category: "" },
+    details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "unlocking-business-credit-step-by-step-success": {
@@ -339,7 +339,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Strategies to negotiate better terms – Get the best deals available.",
       "Steps to grow your business using credit – Leverage credit for expansion.",
     ],
-    details: { format: "PDF eBook", length: "42 pages", category: "" },
+    details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-score-accelerator-the-90-day-credit-comeback-plan": {
@@ -352,7 +352,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Ways to build new credit – Establish positive credit history.",
       "Tactics to boost your credit score faster – See results in 90 days.",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-repair-chatgpt-prompts": {
@@ -365,7 +365,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Faster ways to generate dispute letters – Save hours of work.",
       "Tools to simplify credit repair workflows – Streamline the entire process.",
     ],
-    details: { format: "PDF eBook", length: "37 pages", category: "" },
+    details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-building-resource-library": {
@@ -378,7 +378,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Tools to rebuild credit faster – Accelerate your progress.",
       "Practical guidance for improving credit profiles – Actionable steps.",
     ],
-    details: { format: "PDF eBook", length: "16 pages", category: "" },
+    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "repo-eraser-how-to-delete-repossessions-from-your-credit-fast": {
@@ -391,7 +391,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to rebuild your credit afterward – Start fresh with confidence.",
       "Ways to restore financial confidence – Take back control.",
     ],
-    details: { format: "PDF eBook", length: "26 pages", category: "" },
+    details: { format: "PDF eBook", length: "26 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "the-ultimate-homebuyers-handbook": {
@@ -404,7 +404,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "What to know before making an offer – Negotiate with confidence.",
       "Steps for closing successfully – Navigate the final steps with ease.",
     ],
-    details: { format: "PDF eBook", length: "31 pages", category: "" },
+    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "manufactured-spending-techniques": {
@@ -417,7 +417,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Ways to maximize rewards without overspending – Stay in control.",
       "Tips to leverage credit card benefits – Get more from your cards.",
     ],
-    details: { format: "PDF eBook", length: "43 pages", category: "" },
+    details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "master-your-credit-a-practical-step-by-step-guide-to-boosting-your-score": {
@@ -430,7 +430,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Legal tips for disputing credit report errors – Use the law to your advantage.",
       "Tools to improve your credit independently – Take full control.",
     ],
-    details: { format: "PDF eBook", length: "18 pages", category: "" },
+    details: { format: "PDF eBook", length: "18 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "credit-score-tracker-printable": {
@@ -443,7 +443,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Easy-to-use printable format – Print and use immediately.",
       "Insights to help improve your credit score and financial habits – Make smarter decisions.",
     ],
-    details: { format: "PDF eBook", length: "19 pages", category: "" },
+    details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "ultimate-business-funding-credit-bundle": {
