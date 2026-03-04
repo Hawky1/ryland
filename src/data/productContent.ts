@@ -222,7 +222,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Insights to find the best lenders and financing deals – Make informed decisions.",
       "Tools to achieve financial goals faster and smarter – Stop wasting time searching.",
     ],
-    details: { format: "PDF eBook", length: "", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Credit Business Bundle" },
   },
 
   "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit": {
@@ -495,7 +495,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Strategies to increase approval chances – Maximize your odds.",
       "How to structure your business for funding – Set up for success.",
     ],
-    details: { format: "PDF eBook", length: "", category: "Business Funding" },
+    details: { format: "PDF eBook", length: "29 pages", category: "Business Funding" },
   },
 
   "the-fundability-factor-business-assessment-scorecard": {
@@ -521,7 +521,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to structure purchases to boost credit scores – Strategic spending.",
       "Strategies to grow business credit quickly – Accelerate your progress.",
     ],
-    details: { format: "PDF eBook", length: "", category: "Business Funding" },
+    details: { format: "PDF eBook", length: "22 pages", category: "Business Funding" },
   },
 
   "how-to-get-vehicle-financing-with-ein-only": {
