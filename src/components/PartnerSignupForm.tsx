@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +28,7 @@ interface PartnerSignupFormProps {
 }
 
 export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupFormProps) {
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [affiliateLink, setAffiliateLink] = useState<string | null>(null);
@@ -89,6 +91,9 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
 
       setAffiliateLink(ghlAffiliateLink);
       setSubmitted(true);
+      // Close dialog and redirect to partner onboarding
+      onOpenChange(false);
+      navigate("/partner-onboarding");
     } catch {
       toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
     } finally {
