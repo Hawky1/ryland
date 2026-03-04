@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Loader2, BookOpen, ArrowLeft } from "lucide-react";
+import { Loader2, BookOpen, ArrowLeft, CheckCircle2, FileText, Layers, Tag, ShoppingBag, Shield, Zap } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { productContentMap } from "@/data/productContent";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import SharedHead from "@/components/SharedHead";
+
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
 
@@ -48,97 +51,255 @@ const ProductDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <Loader2 className="w-8 h-8 animate-spin text-slate-400" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
-        <BookOpen className="w-16 h-16 text-slate-300 mb-4" />
-        <h2 className="text-xl font-semibold text-slate-700">Product not found</h2>
-        <Link to="/store" className="text-blue-600 hover:underline mt-4">Back to Store</Link>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+        <BookOpen className="w-16 h-16 text-muted-foreground/40 mb-4" />
+        <h2 className="text-xl font-semibold text-foreground">Product not found</h2>
+        <Link to="/store" className="text-primary hover:underline mt-4">Back to Store</Link>
       </div>
     );
   }
 
-  const images = product.images.edges;
+  const content = handle ? productContentMap[handle] : null;
   const variant = product.variants.edges[selectedVariantIdx]?.node;
+  const image = product.images.edges[0]?.node;
+  const price = variant ? parseFloat(variant.price.amount) : parseFloat(product.priceRange.minVariantPrice.amount);
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <PageMeta title={`${product.title} | Ryland Partners Store`} description={product.description?.slice(0, 160) || "Digital product from Ryland Partners."} />
+    <div className="min-h-screen bg-slate-50 font-[Manrope,sans-serif]">
+      <PageMeta
+        title={`${product.title} | Ryland Partners Store`}
+        description={content?.headline || product.description?.slice(0, 160) || "Digital product from Ryland Partners."}
+      />
       <SharedHead />
       <Navbar />
+
+      {/* Cart bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-end">
         <CartDrawer />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-        <Link to="/store" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 mb-8">
+      {/* Breadcrumb */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-2">
+        <Link to="/store" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Store
         </Link>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Images */}
-          <div>
-            <div className="aspect-[3/4] bg-white rounded-2xl overflow-hidden border border-slate-200 mb-4">
-              {images[selectedImage] ? (
-                <img src={images[selectedImage].node.url} alt={images[selectedImage].node.altText || product.title} className="w-full h-full object-cover" />
+      {/* Hero section */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 lg:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Product image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="aspect-[3/4] bg-gradient-to-br from-[#003A70] to-[#0060A9] rounded-3xl overflow-hidden flex items-center justify-center p-8 lg:p-12 shadow-2xl shadow-blue-900/20">
+              {image ? (
+                <img
+                  src={image.url}
+                  alt={image.altText || product.title}
+                  className="w-full h-full object-contain drop-shadow-2xl"
+                />
               ) : (
-                <div className="w-full h-full flex items-center justify-center"><BookOpen className="w-20 h-20 text-slate-300" /></div>
+                <BookOpen className="w-24 h-24 text-white/30" />
               )}
             </div>
-            {images.length > 1 && (
-              <div className="flex gap-2">
-                {images.map((img, i) => (
-                  <button key={i} onClick={() => setSelectedImage(i)} className={`w-16 h-20 rounded-lg overflow-hidden border-2 transition-colors ${i === selectedImage ? 'border-blue-600' : 'border-slate-200'}`}>
-                    <img src={img.node.url} alt="" className="w-full h-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          </motion.div>
 
-          {/* Info */}
-          <div className="flex flex-col">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">{product.title}</h1>
-            <p className="text-3xl font-bold text-blue-600 mb-6">
-              ${variant ? parseFloat(variant.price.amount).toFixed(2) : parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)}
+          {/* Product info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col"
+          >
+            {content && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">
+                <Tag className="w-3.5 h-3.5" />
+                {content.details.category}
+              </span>
+            )}
+
+            <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-slate-900 leading-tight mb-4 tracking-tight">
+              {product.title}
+            </h1>
+
+            {content && (
+              <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed mb-6">
+                {content.headline}
+              </p>
+            )}
+
+            <p className="text-slate-500 leading-relaxed mb-8">
+              {content?.description || product.description}
             </p>
 
-            {/* Variant selection */}
-            {product.variants.edges.length > 1 && (
-              <div className="mb-6">
-                <label className="text-sm font-medium text-slate-700 mb-2 block">Format</label>
-                <div className="flex flex-wrap gap-2">
-                  {product.variants.edges.map((v, i) => (
-                    <button
-                      key={v.node.id}
-                      onClick={() => setSelectedVariantIdx(i)}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${i === selectedVariantIdx ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-600 hover:border-slate-300'}`}
-                    >
-                      {v.node.title}
-                    </button>
-                  ))}
+            {/* Price + CTA */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6 shadow-sm">
+              <div className="flex items-end gap-3 mb-5">
+                <span className="text-4xl font-black text-slate-900">${price.toFixed(0)}</span>
+                <div className="flex items-center gap-1.5 pb-1">
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider">Instant Download</span>
                 </div>
               </div>
-            )}
 
-            <p className="text-slate-600 leading-relaxed mb-8">{product.description}</p>
+              {/* Variant selection */}
+              {product.variants.edges.length > 1 && (
+                <div className="mb-5">
+                  <label className="text-sm font-semibold text-slate-700 mb-2 block">Format</label>
+                  <div className="flex flex-wrap gap-2">
+                    {product.variants.edges.map((v, i) => (
+                      <button
+                        key={v.node.id}
+                        onClick={() => setSelectedVariantIdx(i)}
+                        className={`px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-all ${
+                          i === selectedVariantIdx
+                            ? "border-blue-600 bg-blue-50 text-blue-700"
+                            : "border-slate-200 text-slate-500 hover:border-slate-300"
+                        }`}
+                      >
+                        {v.node.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-            <button
-              onClick={handleAddToCart}
-              disabled={isLoading || !variant?.availableForSale}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-lg font-semibold transition-colors disabled:opacity-50"
-            >
-              {isLoading ? "Adding..." : !variant?.availableForSale ? "Sold Out" : "Add to Cart"}
-            </button>
-          </div>
+              <button
+                onClick={handleAddToCart}
+                disabled={isLoading || !variant?.availableForSale}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 rounded-xl text-lg font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2.5 shadow-lg shadow-blue-600/25"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {isLoading ? "Adding..." : !variant?.availableForSale ? "Sold Out" : "Get Instant Access"}
+              </button>
+
+              <div className="flex items-center justify-center gap-4 mt-4 text-xs text-slate-400">
+                <span className="flex items-center gap-1"><Shield className="w-3.5 h-3.5" /> Secure Checkout</span>
+                <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Instant Delivery</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Rich content sections — only if we have curated content */}
+      {content && (
+        <>
+          {/* What You'll Get */}
+          <section className="bg-white border-y border-slate-200">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-10 tracking-tight">
+                  What You'll Get
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {content.benefits.map((benefit, i) => {
+                    const [bold, ...rest] = benefit.split(" – ");
+                    const desc = rest.join(" – ");
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: i * 0.08 }}
+                        className="flex items-start gap-3 bg-slate-50 rounded-xl p-5 border border-slate-100"
+                      >
+                        <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900">{bold}</span>
+                          {desc && <span className="text-slate-500"> – {desc}</span>}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Product Details */}
+          <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">
+                Product Details
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Format</p>
+                    <p className="text-lg font-bold text-slate-900">{content.details.format}</p>
+                  </div>
+                </div>
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <Layers className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Length</p>
+                    <p className="text-lg font-bold text-slate-900">{content.details.length}</p>
+                  </div>
+                </div>
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <Tag className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Category</p>
+                    <p className="text-lg font-bold text-slate-900">{content.details.category}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Bottom CTA */}
+          <section className="bg-gradient-to-br from-[#001228] to-[#003A70] py-16">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+                Ready to Take Control?
+              </h2>
+              <p className="text-blue-200/80 mb-8 max-w-xl mx-auto">
+                Get instant access to {product.title} and start transforming your financial future today.
+              </p>
+              <button
+                onClick={handleAddToCart}
+                disabled={isLoading || !variant?.availableForSale}
+                className="bg-white text-slate-900 hover:bg-blue-50 px-8 py-4 rounded-xl text-lg font-bold transition-all disabled:opacity-50 inline-flex items-center gap-2.5 shadow-xl"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                Get Instant Access — ${price.toFixed(0)}
+              </button>
+            </div>
+          </section>
+        </>
+      )}
+
+      <Footer />
     </div>
   );
 };
