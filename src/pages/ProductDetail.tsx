@@ -102,16 +102,12 @@ const ProductDetail = () => {
       <SharedHead />
       <Navbar />
 
-      {/* Cart bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-end">
-        <CartDrawer />
-      </div>
-
-      {/* Breadcrumb */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-2">
+      {/* Cart bar + Breadcrumb */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-3 pb-1 flex items-center justify-between">
         <Link to="/store" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Store
         </Link>
+        <CartDrawer />
       </div>
 
       {/* Hero section */}
