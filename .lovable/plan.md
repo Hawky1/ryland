@@ -1,45 +1,71 @@
 
 
-## Partner Onboarding Calendar Page
+## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
 
-### Overview
-Create a new `/partner-onboarding` page where new partners can schedule a 1-on-1 onboarding call. This reuses the existing calendar booking infrastructure but points to a **separate GHL calendar** (the ID you just provided).
+### What Changes
 
-### What needs to happen
+**1. Move Product Details directly below the price/CTA card (layout optimization)**
 
-**1. Store the new calendar ID as a secret**
-- Add `GHL_PARTNER_CALENDAR_ID` with value `GPBpfYbMuLoKyOaeQGdr` so the edge function can reference it separately from the consultation calendar.
+Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
 
-**2. Update the `ghl-calendar` edge function**
-- Accept an optional `calendarType` field in the request body (`"consultation"` or `"partner"`).
-- Default to the existing `GHL_CALENDAR_ID` for consultation; use `GHL_PARTNER_CALENDAR_ID` when `calendarType === "partner"`.
-- This keeps a single edge function handling both calendars cleanly.
+The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
 
-**3. Create a reusable `PartnerOnboardingCalendar` component**
-- Fork the existing `ConsultationCalendar` into a new component that:
-  - Passes `calendarType: "partner"` in all edge function calls.
-  - Uses partner-specific header copy ("Book Your Partner Onboarding Call", etc.).
-  - Tags the GHL contact with `partner-onboarding` instead of consultation tags.
-  - After booking, navigates to a partner-specific confirmation or shows inline confirmation.
+**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
 
-**4. Create the `/partner-onboarding` page**
-- Same visual structure as the `/consultation` page (hero with video background, two-column layout).
-- Left column: partner-specific messaging — what the onboarding covers (portal walkthrough, referral link setup, commission structure, marketing assets).
-- Right column: the `PartnerOnboardingCalendar` component.
-- Includes Navbar and Footer.
+The two uploaded images will be:
+- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
+- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
+- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
 
-**5. Add the route in `App.tsx`**
-- `<Route path="/partner-onboarding" element={<PartnerOnboarding />} />`
+### Technical Details
 
-### Technical detail
+**Files to modify:**
 
-The edge function change is minimal — just one conditional to pick which calendar ID env var to use:
+1. **`src/data/productContent.ts`**
+   - Add `promoImages?: string[]` to the `ProductContent` interface
+   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
+
+2. **`src/pages/ProductDetail.tsx`**
+   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
+   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
+   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
+
+3. **New assets:**
+   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
+   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
+
+### Layout Change (Before → After)
 
 ```text
-const calendarId = (body.calendarType === "partner")
-  ? Deno.env.get("GHL_PARTNER_CALENDAR_ID")
-  : Deno.env.get("GHL_CALENDAR_ID");
+BEFORE:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│             │  Description │
+│             │  Price + CTA │
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  Product Details (full w)  │
+└────────────────────────────┘
+
+AFTER:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│  [promo 1]  │  Description │
+│  [promo 2]  │  Price + CTA │
+│             │  Details     │ ← moved up
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
 ```
 
-Everything else (slot fetching, booking, contact creation) stays identical.
+Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
 
