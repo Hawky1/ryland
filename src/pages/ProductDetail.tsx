@@ -124,7 +124,7 @@ const ProductDetail = () => {
                 <img
                   src={activeImage.url}
                   alt={activeImage.alt}
-                  className="w-full h-full object-contain drop-shadow-2xl"
+                  className="w-full h-full object-contain drop-shadow-2xl rounded-2xl"
                 />
               ) : (
                 <BookOpen className="w-24 h-24 text-white/30" />
