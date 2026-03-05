@@ -119,7 +119,7 @@ const ProductDetail = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="aspect-[3/4] bg-gradient-to-br from-[#003A70] to-[#0060A9] rounded-3xl overflow-hidden flex items-center justify-center p-8 lg:p-12 shadow-2xl shadow-blue-900/20">
+            <div className="bg-gradient-to-br from-[#003A70] to-[#0060A9] rounded-3xl overflow-hidden flex items-center justify-center p-4 lg:p-6 shadow-2xl shadow-blue-900/20">
               {activeImage ? (
                 <img
                   src={activeImage.url}
