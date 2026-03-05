@@ -14,10 +14,30 @@ import SharedHead from "@/components/SharedHead";
 
 import listingUbcb1 from "@/assets/listing-ubcb-1.png";
 import listingUbcb2 from "@/assets/listing-ubcb-2.png";
+import listingFp1 from "@/assets/listing-fp-1.png";
+import listingFp2 from "@/assets/listing-fp-2.png";
+import listingCips1 from "@/assets/listing-cips-1.png";
+import listingCips2 from "@/assets/listing-cips-2.png";
+import listingSch1 from "@/assets/listing-sch-1.png";
+import listingSch2 from "@/assets/listing-sch-2.png";
+import listingAdlp1 from "@/assets/listing-adlp-1.png";
+import listingAdlp2 from "@/assets/listing-adlp-2.png";
+import listingUccll1 from "@/assets/listing-uccll-1.png";
+import listingUccll2 from "@/assets/listing-uccll-2.png";
 
 const promoImageImports: Record<string, string> = {
   "/src/assets/listing-ubcb-1.png": listingUbcb1,
   "/src/assets/listing-ubcb-2.png": listingUbcb2,
+  "/src/assets/listing-fp-1.png": listingFp1,
+  "/src/assets/listing-fp-2.png": listingFp2,
+  "/src/assets/listing-cips-1.png": listingCips1,
+  "/src/assets/listing-cips-2.png": listingCips2,
+  "/src/assets/listing-sch-1.png": listingSch1,
+  "/src/assets/listing-sch-2.png": listingSch2,
+  "/src/assets/listing-adlp-1.png": listingAdlp1,
+  "/src/assets/listing-adlp-2.png": listingAdlp2,
+  "/src/assets/listing-uccll-1.png": listingUccll1,
+  "/src/assets/listing-uccll-2.png": listingUccll2,
 };
 
 const ProductDetail = () => {
