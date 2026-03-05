@@ -12,11 +12,20 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import SharedHead from "@/components/SharedHead";
 
+import listingUbcb1 from "@/assets/listing-ubcb-1.png";
+import listingUbcb2 from "@/assets/listing-ubcb-2.png";
+
+const promoImageImports: Record<string, string> = {
+  "/src/assets/listing-ubcb-1.png": listingUbcb1,
+  "/src/assets/listing-ubcb-2.png": listingUbcb2,
+};
+
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
+  const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
 
@@ -69,8 +78,20 @@ const ProductDetail = () => {
 
   const content = handle ? productContentMap[handle] : null;
   const variant = product.variants.edges[selectedVariantIdx]?.node;
-  const image = product.images.edges[0]?.node;
+  const mainImage = product.images.edges[0]?.node;
   const price = variant ? parseFloat(variant.price.amount) : parseFloat(product.priceRange.minVariantPrice.amount);
+
+  // Build gallery: main shopify image + promo images
+  const galleryImages: { url: string; alt: string }[] = [];
+  if (mainImage) galleryImages.push({ url: mainImage.url, alt: mainImage.altText || product.title });
+  if (content?.promoImages) {
+    content.promoImages.forEach((path, i) => {
+      const resolved = promoImageImports[path] || path;
+      galleryImages.push({ url: resolved, alt: `${product.title} - Image ${i + 2}` });
+    });
+  }
+
+  const activeImage = galleryImages[selectedImageIdx] || galleryImages[0];
 
   return (
     <div className="min-h-screen bg-slate-50 font-[Manrope,sans-serif]">
@@ -96,23 +117,42 @@ const ProductDetail = () => {
       {/* Hero section */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 lg:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Product image */}
+          {/* Product image gallery */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
             <div className="aspect-[3/4] bg-gradient-to-br from-[#003A70] to-[#0060A9] rounded-3xl overflow-hidden flex items-center justify-center p-8 lg:p-12 shadow-2xl shadow-blue-900/20">
-              {image ? (
+              {activeImage ? (
                 <img
-                  src={image.url}
-                  alt={image.altText || product.title}
+                  src={activeImage.url}
+                  alt={activeImage.alt}
                   className="w-full h-full object-contain drop-shadow-2xl"
                 />
               ) : (
                 <BookOpen className="w-24 h-24 text-white/30" />
               )}
             </div>
+
+            {/* Thumbnail strip */}
+            {galleryImages.length > 1 && (
+              <div className="flex gap-3 mt-4">
+                {galleryImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImageIdx(i)}
+                    className={`w-16 h-20 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${
+                      i === selectedImageIdx
+                        ? "border-blue-600 shadow-md"
+                        : "border-slate-200 hover:border-slate-300 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Product info */}
@@ -189,6 +229,27 @@ const ProductDetail = () => {
                 <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Instant Delivery</span>
               </div>
             </div>
+
+            {/* Compact Product Details - inline */}
+            {content && (
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                  <FileText className="w-4 h-4 text-blue-600 mx-auto mb-1.5" />
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Format</p>
+                  <p className="text-sm font-bold text-slate-900">{content.details.format}</p>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                  <Layers className="w-4 h-4 text-blue-600 mx-auto mb-1.5" />
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Length</p>
+                  <p className="text-sm font-bold text-slate-900">{content.details.length}</p>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                  <Tag className="w-4 h-4 text-blue-600 mx-auto mb-1.5" />
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Category</p>
+                  <p className="text-sm font-bold text-slate-900 text-[11px]">{content.details.category}</p>
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -319,49 +380,6 @@ const ProductDetail = () => {
               </motion.div>
             </section>
           )}
-
-          {/* Product Details */}
-          <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">
-                Product Details
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Format</p>
-                    <p className="text-lg font-bold text-slate-900">{content.details.format}</p>
-                  </div>
-                </div>
-                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <Layers className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Length</p>
-                    <p className="text-lg font-bold text-slate-900">{content.details.length}</p>
-                  </div>
-                </div>
-                <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <Tag className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Category</p>
-                    <p className="text-lg font-bold text-slate-900">{content.details.category}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </section>
 
           {/* Bottom CTA */}
           <section className="bg-gradient-to-br from-[#001228] to-[#003A70] py-16">

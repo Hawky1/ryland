@@ -11,6 +11,7 @@ export interface ProductContent {
   whyYouNeedThis?: string[];
   bundleIncludes?: BundleIncludedProduct[];
   bundleValue?: string;
+  promoImages?: string[];
   details: {
     format: string;
     length: string;
@@ -71,6 +72,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Checklists & Action Plans – Stay organized and track your progress.",
       "Funding Unlocks – Learn how to access credit cards, loans, and vendor accounts for your business.",
       "Confidence & Freedom – Stop using personal credit and build real business credibility.",
+    ],
+    promoImages: [
+      "/src/assets/listing-ubcb-1.png",
+      "/src/assets/listing-ubcb-2.png",
     ],
     details: { format: "PDF eBook", length: "121 pages", category: "Credit Authority Bundle" },
   },
