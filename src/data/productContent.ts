@@ -31,6 +31,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Simple & Practical – Designed for anyone looking to take control of their credit.",
       "Financial Confidence – Make smarter credit decisions with proven guidance.",
     ],
+    promoImages: [
+      "/src/assets/listing-sch-1.png",
+      "/src/assets/listing-sch-2.png",
+    ],
     details: { format: "PDF eBook", length: "44 pages", category: "Credit Authority Bundle" },
   },
 
@@ -45,6 +49,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "All-in-One Guide – No need to search endlessly—the best is already here.",
       "Easy to Use – Clear, straightforward, and practical information.",
     ],
+    promoImages: [
+      "/src/assets/listing-fp-1.png",
+      "/src/assets/listing-fp-2.png",
+    ],
     details: { format: "PDF eBook", length: "33 pages", category: "Credit Authority Bundle" },
   },
 
@@ -58,6 +66,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Save Time & Effort – Generate letters in minutes instead of hours.",
       "Boost Your Credit Confidence – Take control of your credit and correct errors quickly.",
       "Easy to Use – No experience with AI required.",
+    ],
+    promoImages: [
+      "/src/assets/listing-adlp-1.png",
+      "/src/assets/listing-adlp-2.png",
     ],
     details: { format: "PDF eBook", length: "46 pages", category: "Credit Authority Bundle" },
   },
@@ -91,6 +103,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Avoid Common Mistakes – Scripts are designed to prevent errors that could delay results.",
       "Easy to Follow – Perfect for anyone looking to take control of their credit disputes.",
     ],
+    promoImages: [
+      "/src/assets/listing-cips-1.png",
+      "/src/assets/listing-cips-2.png",
+    ],
     details: { format: "PDF eBook", length: "49 pages", category: "Credit Authority Bundle" },
   },
 
@@ -104,6 +120,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Contact Details Included – Reach lenders directly and apply with confidence.",
       "Insider Approval Tips – Strategies to maximize approval odds.",
       "Smart Financial Choices – Save time and avoid unnecessary rejections.",
+    ],
+    promoImages: [
+      "/src/assets/listing-uccll-1.png",
+      "/src/assets/listing-uccll-2.png",
     ],
     details: { format: "PDF eBook", length: "60 pages", category: "Credit Authority Bundle" },
   },
