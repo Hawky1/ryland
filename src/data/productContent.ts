@@ -299,6 +299,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Proven dispute strategies that actually work – Tested methods for real results.",
       "Ways to protect your credit from future negative marks – Stay ahead of the game.",
     ],
+    promoImages: [
+      "/src/assets/listing-irg-1.png",
+      "/src/assets/listing-irg-2.png",
+    ],
     details: { format: "PDF eBook", length: "28 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -311,6 +315,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Strategies for handling 30-, 60-, and 90-day late marks – Tackle every type.",
       "Legal and ethical dispute techniques – Protect yourself while disputing.",
       "Steps to improve your credit score – See real results fast.",
+    ],
+    promoImages: [
+      "/src/assets/listing-lprg-1.png",
+      "/src/assets/listing-lprg-2.png",
     ],
     details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
   },
@@ -390,6 +398,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Progress monitoring tools – See how far you've come.",
       "Motivation checkpoints – Celebrate milestones along the way.",
     ],
+    promoImages: [
+      "/src/assets/listing-crsp-1.png",
+      "/src/assets/listing-crsp-2.png",
+    ],
     details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -415,6 +427,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Dispute strategies to remove damaging items – Take action on negative marks.",
       "Ways to build new credit – Establish positive credit history.",
       "Tactics to boost your credit score faster – See results in 90 days.",
+    ],
+    promoImages: [
+      "/src/assets/listing-csa-1.png",
+      "/src/assets/listing-csa-2.png",
     ],
     details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
@@ -522,6 +538,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Monthly budget inserts for income and expenses – Stay on top of your money.",
       "Easy-to-use printable format – Print and use immediately.",
       "Insights to help improve your credit score and financial habits – Make smarter decisions.",
+    ],
+    promoImages: [
+      "/src/assets/listing-cst-1.png",
+      "/src/assets/listing-cst-2.png",
     ],
     details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Credit Business Bundle" },
   },
