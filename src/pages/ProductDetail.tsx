@@ -25,11 +25,15 @@ import listingAdlp2 from "@/assets/listing-adlp-2.png";
 import listingUccll1 from "@/assets/listing-uccll-1.png";
 import listingUccll2 from "@/assets/listing-uccll-2.png";
 import listingUcp1 from "@/assets/listing-ucp-1.png";
+import listingUcp2 from "@/assets/listing-ucp-2.png";
 import listingDcrw1 from "@/assets/listing-dcrw-1.png";
 import listingMmw1 from "@/assets/listing-mmw-1.png";
+import listingMmw2 from "@/assets/listing-mmw-2.png";
 import listingSlpp1 from "@/assets/listing-slpp-1.png";
+import listingSlpp2 from "@/assets/listing-slpp-2.png";
 import listingC100k1 from "@/assets/listing-c100k-1.png";
 import listingFlsw1 from "@/assets/listing-flsw-1.png";
+import listingFlsw2 from "@/assets/listing-flsw-2.png";
 import listing13wpod1 from "@/assets/listing-13wpod-1.png";
 import listing23mwh1 from "@/assets/listing-23mwh-1.png";
 import listingDcmg1 from "@/assets/listing-dcmg-1.png";
@@ -107,13 +111,17 @@ const promoImageImports: Record<string, string> = {
   "/src/assets/listing-uccll-1.png": listingUccll1,
   "/src/assets/listing-uccll-2.png": listingUccll2,
   "/src/assets/listing-ucp-1.png": listingUcp1,
+  "/src/assets/listing-ucp-2.png": listingUcp2,
   "/src/assets/listing-dcrw-1.png": listingDcrw1,
   "/src/assets/listing-dcrw-2.png": listingDcrw2,
   "/src/assets/listing-mmw-1.png": listingMmw1,
+  "/src/assets/listing-mmw-2.png": listingMmw2,
   "/src/assets/listing-slpp-1.png": listingSlpp1,
+  "/src/assets/listing-slpp-2.png": listingSlpp2,
   "/src/assets/listing-c100k-1.png": listingC100k1,
   "/src/assets/listing-c100k-2.png": listingC100k2,
   "/src/assets/listing-flsw-1.png": listingFlsw1,
+  "/src/assets/listing-flsw-2.png": listingFlsw2,
   "/src/assets/listing-13wpod-1.png": listing13wpod1,
   "/src/assets/listing-13wpod-2.png": listing13wpod2,
   "/src/assets/listing-23mwh-1.png": listing23mwh1,

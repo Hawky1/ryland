@@ -139,6 +139,7 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     promoImages: [
       "/src/assets/listing-ucp-1.png",
+      "/src/assets/listing-ucp-2.png",
     ],
     details: { format: "PDF eBook", length: "24 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -173,6 +174,7 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     promoImages: [
       "/src/assets/listing-mmw-1.png",
+      "/src/assets/listing-mmw-2.png",
     ],
     details: { format: "Worksheet PDF", length: "9 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -189,6 +191,7 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     promoImages: [
       "/src/assets/listing-slpp-1.png",
+      "/src/assets/listing-slpp-2.png",
     ],
     details: { format: "PDF eBook", length: "17 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -222,6 +225,7 @@ export const productContentMap: Record<string, ProductContent> = {
     ],
     promoImages: [
       "/src/assets/listing-flsw-1.png",
+      "/src/assets/listing-flsw-2.png",
     ],
     details: { format: "Workbook PDF", length: "8 pages", category: "Credit Business Accelerator Pack" },
   },
