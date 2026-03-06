@@ -601,6 +601,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to structure purchases to boost credit scores – Strategic spending.",
       "Strategies to grow business credit quickly – Accelerate your progress.",
     ],
+    promoImages: [
+      "/src/assets/listing-ftva-1.png",
+      "/src/assets/listing-ftva-2.png",
+    ],
     details: { format: "PDF eBook", length: "22 pages", category: "Business Funding" },
   },
 
