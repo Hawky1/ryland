@@ -728,6 +728,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Common mistakes that delay approvals – Avoid costly errors.",
       "How to use your Net-30 account correctly – Maximize your credit impact.",
     ],
+    promoImages: [
+      "/src/assets/listing-fn30-1.png",
+      "/src/assets/listing-fn30-2.png",
+    ],
     details: { format: "PDF eBook", length: "34 pages", category: "Business Credit Quickstart Kit" },
   },
 
@@ -744,6 +748,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "A reusable evergreen setup guide – Reference it anytime.",
       "A simple roadmap for building business credit – No guesswork.",
     ],
+    promoImages: [
+      "/src/assets/listing-ebcc-1.png",
+      "/src/assets/listing-ebcc-2.png",
+    ],
     details: { format: "PDF eBook", length: "32 pages", category: "Business Credit Quickstart Kit" },
   },
 
@@ -759,6 +767,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Setup steps that make your business verifiable – Pass lender checks.",
       "The foundation lenders expect – Meet requirements before applying.",
       "A roadmap for building credit correctly – Follow the proven path.",
+    ],
+    promoImages: [
+      "/src/assets/listing-bcb-1.png",
+      "/src/assets/listing-bcb-2.png",
     ],
     details: { format: "PDF eBook", length: "33 pages", category: "Business Credit Quickstart Kit" },
   },

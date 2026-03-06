@@ -81,6 +81,12 @@ import listingDlt1 from "@/assets/listing-dlt-1.png";
 import listingDlt2 from "@/assets/listing-dlt-2.png";
 import listingUbc1 from "@/assets/listing-ubc-1.png";
 import listingUbc2 from "@/assets/listing-ubc-2.png";
+import listingFn301 from "@/assets/listing-fn30-1.png";
+import listingFn302 from "@/assets/listing-fn30-2.png";
+import listingEbcc1 from "@/assets/listing-ebcc-1.png";
+import listingEbcc2 from "@/assets/listing-ebcc-2.png";
+import listingBcb1 from "@/assets/listing-bcb-1.png";
+import listingBcb2 from "@/assets/listing-bcb-2.png";
 
 const promoImageImports: Record<string, string> = {
   "/src/assets/listing-ubcb-1.png": listingUbcb1,
@@ -152,6 +158,12 @@ const promoImageImports: Record<string, string> = {
   "/src/assets/listing-dlt-2.png": listingDlt2,
   "/src/assets/listing-ubc-1.png": listingUbc1,
   "/src/assets/listing-ubc-2.png": listingUbc2,
+  "/src/assets/listing-fn30-1.png": listingFn301,
+  "/src/assets/listing-fn30-2.png": listingFn302,
+  "/src/assets/listing-ebcc-1.png": listingEbcc1,
+  "/src/assets/listing-ebcc-2.png": listingEbcc2,
+  "/src/assets/listing-bcb-1.png": listingBcb1,
+  "/src/assets/listing-bcb-2.png": listingBcb2,
 };
 
 const ProductDetail = () => {
