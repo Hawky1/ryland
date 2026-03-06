@@ -333,6 +333,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Step-by-step dispute techniques – Clear guidance for every step.",
       "How to rebuild credit after bankruptcy – Start fresh with confidence.",
     ],
+    promoImages: [
+      "/src/assets/listing-brb-1.png",
+      "/src/assets/listing-brb-2.png",
+    ],
     details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -380,6 +384,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Templates for charge-offs – Challenge charge-off entries on your report.",
       "Templates for inquiries – Remove unauthorized hard inquiries.",
     ],
+    promoImages: [
+      "/src/assets/listing-dlt-1.png",
+      "/src/assets/listing-dlt-2.png",
+    ],
     details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -426,6 +434,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to qualify for business funding – Meet lender requirements with confidence.",
       "Strategies to negotiate better terms – Get the best deals available.",
       "Steps to grow your business using credit – Leverage credit for expansion.",
+    ],
+    promoImages: [
+      "/src/assets/listing-ubc-1.png",
+      "/src/assets/listing-ubc-2.png",
     ],
     details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Credit Business Bundle" },
   },
