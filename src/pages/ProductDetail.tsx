@@ -120,6 +120,16 @@ const promoImageImports: Record<string, string> = {
   "/src/assets/listing-crsp-2.png": listingCrsp2,
   "/src/assets/listing-csa-1.png": listingCsa1,
   "/src/assets/listing-csa-2.png": listingCsa2,
+  "/src/assets/listing-crm-1.png": listingCrm1,
+  "/src/assets/listing-crm-2.png": listingCrm2,
+  "/src/assets/listing-crsm-1.png": listingCrsm1,
+  "/src/assets/listing-crsm-2.png": listingCrsm2,
+  "/src/assets/listing-crlr-1.png": listingCrlr1,
+  "/src/assets/listing-crlr-2.png": listingCrlr2,
+  "/src/assets/listing-crcgpt-1.png": listingCrcgpt1,
+  "/src/assets/listing-crcgpt-2.png": listingCrcgpt2,
+  "/src/assets/listing-cbrl-1.png": listingCbrl1,
+  "/src/assets/listing-cbrl-2.png": listingCbrl2,
 };
 
 const ProductDetail = () => {

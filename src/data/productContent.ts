@@ -346,6 +346,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to dispute items correctly – Get it right the first time.",
       "Smarter strategies to improve your score – Work smarter, not harder.",
     ],
+    promoImages: [
+      "/src/assets/listing-crm-1.png",
+      "/src/assets/listing-crm-2.png",
+    ],
     details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -358,6 +362,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Confidence to overcome setbacks – Push past obstacles with ease.",
       "Focus to stay consistent – Build discipline that lasts.",
       "Tools to create lasting financial freedom – Change your life, not just your score.",
+    ],
+    promoImages: [
+      "/src/assets/listing-crsm-1.png",
+      "/src/assets/listing-crsm-2.png",
     ],
     details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
@@ -384,6 +392,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "How FDCPA protects consumers – Understand your protections against collectors.",
       "Steps to dispute inaccurate credit data – Use the law to your advantage.",
       "How to guard against illegal collection practices – Stay protected.",
+    ],
+    promoImages: [
+      "/src/assets/listing-crlr-1.png",
+      "/src/assets/listing-crlr-2.png",
     ],
     details: { format: "PDF Guide", length: "27 pages", category: "Ultimate Credit Business Bundle" },
   },
@@ -445,6 +457,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Faster ways to generate dispute letters – Save hours of work.",
       "Tools to simplify credit repair workflows – Streamline the entire process.",
     ],
+    promoImages: [
+      "/src/assets/listing-crcgpt-1.png",
+      "/src/assets/listing-crcgpt-2.png",
+    ],
     details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -457,6 +473,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Access to auto loans and second-chance banking – Options for rebuilding.",
       "Tools to rebuild credit faster – Accelerate your progress.",
       "Practical guidance for improving credit profiles – Actionable steps.",
+    ],
+    promoImages: [
+      "/src/assets/listing-cbrl-1.png",
+      "/src/assets/listing-cbrl-2.png",
     ],
     details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
   },
