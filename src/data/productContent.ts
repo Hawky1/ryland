@@ -282,6 +282,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Insights to find the best lenders and financing deals – Make informed decisions.",
       "Tools to achieve financial goals faster and smarter – Stop wasting time searching.",
     ],
+    promoImages: [
+      "/src/assets/listing-sld-1.png",
+      "/src/assets/listing-sld-2.png",
+    ],
     details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -451,6 +455,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "How to rebuild your credit afterward – Start fresh with confidence.",
       "Ways to restore financial confidence – Take back control.",
     ],
+    promoImages: [
+      "/src/assets/listing-re-1.png",
+      "/src/assets/listing-re-2.png",
+    ],
     details: { format: "PDF eBook", length: "26 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -463,6 +471,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "House hunting strategies – Find the right property smarter.",
       "What to know before making an offer – Negotiate with confidence.",
       "Steps for closing successfully – Navigate the final steps with ease.",
+    ],
+    promoImages: [
+      "/src/assets/listing-uhh-1.png",
+      "/src/assets/listing-uhh-2.png",
     ],
     details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
   },
@@ -477,6 +489,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Ways to maximize rewards without overspending – Stay in control.",
       "Tips to leverage credit card benefits – Get more from your cards.",
     ],
+    promoImages: [
+      "/src/assets/listing-mst-1.png",
+      "/src/assets/listing-mst-2.png",
+    ],
     details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Credit Business Bundle" },
   },
 
@@ -489,6 +505,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Step-by-step credit repair actions – Know exactly what to do next.",
       "Legal tips for disputing credit report errors – Use the law to your advantage.",
       "Tools to improve your credit independently – Take full control.",
+    ],
+    promoImages: [
+      "/src/assets/listing-myc-1.png",
+      "/src/assets/listing-myc-2.png",
     ],
     details: { format: "PDF eBook", length: "18 pages", category: "Ultimate Credit Business Bundle" },
   },
