@@ -550,6 +550,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Improve funding approval chances – Stand out to lenders.",
       "Submit stronger applications – Confidence in every submission.",
     ],
+    promoImages: [
+      "/src/assets/listing-bfasc-1.png",
+      "/src/assets/listing-bfasc-2.png",
+    ],
     details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
   },
 
@@ -563,6 +567,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Strategies to increase approval chances – Maximize your odds.",
       "How to structure your business for funding – Set up for success.",
     ],
+    promoImages: [
+      "/src/assets/listing-150k-1.png",
+      "/src/assets/listing-150k-2.png",
+    ],
     details: { format: "PDF eBook", length: "29 pages", category: "Business Funding" },
   },
 
@@ -575,6 +583,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Evaluation of the 5 key lender factors – Understand what matters most.",
       "Tools to identify weaknesses – Fix issues before applying.",
       "Strategies to increase approval chances – Improve your score.",
+    ],
+    promoImages: [
+      "/src/assets/listing-ff-1.png",
+      "/src/assets/listing-ff-2.png",
     ],
     details: { format: "PDF eBook", length: "27 pages", category: "Business Funding" },
   },
@@ -602,6 +614,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Methods to separate personal and business liability – Protect yourself.",
       "Insider lender approval tips – Know what lenders look for.",
     ],
+    promoImages: [
+      "/src/assets/listing-vfein-1.png",
+      "/src/assets/listing-vfein-2.png",
+    ],
     details: { format: "PDF eBook", length: "34 pages", category: "Business Funding" },
   },
 
@@ -614,6 +630,10 @@ export const productContentMap: Record<string, ProductContent> = {
       "Strategy for applying in the right order – Maximize approvals.",
       "Tips for managing utilization and limits – Keep your profile strong.",
       "Techniques for graduating to larger bank cards – Level up over time.",
+    ],
+    promoImages: [
+      "/src/assets/listing-ubccp-1.png",
+      "/src/assets/listing-ubccp-2.png",
     ],
     details: { format: "PDF eBook", length: "38 pages", category: "Business Funding" },
   },
