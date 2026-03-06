@@ -43,6 +43,8 @@ import listingBfasc1 from "@/assets/listing-bfasc-1.png";
 import listingBfasc2 from "@/assets/listing-bfasc-2.png";
 import listing150k1 from "@/assets/listing-150k-1.png";
 import listing150k2 from "@/assets/listing-150k-2.png";
+import listingFtva1 from "@/assets/listing-ftva-1.png";
+import listingFtva2 from "@/assets/listing-ftva-2.png";
 
 const promoImageImports: Record<string, string> = {
   "/src/assets/listing-ubcb-1.png": listingUbcb1,
@@ -76,6 +78,8 @@ const promoImageImports: Record<string, string> = {
   "/src/assets/listing-bfasc-2.png": listingBfasc2,
   "/src/assets/listing-150k-1.png": listing150k1,
   "/src/assets/listing-150k-2.png": listing150k2,
+  "/src/assets/listing-ftva-1.png": listingFtva1,
+  "/src/assets/listing-ftva-2.png": listingFtva2,
 };
 
 const ProductDetail = () => {
