@@ -137,6 +137,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Learn how to correct errors on your credit report – Step-by-step dispute guidance.",
       "Unlock access to better financial opportunities – Open doors to loans, cards, and more.",
     ],
+    promoImages: [
+      "/src/assets/listing-ucp-1.png",
+    ],
     details: { format: "PDF eBook", length: "24 pages", category: "Credit Business Accelerator Pack" },
   },
 
@@ -151,6 +154,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Systems to build positive credit habits – Create lasting financial discipline.",
       "Structured guidance to stay consistent – Stay on track with a proven framework.",
     ],
+    promoImages: [
+      "/src/assets/listing-dcrw-1.png",
+    ],
     details: { format: "Workbook PDF", length: "17 pages", category: "Credit Business Accelerator Pack" },
   },
 
@@ -163,6 +169,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Income and expense tracking pages – Know exactly where your money goes.",
       "Savings goal worksheets – Set targets and watch your savings grow.",
       "Financial organization tools – Keep your finances neat and structured.",
+    ],
+    promoImages: [
+      "/src/assets/listing-mmw-1.png",
     ],
     details: { format: "Worksheet PDF", length: "9 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -177,6 +186,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Practical budgeting systems – Simple frameworks that actually work.",
       "A roadmap for financial stability – Your step-by-step path to freedom.",
     ],
+    promoImages: [
+      "/src/assets/listing-slpp-1.png",
+    ],
     details: { format: "PDF eBook", length: "17 pages", category: "Credit Business Accelerator Pack" },
   },
 
@@ -189,6 +201,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Progress tracking sheets – See your balances shrink over time.",
       "Milestone markers for motivation – Celebrate wins along the way.",
       "A simple repeatable system for eliminating debt – Use it again and again.",
+    ],
+    promoImages: [
+      "/src/assets/listing-c100k-1.png",
     ],
     details: { format: "Worksheet PDF", length: "7 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -203,6 +218,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Grocery and bill saving strategies – Save on everyday essentials.",
       "Financial goal worksheets – Set and achieve your savings targets.",
     ],
+    promoImages: [
+      "/src/assets/listing-flsw-1.png",
+    ],
     details: { format: "Workbook PDF", length: "8 pages", category: "Credit Business Accelerator Pack" },
   },
 
@@ -215,6 +233,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Debt Snowball method – Build momentum by paying off small debts first.",
       "Debt Avalanche method – Save the most money by tackling high-interest debt.",
       "Personalized debt payoff planning – Create a plan that works for you.",
+    ],
+    promoImages: [
+      "/src/assets/listing-13wpod-1.png",
     ],
     details: { format: "PDF Guide", length: "14 pages", category: "Credit Business Accelerator Pack" },
   },
@@ -229,6 +250,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Practical saving strategies – Keep more of what you earn.",
       "Systems to build better money habits – Create lasting financial discipline.",
     ],
+    promoImages: [
+      "/src/assets/listing-23mwh-1.png",
+    ],
     details: { format: "PDF Guide", length: "15 pages", category: "Credit Business Accelerator Pack" },
   },
 
@@ -241,6 +265,9 @@ export const productContentMap: Record<string, ProductContent> = {
       "Improve your credit profile – Actionable steps to raise your score.",
       "Build better financial habits – Create a foundation for long-term success.",
       "Resell Rights Included – Rebrand and sell as your own product.",
+    ],
+    promoImages: [
+      "/src/assets/listing-dcmg-1.png",
     ],
     details: { format: "PDF eBook", length: "10 pages", category: "Credit Business Accelerator Pack" },
   },
