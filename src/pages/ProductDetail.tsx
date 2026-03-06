@@ -65,6 +65,16 @@ import listingCrsp1 from "@/assets/listing-crsp-1.png";
 import listingCrsp2 from "@/assets/listing-crsp-2.png";
 import listingCsa1 from "@/assets/listing-csa-1.png";
 import listingCsa2 from "@/assets/listing-csa-2.png";
+import listingCrm1 from "@/assets/listing-crm-1.png";
+import listingCrm2 from "@/assets/listing-crm-2.png";
+import listingCrsm1 from "@/assets/listing-crsm-1.png";
+import listingCrsm2 from "@/assets/listing-crsm-2.png";
+import listingCrlr1 from "@/assets/listing-crlr-1.png";
+import listingCrlr2 from "@/assets/listing-crlr-2.png";
+import listingCrcgpt1 from "@/assets/listing-crcgpt-1.png";
+import listingCrcgpt2 from "@/assets/listing-crcgpt-2.png";
+import listingCbrl1 from "@/assets/listing-cbrl-1.png";
+import listingCbrl2 from "@/assets/listing-cbrl-2.png";
 
 const promoImageImports: Record<string, string> = {
   "/src/assets/listing-ubcb-1.png": listingUbcb1,
