@@ -87,6 +87,11 @@ import listingEbcc1 from "@/assets/listing-ebcc-1.png";
 import listingEbcc2 from "@/assets/listing-ebcc-2.png";
 import listingBcb1 from "@/assets/listing-bcb-1.png";
 import listingBcb2 from "@/assets/listing-bcb-2.png";
+import listing13wpod2 from "@/assets/listing-13wpod-2.png";
+import listing23mwh2 from "@/assets/listing-23mwh-2.png";
+import listingC100k2 from "@/assets/listing-c100k-2.png";
+import listingDcmg2 from "@/assets/listing-dcmg-2.png";
+import listingDcrw2 from "@/assets/listing-dcrw-2.png";
 
 const promoImageImports: Record<string, string> = {
   "/src/assets/listing-ubcb-1.png": listingUbcb1,
@@ -103,13 +108,18 @@ const promoImageImports: Record<string, string> = {
   "/src/assets/listing-uccll-2.png": listingUccll2,
   "/src/assets/listing-ucp-1.png": listingUcp1,
   "/src/assets/listing-dcrw-1.png": listingDcrw1,
+  "/src/assets/listing-dcrw-2.png": listingDcrw2,
   "/src/assets/listing-mmw-1.png": listingMmw1,
   "/src/assets/listing-slpp-1.png": listingSlpp1,
   "/src/assets/listing-c100k-1.png": listingC100k1,
+  "/src/assets/listing-c100k-2.png": listingC100k2,
   "/src/assets/listing-flsw-1.png": listingFlsw1,
   "/src/assets/listing-13wpod-1.png": listing13wpod1,
+  "/src/assets/listing-13wpod-2.png": listing13wpod2,
   "/src/assets/listing-23mwh-1.png": listing23mwh1,
+  "/src/assets/listing-23mwh-2.png": listing23mwh2,
   "/src/assets/listing-dcmg-1.png": listingDcmg1,
+  "/src/assets/listing-dcmg-2.png": listingDcmg2,
   "/src/assets/listing-ubccp-1.png": listingUbccp1,
   "/src/assets/listing-ubccp-2.png": listingUbccp2,
   "/src/assets/listing-ff-1.png": listingFf1,
