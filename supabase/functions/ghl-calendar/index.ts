@@ -129,13 +129,21 @@ serve(async (req) => {
       });
       const contactData = await contactRes.json();
 
-      if (!contactRes.ok) {
-        console.error("GHL contact error:", JSON.stringify(contactData));
-        return json({ error: "Unable to process your request. Please try again." }, 500);
-      }
+      let contactId: string | undefined;
 
-      const contactId = contactData.contact?.id || contactData.id;
-      console.log("Contact created/upserted:", contactId);
+      if (!contactRes.ok) {
+        // Handle duplicate contact error by extracting existing contactId
+        if (contactData?.statusCode === 400 && contactData?.meta?.contactId) {
+          contactId = contactData.meta.contactId;
+          console.log("Duplicate contact found, using existing:", contactId);
+        } else {
+          console.error("GHL contact error:", JSON.stringify(contactData));
+          return json({ error: "Unable to process your request. Please try again." }, 500);
+        }
+      } else {
+        contactId = contactData.contact?.id || contactData.id;
+        console.log("Contact created:", contactId);
+      }
 
       // Step 2: Create appointment
       const appointmentPayload = {
