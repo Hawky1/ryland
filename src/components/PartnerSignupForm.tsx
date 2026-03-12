@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, CheckCircle2, Copy, Check, ExternalLink } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 const partnerSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
