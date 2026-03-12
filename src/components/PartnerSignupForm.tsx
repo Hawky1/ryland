@@ -76,7 +76,7 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
 
       if (error) throw error;
 
-      setAffiliateLink(ghlAffiliateLink);
+      setSubmitted(true);
       setSubmitted(true);
       // Close dialog and redirect to partner onboarding
       onOpenChange(false);
