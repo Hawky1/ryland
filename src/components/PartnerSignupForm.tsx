@@ -72,7 +72,6 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
         referral_source: data.referral_source || null,
         message: data.message || null,
         ghl_contact_id: ghlContactId,
-        affiliate_link: ghlAffiliateLink,
       });
 
       if (error) throw error;
