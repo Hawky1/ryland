@@ -92,8 +92,6 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
     if (!val) {
       setTimeout(() => {
         setSubmitted(false);
-        setAffiliateLink(null);
-        setCopied(false);
         form.reset();
       }, 300);
     }
