@@ -114,41 +114,9 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
 
         {submitted ? (
           <div className="flex flex-col items-center py-6 gap-5">
-            <CheckCircle2 className="w-14 h-14 text-emerald-400" />
-
-            {affiliateLink ? (
-              <div className="w-full space-y-3">
-                <p className="text-slate-300 text-sm text-center font-medium">
-                  Your unique referral link is live — start sharing it now!
-                </p>
-                <div className="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-lg px-4 py-3">
-                  <span className="flex-1 text-xs text-blue-400 truncate font-mono">{affiliateLink}</span>
-                  <button
-                    onClick={handleCopy}
-                    className="shrink-0 p-1.5 rounded-md hover:bg-slate-800 transition-colors text-slate-400 hover:text-white"
-                    title="Copy link"
-                  >
-                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
-                  <a
-                    href={affiliateLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 p-1.5 rounded-md hover:bg-slate-800 transition-colors text-slate-400 hover:text-white"
-                    title="Open link"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </div>
-                <p className="text-slate-500 text-xs text-center">
-                  Check your email for a welcome message with full program details.
-                </p>
-              </div>
-            ) : (
-              <p className="text-slate-300 text-center text-sm max-w-xs">
-                Check your email for a welcome message with your referral link and next steps. We're excited to have you on board.
-              </p>
-            )}
+            <p className="text-slate-300 text-center text-sm max-w-xs">
+              Check your email for a welcome message with your referral link and next steps. We're excited to have you on board.
+            </p>
 
             <button onClick={() => handleClose(false)} className="shiny-cta !py-3 !px-8 !text-sm mt-1">
               <span>Close</span>
