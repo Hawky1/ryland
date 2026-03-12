@@ -31,22 +31,12 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [affiliateLink, setAffiliateLink] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<PartnerFormData>({
     resolver: zodResolver(partnerSchema),
     defaultValues: { name: "", email: "", phone: "", business_name: "", referral_source: "", message: "" },
   });
-
-  const handleCopy = () => {
-    if (!affiliateLink) return;
-    navigator.clipboard.writeText(affiliateLink).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
 
   const onSubmit = async (data: PartnerFormData) => {
     setSubmitting(true);

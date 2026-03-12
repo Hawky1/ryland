@@ -122,69 +122,9 @@ serve(async (req) => {
       console.log("GHL contact created:", contactId);
     }
 
-    // --- Affiliate enrollment (only for Partner Signup Form) ---
-    let affiliateLink: string | null = null;
-
-    if (source === "Partner Signup Form" && contactId) {
-      const campaignId = Deno.env.get("GHL_AFFILIATE_CAMPAIGN_ID");
-
-      if (!campaignId) {
-        console.warn("GHL_AFFILIATE_CAMPAIGN_ID not set — skipping affiliate enrollment");
-      } else {
-        try {
-          const affiliateRes = await fetch("https://services.leadconnectorhq.com/affiliates/", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-              "Content-Type": "application/json",
-              Version: "2021-07-28",
-            },
-            body: JSON.stringify({
-              contactId,
-              campaignId,
-              locationId,
-            }),
-          });
-
-          const rawText = await affiliateRes.text();
-          console.log("GHL affiliate raw response:", affiliateRes.status, rawText?.slice(0, 500));
-
-          let affiliateData: Record<string, unknown> = {};
-          try {
-            if (rawText && rawText.trim().length > 0) {
-              affiliateData = JSON.parse(rawText);
-            }
-          } catch {
-            // Non-JSON response
-          }
-
-          if (!affiliateRes.ok) {
-            console.error("GHL affiliate enrollment error:", affiliateRes.status, rawText);
-          } else {
-            affiliateLink =
-              (affiliateData.affiliate as Record<string, unknown>)?.referralLink as string ||
-              (affiliateData.affiliate as Record<string, unknown>)?.referral_link as string ||
-              affiliateData.referralLink as string ||
-              affiliateData.referral_link as string ||
-              null;
-
-            const affiliateId =
-              (affiliateData.affiliate as Record<string, unknown>)?.id ||
-              affiliateData.id ||
-              "enrolled";
-
-            console.log("GHL affiliate enrolled:", affiliateId, "link:", affiliateLink);
-          }
-        } catch (affiliateErr) {
-          console.error("Affiliate enrollment request failed:", affiliateErr);
-        }
-      }
-    }
-
     return json({
       success: true,
       contactId,
-      affiliateLink,
     });
   } catch (err) {
     console.error("Unexpected error:", err);
