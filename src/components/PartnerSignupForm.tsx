@@ -58,7 +58,6 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
 
         if (!ghlError && ghlData) {
           ghlContactId = ghlData.contactId || null;
-          ghlAffiliateLink = ghlData.affiliateLink || null;
         }
       } catch {
         // GHL sync is non-critical — continue with insert
