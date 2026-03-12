@@ -107,7 +107,7 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
           </DialogTitle>
           <DialogDescription className="text-slate-400">
             {submitted
-              ? "Welcome to the partner program — your referral link is ready below."
+              ? "Welcome to the partner program — check your email for your referral link and next steps."
               : "Fill out the form below and our team will get you set up — it's 100% free."}
           </DialogDescription>
         </DialogHeader>
