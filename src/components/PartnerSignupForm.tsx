@@ -43,7 +43,6 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
     try {
       // Call GHL first to get affiliate link before inserting
       let ghlContactId: string | null = null;
-      let ghlAffiliateLink: string | null = null;
 
       try {
         const { data: ghlData, error: ghlError } = await supabase.functions.invoke("ghl-create-contact", {
