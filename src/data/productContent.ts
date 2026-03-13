@@ -35,7 +35,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-sch-1.png",
       "/src/assets/listing-sch-2.png",
     ],
-    details: { format: "PDF eBook", length: "44 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "44 pages", category: "Business Authority Bundle" },
   },
 
   "the-financial-playbook-your-ultimate-money-resource-guide": {
