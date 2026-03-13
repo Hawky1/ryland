@@ -149,7 +149,7 @@ export const productContentMap: Record<string, ProductContent> = {
     description:
       "Stay organized and take charge of your financial future with the DIY Credit Workbook. This workbook includes practical exercises, step-by-step guidance, and easy-to-use tools to help you improve your credit smarter.",
     benefits: [
-      "Worksheets to track your credit repair progress – Monitor every step of your journey.",
+      "Worksheets to track your credit improvement progress – Monitor every step of your journey.",
       "Goal-setting pages for your credit journey – Define and hit your credit milestones.",
       "Action steps for disputing credit report errors – Clear guidance on what to do next.",
       "Systems to build positive credit habits – Create lasting financial discipline.",
