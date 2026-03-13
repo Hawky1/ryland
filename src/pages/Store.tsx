@@ -20,12 +20,12 @@ import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
 
 const BUNDLES = [
-  { id: "credit-authority", tag: "Credit Authority Bundle", name: "Credit Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
-  { id: "credit-accelerator", tag: "Credit Business Accelerator", name: "Credit Business Accelerator", tagline: "Essential DIY guides and workbooks for credit mastery" },
-  { id: "credit-funding", tag: "Credit Business Funding", name: "Credit Business Funding", tagline: "Advanced strategies to secure $50K–$250K+ in business capital" },
-  { id: "credit-quickstart", tag: "Credit Business Quickstart", name: "Credit Business Quickstart", tagline: "Get started with business credit in days, not months" },
-  { id: "ultimate-bundle", tag: "Ultimate Credit Business Bundle", name: "Ultimate Credit Business Bundle", tagline: "The complete 18-resource library for total credit transformation" },
-  { id: "standalone", tag: "Standalone", name: "Standalone Guides", tagline: "Specialized guides for homebuying and credit optimization" },
+  { id: "credit-authority", tag: "Credit Authority Bundle", name: "Business Authority Bundle", tagline: "Premium blueprints and lender lists to dominate business credit" },
+  { id: "credit-accelerator", tag: "Credit Business Accelerator", name: "Entrepreneur Accelerator", tagline: "Essential DIY guides and workbooks for financial mastery" },
+  { id: "credit-funding", tag: "Credit Business Funding", name: "Business Funding Essentials", tagline: "Advanced strategies to secure $50K–$250K+ in business capital" },
+  { id: "credit-quickstart", tag: "Credit Business Quickstart", name: "Entrepreneur Quickstart", tagline: "Get started with business credit in days, not months" },
+  { id: "ultimate-bundle", tag: "Ultimate Credit Business Bundle", name: "Ultimate Business Education Bundle", tagline: "The complete 18-resource library for total business transformation" },
+  { id: "standalone", tag: "Standalone", name: "Standalone Guides", tagline: "Specialized guides for homebuying and financial optimization" },
 ];
 
 const Store = () => {
