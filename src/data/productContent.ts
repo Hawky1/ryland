@@ -131,7 +131,7 @@ export const productContentMap: Record<string, ProductContent> = {
   "unlock-credit-potential": {
     headline: "Ready to take charge of your financial future?",
     description:
-      "The Unlock Your Credit Potential – Credit Repair Guide 2025 is designed to help you build stronger credit, fix mistakes, and open the door to better financial opportunities.",
+      "The Unlock Your Credit Potential – Credit Education Guide 2025 is designed to help you build stronger credit, fix mistakes, and open the door to better financial opportunities.",
     benefits: [
       "Build a stronger credit profile – Proven strategies to elevate your credit standing.",
       "Learn how to correct errors on your credit report – Step-by-step dispute guidance.",
