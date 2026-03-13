@@ -476,7 +476,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "37 pages of AI-powered ChatGPT prompts – Ready to use immediately.",
       "Templates for dispute letters and negotiations – Professional and effective.",
       "Faster ways to generate dispute letters – Save hours of work.",
-      "Tools to simplify credit repair workflows – Streamline the entire process.",
+      "Tools to simplify credit education workflows – Streamline the entire process.",
     ],
     promoImages: [
       "/src/assets/listing-crcgpt-1.png",
