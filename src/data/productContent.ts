@@ -865,17 +865,17 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "ultimate-credit-business-vault": {
-    headline: "Fix Your Credit. Rebuild Your Profile. Unlock Real Financial Opportunities.",
+    headline: "Improve Your Credit. Rebuild Your Profile. Unlock Real Financial Opportunities.",
     description:
-      "Fix your credit, rebuild your profile, and unlock real financial opportunities with one complete system.\n\nThis vault includes 18 powerful guides covering credit repair, credit building, dispute strategies, and financial optimization.",
+      "Improve your credit, rebuild your profile, and unlock real financial opportunities with one complete system.\n\nThis vault includes 18 powerful guides covering credit education, credit building, dispute strategies, and financial optimization.",
     benefits: [
-      "18 comprehensive guides in one vault – The most complete credit system available.",
-      "Covers credit repair, disputes, and rebuilding – Every angle covered.",
+      "18 comprehensive guides in one vault – The most complete credit education system available.",
+      "Covers credit improvement, disputes, and rebuilding – Every angle covered.",
       "Includes AI prompts, legal rights guides, and lender databases – Advanced tools.",
       "From beginner to advanced strategies – Something for every stage.",
     ],
     whyYouNeedThis: [
-      "One purchase, complete credit transformation – No gaps in your knowledge.",
+      "One purchase, complete financial transformation – No gaps in your knowledge.",
       "Individually valued at $347+ – Massive savings in one bundle.",
       "Used by 2,400+ entrepreneurs – Proven results.",
     ],
