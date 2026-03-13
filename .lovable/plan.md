@@ -1,71 +1,69 @@
 
 
-## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
+## Plan: Update Shopify Product Data (Titles, Descriptions, Tags)
 
-### What Changes
+This is a large batch operation across 47 Shopify products using the Shopify API tools. I will update titles, descriptions (body_html), and tags directly in your store.
 
-**1. Move Product Details directly below the price/CTA card (layout optimization)**
+---
 
-Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
+### Critical Dependency: Tags + Frontend Sync
 
-The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
+The `/store` page filters products by matching Shopify tags (e.g., `"Credit Authority Bundle"`). If we rename tags in Shopify, we **must also update** the `tag` field in the `BUNDLES` array in `src/pages/Store.tsx` — otherwise products will stop appearing in their sections.
 
-**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
+**Tag rename mapping (Shopify + frontend):**
 
-The two uploaded images will be:
-- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
-- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
-- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
+| Current Shopify Tag | New Shopify Tag |
+|---|---|
+| Credit Authority Bundle | Business Authority Bundle |
+| Credit Business Accelerator | Entrepreneur Accelerator |
+| Credit Business Funding | Business Funding Essentials |
+| Credit Business Quickstart | Entrepreneur Quickstart |
+| Ultimate Credit Business Bundle | Ultimate Business Education Bundle |
 
-### Technical Details
+---
 
-**Files to modify:**
+### Step 1: Update Product Titles (17 products)
 
-1. **`src/data/productContent.ts`**
-   - Add `promoImages?: string[]` to the `ProductContent` interface
-   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
+| ID | Current Title | New Title |
+|---|---|---|
+| 14898867569003 | 100 Dispute Letters Templates | 100 Financial Strategy Templates |
+| 14898863833451 | AI-Powered Credit Dispute Letter Prompts | AI-Powered Credit Education Prompts |
+| 14898866946411 | Bankruptcy Removal Blueprint: Your Step-by-Step Guide to Clean Credit | Bankruptcy Education Blueprint: Understanding Credit Recovery |
+| 14898868158827 | Credit Repair ChatGPT Prompts | Credit Education ChatGPT Prompts |
+| 14898867700075 | Credit Repair Legal Rights Cheat Sheet | Credit Legal Rights Cheat Sheet |
+| 14898867044715 | Credit Repair Mistakes to Avoid Guide | Credit Mistakes to Avoid Guide |
+| 14898867208555 | Credit Repair Success Mindset Guide | Credit Success Mindset Guide |
+| 14898867798379 | Credit Repair Success Planner | Credit Success Planner |
+| 14898864193899 | DIY Credit Repair Workbook | DIY Credit Workbook |
+| 14898863702379 | Credit Inquiry Phone Script – Remove Inquiries Fast | Credit Inquiry Phone Script – Understanding Inquiries |
+| 14898866717035 | Inquiry Removal Guide: Step-by-Step Directions to Clean Up Your Credit | Inquiry Education Guide: Understanding Credit Inquiries |
+| 14898866848107 | Late Payment Removal Guide | Late Payment Strategy Guide |
+| 14898868388203 | Repo Eraser: How to Delete Repossessions from Your Credit Fast | Repo Strategy Guide: Understanding Repossessions on Your Credit |
+| 14898868519275 | Credit Score Accelerator: The 90-Day Credit Comeback Plan | Credit Score Accelerator: The 90-Day Credit Education Plan |
+| 14916577919339 | Credit Authority Bundle | Business Authority Bundle |
+| 14916577886571 | Credit Business Accelerator Pack | Entrepreneur Accelerator Pack |
+| 14916577952107 | Ultimate Credit Business Vault | Ultimate Business Education Vault |
 
-2. **`src/pages/ProductDetail.tsx`**
-   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
-   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
-   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
+### Step 2: Update Product Descriptions (5 bundles with body_html)
 
-3. **New assets:**
-   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
-   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
+Rewrite descriptions for the 5 bundle products to use educational language. Remove "fix your credit," "help repair credit," "credit repair" — replace with "understand your credit," "credit education," "financial literacy."
 
-### Layout Change (Before → After)
+### Step 3: Update Tags on All 47 Products
 
-```text
-BEFORE:
-┌─────────────┬──────────────┐
-│  Cover Img  │  Title       │
-│             │  Headline    │
-│             │  Description │
-│             │  Price + CTA │
-└─────────────┴──────────────┘
-  ... scroll ...
-┌────────────────────────────┐
-│  What You'll Get (full w)  │
-└────────────────────────────┘
-  ... scroll ...
-┌────────────────────────────┐
-│  Product Details (full w)  │
-└────────────────────────────┘
+Replace bundle tag strings per the mapping above. Also remove any problematic tags like "credit repair", "credit restoration", "dispute", "credit fix", "score improvement" and add "business education", "financial literacy", "credit education" where appropriate.
 
-AFTER:
-┌─────────────┬──────────────┐
-│  Cover Img  │  Title       │
-│             │  Headline    │
-│  [promo 1]  │  Description │
-│  [promo 2]  │  Price + CTA │
-│             │  Details     │ ← moved up
-└─────────────┴──────────────┘
-  ... scroll ...
-┌────────────────────────────┐
-│  What You'll Get (full w)  │
-└────────────────────────────┘
-```
+### Step 4: Update Frontend Tag References
 
-Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
+Update `src/pages/Store.tsx` BUNDLES array `tag` fields to match the new Shopify tags.
+
+---
+
+### Execution Order
+
+1. Update all product titles + descriptions + tags via `shopify--update_product` (batched)
+2. Update `src/pages/Store.tsx` to sync the `tag` fields with new Shopify tags
+
+### Estimated API Calls
+
+~47 `update_product` calls (one per product) + 1 code file edit.
 
