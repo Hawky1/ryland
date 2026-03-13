@@ -367,11 +367,11 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-repair-success-mindset-guide": {
-    headline: "Build the Mindset to Repair Your Credit and Transform Your Finances.",
+    headline: "Build the Mindset to Improve Your Credit and Transform Your Finances.",
     description:
-      "Repairing your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
+      "Improving your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
     benefits: [
-      "Motivation strategies during credit repair – Stay driven through the process.",
+      "Motivation strategies during credit improvement – Stay driven through the process.",
       "Confidence to overcome setbacks – Push past obstacles with ease.",
       "Focus to stay consistent – Build discipline that lasts.",
       "Tools to create lasting financial freedom – Change your life, not just your score.",
