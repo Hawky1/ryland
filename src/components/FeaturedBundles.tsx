@@ -41,7 +41,7 @@ const FEATURED = [
     id: "credit-authority",
     handle: "credit-business-accelerator-pack",
     image: bundleAccelerator,
-    title: "Credit Business Accelerator Pack",
+    title: "Entrepreneur Accelerator Pack",
     subtitle: "9 eBooks & Workbooks to Transform Your Finances",
     price: "$67",
     originalPrice: "$153",

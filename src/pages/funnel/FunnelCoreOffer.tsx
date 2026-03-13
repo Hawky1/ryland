@@ -143,7 +143,7 @@ export default function FunnelCoreOffer() {
             </motion.div>
 
             <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              I'm giving you my entire library of playbooks. This is every secret, every bank hack, and every dispute template we've refined over 8 years.
+              I'm giving you my entire library of playbooks. This is every strategy, every funding hack, and every financial template we've refined over 8 years.
             </p>
 
             {/* Hero CTA */}

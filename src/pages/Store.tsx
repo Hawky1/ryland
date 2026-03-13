@@ -82,7 +82,7 @@ const Store = () => {
   return (
     <div className="min-h-screen bg-slate-50 font-[Manrope,sans-serif]">
       <SharedHead />
-      <PageMeta title="Digital Products Store | Ryland Partners" description="Browse eBooks, guides, and resources for credit repair, business funding, and financial education." />
+      <PageMeta title="Digital Education Store | Ryland Partners" description="Browse eBooks, guides, and resources for business education, funding strategies, and financial literacy." />
       <Navbar />
 
       {/* Hero */}
