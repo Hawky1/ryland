@@ -861,7 +861,7 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "ultimate-credit-card-lender-list", title: "Ultimate Credit Card Lender List", price: "$27" },
     ],
     bundleValue: "$132",
-    details: { format: "6 Premium PDF eBooks", length: "33–121 pages each", category: "Credit Authority Bundle" },
+    details: { format: "6 Premium PDF eBooks", length: "33–121 pages each", category: "Business Authority Bundle" },
   },
 
   "ultimate-credit-business-vault": {
