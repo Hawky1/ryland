@@ -193,7 +193,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-slpp-1.png",
       "/src/assets/listing-slpp-2.png",
     ],
-    details: { format: "PDF eBook", length: "17 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF eBook", length: "17 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "crush-100k-debt-worksheet": {
