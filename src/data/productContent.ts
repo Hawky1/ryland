@@ -278,7 +278,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dcmg-1.png",
       "/src/assets/listing-dcmg-2.png",
     ],
-    details: { format: "PDF eBook", length: "10 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF eBook", length: "10 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "secret-lenders-database": {
