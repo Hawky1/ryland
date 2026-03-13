@@ -834,7 +834,7 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "23-money-wasting-habits-to-break", title: "23 Money-Wasting Habits to Break", price: "$17" },
     ],
     bundleValue: "$153",
-    details: { format: "9 PDF eBooks", length: "9 Guides", category: "Credit Business Accelerator Pack" },
+    details: { format: "9 PDF eBooks", length: "9 Guides", category: "Entrepreneur Accelerator Pack" },
   },
 
   "credit-authority-bundle": {
