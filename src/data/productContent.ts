@@ -89,7 +89,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-ubcb-1.png",
       "/src/assets/listing-ubcb-2.png",
     ],
-    details: { format: "PDF eBook", length: "121 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "121 pages", category: "Business Authority Bundle" },
   },
 
   "credit-inquiry-phone-script-remove-inquiries-fast": {
