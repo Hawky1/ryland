@@ -420,9 +420,9 @@ export const productContentMap: Record<string, ProductContent> = {
   "credit-repair-success-planner": {
     headline: "Organize Your Disputes. Track Your Progress. Stay Motivated.",
     description:
-      "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit repair journey.",
+      "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit improvement journey.",
     benefits: [
-      "Goal-setting worksheets – Define your credit repair targets.",
+      "Goal-setting worksheets – Define your credit improvement targets.",
       "Dispute activity tracking – Keep every dispute organized.",
       "Progress monitoring tools – See how far you've come.",
       "Motivation checkpoints – Celebrate milestones along the way.",
