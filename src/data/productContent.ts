@@ -900,6 +900,6 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "late-payment-removal-guide", title: "Late Payment Removal Guide", price: "$22" },
     ],
     bundleValue: "$347",
-    details: { format: "18 PDF eBooks", length: "18 Guides", category: "Ultimate Credit Business Vault" },
+    details: { format: "18 PDF eBooks", length: "18 Guides", category: "Ultimate Business Education Vault" },
   },
 };
