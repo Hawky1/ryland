@@ -397,7 +397,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dlt-1.png",
       "/src/assets/listing-dlt-2.png",
     ],
-    details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-legal-rights-cheat-sheet": {
