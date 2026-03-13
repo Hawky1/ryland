@@ -431,7 +431,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crsp-1.png",
       "/src/assets/listing-crsp-2.png",
     ],
-    details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "unlocking-business-credit-step-by-step-success": {
