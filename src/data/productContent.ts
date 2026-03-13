@@ -227,7 +227,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-flsw-1.png",
       "/src/assets/listing-flsw-2.png",
     ],
-    details: { format: "Workbook PDF", length: "8 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Workbook PDF", length: "8 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "13-ways-to-pay-off-debt": {
