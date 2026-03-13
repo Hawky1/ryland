@@ -808,11 +808,11 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-business-accelerator-pack": {
-    headline: "Take Control of Your Finances and Transform Your Credit.",
+    headline: "Take Control of Your Finances and Transform Your Financial Future.",
     description:
-      "Take control of your finances and transform your credit with this all-in-one bundle.\n\nThis pack includes powerful eBooks and workbooks designed to help repair credit, eliminate debt, and build smarter financial habits.",
+      "Take control of your finances and transform your financial future with this all-in-one bundle.\n\nThis pack includes powerful eBooks and workbooks designed to help improve credit, eliminate debt, and build smarter financial habits.",
     benefits: [
-      "Credit repair guides and workbooks – Hands-on tools for real progress.",
+      "Credit education guides and workbooks – Hands-on tools for real progress.",
       "Debt elimination strategies – Multiple methods to fit your situation.",
       "Budgeting and savings worksheets – Track every dollar.",
       "Habit-breaking guides – Stop the leaks in your finances.",
@@ -820,7 +820,7 @@ export const productContentMap: Record<string, ProductContent> = {
     whyYouNeedThis: [
       "Complete credit and financial transformation – Everything in one pack.",
       "Actionable workbooks you can use immediately – Not just theory.",
-      "Covers credit repair, debt payoff, budgeting, and saving – Full coverage.",
+      "Covers credit education, debt payoff, budgeting, and saving – Full coverage.",
     ],
     bundleIncludes: [
       { handle: "unlock-credit-potential", title: "Unlock Your Credit Potential – Credit Repair Guide 2025", price: "$17" },
