@@ -469,9 +469,9 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-repair-chatgpt-prompts": {
-    headline: "Speed Up Your Credit Repair with the Power of AI.",
+    headline: "Speed Up Your Credit Education with the Power of AI.",
     description:
-      "Speed up your credit repair with the power of AI. Credit Repair ChatGPT Prompts gives you ready-to-use prompts to write dispute letters, negotiate with creditors, and get personalized guidance.",
+      "Speed up your credit education with the power of AI. Credit Education ChatGPT Prompts gives you ready-to-use prompts to write dispute letters, negotiate with creditors, and get personalized guidance.",
     benefits: [
       "37 pages of AI-powered ChatGPT prompts – Ready to use immediately.",
       "Templates for dispute letters and negotiations – Professional and effective.",
