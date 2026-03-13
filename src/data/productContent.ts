@@ -452,9 +452,9 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-score-accelerator-the-90-day-credit-comeback-plan": {
-    headline: "Repair, Rebuild, and Improve Your Credit in 90 Days.",
+    headline: "Rebuild and Improve Your Credit in 90 Days.",
     description:
-      "A 90-day blueprint designed to repair, rebuild, and improve your credit quickly using proven tactics and dispute strategies.",
+      "A 90-day blueprint designed to rebuild and improve your credit quickly using proven tactics and dispute strategies.",
     benefits: [
       "How to pull and review your credit reports – Know exactly where you stand.",
       "Dispute strategies to remove damaging items – Take action on negative marks.",
