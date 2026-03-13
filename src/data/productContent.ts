@@ -550,7 +550,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-mst-1.png",
       "/src/assets/listing-mst-2.png",
     ],
-    details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "master-your-credit-a-practical-step-by-step-guide-to-boosting-your-score": {
