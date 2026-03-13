@@ -584,7 +584,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-cst-1.png",
       "/src/assets/listing-cst-2.png",
     ],
-    details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "the-ultimate-business-funding-credit-bundle": {
