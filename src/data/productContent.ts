@@ -295,7 +295,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-sld-1.png",
       "/src/assets/listing-sld-2.png",
     ],
-    details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit": {
