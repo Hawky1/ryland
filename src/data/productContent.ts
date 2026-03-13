@@ -448,7 +448,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-ubc-1.png",
       "/src/assets/listing-ubc-2.png",
     ],
-    details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-score-accelerator-the-90-day-credit-comeback-plan": {
