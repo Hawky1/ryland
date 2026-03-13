@@ -159,7 +159,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dcrw-1.png",
       "/src/assets/listing-dcrw-2.png",
     ],
-    details: { format: "Workbook PDF", length: "17 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Workbook PDF", length: "17 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "money-management-worksheet": {
