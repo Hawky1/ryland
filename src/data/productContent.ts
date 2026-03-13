@@ -499,7 +499,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-cbrl-1.png",
       "/src/assets/listing-cbrl-2.png",
     ],
-    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "repo-eraser-how-to-delete-repossessions-from-your-credit-fast": {
