@@ -350,11 +350,11 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-repair-mistakes-to-avoid-guide": {
-    headline: "Avoid Costly Mistakes. Fast-Track Your Credit Repair Journey.",
+    headline: "Avoid Costly Mistakes. Fast-Track Your Credit Improvement Journey.",
     description:
-      "Avoid costly mistakes and fast-track your credit repair journey with this guide that reveals the most common errors people make when trying to fix their credit.",
+      "Avoid costly mistakes and fast-track your credit improvement journey with this guide that reveals the most common errors people make when trying to fix their credit.",
     benefits: [
-      "The top credit repair mistakes people make – Learn what to avoid.",
+      "The top credit mistakes people make – Learn what to avoid.",
       "Why payment history matters most – Focus on what moves the needle.",
       "How to dispute items correctly – Get it right the first time.",
       "Smarter strategies to improve your score – Work smarter, not harder.",
