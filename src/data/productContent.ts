@@ -244,7 +244,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-13wpod-1.png",
       "/src/assets/listing-13wpod-2.png",
     ],
-    details: { format: "PDF Guide", length: "14 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF Guide", length: "14 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "23-money-wasting-habits-to-break": {
