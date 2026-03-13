@@ -329,7 +329,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-lprg-1.png",
       "/src/assets/listing-lprg-2.png",
     ],
-    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "bankruptcy-removal-blueprint-your-step-by-step-guide-to-clean-credit": {
