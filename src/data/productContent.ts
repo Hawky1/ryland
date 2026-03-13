@@ -559,7 +559,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Master Your Credit is a practical guide that teaches you how to read credit reports, dispute errors, and improve your credit score step-by-step.",
     benefits: [
       "How to read your credit reports correctly – Understand every detail.",
-      "Step-by-step credit repair actions – Know exactly what to do next.",
+      "Step-by-step credit improvement actions – Know exactly what to do next.",
       "Legal tips for disputing credit report errors – Use the law to your advantage.",
       "Tools to improve your credit independently – Take full control.",
     ],
