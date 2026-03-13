@@ -482,7 +482,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crcgpt-1.png",
       "/src/assets/listing-crcgpt-2.png",
     ],
-    details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-building-resource-library": {
