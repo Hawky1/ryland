@@ -44,7 +44,7 @@ const FAQS = [
   },
   {
     q: "What if I have bad credit right now?",
-    a: "That's exactly who this is for. The bundle includes step-by-step dispute letters, removal guides, and credit-building strategies designed to help you rebuild from any starting point.",
+    a: "That's exactly who this is for. The bundle includes step-by-step educational guides, financial strategies, and credit-building resources designed to help you improve from any starting point.",
   },
   {
     q: "Do I get instant access?",
