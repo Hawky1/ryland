@@ -1,81 +1,71 @@
 
 
-## Plan: Reposition Store & Funnel Language from "Credit Repair" to "Business Education"
+## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
 
-### Scope
+### What Changes
 
-Update product/store/funnel copy only. Leave alone: `/credit-repair`, `/assessment`, `/about`, legal pages, footer CROA notice, navbar service links, homepage service descriptions, partner page, contact page, and `FundingJourney.tsx`.
+**1. Move Product Details directly below the price/CTA card (layout optimization)**
 
----
+Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
 
-### Files to Edit
+The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
 
-#### 1. `src/pages/Store.tsx`
-- **BUNDLES array (lines 22-28):** Rename `name` fields per the mapping table. **Keep `tag` values unchanged** — these must match Shopify product tags exactly.
-  - `"Credit Authority Bundle"` → name: `"Business Authority Bundle"`
-  - `"Credit Business Accelerator"` → name: `"Entrepreneur Accelerator"`
-  - `"Credit Business Funding"` → name: `"Business Funding Essentials"`
-  - `"Credit Business Quickstart"` → name: `"Entrepreneur Quickstart"`
-  - `"Ultimate Credit Business Bundle"` → name: `"Ultimate Business Education Bundle"`
-- Update taglines: replace "credit mastery" → "financial mastery", "total credit transformation" → "total business transformation"
-- **PageMeta (line 85):** Replace "credit repair" with "business education" in description
+**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
 
-#### 2. `src/components/FeaturedBundles.tsx`
-- Rename display titles (lines 16, 35, 44):
-  - `"Ultimate Credit Business Vault"` → `"Ultimate Business Education Vault"`
-  - `"Credit Authority Bundle"` → `"Business Authority Bundle"`
-  - `"Credit Business Accelerator Pack"` → `"Entrepreneur Accelerator Pack"`
-- Update subtitles: "Total Credit Transformation" → "Total Business Transformation", "Credit Mastery" → "Financial Mastery"
+The two uploaded images will be:
+- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
+- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
+- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
 
-#### 3. `src/data/productContent.ts` (~40 changes across the file)
-- **Category labels** in `details.category`: Update all instances:
-  - `"Credit Authority Bundle"` → `"Business Authority Bundle"`
-  - `"Credit Business Accelerator Pack"` → `"Entrepreneur Accelerator Pack"`
-  - `"Ultimate Credit Business Bundle"` → `"Ultimate Business Education Bundle"`
-  - `"Ultimate Credit Business Vault"` → `"Ultimate Business Education Vault"`
-- **Product descriptions & benefits** containing "credit repair" language — reframe to educational language:
-  - "credit repair guides" → "credit education guides"
-  - "credit repair progress" → "credit improvement progress"
-  - "credit repair journey" → "credit improvement journey"
-  - "credit repair system" → "credit education system"
-  - "credit repair mistakes" → "credit mistakes"
-  - "credit repair action guide" → "credit education guide"
-  - "help repair credit" → "help improve credit"
-  - "credit restoration" → "credit education"
-  - "credit transformation" → "financial transformation"
-- **Bundle headlines/descriptions** (lines 810-904): Reframe from repair to education framing
-- **Bundle includes titles** remain unchanged (these are actual product names in Shopify)
+### Technical Details
 
-#### 4. `src/pages/funnel/FunnelCoreOffer.tsx`
-- **EBOOKS array (lines 24-27):** These are actual product titles displayed as cover labels — rename the ones with "Credit Repair" in the title:
-  - `"Credit Repair ChatGPT Prompts"` → `"Credit Education ChatGPT Prompts"`
-  - `"Credit Repair Legal Rights Guide"` → `"Credit Legal Rights Guide"`
-  - `"DIY Credit Repair Workbook"` → `"DIY Credit Workbook"`
-- **FAQ answer (line 47):** Replace "dispute letters, removal guides, and credit-building strategies" — reframe from repair to education
-- **Page copy (line 146):** "every dispute template" → soften to educational framing
+**Files to modify:**
 
-#### 5. `src/pages/funnel/FunnelDownsell.tsx`
-- **Alt text (line 78):** `"Master Your Credit — Complete Bundle"` — fine as-is (no "repair" language)
-- Scan confirms no "credit repair" language on this page. No changes needed.
+1. **`src/data/productContent.ts`**
+   - Add `promoImages?: string[]` to the `ProductContent` interface
+   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
 
-#### 6. `src/components/store/StoreHero.tsx`
-- Already uses "Premium Digital Resources" and "Financial Freedom" — no "credit repair" language. No changes needed.
+2. **`src/pages/ProductDetail.tsx`**
+   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
+   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
+   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
 
----
+3. **New assets:**
+   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
+   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
 
-### Important Notes
+### Layout Change (Before → After)
 
-- **Shopify tags are NOT changed** — the `tag` field in the BUNDLES array must remain as-is because they match Shopify product tags used for filtering. Only the `name` (display) field changes.
-- **Product handles are NOT changed** — these are Shopify URL slugs and must stay synchronized.
-- **Individual product titles in bundleIncludes** (e.g., "Credit Repair ChatGPT Prompts") — these match Shopify product names. Changing display titles here without changing them in Shopify will cause mismatches. I will update the display copy but keep `handle` values intact.
-- **File names** (cover images like `credit-repair-chatgpt-prompts.png`) stay unchanged — only display text is updated.
+```text
+BEFORE:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│             │  Description │
+│             │  Price + CTA │
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  Product Details (full w)  │
+└────────────────────────────┘
 
-### Summary of Touch Points
+AFTER:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│  [promo 1]  │  Description │
+│  [promo 2]  │  Price + CTA │
+│             │  Details     │ ← moved up
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+```
 
-| File | Changes |
-|------|---------|
-| `src/pages/Store.tsx` | Bundle names, taglines, PageMeta |
-| `src/components/FeaturedBundles.tsx` | Bundle titles, subtitles |
-| `src/data/productContent.ts` | ~40 category labels + description rewrites |
-| `src/pages/funnel/FunnelCoreOffer.tsx` | Ebook display titles, FAQ copy |
+Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
 

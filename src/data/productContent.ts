@@ -35,7 +35,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-sch-1.png",
       "/src/assets/listing-sch-2.png",
     ],
-    details: { format: "PDF eBook", length: "44 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "44 pages", category: "Business Authority Bundle" },
   },
 
   "the-financial-playbook-your-ultimate-money-resource-guide": {
@@ -53,7 +53,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-fp-1.png",
       "/src/assets/listing-fp-2.png",
     ],
-    details: { format: "PDF eBook", length: "33 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "33 pages", category: "Business Authority Bundle" },
   },
 
   "ai-powered-credit-dispute-letter-prompts": {
@@ -71,7 +71,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-adlp-1.png",
       "/src/assets/listing-adlp-2.png",
     ],
-    details: { format: "PDF eBook", length: "46 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "46 pages", category: "Business Authority Bundle" },
   },
 
   "ultimate-business-credit-blueprint": {
@@ -89,7 +89,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-ubcb-1.png",
       "/src/assets/listing-ubcb-2.png",
     ],
-    details: { format: "PDF eBook", length: "121 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "121 pages", category: "Business Authority Bundle" },
   },
 
   "credit-inquiry-phone-script-remove-inquiries-fast": {
@@ -107,7 +107,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-cips-1.png",
       "/src/assets/listing-cips-2.png",
     ],
-    details: { format: "PDF eBook", length: "49 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "49 pages", category: "Business Authority Bundle" },
   },
 
   "ultimate-credit-card-lender-list": {
@@ -125,13 +125,13 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-uccll-1.png",
       "/src/assets/listing-uccll-2.png",
     ],
-    details: { format: "PDF eBook", length: "60 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "60 pages", category: "Business Authority Bundle" },
   },
 
   "unlock-credit-potential": {
     headline: "Ready to take charge of your financial future?",
     description:
-      "The Unlock Your Credit Potential – Credit Repair Guide 2025 is designed to help you build stronger credit, fix mistakes, and open the door to better financial opportunities.",
+      "The Unlock Your Credit Potential – Credit Education Guide 2025 is designed to help you build stronger credit, fix mistakes, and open the door to better financial opportunities.",
     benefits: [
       "Build a stronger credit profile – Proven strategies to elevate your credit standing.",
       "Learn how to correct errors on your credit report – Step-by-step dispute guidance.",
@@ -141,15 +141,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-ucp-1.png",
       "/src/assets/listing-ucp-2.png",
     ],
-    details: { format: "PDF eBook", length: "24 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF eBook", length: "24 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "diy-credit-repair-workbook": {
     headline: "Stay organized and take charge of your financial future.",
     description:
-      "Stay organized and take charge of your financial future with the DIY Credit Repair Workbook. This workbook includes practical exercises, step-by-step guidance, and easy-to-use tools to help you repair your credit smarter.",
+      "Stay organized and take charge of your financial future with the DIY Credit Workbook. This workbook includes practical exercises, step-by-step guidance, and easy-to-use tools to help you improve your credit smarter.",
     benefits: [
-      "Worksheets to track your credit repair progress – Monitor every step of your journey.",
+      "Worksheets to track your credit improvement progress – Monitor every step of your journey.",
       "Goal-setting pages for your credit journey – Define and hit your credit milestones.",
       "Action steps for disputing credit report errors – Clear guidance on what to do next.",
       "Systems to build positive credit habits – Create lasting financial discipline.",
@@ -159,7 +159,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dcrw-1.png",
       "/src/assets/listing-dcrw-2.png",
     ],
-    details: { format: "Workbook PDF", length: "17 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Workbook PDF", length: "17 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "money-management-worksheet": {
@@ -176,7 +176,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-mmw-1.png",
       "/src/assets/listing-mmw-2.png",
     ],
-    details: { format: "Worksheet PDF", length: "9 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Worksheet PDF", length: "9 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "stop-living-paycheck-to-paycheck": {
@@ -193,7 +193,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-slpp-1.png",
       "/src/assets/listing-slpp-2.png",
     ],
-    details: { format: "PDF eBook", length: "17 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF eBook", length: "17 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "crush-100k-debt-worksheet": {
@@ -210,7 +210,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-c100k-1.png",
       "/src/assets/listing-c100k-2.png",
     ],
-    details: { format: "Worksheet PDF", length: "7 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Worksheet PDF", length: "7 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "frugal-living-success-workbook": {
@@ -227,7 +227,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-flsw-1.png",
       "/src/assets/listing-flsw-2.png",
     ],
-    details: { format: "Workbook PDF", length: "8 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "Workbook PDF", length: "8 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "13-ways-to-pay-off-debt": {
@@ -244,7 +244,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-13wpod-1.png",
       "/src/assets/listing-13wpod-2.png",
     ],
-    details: { format: "PDF Guide", length: "14 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF Guide", length: "14 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "23-money-wasting-habits-to-break": {
@@ -261,15 +261,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-23mwh-1.png",
       "/src/assets/listing-23mwh-2.png",
     ],
-    details: { format: "PDF Guide", length: "15 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF Guide", length: "15 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "diy-credit-master-guide": {
     headline: "Dispute credit report errors and build better financial habits.",
     description:
-      "A step-by-step credit repair action guide designed to help individuals dispute credit report errors, improve their credit profile, and build better financial habits. This guide also includes resell rights, allowing credit repair businesses to rebrand and sell the guide as their own product.",
+      "A step-by-step credit education guide designed to help individuals dispute credit report errors, improve their credit profile, and build better financial habits. This guide also includes resell rights, allowing credit education businesses to rebrand and sell the guide as their own product.",
     benefits: [
-      "Step-by-step credit repair system – Clear guidance for disputing errors.",
+      "Step-by-step credit education system – Clear guidance for disputing errors.",
       "Improve your credit profile – Actionable steps to raise your score.",
       "Build better financial habits – Create a foundation for long-term success.",
       "Resell Rights Included – Rebrand and sell as your own product.",
@@ -278,7 +278,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dcmg-1.png",
       "/src/assets/listing-dcmg-2.png",
     ],
-    details: { format: "PDF eBook", length: "10 pages", category: "Credit Business Accelerator Pack" },
+    details: { format: "PDF eBook", length: "10 pages", category: "Entrepreneur Accelerator Pack" },
   },
 
   "secret-lenders-database": {
@@ -295,7 +295,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-sld-1.png",
       "/src/assets/listing-sld-2.png",
     ],
-    details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "47 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "inquiry-removal-guide-step-by-step-directions-to-clean-up-your-credit": {
@@ -312,7 +312,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-irg-1.png",
       "/src/assets/listing-irg-2.png",
     ],
-    details: { format: "PDF eBook", length: "28 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "28 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "late-payment-removal-guide": {
@@ -329,7 +329,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-lprg-1.png",
       "/src/assets/listing-lprg-2.png",
     ],
-    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "bankruptcy-removal-blueprint-your-step-by-step-guide-to-clean-credit": {
@@ -346,15 +346,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-brb-1.png",
       "/src/assets/listing-brb-2.png",
     ],
-    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-mistakes-to-avoid-guide": {
-    headline: "Avoid Costly Mistakes. Fast-Track Your Credit Repair Journey.",
+    headline: "Avoid Costly Mistakes. Fast-Track Your Credit Improvement Journey.",
     description:
-      "Avoid costly mistakes and fast-track your credit repair journey with this guide that reveals the most common errors people make when trying to fix their credit.",
+      "Avoid costly mistakes and fast-track your credit improvement journey with this guide that reveals the most common errors people make when trying to fix their credit.",
     benefits: [
-      "The top credit repair mistakes people make – Learn what to avoid.",
+      "The top credit mistakes people make – Learn what to avoid.",
       "Why payment history matters most – Focus on what moves the needle.",
       "How to dispute items correctly – Get it right the first time.",
       "Smarter strategies to improve your score – Work smarter, not harder.",
@@ -363,15 +363,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crm-1.png",
       "/src/assets/listing-crm-2.png",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-success-mindset-guide": {
-    headline: "Build the Mindset to Repair Your Credit and Transform Your Finances.",
+    headline: "Build the Mindset to Improve Your Credit and Transform Your Finances.",
     description:
-      "Repairing your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
+      "Improving your credit isn't just about numbers—it's about mindset. This guide helps you build the motivation, focus, and confidence needed to overcome credit challenges.",
     benefits: [
-      "Motivation strategies during credit repair – Stay driven through the process.",
+      "Motivation strategies during credit improvement – Stay driven through the process.",
       "Confidence to overcome setbacks – Push past obstacles with ease.",
       "Focus to stay consistent – Build discipline that lasts.",
       "Tools to create lasting financial freedom – Change your life, not just your score.",
@@ -380,7 +380,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crsm-1.png",
       "/src/assets/listing-crsm-2.png",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "100-dispute-letters-templates": {
@@ -397,7 +397,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-dlt-1.png",
       "/src/assets/listing-dlt-2.png",
     ],
-    details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF Toolkit", length: "9 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-legal-rights-cheat-sheet": {
@@ -414,15 +414,15 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crlr-1.png",
       "/src/assets/listing-crlr-2.png",
     ],
-    details: { format: "PDF Guide", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF Guide", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-success-planner": {
     headline: "Organize Your Disputes. Track Your Progress. Stay Motivated.",
     description:
-      "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit repair journey.",
+      "A structured planner designed to help you organize disputes, track progress, and stay motivated during your credit improvement journey.",
     benefits: [
-      "Goal-setting worksheets – Define your credit repair targets.",
+      "Goal-setting worksheets – Define your credit improvement targets.",
       "Dispute activity tracking – Keep every dispute organized.",
       "Progress monitoring tools – See how far you've come.",
       "Motivation checkpoints – Celebrate milestones along the way.",
@@ -431,7 +431,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-crsp-1.png",
       "/src/assets/listing-crsp-2.png",
     ],
-    details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF Planner", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "unlocking-business-credit-step-by-step-success": {
@@ -448,13 +448,13 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-ubc-1.png",
       "/src/assets/listing-ubc-2.png",
     ],
-    details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "42 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-score-accelerator-the-90-day-credit-comeback-plan": {
-    headline: "Repair, Rebuild, and Improve Your Credit in 90 Days.",
+    headline: "Rebuild and Improve Your Credit in 90 Days.",
     description:
-      "A 90-day blueprint designed to repair, rebuild, and improve your credit quickly using proven tactics and dispute strategies.",
+      "A 90-day blueprint designed to rebuild and improve your credit quickly using proven tactics and dispute strategies.",
     benefits: [
       "How to pull and review your credit reports – Know exactly where you stand.",
       "Dispute strategies to remove damaging items – Take action on negative marks.",
@@ -465,24 +465,24 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-csa-1.png",
       "/src/assets/listing-csa-2.png",
     ],
-    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "27 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-repair-chatgpt-prompts": {
-    headline: "Speed Up Your Credit Repair with the Power of AI.",
+    headline: "Speed Up Your Credit Education with the Power of AI.",
     description:
-      "Speed up your credit repair with the power of AI. Credit Repair ChatGPT Prompts gives you ready-to-use prompts to write dispute letters, negotiate with creditors, and get personalized guidance.",
+      "Speed up your credit education with the power of AI. Credit Education ChatGPT Prompts gives you ready-to-use prompts to write dispute letters, negotiate with creditors, and get personalized guidance.",
     benefits: [
       "37 pages of AI-powered ChatGPT prompts – Ready to use immediately.",
       "Templates for dispute letters and negotiations – Professional and effective.",
       "Faster ways to generate dispute letters – Save hours of work.",
-      "Tools to simplify credit repair workflows – Streamline the entire process.",
+      "Tools to simplify credit education workflows – Streamline the entire process.",
     ],
     promoImages: [
       "/src/assets/listing-crcgpt-1.png",
       "/src/assets/listing-crcgpt-2.png",
     ],
-    details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "37 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-building-resource-library": {
@@ -499,7 +499,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-cbrl-1.png",
       "/src/assets/listing-cbrl-2.png",
     ],
-    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "16 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "repo-eraser-how-to-delete-repossessions-from-your-credit-fast": {
@@ -516,7 +516,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-re-1.png",
       "/src/assets/listing-re-2.png",
     ],
-    details: { format: "PDF eBook", length: "26 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "26 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "the-ultimate-homebuyers-handbook": {
@@ -533,7 +533,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-uhh-1.png",
       "/src/assets/listing-uhh-2.png",
     ],
-    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "31 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "manufactured-spending-techniques": {
@@ -550,7 +550,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-mst-1.png",
       "/src/assets/listing-mst-2.png",
     ],
-    details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "43 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "master-your-credit-a-practical-step-by-step-guide-to-boosting-your-score": {
@@ -559,7 +559,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "Master Your Credit is a practical guide that teaches you how to read credit reports, dispute errors, and improve your credit score step-by-step.",
     benefits: [
       "How to read your credit reports correctly – Understand every detail.",
-      "Step-by-step credit repair actions – Know exactly what to do next.",
+      "Step-by-step credit improvement actions – Know exactly what to do next.",
       "Legal tips for disputing credit report errors – Use the law to your advantage.",
       "Tools to improve your credit independently – Take full control.",
     ],
@@ -567,7 +567,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-myc-1.png",
       "/src/assets/listing-myc-2.png",
     ],
-    details: { format: "PDF eBook", length: "18 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "18 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "credit-score-tracker-printable": {
@@ -584,7 +584,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-cst-1.png",
       "/src/assets/listing-cst-2.png",
     ],
-    details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Credit Business Bundle" },
+    details: { format: "PDF eBook", length: "19 pages", category: "Ultimate Business Education Bundle" },
   },
 
   "the-ultimate-business-funding-credit-bundle": {
@@ -808,11 +808,11 @@ export const productContentMap: Record<string, ProductContent> = {
   },
 
   "credit-business-accelerator-pack": {
-    headline: "Take Control of Your Finances and Transform Your Credit.",
+    headline: "Take Control of Your Finances and Transform Your Financial Future.",
     description:
-      "Take control of your finances and transform your credit with this all-in-one bundle.\n\nThis pack includes powerful eBooks and workbooks designed to help repair credit, eliminate debt, and build smarter financial habits.",
+      "Take control of your finances and transform your financial future with this all-in-one bundle.\n\nThis pack includes powerful eBooks and workbooks designed to help improve credit, eliminate debt, and build smarter financial habits.",
     benefits: [
-      "Credit repair guides and workbooks – Hands-on tools for real progress.",
+      "Credit education guides and workbooks – Hands-on tools for real progress.",
       "Debt elimination strategies – Multiple methods to fit your situation.",
       "Budgeting and savings worksheets – Track every dollar.",
       "Habit-breaking guides – Stop the leaks in your finances.",
@@ -820,7 +820,7 @@ export const productContentMap: Record<string, ProductContent> = {
     whyYouNeedThis: [
       "Complete credit and financial transformation – Everything in one pack.",
       "Actionable workbooks you can use immediately – Not just theory.",
-      "Covers credit repair, debt payoff, budgeting, and saving – Full coverage.",
+      "Covers credit education, debt payoff, budgeting, and saving – Full coverage.",
     ],
     bundleIncludes: [
       { handle: "unlock-credit-potential", title: "Unlock Your Credit Potential – Credit Repair Guide 2025", price: "$17" },
@@ -834,7 +834,7 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "23-money-wasting-habits-to-break", title: "23 Money-Wasting Habits to Break", price: "$17" },
     ],
     bundleValue: "$153",
-    details: { format: "9 PDF eBooks", length: "9 Guides", category: "Credit Business Accelerator Pack" },
+    details: { format: "9 PDF eBooks", length: "9 Guides", category: "Entrepreneur Accelerator Pack" },
   },
 
   "credit-authority-bundle": {
@@ -861,21 +861,21 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "ultimate-credit-card-lender-list", title: "Ultimate Credit Card Lender List", price: "$27" },
     ],
     bundleValue: "$132",
-    details: { format: "6 Premium PDF eBooks", length: "33–121 pages each", category: "Credit Authority Bundle" },
+    details: { format: "6 Premium PDF eBooks", length: "33–121 pages each", category: "Business Authority Bundle" },
   },
 
   "ultimate-credit-business-vault": {
-    headline: "Fix Your Credit. Rebuild Your Profile. Unlock Real Financial Opportunities.",
+    headline: "Improve Your Credit. Rebuild Your Profile. Unlock Real Financial Opportunities.",
     description:
-      "Fix your credit, rebuild your profile, and unlock real financial opportunities with one complete system.\n\nThis vault includes 18 powerful guides covering credit repair, credit building, dispute strategies, and financial optimization.",
+      "Improve your credit, rebuild your profile, and unlock real financial opportunities with one complete system.\n\nThis vault includes 18 powerful guides covering credit education, credit building, dispute strategies, and financial optimization.",
     benefits: [
-      "18 comprehensive guides in one vault – The most complete credit system available.",
-      "Covers credit repair, disputes, and rebuilding – Every angle covered.",
+      "18 comprehensive guides in one vault – The most complete credit education system available.",
+      "Covers credit improvement, disputes, and rebuilding – Every angle covered.",
       "Includes AI prompts, legal rights guides, and lender databases – Advanced tools.",
       "From beginner to advanced strategies – Something for every stage.",
     ],
     whyYouNeedThis: [
-      "One purchase, complete credit transformation – No gaps in your knowledge.",
+      "One purchase, complete financial transformation – No gaps in your knowledge.",
       "Individually valued at $347+ – Massive savings in one bundle.",
       "Used by 2,400+ entrepreneurs – Proven results.",
     ],
@@ -900,6 +900,6 @@ export const productContentMap: Record<string, ProductContent> = {
       { handle: "late-payment-removal-guide", title: "Late Payment Removal Guide", price: "$22" },
     ],
     bundleValue: "$347",
-    details: { format: "18 PDF eBooks", length: "18 Guides", category: "Ultimate Credit Business Vault" },
+    details: { format: "18 PDF eBooks", length: "18 Guides", category: "Ultimate Business Education Vault" },
   },
 };

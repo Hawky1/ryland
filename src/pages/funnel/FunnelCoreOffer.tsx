@@ -21,10 +21,10 @@ const EBOOKS = [
   { title: "Business Funding Checklist", cover: "/covers/business-funding-checklist.png" },
   { title: "Credit Building Resource Library", cover: "/covers/credit-building-resource-library.png" },
   { title: "Credit Inquiry Phone Script", cover: "/covers/credit-inquiry-phone-script.png" },
-  { title: "Credit Repair ChatGPT Prompts", cover: "/covers/credit-repair-chatgpt-prompts.png" },
-  { title: "Credit Repair Legal Rights Guide", cover: "/covers/credit-repair-legal-rights.png" },
+  { title: "Credit Education ChatGPT Prompts", cover: "/covers/credit-repair-chatgpt-prompts.png" },
+  { title: "Credit Legal Rights Guide", cover: "/covers/credit-repair-legal-rights.png" },
   { title: "DIY Credit Master Guide", cover: "/covers/diy-credit-master-guide.png" },
-  { title: "DIY Credit Repair Workbook", cover: "/covers/diy-credit-repair-workbook.png" },
+  { title: "DIY Credit Workbook", cover: "/covers/diy-credit-repair-workbook.png" },
   { title: "Essential Business Credit Checklist", cover: "/covers/essential-business-credit-checklist.png" },
   { title: "Fast-Track Vendor Accounts", cover: "/covers/fast-track-vendor-accounts.png" },
   { title: "Inquiry Removal Guide", cover: "/covers/inquiry-removal-guide.png" },
@@ -44,7 +44,7 @@ const FAQS = [
   },
   {
     q: "What if I have bad credit right now?",
-    a: "That's exactly who this is for. The bundle includes step-by-step dispute letters, removal guides, and credit-building strategies designed to help you rebuild from any starting point.",
+    a: "That's exactly who this is for. The bundle includes step-by-step educational guides, financial strategies, and credit-building resources designed to help you improve from any starting point.",
   },
   {
     q: "Do I get instant access?",
@@ -143,7 +143,7 @@ export default function FunnelCoreOffer() {
             </motion.div>
 
             <p className="text-blue-100/60 text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              I'm giving you my entire library of playbooks. This is every secret, every bank hack, and every dispute template we've refined over 8 years.
+              I'm giving you my entire library of playbooks. This is every strategy, every funding hack, and every financial template we've refined over 8 years.
             </p>
 
             {/* Hero CTA */}
