@@ -267,9 +267,9 @@ export const productContentMap: Record<string, ProductContent> = {
   "diy-credit-master-guide": {
     headline: "Dispute credit report errors and build better financial habits.",
     description:
-      "A step-by-step credit repair action guide designed to help individuals dispute credit report errors, improve their credit profile, and build better financial habits. This guide also includes resell rights, allowing credit repair businesses to rebrand and sell the guide as their own product.",
+      "A step-by-step credit education guide designed to help individuals dispute credit report errors, improve their credit profile, and build better financial habits. This guide also includes resell rights, allowing credit education businesses to rebrand and sell the guide as their own product.",
     benefits: [
-      "Step-by-step credit repair system – Clear guidance for disputing errors.",
+      "Step-by-step credit education system – Clear guidance for disputing errors.",
       "Improve your credit profile – Actionable steps to raise your score.",
       "Build better financial habits – Create a foundation for long-term success.",
       "Resell Rights Included – Rebrand and sell as your own product.",
