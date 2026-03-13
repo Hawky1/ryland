@@ -53,7 +53,7 @@ export const productContentMap: Record<string, ProductContent> = {
       "/src/assets/listing-fp-1.png",
       "/src/assets/listing-fp-2.png",
     ],
-    details: { format: "PDF eBook", length: "33 pages", category: "Credit Authority Bundle" },
+    details: { format: "PDF eBook", length: "33 pages", category: "Business Authority Bundle" },
   },
 
   "ai-powered-credit-dispute-letter-prompts": {
