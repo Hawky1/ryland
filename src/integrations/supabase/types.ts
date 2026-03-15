@@ -155,6 +155,39 @@ export type Database = {
         }
         Relationships: []
       }
+      sms_opt_ins: {
+        Row: {
+          consent_text: string
+          created_at: string
+          email: string | null
+          id: string
+          ip_address: string | null
+          name: string
+          phone: string
+          user_agent: string | null
+        }
+        Insert: {
+          consent_text: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          name: string
+          phone: string
+          user_agent?: string | null
+        }
+        Update: {
+          consent_text?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          name?: string
+          phone?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
