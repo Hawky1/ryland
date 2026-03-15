@@ -29,6 +29,7 @@ import Community from "./pages/Community";
 import Consultation from "./pages/Consultation";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import PartnerOnboarding from "./pages/PartnerOnboarding";
+import OptIn from "./pages/OptIn";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const AppContent = () => {
           <Route path="/booking-confirmed" element={<BookingConfirmation />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/partner-onboarding" element={<PartnerOnboarding />} />
+          <Route path="/opt-in" element={<OptIn />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
