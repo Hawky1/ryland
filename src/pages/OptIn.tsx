@@ -82,6 +82,7 @@ export default function OptIn() {
         >
           {/* Header */}
           <div className="text-center mb-8">
+            <img src={logoWhite} alt="Ryland Partners" className="h-10 w-auto mx-auto mb-6" />
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 mb-5">
               <MessageSquare className="w-7 h-7 text-blue-400" />
             </div>
