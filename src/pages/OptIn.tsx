@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
+import logoWhite from "@/assets/logo-white.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/integrations/supabase/client";
