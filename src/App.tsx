@@ -29,6 +29,7 @@ import Community from "./pages/Community";
 import Consultation from "./pages/Consultation";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import PartnerOnboarding from "./pages/PartnerOnboarding";
+import OptIn from "./pages/OptIn";
 
 const queryClient = new QueryClient();
 
