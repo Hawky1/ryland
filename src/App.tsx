@@ -69,6 +69,9 @@ const AppContent = () => {
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/partner-onboarding" element={<PartnerOnboarding />} />
           <Route path="/opt-in" element={<OptIn />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/download/:token" element={<DownloadRedirect />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
