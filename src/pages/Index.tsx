@@ -313,7 +313,7 @@ const Index = () => {
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
+                      <img src={profileBradley} alt="Bradley A." className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Bradley A.</span></div><p className="text-sm text-zinc-400">Business Owner</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The process was seamless. The team helped me understand my options and guided me every step of the way."</p>
