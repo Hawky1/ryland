@@ -30,8 +30,8 @@ const STEPS = [
     icon: Building2,
   },
   {
-    title: "Get Funded",
-    description: "Receive $50k–$250k in business funding. No tax returns or revenue history required.",
+    title: "Strategy Execution",
+    description: "Execute your personalized business credit strategy — learn what options may work for your situation.",
     icon: PartyPopper,
   },
 ];
@@ -77,7 +77,7 @@ export default function FundingJourney() {
             Your Path To Funding
           </h2>
           <p className="text-slate-500 mt-3 text-sm max-w-lg mx-auto">
-            From assessment to funded — see exactly how we get you $50k–$250k in business credit.
+            From assessment to execution — see what business credit options could look like for your situation.
           </p>
         </div>
 

@@ -33,24 +33,27 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
+import geneHeroOffice from "@/assets/gene-hero-office.jpg";
+import geneHeroHeadshot from "@/assets/gene-hero-headshot.jpg";
+import geneHeroBlazer from "@/assets/gene-hero-blazer.jpg";
+
+const DISCLAIMER_TEXT = "Terms apply. We provide financial education; specific funding amounts are not guaranteed.";
 
 const FAQ_DATA = [
   { q: "Do I need revenue to get funded?", a: "No. We specialize in startup funding based on credit strength, not just history." },
-  { q: "How long does credit repair take?", a: "Most clients see significant removals and score jumps within 35–90 days." },
+  { q: "How long does the credit education take?", a: "Most clients see meaningful progress after implementing our strategies consistently. Results depend on your unique credit profile and how quickly you take action." },
   { q: "What is the Skool community?", a: "It is our private network where we teach you how to invest your funding into high-ROI digital businesses." },
   { q: "Is the assessment really free?", a: "Yes. It is a soft-pull only and will not impact your credit score." },
 ];
 
 const Index = () => {
-  const [isMuted, setIsMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <PageMeta
-        title="Ryland Partners | Business Funding, Credit Repair & Digital Economy"
-        description="Unlock high-limit business credit lines with Ryland Partners. 0% introductory APR, no tax returns required, and no hard credit pull for your initial assessment."
+        title="Ryland Partners | Business Credit Education & Financial Strategy"
+        description="Discover high-limit business credit strategies with Ryland Partners. Education-first approach to business funding, credit optimization, and the digital economy."
       />
       <SharedHead />
       <style dangerouslySetInnerHTML={{__html: `
@@ -109,10 +112,10 @@ const Index = () => {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
           <div className="text-center lg:text-left lg:flex-1 max-w-3xl">
             <h1 className="text-[28px] leading-[0.95] sm:text-[42px] md:text-[52px] lg:text-[64px] font-medium tracking-tighter font-geist text-center lg:text-left mt-4 sm:mt-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
-              Unlock the Capital, Credit, and Community to Build Your Empire
+              The Business Credit System Most Owners Never Knew Existed
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-zinc-400 mt-4 sm:mt-6 max-w-xl text-center lg:text-left leading-relaxed mx-auto lg:mx-0">
-              We help entrepreneurs secure <span className="text-white font-semibold">$150K+</span> in business funding, repair their credit, and master the digital economy.
+              We help entrepreneurs discover <span className="text-white font-semibold">high-limit business credit strategies</span>, optimize their credit, and master the digital economy.
             </p>
             <div className="flex flex-col mt-6 sm:mt-8 xl:mt-10 gap-4 items-center lg:items-start">
               <Link to="/assessment" className="inline-block bg-transparent">
@@ -120,8 +123,9 @@ const Index = () => {
                   <span>Take the Free Funding Assessment</span>
                 </button>
               </Link>
+              <p className="text-[10px] text-zinc-500/80 max-w-xs text-center lg:text-left">{DISCLAIMER_TEXT}</p>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-3 text-[11px] sm:text-sm text-zinc-500">
-                <span>Results in 2 minutes</span>
+                <span>Instant Assessment</span>
                 <span className="text-zinc-600">•</span>
                 <span>No hard credit pull</span>
                 <span className="text-zinc-600">•</span>
@@ -133,16 +137,15 @@ const Index = () => {
             <div className="relative flex flex-col items-center gap-4 sm:gap-6 w-full max-w-sm sm:max-w-md lg:max-w-xl">
               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full" />
               <div className="relative z-10 w-full">
-                <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="w-full rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover">
-                  <source src="https://storage.googleapis.com/msgsndr/msQ0v10anK0T3yUDTS7C/media/68d7d698897fc0e97958fac9.mp4" type="video/mp4" />
-                </video>
-                <button onClick={() => setIsMuted(!isMuted)} className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full p-2 sm:p-3 shadow-lg transition-colors ${isMuted ? 'animate-pulse' : ''}`}>
-                  {isMuted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
-                </button>
+                <img
+                  src={geneHeroOffice}
+                  alt="Gene Ryland — Business Credit Strategist"
+                  className="w-full rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover aspect-[4/5]"
+                />
               </div>
               <div className="relative z-10 flex flex-col items-center mt-1 sm:mt-2">
                 <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Funding Expert</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Credit Strategist</p>
               </div>
               <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
             </div>
@@ -205,6 +208,7 @@ const Index = () => {
                   <Link to="/contact" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
                     Work With Gene
                   </Link>
+                  <p className="text-[10px] text-white/40 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </div>
             </div>
@@ -251,13 +255,13 @@ const Index = () => {
       <section className="mt-10 mb-0 pt-0 pb-0 relative" id="features">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-5xl font-medium tracking-tighter text-slate-900 font-manrope">The Wealth Ecosystem</h2>
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tighter text-slate-900 font-manrope">How We Help You Move Forward</h2>
             <p className="mt-4 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">Everything you need to build, fund, and scale your business</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: iconFunding, title: "Get Business Funding", desc: "Secure $50K–$250K in 0% APR business credit lines with no revenue or tax returns required.", cta: "Get Funded", href: "/funding" },
-              { icon: iconCredit, title: "Repair My Credit", desc: "Done-for-you credit restoration with negative item removals and dispute management in 35–90 days.", cta: "Repair Credit", href: "/credit-repair" },
+              { icon: iconFunding, title: "Get Business Funding", desc: "Explore strategic business credit options — learn what you may qualify for based on your profile.", cta: "Learn More", href: "/funding" },
+              { icon: iconCredit, title: "Optimize My Credit Profile", desc: "Done-for-you credit optimization with negative item analysis and dispute management.", cta: "Get Started", href: "/credit-repair" },
               { icon: iconCommunity, title: "Join The Community", desc: "Access our private Skool network and learn to invest your funding into high-ROI digital businesses.", cta: "Join Now", href: "/community" },
               { icon: iconProducts, title: "Shop Digital Products", desc: "Browse our curated collection of eBooks and digital resources to accelerate your business growth.", cta: "Shop Now", href: "/store" },
               { icon: iconPartner, title: "Become A Partner", desc: "Earn uncapped commissions by referring entrepreneurs to our funding programs. Free to join.", cta: "Partner Up", href: "/partners" },
@@ -272,6 +276,7 @@ const Index = () => {
                   <Link to={card.href} className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center">
                     {card.cta}
                   </Link>
+                  <p className="text-[9px] text-zinc-400/60 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </motion.div>
             ))}
@@ -302,17 +307,17 @@ const Index = () => {
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofSouthstate} alt="SouthState Visa Business Card — $9,000 credit limit approved" className="w-full object-cover" />
+                    <img src={proofSouthstate} alt="SouthState Visa Business Card — credit limit approved" className="w-full object-cover" />
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Bradley A.</span></div><p className="text-sm text-zinc-400">Business Owner</p></div>
                     </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The funding process was seamless. I got $24k at 0% interest for 12 months. Changed my entire business trajectory."</p>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The process was seamless. The team helped me understand my options and guided me every step of the way."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofBoa} alt="Bank of America — approved for $12,000 business credit card" className="w-full object-cover" />
+                    <img src={proofBoa} alt="Bank of America — approved for business credit card" className="w-full object-cover" />
                   </article>
                 </div>
               ))}
@@ -329,7 +334,7 @@ const Index = () => {
                       <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-400">Real Estate Investor</p></div>
                     </div>
-                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners fixed my credit when no one else could. My score is up 115 points and I just closed on my first investment property."</p>
+                    <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners helped me optimize my credit profile. My score improved significantly and I was able to close on my first investment property."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
                     <img src={proofAmex} alt="American Express approved — client celebration" className="w-full object-cover" />
@@ -413,10 +418,10 @@ const Index = () => {
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
         <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
-            Ready to Scale Your Empire?
+            Not Sure Where to Start?
           </h3>
           <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Get $50K–$250K in business funding at 0% APR. No revenue required. No tax returns. Start in under 48 hours.
+            Learn what business credit options may work for your situation. Education-first approach. No guesswork.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/assessment" className="shiny-cta !py-4 !px-10 !text-lg">
@@ -426,18 +431,19 @@ const Index = () => {
               Explore Products
             </Link>
           </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
+          <p className="text-[10px] text-zinc-400/70 mt-4 max-w-md mx-auto">{DISCLAIMER_TEXT}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
             <span className="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
               No credit check required
             </span>
             <span className="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-              48-hour approval
+              Education-first approach
             </span>
             <span className="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
-              10,000+ entrepreneurs funded
+              Thousands of entrepreneurs helped
             </span>
           </div>
         </div>
