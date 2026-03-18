@@ -30,8 +30,8 @@ const STEPS = [
     icon: Building2,
   },
   {
-    title: "Get Funded",
-    description: "Receive $50k–$250k in business funding. No tax returns or revenue history required.",
+    title: "Strategy Execution",
+    description: "Execute your personalized business credit strategy — learn what options may work for your situation.",
     icon: PartyPopper,
   },
 ];
