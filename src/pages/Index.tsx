@@ -10,6 +10,8 @@ import logoBoa from "@/assets/logo-boa.png";
 import logoNavyFed from "@/assets/logo-navyfed.png";
 import logoChase from "@/assets/logo-chase.png";
 import logoTruist from "@/assets/logo-truist.png";
+import profileBradley from "@/assets/profile-bradley.jpg";
+import profileMichael from "@/assets/profile-michael.jpg";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import FundingJourney from "@/components/FundingJourney";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
