@@ -30,6 +30,9 @@ import Consultation from "./pages/Consultation";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import PartnerOnboarding from "./pages/PartnerOnboarding";
 import OptIn from "./pages/OptIn";
+import ThankYou from "./pages/ThankYou";
+import MyOrders from "./pages/MyOrders";
+import DownloadRedirect from "./pages/DownloadRedirect";
 
 const queryClient = new QueryClient();
 
