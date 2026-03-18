@@ -30,6 +30,9 @@ import Consultation from "./pages/Consultation";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import PartnerOnboarding from "./pages/PartnerOnboarding";
 import OptIn from "./pages/OptIn";
+import ThankYou from "./pages/ThankYou";
+import MyOrders from "./pages/MyOrders";
+import DownloadRedirect from "./pages/DownloadRedirect";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +69,9 @@ const AppContent = () => {
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/partner-onboarding" element={<PartnerOnboarding />} />
           <Route path="/opt-in" element={<OptIn />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/download/:token" element={<DownloadRedirect />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

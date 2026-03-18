@@ -1,114 +1,71 @@
 
 
-# Digital E-Book Delivery System
+## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
 
-## What We're Building
+### What Changes
 
-A complete post-purchase digital delivery pipeline so that when a customer buys an e-book:
+**1. Move Product Details directly below the price/CTA card (layout optimization)**
 
-1. They can **download it immediately** after checkout
-2. They receive a **confirmation email from GoHighLevel** with download links
-3. They have a **personal download library** to re-access purchases anytime
+Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
 
----
+The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
 
-## Architecture Overview
+**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
+
+The two uploaded images will be:
+- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
+- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
+- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
+
+### Technical Details
+
+**Files to modify:**
+
+1. **`src/data/productContent.ts`**
+   - Add `promoImages?: string[]` to the `ProductContent` interface
+   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
+
+2. **`src/pages/ProductDetail.tsx`**
+   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
+   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
+   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
+
+3. **New assets:**
+   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
+   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
+
+### Layout Change (Before → After)
 
 ```text
-Customer buys on Shopify checkout
-         │
-         ▼
-Shopify webhook (order paid)
-         │
-         ▼
-Edge Function: "shopify-order-webhook"
-   ├── Stores order in `orders` table
-   ├── Generates secure download tokens
-   ├── Triggers GHL email via API (with download links)
-   └── Returns
-         │
-         ▼
-Customer clicks link in email OR visits /my-orders
-         │
-         ▼
-Edge Function: "download-ebook"
-   ├── Validates token (or session)
-   ├── Serves file from storage bucket
-   └── Returns PDF
+BEFORE:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│             │  Description │
+│             │  Price + CTA │
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  Product Details (full w)  │
+└────────────────────────────┘
+
+AFTER:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│  [promo 1]  │  Description │
+│  [promo 2]  │  Price + CTA │
+│             │  Details     │ ← moved up
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
 ```
 
----
-
-## Implementation Steps
-
-### Step 1: File Storage
-
-- Create a **storage bucket** called `ebooks` in the backend
-- You will upload your PDF files there (one per product), named by Shopify handle (e.g., `credit-repair-planner.pdf`)
-- Bucket is private — files served only through authenticated edge function
-
-### Step 2: Database Tables
-
-**`orders`** — tracks completed purchases
-- `id`, `shopify_order_id`, `email`, `customer_name`, `created_at`
-
-**`order_items`** — tracks which products were in each order
-- `id`, `order_id` (FK), `shopify_product_handle`, `product_title`, `download_token` (unique UUID), `downloaded_at`
-
-Both tables have RLS policies so customers can only see their own orders (matched by email).
-
-### Step 3: Shopify Webhook Edge Function
-
-**`shopify-order-webhook`** — receives Shopify's `orders/paid` webhook:
-- Parses the order payload (email, line items, product handles)
-- Inserts into `orders` + `order_items` with unique download tokens
-- Calls GoHighLevel API to send a branded confirmation email with download links pointing to your site (e.g., `https://ryland.lovable.app/download/{token}`)
-- The GHL email template would include the product names and individual download links
-
-### Step 4: Download Edge Function
-
-**`download-ebook`** — serves the actual file:
-- Accepts a `token` parameter
-- Looks up the token in `order_items`
-- Fetches the corresponding PDF from the `ebooks` storage bucket
-- Returns the file as a download
-- Marks `downloaded_at` timestamp
-
-### Step 5: Customer Download Library Page
-
-**`/my-orders`** route — a simple page where customers:
-- Enter their email address
-- Receive a verification code (sent via GHL)
-- See all their past purchases with download buttons
-- Can re-download any time
-
-### Step 6: Post-Purchase Redirect
-
-- After Shopify checkout completes, the customer lands on a **thank-you page** (`/thank-you?order={id}`) showing their purchases with immediate download buttons
-- This page reads from the `orders` table using the Shopify order ID
-
-### Step 7: GoHighLevel Email Integration
-
-- Uses the existing `GHL_API_KEY` secret (already configured)
-- The webhook edge function calls GHL to create/update a contact and trigger an email with:
-  - Order confirmation details
-  - Individual download links for each e-book
-  - Link to the `/my-orders` library for future access
-
----
-
-## What You'll Need To Do
-
-1. **Upload your PDF files** — I'll create the storage bucket; you'll upload each e-book PDF named by its Shopify product handle
-2. **Register the webhook in Shopify** — Point `orders/paid` webhook to the edge function URL (I'll provide the exact URL)
-3. **Create a GHL email template** — for the order confirmation email (or I can trigger a simple email via the GHL API with the download links embedded)
-
----
-
-## Technical Details
-
-- **Security**: Download tokens are single-use UUIDs with no expiration, so customers can always re-download. The storage bucket is private; files are only served through the validated edge function.
-- **No user accounts needed**: The download library uses email + verification code (via GHL), keeping things simple — no signup/login required.
-- **Existing secrets**: `GHL_API_KEY`, `GHL_LOCATION_ID`, `SHOPIFY_ACCESS_TOKEN` are all already configured.
-- **Shopify webhook verification**: The edge function will verify the HMAC signature from Shopify to prevent spoofed requests.
+Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
 

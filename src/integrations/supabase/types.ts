@@ -89,6 +89,30 @@ export type Database = {
         }
         Relationships: []
       }
+      email_verifications: {
+        Row: {
+          code: string
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          email: string
+          expires_at: string
+          id?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       funnel_leads: {
         Row: {
           created_at: string
@@ -113,6 +137,71 @@ export type Database = {
           name?: string
           phone?: string | null
           source?: string
+        }
+        Relationships: []
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          download_token: string
+          downloaded_at: string | null
+          id: string
+          order_id: string
+          product_title: string
+          shopify_product_handle: string
+        }
+        Insert: {
+          created_at?: string
+          download_token?: string
+          downloaded_at?: string | null
+          id?: string
+          order_id: string
+          product_title: string
+          shopify_product_handle: string
+        }
+        Update: {
+          created_at?: string
+          download_token?: string
+          downloaded_at?: string | null
+          id?: string
+          order_id?: string
+          product_title?: string
+          shopify_product_handle?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_name: string
+          email: string
+          id: string
+          shopify_order_id: string
+          shopify_order_number: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_name: string
+          email: string
+          id?: string
+          shopify_order_id: string
+          shopify_order_number?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_name?: string
+          email?: string
+          id?: string
+          shopify_order_id?: string
+          shopify_order_number?: string | null
         }
         Relationships: []
       }
