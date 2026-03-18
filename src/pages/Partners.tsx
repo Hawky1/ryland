@@ -13,6 +13,8 @@ import proofBankUnited16k from "@/assets/proof-bankunited-16k.webp";
 import proofNihfcu38k from "@/assets/proof-nihfcu-38k.webp";
 import proofFnbo15k from "@/assets/proof-fnbo-15k.webp";
 import proofFnbo45k from "@/assets/proof-fnbo-45k.webp";
+import profileBradley from "@/assets/profile-bradley.jpg";
+import profileMichael from "@/assets/profile-michael.jpg";
 import proofAmexBbc from "@/assets/proof-amex-bbc.webp";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
@@ -475,7 +477,7 @@ const Partners = () => {
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Bradley A." className="size-9 object-cover rounded-full" />
+                      <img src={profileBradley} alt="Bradley A." className="size-9 object-cover rounded-full" />
                       <div>
                         <span className="text-base font-semibold text-zinc-100">Bradley A.</span>
                         <p className="text-sm text-zinc-400">Business Owner</p>
@@ -502,7 +504,7 @@ const Partners = () => {
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Michael G." className="size-9 object-cover rounded-full" />
+                      <img src={profileMichael} alt="Michael G." className="size-9 object-cover rounded-full" />
                       <div>
                         <span className="text-base font-semibold text-zinc-100">Michael G.</span>
                         <p className="text-sm text-zinc-400">Real Estate Investor</p>
