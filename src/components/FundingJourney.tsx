@@ -77,7 +77,7 @@ export default function FundingJourney() {
             Your Path To Funding
           </h2>
           <p className="text-slate-500 mt-3 text-sm max-w-lg mx-auto">
-            From assessment to funded — see exactly how we get you $50k–$250k in business credit.
+            From assessment to execution — see what business credit options could look like for your situation.
           </p>
         </div>
 
