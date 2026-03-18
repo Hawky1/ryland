@@ -13,6 +13,8 @@ import proofBankUnited16k from "@/assets/proof-bankunited-16k.webp";
 import proofNihfcu38k from "@/assets/proof-nihfcu-38k.webp";
 import proofFnbo15k from "@/assets/proof-fnbo-15k.webp";
 import proofFnbo45k from "@/assets/proof-fnbo-45k.webp";
+import profileBradley from "@/assets/profile-bradley.jpg";
+import profileMichael from "@/assets/profile-michael.jpg";
 import proofAmexBbc from "@/assets/proof-amex-bbc.webp";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
