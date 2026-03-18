@@ -116,6 +116,71 @@ export type Database = {
         }
         Relationships: []
       }
+      order_items: {
+        Row: {
+          created_at: string
+          download_token: string
+          downloaded_at: string | null
+          id: string
+          order_id: string
+          product_title: string
+          shopify_product_handle: string
+        }
+        Insert: {
+          created_at?: string
+          download_token?: string
+          downloaded_at?: string | null
+          id?: string
+          order_id: string
+          product_title: string
+          shopify_product_handle: string
+        }
+        Update: {
+          created_at?: string
+          download_token?: string
+          downloaded_at?: string | null
+          id?: string
+          order_id?: string
+          product_title?: string
+          shopify_product_handle?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_name: string
+          email: string
+          id: string
+          shopify_order_id: string
+          shopify_order_number: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_name: string
+          email: string
+          id?: string
+          shopify_order_id: string
+          shopify_order_number?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_name?: string
+          email?: string
+          id?: string
+          shopify_order_id?: string
+          shopify_order_number?: string | null
+        }
+        Relationships: []
+      }
       partner_submissions: {
         Row: {
           affiliate_link: string | null
