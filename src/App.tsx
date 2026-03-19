@@ -38,7 +38,8 @@ const MyOrders = lazy(() => import("./pages/MyOrders"));
 const DownloadRedirect = lazy(() => import("./pages/DownloadRedirect"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const PortalLogin = lazy(() => import("./pages/portal/PortalLogin"));
-const PortalLayout = lazy(() => import("./components/portal/PortalLayout"));
+// PortalLayout is NOT lazy-loaded to keep sidebar persistent
+import PortalLayout from "./components/portal/PortalLayout";
 const PortalDashboard = lazy(() => import("./pages/portal/PortalDashboard"));
 const PortalLeads = lazy(() => import("./pages/portal/PortalLeads"));
 const PortalCommissions = lazy(() => import("./pages/portal/PortalCommissions"));
