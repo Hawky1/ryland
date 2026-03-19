@@ -5,7 +5,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 
 const FUNDING_TIERS = [
   { range: "$50K – $100K", label: "Starter", desc: "Perfect for launching or expanding marketing efforts", color: "from-blue-400 to-cyan-400" },
