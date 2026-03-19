@@ -238,7 +238,7 @@ const Index = () => {
               const IconComp = { Rocket, LayoutDashboard, ShieldCheck, Handshake }[card.icon]!;
               return (
                 <motion.div key={card.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-[#004E8C] p-6 sm:p-8 text-white min-h-[200px]">
-                  <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+                   <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
                   <div className="relative z-10">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 ring-1 ring-white/20 mb-5">
                       <IconComp className="w-6 h-6 text-white" />
