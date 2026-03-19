@@ -370,7 +370,7 @@ const Index = () => {
 
       {/* FAQ */}
       <section className="md:p-10 max-w-7xl border border-[#004E8C] rounded-3xl mt-20 sm:mt-40 mx-4 sm:mx-auto pt-6 px-4 sm:px-6 pb-6 shadow-2xl text-white relative overflow-hidden">
-        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
         <div className="mb-8 flex items-center justify-between relative z-10">
           <div className="flex items-center gap-3">
             <div>
