@@ -1,17 +1,50 @@
+import { useRef, useEffect, useState } from "react";
+
 interface Props {
   overlay?: string;
   className?: string;
 }
 
 export default function HlsVideoBackground({ className = "" }: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isVisible) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVisible]);
+
   return (
-    <div className={`absolute inset-0 z-0 overflow-hidden ${className}`}>
+    <div ref={containerRef} className={`absolute inset-0 z-0 overflow-hidden ${className}`}>
       <video
+        ref={videoRef}
         src="/videos/card-bg.mp4"
-        autoPlay
         loop
         muted
         playsInline
+        preload="none"
         className="w-full h-full object-cover"
       />
       {/* Dark-to-light blue gradient shading */}
