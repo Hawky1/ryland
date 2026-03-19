@@ -352,7 +352,7 @@ const Index = () => {
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofUsbank} alt="U.S. Bank — congratulations on your new credit card" className="w-full object-cover" />
+                    <img src={proofUsbank} alt="U.S. Bank — congratulations on your new credit card" loading="lazy" width={378} height={443} className="w-full object-cover" />
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
