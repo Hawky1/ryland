@@ -152,7 +152,7 @@ const Index = () => {
                 <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
                 <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Credit Strategist</p>
               </div>
-              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
+              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" width={1584} height={263} loading="lazy" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
             </div>
           </div>
         </div>
