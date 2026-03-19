@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 
 const Disclaimers = () => {
