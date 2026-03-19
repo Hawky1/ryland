@@ -180,7 +180,7 @@ serve(async (req) => {
       type: "recovery",
       email: trimmedEmail,
       options: {
-        redirectTo: "https://ryland.lovable.app/reset-password",
+        redirectTo: "https://rylandpartners.com/reset-password",
       },
     });
 
