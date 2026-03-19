@@ -140,7 +140,7 @@ export default function Assessment() {
 
     try {
       // Save to database
-      const { error } = await supabase.from("assessment_leads" as any).insert({
+      const { error } = await supabase.from("assessment_leads").insert({
         name: parsed.data.name,
         email: parsed.data.email,
         phone: parsed.data.phone,
