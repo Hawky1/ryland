@@ -52,7 +52,7 @@ const About = () => {
               Helping entrepreneurs unlock capital to build, scale, and grow their businesses.
             </p>
             <div className="flex flex-col mt-6 sm:mt-8 gap-4 items-center lg:items-start">
-              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" className="w-full max-w-xs sm:max-w-sm lg:max-w-md brightness-0 invert opacity-60" />
+              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" width={1584} height={263} loading="lazy" className="w-full max-w-xs sm:max-w-sm lg:max-w-md brightness-0 invert opacity-60" />
             </div>
           </div>
           <div className="relative lg:flex-1 flex justify-center mt-4 lg:mt-0 w-full">
