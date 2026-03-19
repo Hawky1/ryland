@@ -78,6 +78,8 @@ serve(async (req) => {
         return json({ error: "Unable to fetch available slots. Please try again." }, 500);
       }
 
+      console.log("GHL free-slots response keys:", Object.keys(data));
+      console.log("GHL free-slots raw (first 500 chars):", JSON.stringify(data).slice(0, 500));
       return json(data);
     }
 
@@ -149,7 +151,7 @@ serve(async (req) => {
       }
 
       // Step 2: Create appointment
-      const appointmentPayload = {
+      const appointmentPayload: Record<string, unknown> = {
         calendarId,
         locationId,
         contactId,
@@ -157,9 +159,9 @@ serve(async (req) => {
         endTime,
         title: `Strategy Session — ${name}`,
         appointmentStatus: "new",
-        address: timezone || "America/New_York",
-        notes: notes || "",
+        selectedTimezone: timezone || "America/New_York",
       };
+      if (notes) appointmentPayload.notes = notes;
 
       const apptRes = await fetch(
         "https://services.leadconnectorhq.com/calendars/events/appointments",
