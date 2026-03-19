@@ -82,6 +82,17 @@ const AppContent = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/download/:token" element={<DownloadRedirect />} />
+          <Route path="/portal/login" element={<PortalLogin />} />
+          <Route path="/portal" element={<PortalLayout />}>
+            <Route index element={<PortalDashboard />} />
+            <Route path="leads" element={<PortalLeads />} />
+            <Route path="commissions" element={<PortalCommissions />} />
+            <Route path="calculator" element={<PortalCalculator />} />
+            <Route path="resources" element={<PortalResources />} />
+            <Route path="events" element={<PortalEvents />} />
+            <Route path="speaking" element={<PortalSpeaking />} />
+            <Route path="settings" element={<PortalSettings />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
