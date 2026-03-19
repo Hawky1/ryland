@@ -74,7 +74,7 @@ export default function LenderMatchVisual() {
               className="flex items-center gap-4"
             >
               <div className="flex items-center gap-3 w-44 flex-shrink-0">
-                <img src={l.logo} alt={l.name} className="w-8 h-8 object-contain brightness-0 invert opacity-70 flex-shrink-0" />
+                <img src={l.logo} alt={l.name} width={32} height={32} loading="lazy" className="w-8 h-8 object-contain brightness-0 invert opacity-70 flex-shrink-0" />
                 <span className="text-base text-neutral-200 font-semibold">{l.name}</span>
               </div>
               <div className="flex-1 h-7 rounded-lg bg-white/5 overflow-hidden relative">

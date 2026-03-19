@@ -58,6 +58,8 @@ const SocialProofStrip = () => {
               key={i}
               src={proof.src}
               alt={proof.alt}
+              width={200}
+              height={144}
               className="h-28 sm:h-36 w-auto rounded-xl border border-white/10 flex-shrink-0 object-cover"
               loading="lazy"
             />

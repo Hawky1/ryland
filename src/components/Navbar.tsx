@@ -38,7 +38,7 @@ const Navbar = ({ active, showServicesDropdown = true }: NavbarProps) => {
       <header className="sticky z-20 top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100">
         <div className="flex max-w-7xl mx-auto py-4 px-4 sm:px-6 items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
+            <img src={logoDark} alt="Ryland Partners" width={189} height={56} className="h-8 w-auto" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">

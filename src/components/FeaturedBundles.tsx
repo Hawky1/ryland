@@ -101,6 +101,9 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                 <img
                   src={FEATURED[0].image}
                   alt={FEATURED[0].title}
+                  width={600}
+                  height={400}
+                  loading="lazy"
                   className="w-full rounded-2xl group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </div>
@@ -148,6 +151,9 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                     <img
                       src={bundle.image}
                       alt={bundle.title}
+                      width={400}
+                      height={267}
+                      loading="lazy"
                       className="w-full rounded-xl mb-5 group-hover:scale-[1.02] transition-transform duration-700"
                     />
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 leading-snug">

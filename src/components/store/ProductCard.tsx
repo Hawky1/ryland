@@ -29,6 +29,8 @@ const ProductCard = ({ product, index, onAddToCart, isLoading }: ProductCardProp
               <img
                 src={image.url}
                 alt={image.altText || product.node.title}
+                width={400}
+                height={500}
                 className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />

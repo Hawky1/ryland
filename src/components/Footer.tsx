@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logoDark} alt="Ryland Partners" className="h-8 w-auto" />
+              <img src={logoDark} alt="Ryland Partners" width={189} height={56} loading="lazy" className="h-8 w-auto" />
             </Link>
             <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
               Credit restoration, business funding, and financial education — empowering entrepreneurs to build and scale with confidence.

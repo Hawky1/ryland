@@ -81,6 +81,9 @@ const StoreHero = ({ onBrowse }: StoreHeroProps) => {
               <img
                 src={geneRyland}
                 alt="Gene Ryland - Financial Expert"
+                width={448}
+                height={560}
+                loading="lazy"
                 className="relative w-full max-w-md"
               />
             </div>

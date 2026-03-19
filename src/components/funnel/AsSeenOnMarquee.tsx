@@ -10,6 +10,9 @@ export default function AsSeenOnMarquee() {
         <img
           src={asSeenOn}
           alt="As Seen On – FOX, USA Today, and more"
+          width={1584}
+          height={263}
+          loading="lazy"
           className="max-w-md w-full opacity-50"
         />
       </div>

@@ -143,6 +143,8 @@ const Index = () => {
                   src={geneHeroOffice}
                   alt="Gene Ryland — Business Credit Strategist"
                   fetchPriority="high"
+                  width={1280}
+                  height={1600}
                   className="w-full rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover aspect-[4/5]"
                 />
               </div>
@@ -150,7 +152,7 @@ const Index = () => {
                 <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
                 <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Credit Strategist</p>
               </div>
-              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
+              <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" width={1584} height={263} loading="lazy" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
             </div>
           </div>
         </div>
@@ -165,18 +167,18 @@ const Index = () => {
           <div style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
             <div className="flex carousel-wrapper gap-x-10 lg:gap-x-20">
               <div className="flex gap-10 shrink-0 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" width={1622} height={480} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" width={1920} height={1080} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" width={1920} height={558} loading="lazy" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" width={1920} height={1125} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" width={1280} height={297} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex shrink-0 gap-10 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" width={1622} height={480} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" width={1920} height={1080} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" width={1920} height={558} loading="lazy" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" width={1920} height={1125} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" width={1280} height={297} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -196,7 +198,7 @@ const Index = () => {
             <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center relative z-10">
               <div className="relative flex justify-center -mt-20 sm:-mt-32 md:-mt-56 lg:-mt-64">
-                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" loading="lazy" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
+                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" loading="lazy" width={1178} height={1667} className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
               </div>
               <div className="space-y-6">
                 <p className="text-white/80 leading-relaxed text-base">Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.</p>
@@ -273,7 +275,7 @@ const Index = () => {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: i * 0.08 }} whileHover={{ y: -4 }} className="relative overflow-hidden border border-[#004E8C] rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
                 <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
                 <div className="relative z-10 flex flex-col items-center text-center flex-1">
-                  <img src={card.icon} alt={card.title} loading="lazy" className="w-28 h-28 mx-auto mb-6 object-contain" />
+                  <img src={card.icon} alt={card.title} loading="lazy" width={112} height={112} className="w-28 h-28 mx-auto mb-6 object-contain" />
                   <h3 className="text-xl font-bold text-white mb-3 font-manrope">{card.title}</h3>
                   <p className="text-sm text-zinc-300 mb-6 leading-relaxed">{card.desc}</p>
                   <Link to={card.href} className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center">
@@ -310,17 +312,17 @@ const Index = () => {
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofSouthstate} alt="SouthState Visa Business Card — credit limit approved" className="w-full object-cover" />
+                    <img src={proofSouthstate} alt="SouthState Visa Business Card — credit limit approved" loading="lazy" width={378} height={443} className="w-full object-cover" />
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src={profileBradley} alt="Bradley A." className="size-9 object-cover rounded-full" />
+                      <img src={profileBradley} alt="Bradley A." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Bradley A.</span></div><p className="text-sm text-zinc-400">Business Owner</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The process was seamless. The team helped me understand my options and guided me every step of the way."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofBoa} alt="Bank of America — approved for business credit card" className="w-full object-cover" />
+                    <img src={proofBoa} alt="Bank of America — approved for business credit card" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
@@ -330,17 +332,17 @@ const Index = () => {
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofTruist} alt="Truist Business credit card approved" className="w-full object-cover" />
+                    <img src={proofTruist} alt="Truist Business credit card approved" loading="lazy" width={378} height={443} className="w-full object-cover" />
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src={profileMichael} alt="Michael G." className="size-9 object-cover rounded-full" />
+                      <img src={profileMichael} alt="Michael G." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-400">Real Estate Investor</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners helped me optimize my credit profile. My score improved significantly and I was able to close on my first investment property."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofAmex} alt="American Express approved — client celebration" className="w-full object-cover" />
+                    <img src={proofAmex} alt="American Express approved — client celebration" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
@@ -350,17 +352,17 @@ const Index = () => {
               {[...Array(2)].map((_, dup) => (
                 <div key={dup} className="flex flex-col gap-4">
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofUsbank} alt="U.S. Bank — congratulations on your new credit card" className="w-full object-cover" />
+                    <img src={proofUsbank} alt="U.S. Bank — congratulations on your new credit card" loading="lazy" width={378} height={443} className="w-full object-cover" />
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
+                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Carlos R.</span></div><p className="text-sm text-zinc-400">CEO, Rivera Ventures</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofIbc} alt="IBC Visa credit card application approved" className="w-full object-cover" />
+                    <img src={proofIbc} alt="IBC Visa credit card application approved" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
