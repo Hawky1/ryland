@@ -63,8 +63,11 @@ serve(async (req) => {
       const url = new URL(
         `https://services.leadconnectorhq.com/calendars/${calendarId}/free-slots`
       );
-      url.searchParams.set("startDate", String(startDate));
-      url.searchParams.set("endDate", String(endDate));
+      // GHL API expects timestamps in seconds, not milliseconds
+      const startSec = Math.floor(Number(startDate) / 1000);
+      const endSec = Math.floor(Number(endDate) / 1000);
+      url.searchParams.set("startDate", String(startSec));
+      url.searchParams.set("endDate", String(endSec));
       url.searchParams.set("timezone", timezone);
 
       const res = await fetch(url.toString(), { headers: ghlHeaders });
