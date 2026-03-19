@@ -101,6 +101,9 @@ const FeaturedBundles = ({ onScrollToBundle }: FeaturedBundlesProps) => {
                 <img
                   src={FEATURED[0].image}
                   alt={FEATURED[0].title}
+                  width={600}
+                  height={400}
+                  loading="lazy"
                   className="w-full rounded-2xl group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </div>
