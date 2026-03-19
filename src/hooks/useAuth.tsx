@@ -56,7 +56,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log("Affiliate data found:", data ? "YES" : "NO", data?.affiliate_id);
       return data as Affiliate | null;
     } catch (err) {
-      console.error("Fetch affiliate exception:", (err as Error)?.message || err);
+      const errorMessage = (err as Error)?.message || String(err);
+      // Ignore abort errors from component unmounting
+      if (errorMessage.includes('aborted') || errorMessage.includes('AbortError')) {
+        console.log('Affiliate fetch aborted (component unmounted or refreshed)');
+        return null;
+      }
+      console.error("Fetch affiliate exception:", errorMessage);
       // Return null instead of throwing - allows portal to work without affiliate data
       return null;
     }
@@ -64,6 +70,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
+    const loadingTimeout = setTimeout(() => {
+      if (!cancelled) {
+        setState((prev) => {
+          if (prev.loading) {
+            console.warn('Auth loading timeout - forcing loading to false');
+            return { ...prev, loading: false };
+          }
+          return prev;
+        });
+      }
+    }, 5000);
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
@@ -107,6 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       cancelled = true;
+      clearTimeout(loadingTimeout);
       subscription.unsubscribe();
     };
   }, [fetchAffiliate]);
