@@ -70,67 +70,74 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
-    let initialSessionLoaded = false;
 
-    // Single source of truth: onAuthStateChange handles both initial and subsequent auth events
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    // Initialize auth state
+    const initAuth = async () => {
+      try {
+        // Get initial session FIRST
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
         if (cancelled) return;
         
-        console.log('Auth state changed:', event, session?.user?.id || 'no user');
+        if (error) {
+          console.error('getSession error:', error);
+        }
         
         const user = session?.user ?? null;
-
-        // Set loading to false and update user/session
+        console.log('Initial session:', user ? `User ${user.id}` : 'No user');
+        
+        // Set user and loading state
         setState((prev) => ({ ...prev, user, session, loading: false }));
-        initialSessionLoaded = true;
-
-        // Fetch affiliate data in background (non-blocking)
+        
+        // Fetch affiliate in background
         if (user) {
           fetchAffiliate(user.id).then((affiliate) => {
             if (!cancelled) {
               setState((prev) => ({ ...prev, affiliate }));
             }
-          }).catch((err) => {
-            console.error("Failed to fetch affiliate:", err);
-          });
+          }).catch(() => {});
+        }
+      } catch (err) {
+        console.error('Init auth failed:', err);
+        if (!cancelled) {
+          setState((prev) => ({ ...prev, loading: false }));
+        }
+      }
+    };
+
+    // Set up auth state change listener for login/logout events
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (cancelled) return;
+        
+        // Skip INITIAL_SESSION since we handle it above
+        if (event === 'INITIAL_SESSION') {
+          console.log('INITIAL_SESSION event (handled by getSession)');
+          return;
+        }
+        
+        console.log('Auth state changed:', event, session?.user?.id || 'no user');
+        
+        const user = session?.user ?? null;
+        setState((prev) => ({ ...prev, user, session, loading: false }));
+
+        if (user) {
+          fetchAffiliate(user.id).then((affiliate) => {
+            if (!cancelled) {
+              setState((prev) => ({ ...prev, affiliate }));
+            }
+          }).catch(() => {});
         } else {
-          // Clear affiliate if user logs out
           setState((prev) => ({ ...prev, affiliate: null }));
         }
       }
     );
 
-    // Fallback: If onAuthStateChange doesn't fire within 3 seconds, check manually
-    const fallbackTimeout = setTimeout(async () => {
-      if (!initialSessionLoaded && !cancelled) {
-        console.log('Fallback: checking session manually');
-        try {
-          const { data: { session } } = await supabase.auth.getSession();
-          if (!cancelled && !initialSessionLoaded) {
-            const user = session?.user ?? null;
-            console.log('Fallback session check:', user ? 'User found' : 'No user');
-            setState((prev) => ({ ...prev, user, session, loading: false }));
-            
-            if (user) {
-              const affiliate = await fetchAffiliate(user.id);
-              if (!cancelled) {
-                setState((prev) => ({ ...prev, affiliate }));
-              }
-            }
-          }
-        } catch (err) {
-          console.error('Fallback session check failed:', err);
-          if (!cancelled) {
-            setState((prev) => ({ ...prev, loading: false }));
-          }
-        }
-      }
-    }, 3000);
+    // Run init
+    initAuth();
 
     return () => {
       cancelled = true;
-      clearTimeout(fallbackTimeout);
       subscription.unsubscribe();
     };
   }, [fetchAffiliate]);
