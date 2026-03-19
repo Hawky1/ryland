@@ -83,6 +83,7 @@ const AppContent = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/download/:token" element={<DownloadRedirect />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/portal/login" element={<PortalLogin />} />
           <Route path="/portal" element={<PortalLayout />}>
             <Route index element={<PortalDashboard />} />

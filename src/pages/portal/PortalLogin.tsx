@@ -98,6 +98,31 @@ export default function PortalLogin() {
                 {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                 Sign In
               </Button>
+
+              <button
+                type="button"
+                disabled={forgotLoading}
+                onClick={async () => {
+                  if (!email) {
+                    setError("Enter your email address, then click Forgot Password.");
+                    return;
+                  }
+                  setForgotLoading(true);
+                  setError("");
+                  const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/reset-password`,
+                  });
+                  setForgotLoading(false);
+                  if (resetError) {
+                    setError("Unable to send reset email. Please try again.");
+                  } else {
+                    toast({ title: "Check your email", description: "We sent a password reset link to your inbox." });
+                  }
+                }}
+                className="w-full text-sm text-muted-foreground hover:text-primary underline underline-offset-2 transition-colors"
+              >
+                {forgotLoading ? "Sending..." : "Forgot password?"}
+              </button>
             </form>
 
             <p className="mt-6 text-center text-xs text-muted-foreground">

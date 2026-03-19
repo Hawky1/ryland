@@ -95,7 +95,10 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
         {submitted ? (
           <div className="flex flex-col items-center py-6 gap-5">
             <p className="text-slate-300 text-center text-sm max-w-xs">
-              Check your email for a welcome message with your referral link and next steps. We're excited to have you on board.
+              Check your email for a link to <strong>set your portal password</strong>. Once set, you'll have full access to your partner dashboard.
+            </p>
+            <p className="text-slate-500 text-center text-xs max-w-xs">
+              Don't see it? Check your spam or promotions folder.
             </p>
 
             <button onClick={() => handleClose(false)} className="shiny-cta !py-3 !px-8 !text-sm mt-1">
