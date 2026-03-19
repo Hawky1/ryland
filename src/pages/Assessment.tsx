@@ -22,6 +22,23 @@ import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
 import PageMeta from "@/components/PageMeta";
 
+// Direct fetch helper to bypass Supabase SDK AbortError
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+async function callEdgeFunction(name: string, body: Record<string, unknown>) {
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "apikey": SUPABASE_KEY,
+    },
+    body: JSON.stringify(body),
+  });
+  return res.json();
+}
+
 /* ── Quiz Data ─────────────────────────────────────────────── */
 const STEPS = [
   {
@@ -163,46 +180,38 @@ export default function Assessment() {
         tags.push("Affiliate", `Affiliate - ${refId}`);
       }
 
-      const ghlPromise = supabase.functions
-        .invoke("ghl-create-contact", {
-          body: {
-            name: parsed.data.name,
+      const ghlPromise = callEdgeFunction("ghl-create-contact", {
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        businessName: parsed.data.business_name,
+        tags,
+        source: refId ? `Affiliate Referral - ${refId}` : "Funding Assessment",
+        customFields: {
+          credit_score_range: answers.credit_score,
+          primary_goal: answers.primary_goal,
+          business_status: answers.business_status,
+          funding_timeline: answers.funding_timeline,
+          denied_recently: answers.denied_recently,
+          qualification,
+          ...(refId ? { affiliate_id: refId } : {}),
+        },
+      }).then((result) => {
+        if (result?.error) console.error("GHL sync failed:", result.error);
+
+        // If affiliate referral, also record the lead in the portal
+        if (refId) {
+          callEdgeFunction("ghl-affiliate-webhook", {
+            type: "lead_referred",
+            affiliate_id: refId,
+            full_name: parsed.data.name,
             email: parsed.data.email,
             phone: parsed.data.phone,
-            businessName: parsed.data.business_name,
-            tags,
-            source: refId ? `Affiliate Referral - ${refId}` : "Funding Assessment",
-            customFields: {
-              credit_score_range: answers.credit_score,
-              primary_goal: answers.primary_goal,
-              business_status: answers.business_status,
-              funding_timeline: answers.funding_timeline,
-              denied_recently: answers.denied_recently,
-              qualification,
-              ...(refId ? { affiliate_id: refId } : {}),
-            },
-          },
-        })
-        .then(({ error: ghlErr }) => {
-          if (ghlErr) console.error("GHL sync failed:", ghlErr);
-
-          // If affiliate referral, also record the lead in the portal
-          if (refId) {
-            supabase.functions
-              .invoke("ghl-affiliate-webhook", {
-                body: {
-                  type: "lead_referred",
-                  affiliate_id: refId,
-                  full_name: parsed.data.name,
-                  email: parsed.data.email,
-                  phone: parsed.data.phone,
-                },
-              })
-              .then(({ error: webhookErr }) => {
-                if (webhookErr) console.error("Affiliate lead sync failed:", webhookErr);
-              });
-          }
-        });
+          }).then((r) => {
+            if (r?.error) console.error("Affiliate lead sync failed:", r.error);
+          }).catch(() => {});
+        }
+      }).catch(() => {});
 
       // Run both in parallel, don't block
       Promise.allSettled([insertPromise, ghlPromise]).catch(() => {});
