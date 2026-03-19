@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { 
   motion, 
   useMotionValue, 
@@ -26,22 +26,25 @@ const InfiniteGrid = ({
   activeGridColor = "rgba(59, 130, 246, 0.8)"
 }: InfiniteGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const offsetRef = useRef({ x: 0, y: 0 });
+  const patternRef = useRef<SVGPatternElement>(null);
+  const activePatternRef = useRef<SVGPatternElement>(null);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const { left, top } = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - left);
     mouseY.set(e.clientY - top);
-  };
+  }, [mouseX, mouseY]);
 
   useAnimationFrame(() => {
-    setOffset(prev => ({
-      x: (prev.x + speedX) % gridSize,
-      y: (prev.y + speedY) % gridSize
-    }));
+    offsetRef.current.x = (offsetRef.current.x + speedX) % gridSize;
+    offsetRef.current.y = (offsetRef.current.y + speedY) % gridSize;
+    const transform = `translate(${offsetRef.current.x} ${offsetRef.current.y})`;
+    patternRef.current?.setAttribute('patternTransform', transform);
+    activePatternRef.current?.setAttribute('patternTransform', transform);
   });
 
   const maskImage = useMotionTemplate`radial-gradient(${revealSize}px circle at ${mouseX}px ${mouseY}px, black, transparent)`;
@@ -56,11 +59,11 @@ const InfiniteGrid = ({
       <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
         <defs>
           <pattern
+            ref={patternRef}
             id="base-grid-pattern"
             width={gridSize}
             height={gridSize}
             patternUnits="userSpaceOnUse"
-            patternTransform={`translate(${offset.x} ${offset.y})`}
           >
             <path
               d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
@@ -83,11 +86,11 @@ const InfiniteGrid = ({
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
           <defs>
             <pattern
+              ref={activePatternRef}
               id="active-grid-pattern"
               width={gridSize}
               height={gridSize}
               patternUnits="userSpaceOnUse"
-              patternTransform={`translate(${offset.x} ${offset.y})`}
             >
               <path
                 d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
