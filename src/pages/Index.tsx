@@ -342,7 +342,7 @@ const Index = () => {
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners helped me optimize my credit profile. My score improved significantly and I was able to close on my first investment property."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofAmex} alt="American Express approved — client celebration" className="w-full object-cover" />
+                    <img src={proofAmex} alt="American Express approved — client celebration" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
