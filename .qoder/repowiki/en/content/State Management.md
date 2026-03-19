@@ -17,16 +17,17 @@
 - [src/components/CartDrawer.tsx](file://src/components/CartDrawer.tsx)
 - [src/pages/Store.tsx](file://src/pages/Store.tsx)
 - [src/components/ui/toast.tsx](file://src/components/ui/toast.tsx)
+- [src/components/portal/AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
+- [src/components/portal/PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [src/pages/portal/PortalLogin.tsx](file://src/pages/portal/PortalLogin.tsx)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Enhanced authentication system with improved session restoration using dual approach (localStorage + Supabase)
-- Implemented synchronous localStorage restoration before falling back to Supabase listeners
-- Added AbortController support for better affiliate data fetching with enhanced error handling
-- Refined cart store implementation with separate selector functions for improved performance
-- Added fine-grained re-render control through dedicated hooks (useCartItems, useCartLoading, useCartCheckoutUrl, useCartActions)
-- Updated component usage patterns to leverage new selector functions for optimal performance
+- Enhanced authentication logout functionality with immediate localStorage cleanup, synchronous state clearing, and instant redirect
+- Improved user experience during account sign-out by eliminating delays and ensuring immediate state cleanup
+- Added background Supabase signOut for complete session termination
+- Updated authentication state handling with enhanced error management and AbortController support
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -46,7 +47,7 @@ This document explains the state management architecture in the Ryland applicati
 
 It documents cart state management, authentication state handling, and the toast notification system. It also covers state synchronization patterns, data fetching strategies, persistence, performance considerations, debugging, and best practices for scalability.
 
-**Updated** The authentication system now implements a sophisticated dual-session restoration approach combining synchronous localStorage checks with asynchronous Supabase listeners, eliminating blank screen issues during page refreshes. The cart store provides enhanced selector functions for improved performance and fine-grained re-render control.
+**Updated** The authentication system now implements a sophisticated dual-session restoration approach combining synchronous localStorage checks with asynchronous Supabase listeners, eliminating blank screen issues during page refreshes. The logout functionality has been enhanced with immediate localStorage cleanup, synchronous state clearing, and instant redirect to provide better user experience during account sign-out. The cart store provides enhanced selector functions for improved performance and fine-grained re-render control.
 
 ## Project Structure
 The project is a React + TypeScript application using Vite. State management is implemented primarily in:
@@ -63,10 +64,13 @@ PD["ProductDetail.tsx"]
 CD["CartDrawer.tsx"]
 SONNER["components/ui/sonner.tsx"]
 TOASTER["components/ui/toaster.tsx"]
+PS["PortalSidebar.tsx"]
+PL["PortalLogin.tsx"]
+AG["AuthGuard.tsx"]
 END
 subgraph "Enhanced State Stores"
 CART["stores/cartStore.ts<br/>+ Separate Selectors"]
-AUTH["hooks/useAuth.tsx<br/>+ Dual Session Restoration"]
+AUTH["hooks/useAuth.tsx<br/>+ Dual Session Restoration<br/>+ Enhanced Logout"]
 END
 subgraph "External Services"
 SUPABASE["@supabase/supabase-js<br/>+ localStorage Sync"]
@@ -75,6 +79,9 @@ END
 PD --> CART
 CD --> CART
 SONNER --> TOASTER
+PS --> AUTH
+PL --> AUTH
+AG --> AUTH
 CART --> SHOP
 AUTH --> SUPABASE
 ```
@@ -87,6 +94,9 @@ AUTH --> SUPABASE
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
 - [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
 - [src/lib/shopify.ts:54-104](file://src/lib/shopify.ts#L54-L104)
+- [src/components/portal/PortalSidebar.tsx:41-120](file://src/components/portal/PortalSidebar.tsx#L41-L120)
+- [src/pages/portal/PortalLogin.tsx:20-35](file://src/pages/portal/PortalLogin.tsx#L20-L35)
+- [src/components/portal/AuthGuard.tsx:10-27](file://src/components/portal/AuthGuard.tsx#L10-L27)
 
 **Section sources**
 - [README.md:53-74](file://README.md#L53-L74)
@@ -94,21 +104,21 @@ AUTH --> SUPABASE
 
 ## Core Components
 - Zustand cart store: Manages cart items, cart ID, checkout URL, loading states, and persistence to localStorage. Provides actions to add/update/remove items and to synchronize with Shopify. **Enhanced** with separate selector functions for improved performance.
-- Authentication hook: Implements dual-session restoration using synchronous localStorage checks followed by asynchronous Supabase listeners, with enhanced error handling and AbortController support for affiliate data fetching.
+- Authentication hook: Implements dual-session restoration using synchronous localStorage checks followed by asynchronous Supabase listeners, with enhanced error handling and AbortController support for affiliate data fetching. **Enhanced** with immediate logout functionality including localStorage cleanup and instant redirect.
 - Toast system: A lightweight toast manager with a reducer-driven store and UI components for rendering notifications.
 
 Key implementation references:
 - Cart store definition and actions: [src/stores/cartStore.ts:37-171](file://src/stores/cartStore.ts#L37-L171)
 - Cart synchronization hook: [src/hooks/useCartSync.ts:1-16](file://src/hooks/useCartSync.ts#L1-L16)
 - Shopify API wrapper: [src/lib/shopify.ts:54-104](file://src/lib/shopify.ts#L54-L104)
-- Auth provider and context: [src/hooks/useAuth.tsx:32-134](file://src/hooks/useAuth.tsx#L32-L134)
+- Auth provider and context: [src/hooks/useAuth.tsx:32-176](file://src/hooks/useAuth.tsx#L32-L176)
 - Toast manager and UI: [src/hooks/use-toast.ts:1-186](file://src/hooks/use-toast.ts#L1-L186), [src/components/ui/sonner.tsx:1-27](file://src/components/ui/sonner.tsx#L1-L27), [src/components/ui/toaster.tsx:1-24](file://src/components/ui/toaster.tsx#L1-L24)
 
 **Section sources**
 - [src/stores/cartStore.ts:1-171](file://src/stores/cartStore.ts#L1-L171)
 - [src/hooks/useCartSync.ts:1-16](file://src/hooks/useCartSync.ts#L1-L16)
 - [src/lib/shopify.ts:54-104](file://src/lib/shopify.ts#L54-L104)
-- [src/hooks/useAuth.tsx:1-179](file://src/hooks/useAuth.tsx#L1-L179)
+- [src/hooks/useAuth.tsx:1-176](file://src/hooks/useAuth.tsx#L1-L176)
 - [src/hooks/use-toast.ts:1-186](file://src/hooks/use-toast.ts#L1-L186)
 - [src/components/ui/sonner.tsx:1-27](file://src/components/ui/sonner.tsx#L1-L27)
 - [src/components/ui/toaster.tsx:1-24](file://src/components/ui/toaster.tsx#L1-L24)
@@ -189,40 +199,39 @@ The AuthProvider implements a sophisticated dual-session restoration approach:
 - **Asynchronous Supabase listeners**: Falls back to Supabase auth state change listeners for login/logout events
 - **Enhanced error handling**: Improved error management with AbortController support for affiliate data fetching
 - **Background affiliate loading**: Affiliate metadata is fetched asynchronously after initial session restoration
+- **Enhanced logout functionality**: Immediate localStorage cleanup, synchronous state clearing, and instant redirect
 
 **Updated** Key improvements in the authentication system:
 - `restoreSessionFromStorage()`: Synchronously searches localStorage for Supabase auth tokens and restores session immediately
 - `cancelled` flag: Prevents state updates after component unmounting
 - Enhanced `fetchAffiliate()` with AbortController support and graceful error handling
+- **Enhanced** `signOut()` function with immediate localStorage cleanup, synchronous state clearing, and instant redirect:
+  - Clears Supabase auth tokens from localStorage first (immediate)
+  - Sets user, session, and affiliate to null immediately
+  - Redirects to `/portal/login` without waiting for Supabase response
+  - Calls Supabase signOut in background (fire and forget)
 - Improved logging and debugging capabilities throughout the authentication flow
 
 ```mermaid
 sequenceDiagram
-participant App as "App.tsx"
-participant Provider as "useAuth.tsx"
+participant UI as "PortalSidebar.tsx"
+participant Auth as "useAuth.tsx"
 participant Storage as "localStorage"
 participant Supabase as "@supabase/supabase-js"
-App->>Provider : "Initialize AuthProvider"
-Provider->>Storage : "restoreSessionFromStorage()"
-Storage-->>Provider : "Session restored (if exists)"
-alt Session found
-Provider->>Provider : "setState({ user, session, loading : false })"
-Provider->>Provider : "fetchAffiliate(user.id) in background"
-else No session
-Provider->>Provider : "setState({ loading : false })"
-end
-Provider->>Supabase : "onAuthStateChange(...)"
-Supabase-->>Provider : "Auth events"
-Provider->>Provider : "Update state with new session"
-Provider->>Provider : "fetchAffiliate(user.id) if authenticated"
+UI->>Auth : "signOut()"
+Auth->>Storage : "removeItem(storageKey)"
+Auth->>Auth : "setState({ user : null, session : null, affiliate : null })"
+Auth->>UI : "window.location.href = '/portal/login'"
+Auth->>Supabase : "signOut() (background)"
+Supabase-->>Auth : "Response (ignored)"
 ```
 
 **Diagram sources**
-- [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
-- [src/hooks/useAuth.tsx:122-142](file://src/hooks/useAuth.tsx#L122-L142)
+- [src/components/portal/PortalSidebar.tsx:120](file://src/components/portal/PortalSidebar.tsx#L120)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 **Section sources**
-- [src/hooks/useAuth.tsx:1-179](file://src/hooks/useAuth.tsx#L1-L179)
+- [src/hooks/useAuth.tsx:1-176](file://src/hooks/useAuth.tsx#L1-L176)
 
 ### Toast Notification System
 The toast system consists of:
@@ -262,14 +271,17 @@ UI-->>Page : "Render toast with title/description"
 - Cart synchronization on visibility change: A dedicated hook triggers cart sync when the page becomes visible, ensuring local state reflects server state after potential external edits.
 - **Enhanced** Dual authentication session restoration: Auth state is immediately restored from localStorage (synchronous) before relying on Supabase listeners (asynchronous).
 - **Enhanced** selector-based component patterns: Components now use specific selector functions to minimize re-renders and improve performance.
+- **Enhanced** Logout synchronization: Logout operations now provide immediate state synchronization across the application.
 
 References:
 - Visibility-based sync: [src/hooks/useCartSync.ts:1-16](file://src/hooks/useCartSync.ts#L1-L16)
 - Dual session restoration: [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
+- Enhanced logout: [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 **Section sources**
 - [src/hooks/useCartSync.ts:1-16](file://src/hooks/useCartSync.ts#L1-L16)
 - [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 ### Data Fetching Strategies
 - Shopify storefront queries are executed via a wrapper that handles errors and returns structured data.
@@ -277,20 +289,24 @@ References:
 - Product detail pages trigger async operations to add items to the cart and show toasts upon completion.
 - **Enhanced** selector functions provide better separation of concerns and improved component performance.
 - **Enhanced** affiliate data fetching with AbortController support for better cleanup and error handling.
+- **Enhanced** logout data fetching with immediate cleanup and background processing.
 
 References:
 - Shopify API request and error handling: [src/lib/shopify.ts:54-79](file://src/lib/shopify.ts#L54-L79)
 - Cart sync via storefront query: [src/stores/cartStore.ts:147-162](file://src/stores/cartStore.ts#L147-L162)
 - Add-to-cart flow with toast: [src/pages/ProductDetail.tsx:210-223](file://src/pages/ProductDetail.tsx#L210-L223)
+- Enhanced logout: [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 **Section sources**
 - [src/lib/shopify.ts:54-104](file://src/lib/shopify.ts#L54-L104)
 - [src/stores/cartStore.ts:147-162](file://src/stores/cartStore.ts#L147-L162)
 - [src/pages/ProductDetail.tsx:210-223](file://src/pages/ProductDetail.tsx#L210-L223)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 ### State Persistence
 - Cart persistence: The cart store persists items, cartId, and checkoutUrl to localStorage using Zustand's persist middleware with a partialize function to minimize persisted payload.
 - **Enhanced** Authentication persistence: Session restoration now prioritizes localStorage for immediate availability, reducing blank screen issues during page refreshes.
+- **Enhanced** Logout persistence: Immediate localStorage cleanup ensures complete session termination across browser sessions.
 - No explicit persistence is shown for the auth context beyond the dual-session restoration approach.
 
 References:
@@ -299,6 +315,7 @@ References:
 **Section sources**
 - [src/stores/cartStore.ts:164-169](file://src/stores/cartStore.ts#L164-L169)
 - [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 ### Practical Examples and Custom Hooks
 - Cart sync hook: Demonstrates subscribing to visibility changes and invoking a store action.
@@ -310,6 +327,9 @@ References:
 - **Enhanced** selector usage: Components now use specific selector functions for optimal performance.
   - Reference: [src/components/CartDrawer.tsx:11](file://src/components/CartDrawer.tsx#L11)
   - Reference: [src/pages/ProductDetail.tsx:192-194](file://src/pages/ProductDetail.tsx#L192-L194)
+- **Enhanced** Logout usage: Demonstrates immediate session termination with localStorage cleanup and instant redirect.
+  - Reference: [src/components/portal/PortalSidebar.tsx:120](file://src/components/portal/PortalSidebar.tsx#L120)
+  - Reference: [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 **Section sources**
 - [src/hooks/useCartSync.ts:1-16](file://src/hooks/useCartSync.ts#L1-L16)
@@ -317,6 +337,8 @@ References:
 - [src/hooks/useAuth.tsx:32-134](file://src/hooks/useAuth.tsx#L32-L134)
 - [src/components/CartDrawer.tsx:11](file://src/components/CartDrawer.tsx#L11)
 - [src/pages/ProductDetail.tsx:192-194](file://src/pages/ProductDetail.tsx#L192-L194)
+- [src/components/portal/PortalSidebar.tsx:120](file://src/components/portal/PortalSidebar.tsx#L120)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 
 ## Dependency Analysis
 The state management stack relies on:
@@ -330,7 +352,7 @@ The state management stack relies on:
 graph LR
 ZUSTAND["zustand"] --> CARTSTORE["cartStore.ts<br/>+ Separate Selectors"]
 REACTQUERY["@tanstack/react-query"] -.-> SERVERSTATE["Server state (external)"]
-SUPABASE["@supabase/supabase-js<br/>+ Dual Session Restoration"] --> AUTHHOOK["useAuth.tsx"]
+SUPABASE["@supabase/supabase-js<br/>+ Dual Session Restoration<br/>+ Enhanced Logout"] --> AUTHHOOK["useAuth.tsx"]
 SHOP["lib/shopify.ts"] --> CARTSTORE
 RADIX["@radix-ui/react-toast"] --> TOASTUI["toaster.tsx"]
 SONNER["sonner"] --> SONNERCOMP["sonner.tsx"]
@@ -340,7 +362,7 @@ TOASTUI --> SONNERCOMP
 **Diagram sources**
 - [package.json:45-69](file://package.json#L45-L69)
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
-- [src/hooks/useAuth.tsx:1-179](file://src/hooks/useAuth.tsx#L1-L179)
+- [src/hooks/useAuth.tsx:1-176](file://src/hooks/useAuth.tsx#L1-L176)
 - [src/lib/shopify.ts:54-104](file://src/lib/shopify.ts#L54-L104)
 - [src/components/ui/toaster.tsx:1-24](file://src/components/ui/toaster.tsx#L1-L24)
 - [src/components/ui/sonner.tsx:1-27](file://src/components/ui/sonner.tsx#L1-L27)
@@ -351,6 +373,7 @@ TOASTUI --> SONNERCOMP
 ## Performance Considerations
 - **Enhanced** Minimize re-renders by using separate selector functions that select only necessary slices of state in components.
 - **Enhanced** Dual-session restoration eliminates blank screen issues during page refreshes by prioritizing synchronous localStorage checks.
+- **Enhanced** Immediate logout functionality provides instant user feedback and reduces perceived latency.
 - Use optimistic updates for cart operations and reconcile with server state via sync.
 - Debounce or batch frequent updates (e.g., quantity changes) to reduce network calls.
 - Keep persisted state minimal (already partially persisted) to reduce storage overhead.
@@ -359,6 +382,7 @@ TOASTUI --> SONNERCOMP
 - **New** Leverage the new selector functions (useCartItems, useCartLoading, useCartCheckoutUrl, useCartActions) for optimal component performance.
 - **New** Empty cart handling logic ensures efficient cleanup when cart becomes empty after item removal.
 - **New** Enhanced error handling with AbortController support prevents memory leaks and improves cleanup.
+- **New** Background Supabase signOut ensures complete session termination without blocking the UI.
 
 ## Troubleshooting Guide
 Common issues and remedies:
@@ -375,6 +399,11 @@ Common issues and remedies:
   - Ensure component cancellation flag prevents state updates after unmount.
   - Verify affiliate fetch error handling with AbortController support.
   - References: [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120), [src/hooks/useAuth.tsx:122-142](file://src/hooks/useAuth.tsx#L122-L142)
+- **Enhanced** Logout not working properly
+  - Verify localStorage cleanup is successful before state clearing.
+  - Check that redirect occurs immediately without waiting for Supabase response.
+  - Ensure background Supabase signOut doesn't block UI.
+  - References: [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 - Shopify API errors
   - Inspect error handling in the API wrapper and surface user-friendly messages.
   - References: [src/lib/shopify.ts:54-79](file://src/lib/shopify.ts#L54-L79)
@@ -393,8 +422,13 @@ Common issues and remedies:
 - [src/components/ui/toaster.tsx:4-23](file://src/components/ui/toaster.tsx#L4-L23)
 - [src/pages/ProductDetail.tsx:210-223](file://src/pages/ProductDetail.tsx#L210-L223)
 - [src/hooks/useAuth.tsx:71-120](file://src/hooks/useAuth.tsx#L71-L120)
+- [src/hooks/useAuth.tsx:155-176](file://src/hooks/useAuth.tsx#L155-L176)
 - [src/lib/shopify.ts:54-79](file://src/lib/shopify.ts#L54-L79)
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
 
 ## Conclusion
-Ryland's state management combines Zustand for robust local state and persistence with **enhanced selector functions** for improved performance, Supabase for **dual-session authentication** with synchronous localStorage restoration, and a custom toast system for user feedback. The cart store integrates with Shopify via targeted mutations and sync operations, while the auth provider ensures responsive UX through immediate session restoration and background data loading. The new selector functions (useCartItems, useCartLoading, useCartCheckoutUrl, useCartActions) provide fine-grained re-render control and significantly improve component performance. The enhanced authentication system addresses blank screen issues during page refreshes through dual-session restoration, while improved error handling and AbortController support ensure better resource management. Following the recommended patterns and best practices will help maintain scalability and reliability as the application evolves.
+Ryland's state management combines Zustand for robust local state and persistence with **enhanced selector functions** for improved performance, Supabase for **dual-session authentication** with synchronous localStorage restoration, and a custom toast system for user feedback. The cart store integrates with Shopify via targeted mutations and sync operations, while the auth provider ensures responsive UX through immediate session restoration and background data loading.
+
+**Updated** The authentication system now provides an enhanced logout experience with immediate localStorage cleanup, synchronous state clearing, and instant redirect to `/portal/login`, eliminating delays and ensuring complete session termination. The logout functionality follows the same pattern as the dual-session restoration approach, prioritizing immediate user feedback and complete state cleanup before performing background cleanup operations.
+
+The new selector functions (useCartItems, useCartLoading, useCartCheckoutUrl, useCartActions) provide fine-grained re-render control and significantly improve component performance. The enhanced authentication system addresses blank screen issues during page refreshes through dual-session restoration, while improved error handling and AbortController support ensure better resource management. Following the recommended patterns and best practices will help maintain scalability and reliability as the application evolves.

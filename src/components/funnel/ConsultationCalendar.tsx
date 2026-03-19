@@ -7,7 +7,24 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
-import { supabase } from "@/integrations/supabase/client";
+// Use direct fetch instead of supabase.functions.invoke() to avoid SDK AbortError
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+async function invokeEdgeFunction(name: string, body: Record<string, unknown>) {
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "apikey": SUPABASE_KEY,
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+  return data;
+}
 import { ArrowLeft, CheckCircle2, Loader2, Clock, CalendarDays, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,18 +68,15 @@ export default function ConsultationCalendar() {
     try {
       const start = startOfMonth(monthStart);
       const end = endOfMonth(monthStart);
-      const { data, error: fnError } = await supabase.functions.invoke("ghl-calendar", {
-        body: {
-          action: "get-slots",
-          startDate: start.getTime(),
-          endDate: end.getTime(),
-          timezone,
-        },
+      const data = await invokeEdgeFunction("ghl-calendar", {
+        action: "get-slots",
+        startDate: start.getTime(),
+        endDate: end.getTime(),
+        timezone,
       });
-      if (fnError) throw fnError;
       const slotData: SlotMap = data || {};
       setSlots(slotData);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error("Failed to fetch slots:", e);
       setError("Unable to load availability. Please try again.");
     } finally {
@@ -113,19 +127,16 @@ export default function ConsultationCalendar() {
       const endDate = new Date(new Date(selectedSlot).getTime() + 30 * 60 * 1000);
       const endTime = endDate.toISOString();
 
-      const { data, error: fnError } = await supabase.functions.invoke("ghl-calendar", {
-        body: {
-          action: "book",
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim() || undefined,
-          notes: notes.trim() || undefined,
-          startTime,
-          endTime,
-          timezone,
-        },
+      const data = await invokeEdgeFunction("ghl-calendar", {
+        action: "book",
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim() || undefined,
+        notes: notes.trim() || undefined,
+        startTime,
+        endTime,
+        timezone,
       });
-      if (fnError) throw fnError;
       if (data?.error) throw new Error(data.error);
       if (!isFunnel && selectedDate && selectedSlot) {
         navigate("/booking-confirmed", {
@@ -138,7 +149,7 @@ export default function ConsultationCalendar() {
       } else {
         setStep("confirmed");
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error("Booking failed:", e);
       setError("Booking failed. Please try again or contact us directly.");
     } finally {
