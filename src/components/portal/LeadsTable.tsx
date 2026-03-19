@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Users, CheckCircle, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import type { Lead } from "@/types/leads";
@@ -32,7 +32,7 @@ const invoiceStatusBadge: Record<string, string> = {
   "Pending": "bg-slate-50 text-slate-600 border-slate-200",
 };
 
-export default function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: LeadsTableProps) {
+function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: LeadsTableProps) {
   const { toast } = useToast();
   const [approvingId, setApprovingId] = useState<string | null>(null);
 
@@ -143,3 +143,5 @@ export default function LeadsTable({ leads, isLoading, onSelectLead, adminMode, 
     </div>
   );
 }
+
+export default memo(LeadsTable);
