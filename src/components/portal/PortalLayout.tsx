@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import PortalSidebar from "./PortalSidebar";
 import AuthGuard from "./AuthGuard";
+import PortalContentLoader from "./PortalContentLoader";
 import { useAuth } from "@/hooks/useAuth";
 import { Menu } from "lucide-react";
 
@@ -34,7 +36,9 @@ export default function PortalLayout() {
 
             {/* Page content — light background */}
             <main className="flex-1 overflow-y-auto p-4 lg:p-8">
-              <Outlet />
+              <Suspense fallback={<PortalContentLoader />}>
+                <Outlet />
+              </Suspense>
             </main>
           </div>
         </div>
