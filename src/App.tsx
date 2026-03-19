@@ -33,6 +33,16 @@ import OptIn from "./pages/OptIn";
 import ThankYou from "./pages/ThankYou";
 import MyOrders from "./pages/MyOrders";
 import DownloadRedirect from "./pages/DownloadRedirect";
+import PortalLogin from "./pages/portal/PortalLogin";
+import PortalLayout from "./components/portal/PortalLayout";
+import PortalDashboard from "./pages/portal/PortalDashboard";
+import PortalLeads from "./pages/portal/PortalLeads";
+import PortalCommissions from "./pages/portal/PortalCommissions";
+import PortalCalculator from "./pages/portal/PortalCalculator";
+import PortalResources from "./pages/portal/PortalResources";
+import PortalEvents from "./pages/portal/PortalEvents";
+import PortalSpeaking from "./pages/portal/PortalSpeaking";
+import PortalSettings from "./pages/portal/PortalSettings";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +82,17 @@ const AppContent = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/download/:token" element={<DownloadRedirect />} />
+          <Route path="/portal/login" element={<PortalLogin />} />
+          <Route path="/portal" element={<PortalLayout />}>
+            <Route index element={<PortalDashboard />} />
+            <Route path="leads" element={<PortalLeads />} />
+            <Route path="commissions" element={<PortalCommissions />} />
+            <Route path="calculator" element={<PortalCalculator />} />
+            <Route path="resources" element={<PortalResources />} />
+            <Route path="events" element={<PortalEvents />} />
+            <Route path="speaking" element={<PortalSpeaking />} />
+            <Route path="settings" element={<PortalSettings />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

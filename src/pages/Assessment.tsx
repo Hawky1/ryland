@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { captureReferral, getReferralAffiliateId } from "@/lib/referralTracking";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import {
@@ -100,6 +101,9 @@ export default function Assessment() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<"credit_repair" | "business_funding" | null>(null);
 
+  // Capture referral attribution on mount
+  useEffect(() => { captureReferral(); }, []);
+
   const totalSteps = STEPS.length + 1; // quiz steps + contact step
   const progress = result ? 100 : ((step + 1) / (totalSteps + 1)) * 100;
 
@@ -150,7 +154,13 @@ export default function Assessment() {
       });
       if (error) throw error;
 
-      // Fire-and-forget: sync to GHL
+      // Fire-and-forget: sync to GHL with affiliate attribution
+      const refId = getReferralAffiliateId();
+      const tags = ["assessment-lead", qualification];
+      if (refId) {
+        tags.push("Affiliate", `Affiliate - ${refId}`);
+      }
+
       supabase.functions
         .invoke("ghl-create-contact", {
           body: {
@@ -158,8 +168,8 @@ export default function Assessment() {
             email: parsed.data.email,
             phone: parsed.data.phone,
             businessName: parsed.data.business_name,
-            tags: ["assessment-lead", qualification],
-            source: "Funding Assessment",
+            tags,
+            source: refId ? `Affiliate Referral - ${refId}` : "Funding Assessment",
             customFields: {
               credit_score_range: answers.credit_score,
               primary_goal: answers.primary_goal,
@@ -167,11 +177,29 @@ export default function Assessment() {
               funding_timeline: answers.funding_timeline,
               denied_recently: answers.denied_recently,
               qualification,
+              ...(refId ? { affiliate_id: refId } : {}),
             },
           },
         })
         .then(({ error: ghlErr }) => {
           if (ghlErr) console.error("GHL sync failed:", ghlErr);
+
+          // If affiliate referral, also record the lead in the portal
+          if (refId) {
+            supabase.functions
+              .invoke("ghl-affiliate-webhook", {
+                body: {
+                  type: "lead_referred",
+                  affiliate_id: refId,
+                  full_name: parsed.data.name,
+                  email: parsed.data.email,
+                  phone: parsed.data.phone,
+                },
+              })
+              .then(({ error: webhookErr }) => {
+                if (webhookErr) console.error("Affiliate lead sync failed:", webhookErr);
+              });
+          }
         });
 
       setResult(qualification);
