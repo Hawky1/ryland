@@ -113,7 +113,7 @@ export const CartDrawer = () => {
                               {item.product.node.title}
                             </h4>
                             {item.selectedOptions.length > 0 && (
-                              <p className="text-xs text-slate-400 mt-0.5">
+                              <p className="text-xs text-slate-500 mt-0.5">
                                 {item.selectedOptions.map(o => o.value).join(' · ')}
                               </p>
                             )}
