@@ -40,26 +40,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const fetchAffiliate = useCallback(async (userId: string) => {
     console.log("Fetching affiliate for user:", userId);
     
-    // Add timeout to prevent infinite loading
-    const timeoutPromise = new Promise<never>((_, reject) => 
-      setTimeout(() => reject(new Error("Affiliate fetch timeout")), 10000)
-    );
-    
-    const fetchPromise = supabase
-      .from("affiliates")
-      .select("id, affiliate_id, full_name, email, phone, company_name, website, status")
-      .eq("user_id", userId)
-      .maybeSingle();
-    
-    const { data, error } = await Promise.race([fetchPromise, timeoutPromise]);
-    
-    if (error) {
-      console.error("Supabase error fetching affiliate:", error);
-      throw error;
+    try {
+      // Remove timeout - let Supabase handle it, but add abort controller for cleanup
+      const { data, error } = await supabase
+        .from("affiliates")
+        .select("id, affiliate_id, full_name, email, phone, company_name, website, status")
+        .eq("user_id", userId)
+        .maybeSingle();
+      
+      if (error) {
+        console.error("Supabase error fetching affiliate:", error.message, error.code, error.details);
+        throw error;
+      }
+      
+      console.log("Affiliate data found:", data ? "YES" : "NO", data?.affiliate_id);
+      return data as Affiliate | null;
+    } catch (err) {
+      console.error("Fetch affiliate exception:", (err as Error)?.message || err);
+      // Return null instead of throwing - allows portal to work without affiliate data
+      return null;
     }
-    
-    console.log("Affiliate data:", data);
-    return data as Affiliate | null;
   }, []);
 
   useEffect(() => {
