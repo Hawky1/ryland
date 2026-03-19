@@ -34,7 +34,6 @@ import successCredit from "@/assets/success-credit.webp";
 import successEmpire from "@/assets/success-empire.webp";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
 import geneHeroOffice from "@/assets/gene-hero-office.jpg";
 import geneHeroHeadshot from "@/assets/gene-hero-headshot.jpg";
