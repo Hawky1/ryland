@@ -66,7 +66,7 @@ const Footer = () => {
 
         {/* General Disclaimer */}
         <div className="border-t border-slate-200 pt-8 pb-6">
-          <p className="text-xs text-slate-400 leading-relaxed max-w-4xl mx-auto text-center">
+          <p className="text-xs text-slate-500 leading-relaxed max-w-4xl mx-auto text-center">
             Ryland Partners provides financial education and consulting services. We are not a lender and do not guarantee funding approval or specific credit amounts. All outcomes depend on individual qualifications, lender decisions, and credit profile. Results vary.
           </p>
         </div>
