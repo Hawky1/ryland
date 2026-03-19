@@ -142,6 +142,7 @@ const Index = () => {
                 <img
                   src={geneHeroOffice}
                   alt="Gene Ryland — Business Credit Strategist"
+                  fetchPriority="high"
                   className="w-full rounded-2xl border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-blue-500/10 object-cover aspect-[4/5]"
                 />
               </div>
