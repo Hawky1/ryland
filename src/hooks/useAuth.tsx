@@ -38,11 +38,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const fetchAffiliate = useCallback(async (userId: string) => {
-    const { data } = await supabase
+    console.log("Fetching affiliate for user:", userId);
+    
+    // Add timeout to prevent infinite loading
+    const timeoutPromise = new Promise<never>((_, reject) => 
+      setTimeout(() => reject(new Error("Affiliate fetch timeout")), 10000)
+    );
+    
+    const fetchPromise = supabase
       .from("affiliates")
       .select("id, affiliate_id, full_name, email, phone, company_name, website, status")
       .eq("user_id", userId)
       .maybeSingle();
+    
+    const { data, error } = await Promise.race([fetchPromise, timeoutPromise]);
+    
+    if (error) {
+      console.error("Supabase error fetching affiliate:", error);
+      throw error;
+    }
+    
+    console.log("Affiliate data:", data);
     return data as Affiliate | null;
   }, []);
 
@@ -55,22 +71,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const user = session?.user ?? null;
 
         // Set user immediately so AuthGuard can pass, fetch affiliate in background
-        setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
+        setState((prev) => ({ ...prev, user, session, loading: false }));
 
+        // Fetch affiliate data in background (non-blocking)
         if (user) {
-          try {
-            const affiliate = await fetchAffiliate(user.id);
+          fetchAffiliate(user.id).then((affiliate) => {
             if (!cancelled) {
-              setState({ user, session, affiliate, loading: false });
+              setState((prev) => ({ ...prev, affiliate }));
             }
-          } catch (err) {
+          }).catch((err) => {
             console.error("Failed to fetch affiliate:", err);
-            if (!cancelled) {
-              setState({ user, session, affiliate: null, loading: false });
-            }
-          }
-        } else {
-          setState({ user: null, session: null, affiliate: null, loading: false });
+          });
         }
       }
     );
@@ -79,22 +90,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (cancelled) return;
       const user = session?.user ?? null;
 
-      setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
+      // Set user immediately so AuthGuard can pass
+      setState((prev) => ({ ...prev, user, session, loading: false }));
 
+      // Fetch affiliate data in background (non-blocking)
       if (user) {
-        try {
-          const affiliate = await fetchAffiliate(user.id);
+        fetchAffiliate(user.id).then((affiliate) => {
           if (!cancelled) {
-            setState({ user, session, affiliate, loading: false });
+            setState((prev) => ({ ...prev, affiliate }));
           }
-        } catch (err) {
+        }).catch((err) => {
           console.error("Failed to fetch affiliate:", err);
-          if (!cancelled) {
-            setState({ user: null, session: null, affiliate: null, loading: false });
-          }
-        }
-      } else {
-        setState({ user: null, session: null, affiliate: null, loading: false });
+        });
       }
     });
 
