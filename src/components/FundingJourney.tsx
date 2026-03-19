@@ -176,7 +176,6 @@ export default function FundingJourney() {
               Next
               <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
-            </button>
           </div>
         </div>
       </div>
