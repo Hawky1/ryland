@@ -133,6 +133,7 @@ export const CartDrawer = () => {
                           <div className="flex items-center gap-0.5 bg-slate-50 rounded-lg border border-slate-100">
                             <button
                               onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                              aria-label="Decrease quantity"
                               className="p-1.5 text-slate-500 hover:text-slate-900 transition-colors"
                             >
                               <Minus className="h-3 w-3" />
@@ -142,6 +143,7 @@ export const CartDrawer = () => {
                             </span>
                             <button
                               onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                              aria-label="Increase quantity"
                               className="p-1.5 text-slate-500 hover:text-slate-900 transition-colors"
                             >
                               <Plus className="h-3 w-3" />
