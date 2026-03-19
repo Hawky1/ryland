@@ -16,7 +16,7 @@ import WhyChooseUs from "@/components/store/WhyChooseUs";
 import PreFooterCTA from "@/components/store/PreFooterCTA";
 import ProductCard from "@/components/store/ProductCard";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 
 const BUNDLES = [
