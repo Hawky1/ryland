@@ -70,14 +70,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
+    let initialSessionLoaded = false;
 
+    // Single source of truth: onAuthStateChange handles both initial and subsequent auth events
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      async (event, session) => {
         if (cancelled) return;
+        
+        console.log('Auth state changed:', event, session?.user?.id || 'no user');
+        
         const user = session?.user ?? null;
 
-        // Set user immediately so AuthGuard can pass, fetch affiliate in background
+        // Set loading to false and update user/session
         setState((prev) => ({ ...prev, user, session, loading: false }));
+        initialSessionLoaded = true;
 
         // Fetch affiliate data in background (non-blocking)
         if (user) {
@@ -88,43 +94,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           }).catch((err) => {
             console.error("Failed to fetch affiliate:", err);
           });
+        } else {
+          // Clear affiliate if user logs out
+          setState((prev) => ({ ...prev, affiliate: null }));
         }
       }
     );
 
-    // Initial session check - this is critical for refresh
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
-      if (cancelled) return;
-      
-      if (error) {
-        console.error('getSession error:', error);
-      }
-      
-      const user = session?.user ?? null;
-      console.log('Initial session check:', user ? 'User found' : 'No user');
-
-      // Set user immediately so AuthGuard can pass
-      setState((prev) => ({ ...prev, user, session, loading: false }));
-
-      // Fetch affiliate data in background (non-blocking)
-      if (user) {
-        fetchAffiliate(user.id).then((affiliate) => {
-          if (!cancelled) {
-            setState((prev) => ({ ...prev, affiliate }));
+    // Fallback: If onAuthStateChange doesn't fire within 3 seconds, check manually
+    const fallbackTimeout = setTimeout(async () => {
+      if (!initialSessionLoaded && !cancelled) {
+        console.log('Fallback: checking session manually');
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (!cancelled && !initialSessionLoaded) {
+            const user = session?.user ?? null;
+            console.log('Fallback session check:', user ? 'User found' : 'No user');
+            setState((prev) => ({ ...prev, user, session, loading: false }));
+            
+            if (user) {
+              const affiliate = await fetchAffiliate(user.id);
+              if (!cancelled) {
+                setState((prev) => ({ ...prev, affiliate }));
+              }
+            }
           }
-        }).catch((err) => {
-          console.error("Failed to fetch affiliate:", err);
-        });
+        } catch (err) {
+          console.error('Fallback session check failed:', err);
+          if (!cancelled) {
+            setState((prev) => ({ ...prev, loading: false }));
+          }
+        }
       }
-    }).catch((err) => {
-      if (cancelled) return;
-      console.error('getSession failed:', err);
-      // Even on error, stop loading
-      setState((prev) => ({ ...prev, loading: false }));
-    });
+    }, 3000);
 
     return () => {
       cancelled = true;
+      clearTimeout(fallbackTimeout);
       subscription.unsubscribe();
     };
   }, [fetchAffiliate]);
