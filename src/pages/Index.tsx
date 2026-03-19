@@ -362,7 +362,7 @@ const Index = () => {
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofIbc} alt="IBC Visa credit card application approved" className="w-full object-cover" />
+                    <img src={proofIbc} alt="IBC Visa credit card application approved" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
