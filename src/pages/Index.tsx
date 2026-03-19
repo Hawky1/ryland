@@ -205,7 +205,7 @@ const Index = () => {
                 <p className="text-white/80 leading-relaxed text-base">After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.</p>
                 <p className="text-white/80 leading-relaxed text-base">Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.</p>
                 <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/20">
-                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p><p className="text-xs text-white/60 mt-1">Funding Secured</p></div>
+                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p><p className="text-xs text-white/70 mt-1">Funding Secured</p></div>
                   <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p><p className="text-xs text-white/60 mt-1">Entrepreneurs Helped</p></div>
                   <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p><p className="text-xs text-white/60 mt-1">Years of Experience</p></div>
                 </div>
