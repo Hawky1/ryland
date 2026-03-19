@@ -207,7 +207,7 @@ const Index = () => {
                 <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/20">
                   <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p><p className="text-xs text-white/70 mt-1">Funding Secured</p></div>
                   <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p><p className="text-xs text-white/70 mt-1">Entrepreneurs Helped</p></div>
-                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p><p className="text-xs text-white/60 mt-1">Years of Experience</p></div>
+                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p><p className="text-xs text-white/70 mt-1">Years of Experience</p></div>
                 </div>
                 <div className="pt-4">
                   <Link to="/contact" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
