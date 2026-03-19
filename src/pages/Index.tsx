@@ -422,7 +422,7 @@ const Index = () => {
       <section className="my-10 max-w-7xl mx-4 sm:mx-auto border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden" id="cta">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
         <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
             Not Sure Where to Start?
           </h3>
           <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
