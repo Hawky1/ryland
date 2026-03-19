@@ -73,10 +73,10 @@ const About = () => {
         <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-10">
           <HlsVideoBackground overlay="bg-[#003A70]/90" />
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight">$<Counter target={150} />M+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Funding Secured</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={10000} prefix="" />+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Entrepreneurs Helped</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={8} />+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Years Experience</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={0} />%</p><p className="text-xs sm:text-sm text-white/60 mt-1">APR Introductory Rates</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight">$<Counter target={150} />M+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Funding Secured</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={10000} prefix="" />+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Entrepreneurs Helped</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={8} />+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Years Experience</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={0} />%</p><p className="text-xs sm:text-sm text-white/70 mt-1">APR Introductory Rates</p></div>
           </div>
         </div>
       </section>
