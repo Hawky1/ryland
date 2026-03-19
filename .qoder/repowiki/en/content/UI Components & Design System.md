@@ -12,7 +12,18 @@
 - [postcss.config.js](file://postcss.config.js)
 - [eslint.config.js](file://eslint.config.js)
 - [vitest.config.ts](file://vitest.config.ts)
+- [src/components/portal/LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
+- [src/pages/portal/PortalLeads.tsx](file://src/pages/portal/PortalLeads.tsx)
+- [src/hooks/useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
+- [src/types/leads.ts](file://src/types/leads.ts)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Updated Performance Considerations section to include component-level memoization optimization
+- Added detailed analysis of LeadsTable component optimization techniques
+- Enhanced Component Composition Patterns section with performance best practices
+- Updated Troubleshooting Guide with memoization-related guidance
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -68,7 +79,7 @@ The design system centers around:
 
 Key integration points:
 - shadcn/ui configuration defines aliases and Tailwind settings, including CSS variables for base colors.
-- Tailwind configuration controls the design system’s foundational tokens and enables consistent theming.
+- Tailwind configuration controls the design system's foundational tokens and enables consistent theming.
 
 **Section sources**
 - [components.json:1-20](file://components.json#L1-L20)
@@ -181,6 +192,26 @@ Customization:
 - [package.json:19](file://package.json#L19)
 - [package.json:33](file://package.json#L33)
 
+### Component-Level Memoization Optimization
+**Updated** The LeadsTable component demonstrates advanced performance optimization through React.memo wrapper and named function exports.
+
+The LeadsTable component implements several performance optimization strategies:
+
+- **Component-level memoization**: Wrapped with `React.memo()` to prevent unnecessary re-renders when props remain unchanged
+- **Named function export**: Converted from default export to named function (`export default memo(LeadsTable)`) for better tree-shaking and debugging
+- **Large dataset optimization**: Particularly beneficial for applications handling extensive lead data with frequent updates
+- **State isolation**: Local state management (`approvingId`, `setApprovingId`) is scoped to component boundaries
+
+Performance benefits:
+- Reduced render cycles for static data tables
+- Improved scrolling performance in large datasets
+- Better memory usage patterns for frequently updated lists
+- Enhanced user experience during bulk operations
+
+**Section sources**
+- [src/components/portal/LeadsTable.tsx:35-147](file://src/components/portal/LeadsTable.tsx#L35-L147)
+- [src/pages/portal/PortalLeads.tsx:55](file://src/pages/portal/PortalLeads.tsx#L55)
+
 ### Theming and Composition Patterns
 - CSS variables in Tailwind configuration enable theme-aware tokens.
 - shadcn/ui aliases streamline imports and promote consistent usage across the app.
@@ -217,22 +248,69 @@ P --> UTILS["Utilities<br/>class-variance-authority, clsx,<br/>tailwind-merge, l
 - [package.json:15-69](file://package.json#L15-L69)
 
 ## Performance Considerations
-- Prefer lightweight primitives and avoid unnecessary re-renders by composing components efficiently.
-- Use CSS variables and Tailwind utilities to minimize runtime style computations.
-- Keep component trees shallow and leverage lazy loading for heavy overlays.
+**Updated** The application implements comprehensive performance optimization strategies across multiple layers:
+
+### Component-Level Optimizations
+- **React.memo implementation**: The LeadsTable component uses `React.memo()` wrapper to prevent unnecessary re-renders when props remain unchanged
+- **Named function exports**: Converted from default exports to named functions for improved tree-shaking and debugging capabilities
+- **State management optimization**: Local state is scoped appropriately to minimize re-render triggers
+
+### Data Flow Optimization
+- **Efficient data fetching**: The useAffiliateLeads hook implements React Query for efficient caching and background updates
+- **Conditional rendering**: Loading states and empty state handling prevent unnecessary DOM manipulation
+- **Event delegation**: Click handlers are optimized to prevent event bubbling when not needed
+
+### Large Dataset Handling
+- **Virtualization considerations**: For extremely large datasets, consider implementing virtualized lists using libraries like react-window
+- **Pagination strategies**: Implement server-side pagination for datasets exceeding 1000+ records
+- **Memory management**: Proper cleanup of subscriptions and event listeners in useEffect hooks
+
+### Rendering Performance
+- **Minimal re-renders**: Use stable prop references and memoized callbacks to reduce component updates
+- **Optimized loops**: Efficient map operations with stable keys and minimal component nesting
+- **CSS-in-JS optimization**: Leverage Tailwind utility classes instead of dynamic styled components for better performance
+
+Best practices:
+- Monitor component render frequency using React DevTools Profiler
+- Implement performance budgets for critical components
+- Use React.lazy for non-critical components to improve initial load times
+- Consider code splitting for large feature modules
+
+**Section sources**
+- [src/components/portal/LeadsTable.tsx:5](file://src/components/portal/LeadsTable.tsx#L5)
+- [src/components/portal/LeadsTable.tsx:147](file://src/components/portal/LeadsTable.tsx#L147)
+- [src/hooks/useAffiliateLeads.ts:6-30](file://src/hooks/useAffiliateLeads.ts#L6-L30)
 
 ## Troubleshooting Guide
-Common issues and resolutions:
-- Missing shadcn/ui components after installation: verify aliases and Tailwind configuration in components.json and tailwind.config.ts.
-- Theme inconsistencies: ensure CSS variables are applied and Tailwind is generating utilities for the configured base color.
-- Accessibility regressions: confirm Radix UI ARIA attributes and focus management are intact when customizing components.
+**Updated** Common issues and resolutions with performance-related guidance:
+
+### Component Performance Issues
+- **Excessive re-renders**: Verify that components are properly memoized using React.memo wrapper
+- **Large dataset lag**: Implement pagination or virtualization for tables with more than 100 records
+- **Memory leaks**: Ensure proper cleanup of subscriptions and event listeners in useEffect hooks
+
+### Component-Level Memoization Problems
+- **Missing memoization**: Check that components using React.memo are exported as named functions
+- **Prop comparison issues**: Ensure props passed to memoized components are stable references
+- **Context provider conflicts**: Verify that memoized components aren't consuming unstable context values
+
+### Shadcn/UI Integration Issues
+- Missing shadcn/ui components after installation: verify aliases and Tailwind configuration in components.json and tailwind.config.ts
+- Theme inconsistencies: ensure CSS variables are applied and Tailwind is generating utilities for the configured base color
+- Accessibility regressions: confirm Radix UI ARIA attributes and focus management are intact when customizing components
+
+### Performance Debugging
+- Use React DevTools Profiler to identify components causing excessive re-renders
+- Monitor bundle size using webpack-bundle-analyzer for optimization opportunities
+- Implement performance monitoring in production using tools like Sentry or LogRocket
 
 **Section sources**
 - [components.json:1-20](file://components.json#L1-L20)
 - [tailwind.config.ts](file://tailwind.config.ts)
+- [src/components/portal/LeadsTable.tsx:147](file://src/components/portal/LeadsTable.tsx#L147)
 
 ## Conclusion
-The Ryland application employs a robust UI design system that combines Radix UI primitives with shadcn/ui components and Tailwind CSS. The system emphasizes accessibility, customization, and consistency through a centralized configuration that defines color tokens, typography, and spacing. By leveraging the provided aliases and CSS variables, developers can compose accessible, responsive interfaces that align with the design system’s guidelines.
+The Ryland application employs a robust UI design system that combines Radix UI primitives with shadcn/ui components and Tailwind CSS. The system emphasizes accessibility, customization, and consistency through a centralized configuration that defines color tokens, typography, and spacing. Recent optimizations demonstrate a commitment to performance, particularly evident in the LeadsTable component's implementation of React.memo wrapper and named function exports. By leveraging the provided aliases, CSS variables, and performance optimization patterns, developers can compose accessible, responsive interfaces that align with the design system's guidelines while maintaining optimal performance characteristics.
 
 ## Appendices
 - Global styles and app-level styling are defined in the CSS files referenced below.

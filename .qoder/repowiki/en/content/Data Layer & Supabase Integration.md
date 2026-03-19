@@ -14,7 +14,15 @@
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql)
+- [index.html](file://index.html)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Added performance optimization section documenting Supabase preconnect optimization
+- Updated architecture overview to include network optimization layer
+- Enhanced performance considerations with specific preconnect benefits
+- Added network optimization best practices for Supabase integration
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -22,11 +30,12 @@
 3. [Core Components](#core-components)
 4. [Architecture Overview](#architecture-overview)
 5. [Detailed Component Analysis](#detailed-component-analysis)
-6. [Dependency Analysis](#dependency-analysis)
-7. [Performance Considerations](#performance-considerations)
-8. [Troubleshooting Guide](#troubleshooting-guide)
-9. [Conclusion](#conclusion)
-10. [Appendices](#appendices)
+6. [Network Optimization & Performance](#network-optimization--performance)
+7. [Dependency Analysis](#dependency-analysis)
+8. [Performance Considerations](#performance-considerations)
+9. [Troubleshooting Guide](#troubleshooting-guide)
+10. [Conclusion](#conclusion)
+11. [Appendices](#appendices)
 
 ## Introduction
 This document describes the data model and Supabase integration for the project. It focuses on the database schema design, entity relationships, field definitions for user accounts, affiliate leads, and application data. It also documents authentication setup, real-time features, data validation rules, data access patterns, caching strategies, performance considerations, data lifecycle, security measures, access control mechanisms, synchronization, offline capabilities, and error handling strategies for database operations.
@@ -39,6 +48,7 @@ The project is a frontend-first React application that integrates with Supabase 
 - Data access hooks for affiliate leads
 - Supabase functions for webhook-driven data updates
 - Database migrations defining RLS policies and schema evolution
+- Network optimization through preconnect hints for reduced latency
 
 ```mermaid
 graph TB
@@ -47,6 +57,7 @@ Auth["Auth Provider<br/>useAuth.tsx"]
 LeadsHook["Leads Query Hook<br/>useAffiliateLeads.ts"]
 LoginPage["Portal Login Page<br/>PortalLogin.tsx"]
 ResetPage["Reset Password Page<br/>ResetPassword.tsx"]
+HTML["HTML Entry Point<br/>index.html"]
 end
 subgraph "Supabase Integration"
 Client["Supabase Client<br/>client.ts"]
@@ -57,6 +68,7 @@ subgraph "Database"
 Migs["Migrations<br/>RLS Policies"]
 Tables["Tables<br/>affiliates, affiliate_leads, commissions, payouts, speaker_requests, orders, order_items"]
 end
+HTML --> Client
 Auth --> Client
 LeadsHook --> Client
 LoginPage --> Client
@@ -78,6 +90,7 @@ Migs --> Tables
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql:1-8](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql#L1-L8)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
+- [index.html:17](file://index.html#L17)
 
 **Section sources**
 - [README.md:1-74](file://README.md#L1-L74)
@@ -90,6 +103,7 @@ Migs --> Tables
 - Data access hook for retrieving affiliate-specific leads with reactive queries.
 - Webhook function integrating with external systems to create/update affiliate leads.
 - Database migrations establishing row-level security (RLS) policies for data isolation.
+- Network optimization through preconnect hints for reduced database connection latency.
 
 **Section sources**
 - [client.ts:1-17](file://src/integrations/supabase/client.ts#L1-L17)
@@ -101,15 +115,17 @@ Migs --> Tables
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
 ## Architecture Overview
-The data layer architecture centers on a typed Supabase client, React Query for caching and reactivity, and Supabase RLS for access control. Authentication events drive state updates, while external webhooks synchronize data into affiliate leads.
+The data layer architecture centers on a typed Supabase client, React Query for caching and reactivity, and Supabase RLS for access control. Authentication events drive state updates, while external webhooks synchronize data into affiliate leads. Network optimization through preconnect hints reduces latency for database operations and improves real-time feature responsiveness.
 
 ```mermaid
 sequenceDiagram
+participant HTML as "HTML Entry Point<br/>index.html"
 participant UI as "UI Components"
 participant Auth as "Auth Provider<br/>useAuth.tsx"
 participant Client as "Supabase Client<br/>client.ts"
 participant DB as "PostgreSQL Tables<br/>types.ts"
 participant Func as "Webhook Function<br/>index.ts"
+HTML->>Client : Preconnect hint for Supabase domain
 UI->>Auth : Initialize auth state
 Auth->>Client : Subscribe to auth state changes
 Client-->>Auth : User/session events
@@ -127,6 +143,7 @@ DB-->>Client : Acknowledgement
 ```
 
 **Diagram sources**
+- [index.html:17](file://index.html#L17)
 - [useAuth.tsx:68-106](file://src/hooks/useAuth.tsx#L68-L106)
 - [client.ts:11-17](file://src/integrations/supabase/client.ts#L11-L17)
 - [types.ts:16-147](file://src/integrations/supabase/types.ts#L16-L147)
@@ -172,7 +189,7 @@ Auth-->>Page : Auth state updated
 - [ResetPassword.tsx:24-60](file://src/pages/ResetPassword.tsx#L24-L60)
 
 ### Data Access Hooks
-- Affiliate leads hook performs a PostgREST query filtered by the authenticated affiliate’s ID and sorted by last update.
+- Affiliate leads hook performs a PostgREST query filtered by the authenticated affiliate's ID and sorted by last update.
 - Integrates with React Query for caching, refetching, and error propagation.
 
 ```mermaid
@@ -352,8 +369,38 @@ ORDERS ||--o{ ORDER_ITEMS : "contains"
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
+## Network Optimization & Performance
+
+### Supabase Preconnect Optimization
+The application implements proactive network optimization through HTML preconnect hints to reduce database connection latency and improve real-time feature responsiveness. The optimization specifically targets the Supabase domain (`gkowxzoadsljkpdzrlue.supabase.co`) to establish early connections for database operations.
+
+**Implementation Details:**
+- Added `<link rel="preconnect" href="https://gkowxzoadsljkpdzrlue.supabase.co" />` in the HTML head section
+- This allows the browser to establish DNS resolution and TCP handshake in advance
+- Reduces connection establishment time for subsequent Supabase API calls
+- Improves real-time feature responsiveness and overall application performance
+
+**Benefits:**
+- Reduced first-byte latency for database operations
+- Faster authentication and data fetching responses
+- Improved real-time feature performance (subscriptions, live updates)
+- Better user experience during peak traffic periods
+
+**Section sources**
+- [index.html:17](file://index.html#L17)
+
+### Network Optimization Best Practices
+- Implement preconnect for critical third-party domains (Supabase, external APIs)
+- Use DNS prefetch for frequently accessed domains
+- Leverage HTTP/2 server push for static assets
+- Implement connection pooling and keep-alive settings
+- Monitor network performance metrics and adjust optimization strategies
+
+**Section sources**
+- [index.html:15-18](file://index.html#L15-L18)
+
 ## Dependency Analysis
-The frontend depends on Supabase for identity and data, React Query for caching, and TypeScript for type safety. Supabase functions depend on the Supabase runtime and service role credentials.
+The frontend depends on Supabase for identity and data, React Query for caching, and TypeScript for type safety. Supabase functions depend on the Supabase runtime and service role credentials. Network optimization through preconnect hints provides transparent performance benefits across all Supabase operations.
 
 ```mermaid
 graph LR
@@ -363,9 +410,11 @@ Types["types.ts"]
 Auth["useAuth.tsx"]
 Leads["useAffiliateLeads.ts"]
 Func["ghl-affiliate-webhook/index.ts"]
+HTML["index.html"]
 Package --> Client
 Package --> Auth
 Package --> Leads
+HTML --> Client
 Client --> Types
 Auth --> Client
 Leads --> Client
@@ -379,6 +428,7 @@ Func --> Client
 - [useAuth.tsx:1-4](file://src/hooks/useAuth.tsx#L1-L4)
 - [useAffiliateLeads.ts:1-4](file://src/hooks/useAffiliateLeads.ts#L1-L4)
 - [index.ts:42-44](file://supabase/functions/ghl-affiliate-webhook/index.ts#L42-L44)
+- [index.html:17](file://index.html#L17)
 
 **Section sources**
 - [package.json:15-69](file://package.json#L15-L69)
@@ -390,13 +440,17 @@ Func --> Client
 - Keep payloads minimal by selecting only required columns where possible.
 - Use migrations to add appropriate indexes for frequently queried columns.
 - Batch external webhook updates to reduce write amplification.
+- **Updated**: Implement preconnect optimization for Supabase domain to reduce connection establishment latency.
+- **Updated**: Monitor network performance metrics to validate preconnect effectiveness.
+- **Updated**: Consider connection pooling and keep-alive settings for optimal database performance.
 
 ## Troubleshooting Guide
 Common issues and strategies:
 - Authentication session not persisting: Verify localStorage availability and environment variable configuration for the Supabase URL and publishable key.
 - Affiliate profile not loading: Confirm the user_id-to-affiliate mapping and check for timeouts during background fetch.
 - Webhook not updating leads: Inspect the external payload fields and ensure the function has service role access to write to affiliate_leads.
-- RLS policy errors: Validate that the authenticated user’s affiliate_id matches the record being inserted/updated.
+- RLS policy errors: Validate that the authenticated user's affiliate_id matches the record being inserted/updated.
+- **Updated**: Preconnect optimization not taking effect: Verify the preconnect link is present in the HTML head and check browser developer tools for connection establishment timing improvements.
 
 **Section sources**
 - [client.ts:5-17](file://src/integrations/supabase/client.ts#L5-L17)
@@ -406,7 +460,7 @@ Common issues and strategies:
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
 ## Conclusion
-The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
+The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
 
 ## Appendices
 
