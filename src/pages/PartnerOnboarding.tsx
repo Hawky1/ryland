@@ -100,6 +100,9 @@ export default function PartnerOnboarding() {
               <img
                 src={brittanyW}
                 alt="Brittany W."
+                width={80}
+                height={80}
+                loading="lazy"
                 className="w-20 h-20 rounded-2xl object-cover object-top ring-2 ring-cyan-400/20"
               />
               <div>

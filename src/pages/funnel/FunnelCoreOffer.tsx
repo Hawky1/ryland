@@ -211,6 +211,8 @@ export default function FunnelCoreOffer() {
                   <img
                     src={ebook.cover}
                     alt={ebook.title}
+                    width={150}
+                    height={200}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />

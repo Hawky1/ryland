@@ -60,6 +60,9 @@ export default function FunnelConsultation() {
               <img
                 src={geneRyland}
                 alt="Gene Ryland"
+                width={80}
+                height={80}
+                loading="lazy"
                 className="w-20 h-20 rounded-2xl object-cover object-top"
               />
               <div>
