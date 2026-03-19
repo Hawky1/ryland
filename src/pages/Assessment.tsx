@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { captureReferral, getReferralAffiliateId } from "@/lib/referralTracking";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import {
