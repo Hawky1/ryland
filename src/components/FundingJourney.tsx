@@ -158,7 +158,6 @@ export default function FundingJourney() {
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
               Previous
             </button>
-            </button>
 
             {/* progress dots */}
             <div className="flex gap-1.5">
