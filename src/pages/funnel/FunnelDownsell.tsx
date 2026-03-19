@@ -76,6 +76,8 @@ export default function FunnelDownsell() {
               <img
                 src={bundleImage}
                 alt="Master Your Credit — Complete Bundle"
+                width={576}
+                height={384}
                 className="max-w-lg sm:max-w-xl mx-auto w-full rounded-xl"
               />
             </div>
