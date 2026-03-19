@@ -125,7 +125,8 @@ export const CartDrawer = () => {
                         <div className="flex flex-col items-end justify-between flex-shrink-0 py-0.5">
                           <button
                             onClick={() => removeItem(item.variantId)}
-                            className="p-1 rounded-md text-slate-300 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
+                            aria-label={`Remove ${item.product.node.title} from cart`}
+                            className="p-1 rounded-md text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
