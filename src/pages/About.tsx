@@ -7,7 +7,7 @@ import Counter from "@/components/funding-visuals/Counter";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 
 const About = () => {
   return (
