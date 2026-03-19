@@ -195,7 +195,7 @@ const Index = () => {
             <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center relative z-10">
               <div className="relative flex justify-center -mt-20 sm:-mt-32 md:-mt-56 lg:-mt-64">
-                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
+                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" loading="lazy" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
               </div>
               <div className="space-y-6">
                 <p className="text-white/80 leading-relaxed text-base">Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.</p>
