@@ -152,6 +152,7 @@ export default function FundingJourney() {
           <div className="flex items-center justify-between mt-6">
             <button
               onClick={prev}
+              aria-label="Previous step"
               className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-900 transition-colors group"
             >
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
@@ -169,6 +170,7 @@ export default function FundingJourney() {
 
             <button
               onClick={next}
+              aria-label="Next step"
               className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-900 transition-colors group"
             >
               Next

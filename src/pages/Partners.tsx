@@ -629,12 +629,12 @@ const Partners = () => {
             </div>
 
             <div className="relative z-10 text-center mx-auto max-w-3xl py-20 px-6 md:py-28 md:px-16">
-              <motion.h3
+              <motion.h2
                 {...fadeUp}
                 className="text-[36px] md:text-[52px] lg:text-[60px] font-bold tracking-[-0.03em] bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-manrope"
               >
                 Click Below. Become A Partner. Get Paid To Be A Connector.
-              </motion.h3>
+              </motion.h2>
 
               <motion.p
                 {...stagger(0.15)}

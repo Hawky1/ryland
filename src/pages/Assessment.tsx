@@ -255,6 +255,7 @@ export default function Assessment() {
 
       {/* Content */}
       <main className="max-w-2xl mx-auto px-4 py-10 sm:py-16">
+        <h1 className="sr-only">Funding Assessment</h1>
         <AnimatePresence mode="wait">
           {/* ── Quiz Steps ──────────────────────────────────── */}
           {result === null && step < STEPS.length && (

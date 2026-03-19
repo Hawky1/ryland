@@ -149,7 +149,7 @@ const Index = () => {
                 />
               </div>
               <div className="relative z-10 flex flex-col items-center mt-1 sm:mt-2">
-                <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
+                <p className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</p>
                 <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/50 mx-1">|</span> Business Credit Strategist</p>
               </div>
               <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" width={1584} height={263} loading="lazy" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
@@ -422,9 +422,9 @@ const Index = () => {
       <section className="my-10 max-w-7xl mx-4 sm:mx-auto border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden" id="cta">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
         <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
             Not Sure Where to Start?
-          </h3>
+           </h2>
           <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Learn what business credit options may work for your situation. Education-first approach. No guesswork.
           </p>
