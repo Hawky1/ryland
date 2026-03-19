@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import ConsultationCalendar from "@/components/funnel/ConsultationCalendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import geneRyland from "@/assets/gene-ryland-about.png";
 
@@ -24,7 +24,7 @@ const STATS = [
 export default function Consultation() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased">
-      <SharedHead />
+      
       <PageMeta
         title="Free Consultation | Ryland Partners"
         description="Book a free strategy session with a funding specialist. Get a personalized plan for $50K–$250K in business funding."

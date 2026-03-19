@@ -7,12 +7,12 @@ import Counter from "@/components/funding-visuals/Counter";
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 
 const About = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
       <style dangerouslySetInnerHTML={{__html: `
         .gradient-blur {
           position: fixed; z-index: 5; inset: 0 0 auto 0; height: 12%; pointer-events: none;

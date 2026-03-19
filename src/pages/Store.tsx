@@ -16,7 +16,7 @@ import WhyChooseUs from "@/components/store/WhyChooseUs";
 import PreFooterCTA from "@/components/store/PreFooterCTA";
 import ProductCard from "@/components/store/ProductCard";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 
 const BUNDLES = [
@@ -81,7 +81,7 @@ const Store = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-[Manrope,sans-serif]">
-      <SharedHead />
+      
       <PageMeta title="Digital Education Store | Ryland Partners" description="Browse eBooks, guides, and resources for business education, funding strategies, and financial literacy." />
       <Navbar />
 

@@ -13,7 +13,8 @@ import logoTruist from "@/assets/logo-truist.png";
 import profileBradley from "@/assets/profile-bradley.jpg";
 import profileMichael from "@/assets/profile-michael.jpg";
 import InfiniteGrid from "@/components/ui/infinite-grid";
-import FundingJourney from "@/components/FundingJourney";
+import { lazy } from "react";
+const FundingJourney = lazy(() => import("@/components/FundingJourney"));
 import HlsVideoBackground from "@/components/HlsVideoBackground";
 import iconFunding from "@/assets/icon-funding.png";
 import iconCredit from "@/assets/icon-credit.png";
@@ -33,7 +34,6 @@ import successCredit from "@/assets/success-credit.webp";
 import successEmpire from "@/assets/success-empire.webp";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
 import PageMeta from "@/components/PageMeta";
 import geneHeroOffice from "@/assets/gene-hero-office.jpg";
 import geneHeroHeadshot from "@/assets/gene-hero-headshot.jpg";
@@ -57,7 +57,7 @@ const Index = () => {
         title="Ryland Partners | Business Credit Education & Financial Strategy"
         description="Discover high-limit business credit strategies with Ryland Partners. Education-first approach to business funding, credit optimization, and the digital economy."
       />
-      <SharedHead />
+      
       <style dangerouslySetInnerHTML={{__html: `
         .hover-blur:hover img { filter: blur(4px); }
         .hover-blur figcaption { opacity: 0; transition: opacity 0.3s; }

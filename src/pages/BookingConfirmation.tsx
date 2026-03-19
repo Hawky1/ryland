@@ -2,7 +2,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle2, CalendarDays, Clock, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import geneRyland from "@/assets/gene-ryland-about.png";
 import logoWhite from "@/assets/logo-white.png";
@@ -14,7 +14,7 @@ export default function BookingConfirmation() {
 
   return (
     <div className="min-h-screen bg-[#001228] selection:bg-blue-500/30 selection:text-white antialiased">
-      <SharedHead />
+      
       <PageMeta
         title="Booking Confirmed | Ryland Partners"
         description="Your consultation has been booked. We look forward to speaking with you."

@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -92,7 +92,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
       <PageMeta title="Contact Us | Ryland Partners" description="Get in touch with Ryland Partners for business funding, credit repair, or partnership inquiries. Our team responds within 24 hours." />
-      <SharedHead />
+      
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

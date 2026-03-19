@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import PartnerOnboardingCalendar from "@/components/funnel/PartnerOnboardingCalendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import brittanyW from "@/assets/brittany-w-partner.png";
 
@@ -18,7 +18,7 @@ const ONBOARDING_ITEMS = [
 export default function PartnerOnboarding() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased">
-      <SharedHead />
+      
       <PageMeta
         title="Partner Onboarding | Ryland Partners"
         description="Schedule your 1-on-1 partner onboarding call. Get set up with your portal, referral link, and marketing assets."

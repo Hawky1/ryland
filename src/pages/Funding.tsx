@@ -5,7 +5,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 
 const FUNDING_TIERS = [
   { range: "$50K – $100K", label: "Starter", desc: "Perfect for launching or expanding marketing efforts", color: "from-blue-400 to-cyan-400" },
@@ -32,7 +32,7 @@ const BENEFITS = [
 export default function Funding() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
 
       {/* Background Grid */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
