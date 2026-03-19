@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
