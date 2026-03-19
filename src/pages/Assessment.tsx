@@ -138,9 +138,12 @@ export default function Assessment() {
     setSubmitting(true);
     const qualification = determineQualification();
 
+    // Show result immediately for snappy UX
+    setResult(qualification);
+
+    // Fire DB insert + GHL sync in background — don't block UI
     try {
-      // Save to database
-      const { error } = await supabase.from("assessment_leads").insert({
+      const insertPromise = supabase.from("assessment_leads").insert({
         name: parsed.data.name,
         email: parsed.data.email,
         phone: parsed.data.phone,
@@ -152,7 +155,6 @@ export default function Assessment() {
         denied_recently: answers.denied_recently === "yes",
         qualification,
       });
-      if (error) throw error;
 
       // Fire-and-forget: sync to GHL with affiliate attribution
       const refId = getReferralAffiliateId();
@@ -161,7 +163,7 @@ export default function Assessment() {
         tags.push("Affiliate", `Affiliate - ${refId}`);
       }
 
-      supabase.functions
+      const ghlPromise = supabase.functions
         .invoke("ghl-create-contact", {
           body: {
             name: parsed.data.name,
@@ -202,9 +204,11 @@ export default function Assessment() {
           }
         });
 
-      setResult(qualification);
+      // Run both in parallel, don't block
+      Promise.allSettled([insertPromise, ghlPromise]).catch(() => {});
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      // Result is already shown — log silently
+      console.error("Assessment background save failed");
     } finally {
       setSubmitting(false);
     }
