@@ -8,7 +8,7 @@ import PageMeta from "@/components/PageMeta";
 const CCPA = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
       <PageMeta title="CCPA Notice | Ryland Partners" description="California Consumer Privacy Act notice — your rights regarding personal information." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

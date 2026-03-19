@@ -32,7 +32,7 @@ const BENEFITS = [
 export default function Funding() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
 
       {/* Background Grid */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

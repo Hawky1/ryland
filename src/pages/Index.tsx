@@ -57,7 +57,7 @@ const Index = () => {
         title="Ryland Partners | Business Credit Education & Financial Strategy"
         description="Discover high-limit business credit strategies with Ryland Partners. Education-first approach to business funding, credit optimization, and the digital economy."
       />
-      <SharedHead />
+      
       <style dangerouslySetInnerHTML={{__html: `
         .hover-blur:hover img { filter: blur(4px); }
         .hover-blur figcaption { opacity: 0; transition: opacity 0.3s; }

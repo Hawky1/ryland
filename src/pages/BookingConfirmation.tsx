@@ -14,7 +14,7 @@ export default function BookingConfirmation() {
 
   return (
     <div className="min-h-screen bg-[#001228] selection:bg-blue-500/30 selection:text-white antialiased">
-      <SharedHead />
+      
       <PageMeta
         title="Booking Confirmed | Ryland Partners"
         description="Your consultation has been booked. We look forward to speaking with you."

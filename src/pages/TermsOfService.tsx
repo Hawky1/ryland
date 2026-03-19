@@ -8,7 +8,7 @@ import PageMeta from "@/components/PageMeta";
 const TermsOfService = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
       <PageMeta title="Terms of Service | Ryland Partners" description="Read the terms and conditions governing the use of Ryland Partners services." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

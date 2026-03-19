@@ -24,7 +24,7 @@ const STATS = [
 export default function Consultation() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased">
-      <SharedHead />
+      
       <PageMeta
         title="Free Consultation | Ryland Partners"
         description="Book a free strategy session with a funding specialist. Get a personalized plan for $50K–$250K in business funding."

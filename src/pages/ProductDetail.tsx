@@ -263,7 +263,7 @@ const ProductDetail = () => {
         title={`${product.title} | Ryland Partners Store`}
         description={content?.headline || product.description?.slice(0, 160) || "Digital product from Ryland Partners."}
       />
-      <SharedHead />
+      
       <Navbar />
 
       {/* Cart bar + Breadcrumb */}

@@ -7,7 +7,7 @@ import PageMeta from "@/components/PageMeta";
 const CookiePolicy = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
       <PageMeta title="Cookie Policy | Ryland Partners" description="How Ryland Partners uses cookies and tracking technologies on our website." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

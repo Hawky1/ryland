@@ -8,7 +8,7 @@ import PageMeta from "@/components/PageMeta";
 const Disclaimers = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      <SharedHead />
+      
       <PageMeta title="Disclaimers | Ryland Partners" description="Earnings, funding, credit restoration, and legal disclaimers for Ryland Partners services." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">

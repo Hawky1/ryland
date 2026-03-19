@@ -133,7 +133,7 @@ const Partners = () => {
         title="Become A Partner | Ryland Partners"
         description="Join the Ryland Partners program and earn uncapped commissions by referring business owners to our funding services. 100% free to join."
       />
-      <SharedHead />
+      
 
       {/* Background grid — only visible behind light sections */}
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
