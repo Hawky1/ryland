@@ -153,30 +153,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (err) {
-      console.error('signOut error (clearing locally anyway):', err);
-    }
-    
-    // Always clear localStorage as fallback (handles AbortError on live site)
+    // Clear localStorage FIRST (instant)
     try {
       const storageKey = Object.keys(localStorage).find(key => 
         key.startsWith('sb-') && key.endsWith('-auth-token')
       );
       if (storageKey) {
         localStorage.removeItem(storageKey);
-        console.log('Cleared auth from localStorage');
       }
     } catch (e) {
-      console.error('Failed to clear localStorage:', e);
+      // Ignore
     }
     
-    // Clear state
+    // Clear state immediately
     setState({ user: null, session: null, affiliate: null, loading: false });
     
-    // Force redirect to login
+    // Redirect immediately (don't wait for Supabase)
     window.location.href = '/portal/login';
+    
+    // Call Supabase signOut in background (fire and forget)
+    supabase.auth.signOut().catch(() => {});
   };
 
   const updatePassword = async (newPassword: string) => {
