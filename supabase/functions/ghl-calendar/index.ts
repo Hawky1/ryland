@@ -78,6 +78,8 @@ serve(async (req) => {
         return json({ error: "Unable to fetch available slots. Please try again." }, 500);
       }
 
+      console.log("GHL free-slots response keys:", Object.keys(data));
+      console.log("GHL free-slots raw (first 500 chars):", JSON.stringify(data).slice(0, 500));
       return json(data);
     }
 
