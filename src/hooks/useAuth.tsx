@@ -153,8 +153,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.error('signOut error (clearing locally anyway):', err);
+    }
+    
+    // Always clear localStorage as fallback (handles AbortError on live site)
+    try {
+      const storageKey = Object.keys(localStorage).find(key => 
+        key.startsWith('sb-') && key.endsWith('-auth-token')
+      );
+      if (storageKey) {
+        localStorage.removeItem(storageKey);
+        console.log('Cleared auth from localStorage');
+      }
+    } catch (e) {
+      console.error('Failed to clear localStorage:', e);
+    }
+    
+    // Clear state
     setState({ user: null, session: null, affiliate: null, loading: false });
+    
+    // Force redirect to login
+    window.location.href = '/portal/login';
   };
 
   const updatePassword = async (newPassword: string) => {

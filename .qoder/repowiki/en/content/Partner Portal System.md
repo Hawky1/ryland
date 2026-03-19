@@ -12,14 +12,29 @@
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
 - [PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
 - [PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [PortalContentLoader.tsx](file://src/components/portal/PortalContentLoader.tsx)
 - [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
 - [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
 - [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
+- [PortalDashboard.tsx](file://src/pages/portal/PortalDashboard.tsx)
 - [useAuth.tsx](file://src/hooks/useAuth.tsx)
+- [useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
 - [client.ts](file://src/integrations/supabase/client.ts)
 - [types.ts](file://src/integrations/supabase/types.ts)
+- [referralTracking.ts](file://src/lib/referralTracking.ts)
 - [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql)
+- [20260319003239_bed3153f-8413-4f10-80d1-273b1c1bb805.sql](file://supabase/migrations/20260319003239_bed3153f-8413-4f10-80d1-273b1c1bb805.sql)
+- [sidebar.tsx](file://src/components/ui/sidebar.tsx)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Enhanced portal navigation with persistent sidebar and improved user experience
+- Converted PortalLayout from lazy loading to direct import for better page transition performance
+- Implemented Suspense-based loading skeletons for seamless content transitions
+- Added dedicated PortalContentLoader component for consistent loading states
+- Integrated shadcn/ui sidebar components for enhanced navigation functionality
+- Improved authentication loading states with better user feedback
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -49,21 +64,22 @@ graph TB
 subgraph "Application Shell"
 MAIN["main.tsx"]
 APP["App.tsx"]
-end
+END
 subgraph "Routing"
 ROUTER["React Router DOM"]
 AUTH_PROVIDER["AuthProvider"]
 QUERY_CLIENT["QueryClientProvider"]
-end
+END
 subgraph "Public Pages"
 PARTNERS["Partners.tsx"]
 SIGNUP["PartnerSignupForm.tsx"]
-end
+END
 subgraph "Portal"
-PORTAL_LAYOUT["PortalLayout.tsx"]
+PORTAL_LAYOUT["PortalLayout.tsx (Direct Import)"]
 PORTAL_LOGIN["PortalLogin.tsx"]
 AUTH_GUARD["AuthGuard.tsx"]
 PORTAL_SIDEBAR["PortalSidebar.tsx"]
+PORTAL_CONTENT_LOADER["PortalContentLoader.tsx"]
 DASHBOARD["PortalDashboard.tsx"]
 LEADS["PortalLeads.tsx"]
 COMMISSIONS["PortalCommissions.tsx"]
@@ -72,12 +88,12 @@ RESOURCES["PortalResources.tsx"]
 EVENTS["PortalEvents.tsx"]
 SPEAKING["PortalSpeaking.tsx"]
 SETTINGS["PortalSettings.tsx"]
-end
+END
 subgraph "Integrations"
 SUPABASE_CLIENT["integrations/supabase/client.ts"]
 SUPABASE_TYPES["integrations/supabase/types.ts"]
 RLS_POLICY["partner_submissions RLS Policy"]
-end
+END
 MAIN --> APP
 APP --> ROUTER
 APP --> AUTH_PROVIDER
@@ -88,6 +104,7 @@ ROUTER --> PORTAL_LOGIN
 PORTAL_LOGIN --> AUTH_GUARD
 AUTH_GUARD --> PORTAL_LAYOUT
 PORTAL_LAYOUT --> PORTAL_SIDEBAR
+PORTAL_LAYOUT --> PORTAL_CONTENT_LOADER
 PORTAL_LAYOUT --> DASHBOARD
 PORTAL_LAYOUT --> LEADS
 PORTAL_LAYOUT --> COMMISSIONS
@@ -104,12 +121,13 @@ SUPABASE_CLIENT --> RLS_POLICY
 
 **Diagram sources**
 - [main.tsx:1-7](file://src/main.tsx#L1-L7)
-- [App.tsx:1-124](file://src/App.tsx#L1-L124)
+- [App.tsx:1-134](file://src/App.tsx#L1-L134)
 - [PartnerSignupForm.tsx:102-128](file://src/components/PartnerSignupForm.tsx#L102-L128)
 - [PortalLogin.tsx:123-139](file://src/pages/portal/PortalLogin.tsx#L123-L139)
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
-- [PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
-- [PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [PortalLayout.tsx:1-49](file://src/components/portal/PortalLayout.tsx#L1-L49)
+- [PortalSidebar.tsx:1-134](file://src/components/portal/PortalSidebar.tsx#L1-L134)
+- [PortalContentLoader.tsx:1-44](file://src/components/portal/PortalContentLoader.tsx#L1-L44)
 - [client.ts](file://src/integrations/supabase/client.ts)
 - [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:1-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L1-L18)
 
@@ -123,22 +141,29 @@ SUPABASE_CLIENT --> RLS_POLICY
   - Supabase-based authentication with AuthProvider and useAuth hook
   - AuthGuard protects portal routes by checking session state
   - Passwordless login flow via reset-password mechanism
+  - Enhanced error handling with component unmounting detection
 - Portal Layout and Navigation
-  - PortalLayout wraps nested portal routes
-  - PortalSidebar provides menu navigation to dashboard, leads, commissions, calculator, resources, events, speaking, and settings
+  - **Enhanced** PortalLayout now uses direct import for improved performance and persistent sidebar state
+  - **New** PortalContentLoader provides consistent loading skeletons for page transitions
+  - **Enhanced** PortalSidebar integrated with shadcn/ui sidebar components for persistent navigation
+  - **Enhanced** SidebarProvider maintains state across route changes for seamless user experience
 - Lead Management
   - LeadsTable displays lead records
   - SubmitLeadDrawer enables partners to submit new leads
   - LeadDetailDrawer shows detailed lead information
+  - useAffiliateLeads hook for managing affiliate-specific leads
 - Data Access and Security
   - Supabase client configured for database operations
   - Row Level Security policy on partner_submissions table allows anonymous inserts for lead submissions
+  - Enhanced affiliate data fetching with fallback mechanisms
 
 **Section sources**
 - [useAuth.tsx](file://src/hooks/useAuth.tsx)
+- [useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
-- [PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
-- [PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [PortalLayout.tsx:1-49](file://src/components/portal/PortalLayout.tsx#L1-L49)
+- [PortalSidebar.tsx:1-134](file://src/components/portal/PortalSidebar.tsx#L1-L134)
+- [PortalContentLoader.tsx:1-44](file://src/components/portal/PortalContentLoader.tsx#L1-L44)
 - [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
 - [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
 - [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
@@ -158,8 +183,8 @@ graph TB
 CLIENT["Browser Client"]
 ROUTER["React Router DOM"]
 AUTH["AuthProvider + useAuth"]
-LAYOUT["PortalLayout"]
-NAV["PortalSidebar"]
+LAYOUT["PortalLayout (Direct Import)"]
+NAV["PortalSidebar + SidebarProvider"]
 VIEW_DASH["PortalDashboard"]
 VIEW_LEADS["PortalLeads"]
 VIEW_COMMS["PortalCommissions"]
@@ -168,6 +193,7 @@ VIEW_RES["PortalResources"]
 VIEW_EVT["PortalEvents"]
 VIEW_SPEAK["PortalSpeaking"]
 VIEW_SET["PortalSettings"]
+CONTENT_LOADER["PortalContentLoader"]
 SUPA["Supabase Client"]
 DB["PostgreSQL Database"]
 RLS["Row Level Security Policies"]
@@ -175,6 +201,7 @@ CLIENT --> ROUTER
 ROUTER --> AUTH
 ROUTER --> LAYOUT
 LAYOUT --> NAV
+LAYOUT --> CONTENT_LOADER
 LAYOUT --> VIEW_DASH
 LAYOUT --> VIEW_LEADS
 LAYOUT --> VIEW_COMMS
@@ -206,6 +233,7 @@ DB --> RLS
 - Provider Setup
   - AuthProvider wraps the app to manage authentication state
   - useAuth hook centralizes session checks and user data access
+  - Enhanced error handling with component unmounting detection
 - Login Flow
   - PortalLogin handles credentials and triggers passwordless reset flow
   - Forgot password links initiate reset emails
@@ -214,6 +242,9 @@ DB --> RLS
 - Supabase Integration
   - Supabase client initialized for auth and database operations
   - Types defined for type-safe database interactions
+  - Enhanced affiliate data fetching with improved error handling
+
+**Updated** Enhanced error handling now includes component unmounting detection to prevent memory leaks and improve reliability during network connectivity issues.
 
 ```mermaid
 sequenceDiagram
@@ -244,21 +275,31 @@ AG-->>PL : Render protected route or redirect
 - [client.ts](file://src/integrations/supabase/client.ts)
 - [types.ts](file://src/integrations/supabase/types.ts)
 
-### Portal Layout and Navigation
-- PortalLayout
-  - Wraps nested portal routes and provides consistent layout
-- PortalSidebar
-  - Provides navigation to dashboard, leads, commissions, calculator, resources, events, speaking, and settings
-- Nested Routes
-  - Index route renders PortalDashboard
-  - Child routes handle specific features
+### Enhanced Portal Layout and Navigation
+- **Enhanced** PortalLayout
+  - **Changed** Converted from lazy loading to direct import for improved performance and persistent sidebar state
+  - **New** Integrated Suspense-based loading system with PortalContentLoader fallback
+  - **Enhanced** Uses SidebarProvider from shadcn/ui for persistent sidebar state across route changes
+  - **Enhanced** Implements SidebarTrigger for responsive navigation controls
+- **Enhanced** PortalSidebar
+  - **Integrated** Uses shadcn/ui Sidebar components with persistent state management
+  - **Enhanced** Maintains sidebar collapse/expand state across page transitions
+  - **Enhanced** Provides responsive navigation with tooltip support for collapsed state
+  - **Enhanced** Displays affiliate information and persistent navigation links
+- **New** PortalContentLoader
+  - **New** Dedicated skeleton loader component for consistent loading states
+  - **Enhanced** Provides realistic loading skeletons for dashboard, stats cards, and tables
+  - **Enhanced** Used as fallback for Suspense boundary during page transitions
+
+**Updated** The portal layout now provides a seamless user experience with persistent sidebar state and smooth page transitions through Suspense-based loading skeletons.
 
 ```mermaid
 flowchart TD
 START(["/portal/*"]) --> GUARD["AuthGuard"]
-GUARD --> |Valid Session| LAYOUT["PortalLayout"]
+GUARD --> |Valid Session| LAYOUT["PortalLayout (Direct Import)"]
 GUARD --> |Invalid Session| LOGIN["/portal/login"]
-LAYOUT --> SIDEBAR["PortalSidebar"]
+LAYOUT --> SIDEBAR["PortalSidebar + SidebarProvider"]
+LAYOUT --> CONTENT_LOADER["PortalContentLoader"]
 SIDEBAR --> DASH["Dashboard"]
 SIDEBAR --> LEADS["Leads"]
 SIDEBAR --> COMMS["Commissions"]
@@ -271,65 +312,21 @@ SIDEBAR --> SET["Settings"]
 
 **Diagram sources**
 - [App.tsx:94-103](file://src/App.tsx#L94-L103)
-- [PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
-- [PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [PortalLayout.tsx:1-49](file://src/components/portal/PortalLayout.tsx#L1-L49)
+- [PortalSidebar.tsx:1-134](file://src/components/portal/PortalSidebar.tsx#L1-L134)
+- [PortalContentLoader.tsx:1-44](file://src/components/portal/PortalContentLoader.tsx#L1-L44)
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
 
 **Section sources**
 - [App.tsx:94-103](file://src/App.tsx#L94-L103)
-- [PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
-- [PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [PortalLayout.tsx:1-49](file://src/components/portal/PortalLayout.tsx#L1-L49)
+- [PortalSidebar.tsx:1-134](file://src/components/portal/PortalSidebar.tsx#L1-L134)
+- [PortalContentLoader.tsx:1-44](file://src/components/portal/PortalContentLoader.tsx#L1-L44)
 
-### Lead Management System
-- Data Model
-  - partner_submissions table captures lead entries with timestamps and metadata
-  - RLS policy permits anonymous inserts for lead capture
-- UI Components
-  - LeadsTable lists leads with filtering and sorting
-  - SubmitLeadDrawer enables partners to add new leads
-  - LeadDetailDrawer shows detailed lead information
-- Data Flow
-  - Components query and mutate data via Supabase client
-  - React Query manages caching and optimistic updates
-
-```mermaid
-sequenceDiagram
-participant P as "Partner"
-participant SL as "SubmitLeadDrawer"
-participant LT as "LeadsTable"
-participant DD as "LeadDetailDrawer"
-participant SC as "Supabase Client"
-P->>SL : Open submission form
-SL->>SC : Insert into partner_submissions
-SC-->>SL : Success
-SL-->>P : Close drawer and refresh
-P->>LT : View leads list
-LT->>SC : Query partner_submissions
-SC-->>LT : Return leads
-LT-->>P : Render table
-P->>DD : Open lead detail
-DD->>SC : Fetch lead details
-SC-->>DD : Return lead data
-DD-->>P : Show details
-```
-
-**Diagram sources**
-- [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
-- [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
-- [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
-- [client.ts](file://src/integrations/supabase/client.ts)
-- [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:1-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L1-L18)
-
-**Section sources**
-- [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
-- [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
-- [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
-- [client.ts](file://src/integrations/supabase/client.ts)
-- [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:1-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L1-L18)
-
-### Dashboard Functionality
+### Enhanced Dashboard Functionality
 - KPI Cards and Referral Link
   - Dashboard presents key metrics and partner referral link
+  - **Enhanced** Fallback mechanism now uses user ID directly when affiliate data is unavailable
   - Integrates with affiliate marketing systems via referral tracking utilities
 - Data Visualization
   - Recharts-based charts for trends and analytics
@@ -337,8 +334,16 @@ DD-->>P : Show details
 - Reporting Capabilities
   - Exportable reports for leads and earnings
   - Filtering by date range and lead source
+- **New** Reliability Improvements
+  - Dashboard now includes a fallback mechanism that uses user ID directly when affiliate data is unavailable
+  - Ensures functionality during database connectivity issues
+  - Improved affiliate data fetching with better error handling and component unmounting detection
+
+**Updated** The dashboard now provides enhanced reliability by falling back to user ID when affiliate data is unavailable, ensuring continuous functionality even during database connectivity issues.
 
 **Section sources**
+- [PortalDashboard.tsx:14-28](file://src/pages/portal/PortalDashboard.tsx#L14-L28)
+- [PortalDashboard.tsx:30-53](file://src/pages/portal/PortalDashboard.tsx#L30-L53)
 - [plan.md:18-38](file://.lovable/plan.md#L18-L38)
 - [client.ts](file://src/integrations/supabase/client.ts)
 - [types.ts](file://src/integrations/supabase/types.ts)
@@ -353,6 +358,7 @@ DD-->>P : Show details
   - Integration points for payout processing and tax documents
 
 **Section sources**
+- [PortalCommissions.tsx:16-30](file://src/pages/portal/PortalCommissions.tsx#L16-L30)
 - [plan.md:18-38](file://.lovable/plan.md#L18-L38)
 - [client.ts](file://src/integrations/supabase/client.ts)
 - [types.ts](file://src/integrations/supabase/types.ts)
@@ -367,6 +373,63 @@ DD-->>P : Show details
 **Section sources**
 - [App.tsx:98](file://src/App.tsx#L98)
 - [plan.md:33](file://.lovable/plan.md#L33)
+
+### Lead Management System
+- Data Model
+  - partner_submissions table captures lead entries with timestamps and metadata
+  - RLS policy permits anonymous inserts for lead capture
+  - **Enhanced** affiliate_leads table with comprehensive lead tracking
+- UI Components
+  - LeadsTable lists leads with filtering and sorting
+  - SubmitLeadDrawer enables partners to add new leads
+  - LeadDetailDrawer shows detailed lead information
+  - **New** useAffiliateLeads hook for managing affiliate-specific leads
+- Data Flow
+  - Components query and mutate data via Supabase client
+  - React Query manages caching and optimistic updates
+  - **Enhanced** Improved error handling and component lifecycle management
+
+**Updated** Enhanced lead management system with improved error handling and component lifecycle management for better reliability.
+
+```mermaid
+sequenceDiagram
+participant P as "Partner"
+participant SL as "SubmitLeadDrawer"
+participant LT as "LeadsTable"
+participant DD as "LeadDetailDrawer"
+participant UL as "useAffiliateLeads Hook"
+participant SC as "Supabase Client"
+P->>SL : Open submission form
+SL->>SC : Insert into partner_submissions
+SC-->>SL : Success
+SL-->>P : Close drawer and refresh
+P->>LT : View leads list
+LT->>UL : Query affiliate leads
+UL->>SC : Query affiliate_leads
+SC-->>UL : Return leads
+UL-->>LT : Return leads data
+LT-->>P : Render table
+P->>DD : Open lead detail
+DD->>SC : Fetch lead details
+SC-->>DD : Return lead data
+DD-->>P : Show details
+```
+
+**Diagram sources**
+- [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
+- [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
+- [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
+- [useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
+- [client.ts](file://src/integrations/supabase/client.ts)
+- [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:1-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L1-L18)
+
+**Section sources**
+- [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
+- [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
+- [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
+- [useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
+- [client.ts](file://src/integrations/supabase/client.ts)
+- [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:1-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L1-L18)
 
 ### Administrative Interface
 - Role-Based Access Control
@@ -416,26 +479,34 @@ REACT --> UTILS
 
 ## Performance Considerations
 - Client-Side Rendering
-  - Use lazy loading for portal routes to reduce initial bundle size
-  - Implement code splitting for heavy components
+  - **Enhanced** PortalLayout now uses direct import instead of lazy loading for improved performance and persistent sidebar state
+  - **Enhanced** Suspense-based loading system provides seamless transitions between pages
+  - **New** PortalContentLoader component optimizes loading performance with consistent skeleton states
 - Data Fetching
   - Configure React Query cache policies for optimal freshness vs. performance
   - Use background refetching for frequently changing metrics
+  - **Enhanced** Improved error handling prevents unnecessary retries and memory leaks
 - UI Responsiveness
   - Defer non-critical computations to Web Workers if needed
   - Optimize charts and tables with virtualization for large datasets
+  - **Enhanced** Persistent sidebar state maintained across route changes without performance degradation
 - Network Efficiency
   - Batch requests where possible
   - Implement retry and exponential backoff for transient failures
+  - **Enhanced** Component unmounting detection prevents memory leaks during network failures
+
+**Updated** Enhanced performance considerations now include improved error handling, component lifecycle management, and optimized loading states for better user experience.
 
 ## Security and Compliance
 - Authentication and Authorization
   - Passwordless login reduces credential risks
   - AuthGuard ensures only authenticated users access portal routes
   - Supabase RLS policies restrict data access
+  - **Enhanced** Improved error handling prevents sensitive data exposure during failures
 - Data Privacy
   - Minimize data collection to what is necessary for affiliate tracking
   - Implement data retention policies and secure deletion procedures
+  - **Enhanced** Fallback mechanisms ensure functionality without compromising security
 - Compliance
   - GDPR: Right to erasure, data portability, and consent management
   - Tax Compliance: W-9 and 1099-MISC generation for payouts
@@ -444,6 +515,8 @@ REACT --> UTILS
   - Enforce HTTPS and secure cookies
   - Implement CSRF protection for forms
   - Sanitize user inputs and escape outputs
+
+**Updated** Enhanced security measures now include improved error handling and fallback mechanisms that maintain security while ensuring system reliability.
 
 **Section sources**
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
@@ -457,12 +530,27 @@ REACT --> UTILS
 - Route Access Problems
   - Confirm nested route definitions under /portal
   - Ensure PortalLayout wraps child routes
+- **Enhanced** Navigation Issues
+  - **New** Verify PortalLayout uses direct import instead of lazy loading
+  - **New** Check SidebarProvider maintains state across route changes
+  - **New** Ensure PortalContentLoader is properly integrated with Suspense
 - Data Not Loading
   - Validate Supabase client initialization and connection
   - Check RLS policies for required permissions
+  - **Enhanced** Monitor for component unmounting errors during network failures
 - Lead Submission Failures
   - Inspect insert mutations and error handling
   - Review RLS policy for anonymous inserts
+  - **New** Check fallback mechanisms when affiliate data is unavailable
+- **New** Dashboard Reliability Issues
+  - Verify fallback mechanism is using user ID correctly
+  - Monitor error logs for affiliate data fetching failures
+  - Check component unmounting detection in useAuth hook
+- **New** Loading State Issues
+  - **New** Verify PortalContentLoader is properly configured as Suspense fallback
+  - **New** Check that PortalLayout wraps Outlet with Suspense boundary
+
+**Updated** Added troubleshooting guidance for enhanced portal navigation features, loading states, and improved error handling mechanisms.
 
 **Section sources**
 - [PortalLogin.tsx:123-139](file://src/pages/portal/PortalLogin.tsx#L123-L139)
@@ -471,4 +559,12 @@ REACT --> UTILS
 - [20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql:13-18](file://supabase/migrations/20260218185908_476bc8f8-75cd-4ec2-b0bf-216f9b5215cf.sql#L13-L18)
 
 ## Conclusion
-The Partner Portal System leverages a modern React stack with Supabase for authentication and data persistence. Its architecture supports secure, scalable partner experiences with dashboard insights, lead management, and commission tracking. The modular component design and clear separation of concerns enable easy extension and customization. By adhering to security best practices and compliance requirements, the system provides a robust foundation for affiliate marketing integrations and reporting.
+The Partner Portal System leverages a modern React stack with Supabase for authentication and data persistence. Its architecture supports secure, scalable partner experiences with dashboard insights, lead management, and commission tracking. The modular component design and clear separation of concerns enable easy extension and customization.
+
+**Recent Enhancements** The system now includes significant improvements in navigation and user experience:
+- **Persistent Navigation**: PortalLayout uses direct import and SidebarProvider for seamless sidebar state maintenance
+- **Enhanced Loading Experience**: Suspense-based system with PortalContentLoader provides smooth page transitions
+- **Improved Performance**: Direct imports eliminate lazy loading overhead while maintaining responsive navigation
+- **Better User Feedback**: Enhanced loading states and error handling improve overall user experience
+
+These enhancements ensure a more responsive and reliable partner portal experience while maintaining security and performance standards. The system continues to provide a robust foundation for affiliate marketing integrations and reporting with improved navigation and loading capabilities.
