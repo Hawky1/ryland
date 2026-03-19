@@ -85,7 +85,7 @@ export default function PortalResources() {
                       <Icon className="h-5 w-5 text-primary" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-sm font-semibold text-foreground leading-tight">{resource.title}</h3>
+                      <h2 className="text-sm font-semibold text-foreground leading-tight">{resource.title}</h2>
                       <Badge variant="secondary" className="mt-1 text-[10px] font-normal">{resource.category}</Badge>
                     </div>
                   </div>

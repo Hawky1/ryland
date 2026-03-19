@@ -171,10 +171,12 @@ export default function FundingJourney() {
 
             <button
               onClick={next}
+              aria-label="Next step"
               className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-900 transition-colors group"
             >
               Next
               <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </button>
             </button>
           </div>
         </div>
