@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import PartnerOnboardingCalendar from "@/components/funnel/PartnerOnboardingCalendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import brittanyW from "@/assets/brittany-w-partner.png";
 
