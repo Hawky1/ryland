@@ -49,7 +49,7 @@ export default function PortalSidebar() {
 
   const renderGroup = (label: string, items: typeof mainNav) => (
     <SidebarGroup>
-      {!collapsed && <SidebarGroupLabel className="text-sidebar-foreground/50 text-[11px] uppercase tracking-widest">{label}</SidebarGroupLabel>}
+      {!collapsed && <SidebarGroupLabel className="text-sidebar-foreground/60 text-[11px] uppercase tracking-widest">{label}</SidebarGroupLabel>}
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (

@@ -114,7 +114,7 @@ const About = () => {
                   <card.icon className="h-7 w-7 text-blue-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3 text-center">{card.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed text-center">{card.desc}</p>
+                <p className="text-sm text-slate-300 leading-relaxed text-center">{card.desc}</p>
               </div>
             </div>
           ))}

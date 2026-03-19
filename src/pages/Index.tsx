@@ -378,7 +378,7 @@ const Index = () => {
           <div className="flex items-center gap-3">
             <div>
               <h2 className="sm:text-5xl text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)' }}>Ryland Partners — Help &amp; FAQs</h2>
-              <p className="mt-1 text-sm text-slate-400">Common questions about funding, credit, and our services.</p>
+              <p className="mt-1 text-sm text-slate-300">Common questions about funding, credit, and our services.</p>
             </div>
           </div>
         </div>
