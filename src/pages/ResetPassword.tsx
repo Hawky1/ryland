@@ -17,18 +17,64 @@ export default function ResetPassword() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [sessionReady, setSessionReady] = useState(false);
+  const [expired, setExpired] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    // Supabase auto-exchanges the recovery token from the URL hash for a session
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY") {
-        setSessionReady(true);
+    let resolved = false;
+
+    // Listen for the PASSWORD_RECOVERY event from the auth state change
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (resolved) return;
+      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") {
+        // Either event means we have a valid session from the recovery link
+        if (session) {
+          resolved = true;
+          setSessionReady(true);
+        }
       }
     });
 
-    return () => subscription.unsubscribe();
+    // Fallback: check if there's already an active session (e.g. token was
+    // already exchanged before our listener attached). This covers the case
+    // where the redirect already completed and the session is stored.
+    const checkExistingSession = async () => {
+      // Give the auth listener a moment to fire first
+      await new Promise((r) => setTimeout(r, 1500));
+      if (resolved) return;
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        resolved = true;
+        setSessionReady(true);
+      } else {
+        // Also check the URL hash for tokens that haven't been exchanged
+        const hash = window.location.hash;
+        if (hash && (hash.includes("access_token") || hash.includes("type=recovery"))) {
+          // Token is in the URL but wasn't auto-exchanged — wait a bit more
+          await new Promise((r) => setTimeout(r, 3000));
+          if (resolved) return;
+          const { data: { session: retrySession } } = await supabase.auth.getSession();
+          if (retrySession) {
+            resolved = true;
+            setSessionReady(true);
+            return;
+          }
+        }
+        // After all retries, show expiration message
+        if (!resolved) {
+          setExpired(true);
+        }
+      }
+    };
+
+    checkExistingSession();
+
+    return () => {
+      resolved = true;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,7 +128,9 @@ export default function ResetPassword() {
             <CardDescription className="text-muted-foreground">
               {success
                 ? "Your password has been set. Redirecting you to login..."
-                : "Set a password to access your partner portal."}
+                : expired
+                  ? "Your reset link has expired or is invalid."
+                  : "Set a password to access your partner portal."}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -93,11 +141,23 @@ export default function ResetPassword() {
                   Redirecting to login...
                 </p>
               </div>
+            ) : expired ? (
+              <div className="flex flex-col items-center py-8 gap-4">
+                <p className="text-sm text-muted-foreground text-center">
+                  Please request a new password reset link from the login page.
+                </p>
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/portal/login", { replace: true })}
+                >
+                  Go to Login
+                </Button>
+              </div>
             ) : !sessionReady ? (
               <div className="flex flex-col items-center py-8 gap-4">
                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
                 <p className="text-sm text-muted-foreground text-center">
-                  Verifying your link... If this takes too long, your link may have expired.
+                  Verifying your link...
                 </p>
               </div>
             ) : (
