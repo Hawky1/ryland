@@ -46,20 +46,14 @@ serve(async (req) => {
     const body = await req.json();
     const { type } = body;
 
-    // ─── AFFILIATE APPROVAL ───
+    // ─── AFFILIATE APPROVAL (deprecated — partners are created via /partners signup form) ───
     if (type === "ContactTagAdded" || type === "affiliate_approve") {
       const email = body.email?.trim()?.toLowerCase();
-      const fullName = body.full_name || body.contact_name || body.name || "Partner";
-      const phone = body.phone || null;
-      const companyName = body.company_name || null;
-      const website = body.website || null;
-      const ghlContactId = body.contact_id || body.ghl_contact_id || null;
-
       if (!email) {
         return json({ error: "Email is required" }, 400);
       }
 
-      // Check if affiliate already exists
+      // Just check if affiliate already exists and return — no creation
       const { data: existing } = await supabase
         .from("affiliates")
         .select("id, affiliate_id")
@@ -71,87 +65,9 @@ serve(async (req) => {
         return json({ success: true, affiliate_id: existing.affiliate_id, message: "Already exists" });
       }
 
-      // Generate unique affiliate_id
-      let affiliateId = generateAffiliateId();
-      let retries = 0;
-      while (retries < 5) {
-        const { data: dup } = await supabase
-          .from("affiliates")
-          .select("id")
-          .eq("affiliate_id", affiliateId)
-          .maybeSingle();
-        if (!dup) break;
-        affiliateId = generateAffiliateId();
-        retries++;
-      }
-
-      // Generate temporary password
-      const tempPassword = generatePassword();
-
-      // Create Supabase auth user
-      const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
-        email,
-        password: tempPassword,
-        email_confirm: true,
-        user_metadata: { full_name: fullName, affiliate_id: affiliateId },
-      });
-
-      if (authError) {
-        console.error("Auth user creation failed:", authError.message);
-        return json({ error: "Failed to create account" }, 500);
-      }
-
-      // Create affiliate record
-      const { error: insertError } = await supabase.from("affiliates").insert({
-        user_id: authUser.user.id,
-        affiliate_id: affiliateId,
-        full_name: fullName,
-        email,
-        phone,
-        company_name: companyName,
-        website,
-        ghl_contact_id: ghlContactId,
-        status: "approved",
-      });
-
-      if (insertError) {
-        console.error("Affiliate insert failed:", insertError.message);
-        // Cleanup: delete auth user
-        await supabase.auth.admin.deleteUser(authUser.user.id);
-        return json({ error: "Failed to create affiliate record" }, 500);
-      }
-
-      // Update GHL contact with affiliate_id custom field + tag
-      if (ghlApiKey && ghlLocationId && ghlContactId) {
-        try {
-          await fetch(`https://services.leadconnectorhq.com/contacts/${ghlContactId}`, {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${ghlApiKey}`,
-              "Content-Type": "application/json",
-              Version: "2021-07-28",
-            },
-            body: JSON.stringify({
-              tags: ["Affiliate Approved", `Affiliate - ${affiliateId}`],
-              customFields: [
-                { key: "affiliate_id", field_value: affiliateId },
-                { key: "portal_password", field_value: tempPassword },
-              ],
-            }),
-          });
-        } catch (e) {
-          console.error("GHL update failed:", e);
-        }
-      }
-
-      console.log(`Affiliate created: ${affiliateId} for ${email}`);
-
-      return json({
-        success: true,
-        affiliate_id: affiliateId,
-        email,
-        temp_password: tempPassword,
-      });
+      // Partner not found — they should sign up via /partners
+      console.log("No affiliate found for", email, "— ignoring webhook, partner should use signup form");
+      return json({ success: true, message: "No affiliate found. Partner should sign up via the form." });
     }
 
     // ─── OPPORTUNITY STAGE CHANGED ───

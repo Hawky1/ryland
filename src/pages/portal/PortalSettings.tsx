@@ -36,8 +36,8 @@ export default function PortalSettings() {
         .maybeSingle()
         .then(({ data }) => {
           if (data) {
-            setPaymentEmail((data as any).payment_email ?? "");
-            setW9Url((data as any).w9_file_url ?? null);
+            setPaymentEmail(data.payment_email ?? "");
+            setW9Url(data.w9_file_url ?? null);
           }
         });
     }
@@ -70,7 +70,7 @@ export default function PortalSettings() {
     setPayoutLoading(true);
     const { error } = await supabase
       .from("affiliates")
-      .update({ payment_email: paymentEmail.trim() || null } as any)
+      .update({ payment_email: paymentEmail.trim() || null })
       .eq("id", affiliate.id);
     setPayoutLoading(false);
     if (error) {
@@ -102,7 +102,7 @@ export default function PortalSettings() {
     // Save path to affiliates table
     const { error: updateError } = await supabase
       .from("affiliates")
-      .update({ w9_file_url: path } as any)
+      .update({ w9_file_url: path })
       .eq("id", affiliate.id);
 
     setW9Loading(false);

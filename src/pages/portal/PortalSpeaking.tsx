@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -25,6 +25,16 @@ export default function PortalSpeaking() {
     audience_description: "",
     notes: "",
   });
+
+  useEffect(() => {
+    if (affiliate) {
+      setForm((prev) => ({
+        ...prev,
+        full_name: prev.full_name || affiliate.full_name || "",
+        email: prev.email || affiliate.email || "",
+      }));
+    }
+  }, [affiliate]);
 
   const update = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
 
