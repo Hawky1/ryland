@@ -3,14 +3,17 @@ import { useRef, useEffect, useState } from "react";
 interface Props {
   overlay?: string;
   className?: string;
+  /** When true, skip loading the video and use CSS gradient only. Default: false */
+  staticOnly?: boolean;
 }
 
-export default function HlsVideoBackground({ className = "" }: Props) {
+export default function HlsVideoBackground({ className = "", staticOnly = false }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (staticOnly) return;
     const el = containerRef.current;
     if (!el) return;
 
@@ -23,9 +26,10 @@ export default function HlsVideoBackground({ className = "" }: Props) {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [staticOnly]);
 
   useEffect(() => {
+    if (staticOnly) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -34,19 +38,21 @@ export default function HlsVideoBackground({ className = "" }: Props) {
     } else {
       video.pause();
     }
-  }, [isVisible]);
+  }, [isVisible, staticOnly]);
 
   return (
     <div ref={containerRef} className={`absolute inset-0 z-0 overflow-hidden ${className}`}>
-      <video
-        ref={videoRef}
-        src="/videos/card-bg.mp4"
-        loop
-        muted
-        playsInline
-        preload="none"
-        className="w-full h-full object-cover"
-      />
+      {!staticOnly && (
+        <video
+          ref={videoRef}
+          src="/videos/card-bg.mp4"
+          loop
+          muted
+          playsInline
+          preload="none"
+          className="w-full h-full object-cover"
+        />
+      )}
       {/* Dark-to-light blue gradient shading */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#001228]/95 via-[#002952]/90 to-[#003A70]/85" />
       {/* Vignette for depth */}

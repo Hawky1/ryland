@@ -621,7 +621,7 @@ const Partners = () => {
       <section className="relative overflow-hidden" id="cta">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
           <div className="border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden">
-            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
 
             {/* Radial glow */}
             <div className="absolute inset-0 pointer-events-none z-[1]">

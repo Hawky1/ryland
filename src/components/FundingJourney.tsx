@@ -89,7 +89,7 @@ export default function FundingJourney() {
         >
           <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
             {/* Background video matching hero */}
-            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
             {/* notch */}
             <div className="flex justify-center pt-3 pb-1 relative z-10">
               <div className="w-24 h-1 rounded-full bg-white/10" />

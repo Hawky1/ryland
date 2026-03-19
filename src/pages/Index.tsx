@@ -192,10 +192,10 @@ const Index = () => {
             <p className="text-lg text-slate-500">CEO &amp; Founder, Ryland Partners</p>
           </div>
           <div className="border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl overflow-visible relative">
-            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+            <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center relative z-10">
               <div className="relative flex justify-center -mt-20 sm:-mt-32 md:-mt-56 lg:-mt-64">
-                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
+                <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" loading="lazy" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[26rem] lg:max-w-[30rem] object-cover drop-shadow-2xl" />
               </div>
               <div className="space-y-6">
                 <p className="text-white/80 leading-relaxed text-base">Gene Ryland is a serial entrepreneur and business funding strategist who has dedicated his career to helping founders unlock the capital they need to scale. With deep expertise in credit optimization, alternative lending, and strategic financial positioning, Gene has built Ryland Partners into a trusted name in the funding space.</p>
@@ -238,7 +238,7 @@ const Index = () => {
               const IconComp = { Rocket, LayoutDashboard, ShieldCheck, Handshake }[card.icon]!;
               return (
                 <motion.div key={card.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-[#004E8C] p-6 sm:p-8 text-white min-h-[200px]">
-                  <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+                   <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
                   <div className="relative z-10">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 ring-1 ring-white/20 mb-5">
                       <IconComp className="w-6 h-6 text-white" />
@@ -270,9 +270,9 @@ const Index = () => {
               { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "/consultation" },
             ].map((card, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: i * 0.08 }} whileHover={{ y: -4 }} className="relative overflow-hidden border border-[#004E8C] rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
-                <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+                <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
                 <div className="relative z-10 flex flex-col items-center text-center flex-1">
-                  <img src={card.icon} alt={card.title} className="w-28 h-28 mx-auto mb-6 object-contain" />
+                  <img src={card.icon} alt={card.title} loading="lazy" className="w-28 h-28 mx-auto mb-6 object-contain" />
                   <h3 className="text-xl font-bold text-white mb-3 font-manrope">{card.title}</h3>
                   <p className="text-sm text-zinc-300 mb-6 leading-relaxed">{card.desc}</p>
                   <Link to={card.href} className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center">
@@ -370,7 +370,7 @@ const Index = () => {
 
       {/* FAQ */}
       <section className="md:p-10 max-w-7xl border border-[#004E8C] rounded-3xl mt-20 sm:mt-40 mx-4 sm:mx-auto pt-6 px-4 sm:px-6 pb-6 shadow-2xl text-white relative overflow-hidden">
-        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
         <div className="mb-8 flex items-center justify-between relative z-10">
           <div className="flex items-center gap-3">
             <div>
@@ -417,7 +417,7 @@ const Index = () => {
 
       {/* CTA */}
       <section className="my-10 max-w-7xl mx-4 sm:mx-auto border border-[#004E8C] rounded-3xl shadow-2xl text-white relative overflow-hidden" id="cta">
-        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
+        <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" staticOnly />
         <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
             Not Sure Where to Start?

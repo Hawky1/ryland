@@ -132,7 +132,7 @@ const Contact = () => {
               { icon: Clock, title: "Business Hours", detail: "Monday – Friday", sub: "9:00 AM – 6:00 PM EST" },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl border border-[#004E8C] overflow-hidden relative p-5">
-                <HlsVideoBackground overlay="bg-[#003A70]/90" />
+                <HlsVideoBackground overlay="bg-[#003A70]/90" staticOnly />
                 <div className="relative z-10 flex items-start gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20">
                     <item.icon className="h-5 w-5 text-blue-400" />
@@ -150,7 +150,7 @@ const Contact = () => {
           {/* RIGHT - Contact Form */}
           <div className="lg:col-span-3">
             <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <HlsVideoBackground overlay="bg-[#003A70]/90" staticOnly />
               <div className="relative z-10 p-8 md:p-10">
                 {submitted ? (
                   <div className="text-center py-16 animate-fade-in-up">
