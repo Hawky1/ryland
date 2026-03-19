@@ -12,11 +12,13 @@ import { format } from "date-fns";
 const SITE_DOMAIN = "rylandpartners.com";
 
 export default function PortalDashboard() {
-  const { affiliate } = useAuth();
+  const { affiliate, user } = useAuth();
   const [copied, setCopied] = useState(false);
 
-  const referralLink = affiliate
-    ? `https://${SITE_DOMAIN}/assessment?ref=${affiliate.affiliate_id}`
+  // Fallback to user ID if affiliate data isn't available
+  const referralId = affiliate?.affiliate_id ?? user?.id ?? "";
+  const referralLink = referralId
+    ? `https://${SITE_DOMAIN}/assessment?ref=${referralId}`
     : "";
 
   const copyLink = () => {
