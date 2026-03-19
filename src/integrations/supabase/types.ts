@@ -14,6 +14,110 @@ export type Database = {
   }
   public: {
     Tables: {
+      affiliate_leads: {
+        Row: {
+          affiliate_id: string
+          created_at: string
+          deal_amount: number | null
+          email: string | null
+          full_name: string
+          ghl_contact_id: string | null
+          ghl_opportunity_id: string | null
+          id: string
+          notes: string | null
+          phone: string | null
+          pipeline_stage: string
+          referred_at: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          created_at?: string
+          deal_amount?: number | null
+          email?: string | null
+          full_name: string
+          ghl_contact_id?: string | null
+          ghl_opportunity_id?: string | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          pipeline_stage?: string
+          referred_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          created_at?: string
+          deal_amount?: number | null
+          email?: string | null
+          full_name?: string
+          ghl_contact_id?: string | null
+          ghl_opportunity_id?: string | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          pipeline_stage?: string
+          referred_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_leads_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliates: {
+        Row: {
+          affiliate_id: string
+          company_name: string | null
+          created_at: string
+          email: string
+          full_name: string
+          ghl_contact_id: string | null
+          id: string
+          phone: string | null
+          status: Database["public"]["Enums"]["affiliate_status"]
+          updated_at: string
+          user_id: string
+          website: string | null
+        }
+        Insert: {
+          affiliate_id: string
+          company_name?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          ghl_contact_id?: string | null
+          id?: string
+          phone?: string | null
+          status?: Database["public"]["Enums"]["affiliate_status"]
+          updated_at?: string
+          user_id: string
+          website?: string | null
+        }
+        Update: {
+          affiliate_id?: string
+          company_name?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          ghl_contact_id?: string | null
+          id?: string
+          phone?: string | null
+          status?: Database["public"]["Enums"]["affiliate_status"]
+          updated_at?: string
+          user_id?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       assessment_leads: {
         Row: {
           business_name: string | null
@@ -58,6 +162,57 @@ export type Database = {
           qualification?: string
         }
         Relationships: []
+      }
+      commissions: {
+        Row: {
+          affiliate_id: string
+          commission_amount: number
+          commission_status: Database["public"]["Enums"]["commission_status"]
+          commission_type: string
+          created_at: string
+          id: string
+          lead_id: string | null
+          payout_date: string | null
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          commission_amount?: number
+          commission_status?: Database["public"]["Enums"]["commission_status"]
+          commission_type?: string
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          payout_date?: string | null
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          commission_amount?: number
+          commission_status?: Database["public"]["Enums"]["commission_status"]
+          commission_type?: string
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          payout_date?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commissions_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commissions_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "affiliate_leads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       contact_submissions: {
         Row: {
@@ -205,6 +360,45 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          end_time: string | null
+          event_date: string
+          event_link: string | null
+          id: string
+          location: string | null
+          start_time: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_date: string
+          event_link?: string | null
+          id?: string
+          location?: string | null
+          start_time?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_date?: string
+          event_link?: string | null
+          id?: string
+          location?: string | null
+          start_time?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       partner_submissions: {
         Row: {
           affiliate_link: string | null
@@ -244,6 +438,89 @@ export type Database = {
         }
         Relationships: []
       }
+      payouts: {
+        Row: {
+          affiliate_id: string
+          amount: number
+          created_at: string
+          id: string
+          payment_method: string | null
+          payout_period: string | null
+          status: Database["public"]["Enums"]["payout_status"]
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          amount?: number
+          created_at?: string
+          id?: string
+          payment_method?: string | null
+          payout_period?: string | null
+          status?: Database["public"]["Enums"]["payout_status"]
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          amount?: number
+          created_at?: string
+          id?: string
+          payment_method?: string | null
+          payout_period?: string | null
+          status?: Database["public"]["Enums"]["payout_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payouts_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resources: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          external_url: string | null
+          file_url: string | null
+          id: string
+          is_placeholder: boolean
+          resource_type: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          is_placeholder?: boolean
+          resource_type?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          is_placeholder?: boolean
+          resource_type?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sms_opt_ins: {
         Row: {
           consent_text: string
@@ -277,15 +554,74 @@ export type Database = {
         }
         Relationships: []
       }
+      speaker_requests: {
+        Row: {
+          affiliate_id: string
+          audience_description: string | null
+          created_at: string
+          email: string
+          event_location: string | null
+          event_name: string
+          full_name: string
+          id: string
+          notes: string | null
+          organization_name: string | null
+          requested_date: string | null
+          status: Database["public"]["Enums"]["speaker_request_status"]
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          audience_description?: string | null
+          created_at?: string
+          email: string
+          event_location?: string | null
+          event_name: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          organization_name?: string | null
+          requested_date?: string | null
+          status?: Database["public"]["Enums"]["speaker_request_status"]
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          audience_description?: string | null
+          created_at?: string
+          email?: string
+          event_location?: string | null
+          event_name?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          organization_name?: string | null
+          requested_date?: string | null
+          status?: Database["public"]["Enums"]["speaker_request_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "speaker_requests_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_my_affiliate_id: { Args: never; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      affiliate_status: "pending" | "approved" | "suspended"
+      commission_status: "pending" | "approved" | "paid"
+      payout_status: "pending" | "processing" | "paid" | "failed"
+      speaker_request_status: "pending" | "reviewed" | "approved" | "declined"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -412,6 +748,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      affiliate_status: ["pending", "approved", "suspended"],
+      commission_status: ["pending", "approved", "paid"],
+      payout_status: ["pending", "processing", "paid", "failed"],
+      speaker_request_status: ["pending", "reviewed", "approved", "declined"],
+    },
   },
 } as const
