@@ -14,9 +14,9 @@ import {
   User,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import CreditRepairResult from "@/components/assessment/CreditRepairResult";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
