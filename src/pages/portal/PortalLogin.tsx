@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Lock, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import logoDark from "@/assets/logo-dark.png";
 import PageMeta from "@/components/PageMeta";
 
@@ -14,8 +16,10 @@ export default function PortalLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,6 +98,31 @@ export default function PortalLogin() {
                 {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                 Sign In
               </Button>
+
+              <button
+                type="button"
+                disabled={forgotLoading}
+                onClick={async () => {
+                  if (!email) {
+                    setError("Enter your email address, then click Forgot Password.");
+                    return;
+                  }
+                  setForgotLoading(true);
+                  setError("");
+                  const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/reset-password`,
+                  });
+                  setForgotLoading(false);
+                  if (resetError) {
+                    setError("Unable to send reset email. Please try again.");
+                  } else {
+                    toast({ title: "Check your email", description: "We sent a password reset link to your inbox." });
+                  }
+                }}
+                className="w-full text-sm text-muted-foreground hover:text-primary underline underline-offset-2 transition-colors"
+              >
+                {forgotLoading ? "Sending..." : "Forgot password?"}
+              </button>
             </form>
 
             <p className="mt-6 text-center text-xs text-muted-foreground">

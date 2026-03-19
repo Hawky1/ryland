@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +27,7 @@ interface PartnerSignupFormProps {
 }
 
 export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupFormProps) {
-  const navigate = useNavigate();
+  
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
@@ -41,46 +40,26 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
   const onSubmit = async (data: PartnerFormData) => {
     setSubmitting(true);
     try {
-      // Call GHL first to get affiliate link before inserting
-      let ghlContactId: string | null = null;
-
-      try {
-        const { data: ghlData, error: ghlError } = await supabase.functions.invoke("ghl-create-contact", {
-          body: {
-            name: data.name,
-            email: data.email,
-            phone: data.phone || undefined,
-            businessName: data.business_name || undefined,
-            tags: ["partner-signup", "referral-partner"],
-            source: "Partner Signup Form",
-          },
-        });
-
-        if (!ghlError && ghlData) {
-          ghlContactId = ghlData.contactId || null;
-        }
-      } catch {
-        // GHL sync is non-critical — continue with insert
-      }
-
-      // Insert complete record with GHL data included
-      const { error } = await supabase.from("partner_submissions").insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone || null,
-        business_name: data.business_name || null,
-        referral_source: data.referral_source || null,
-        message: data.message || null,
-        ghl_contact_id: ghlContactId,
+      const { data: result, error: fnError } = await supabase.functions.invoke("create-partner-account", {
+        body: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone || undefined,
+          business_name: data.business_name || undefined,
+          referral_source: data.referral_source || undefined,
+          message: data.message || undefined,
+        },
       });
 
-      if (error) throw error;
+      if (fnError) throw fnError;
+
+      // Check for application-level errors returned as JSON
+      if (result?.error) {
+        toast({ title: "Unable to create account", description: result.error, variant: "destructive" });
+        return;
+      }
 
       setSubmitted(true);
-      setSubmitted(true);
-      // Close dialog and redirect to partner onboarding
-      onOpenChange(false);
-      navigate("/partner-onboarding");
     } catch {
       toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
     } finally {
@@ -115,7 +94,10 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
         {submitted ? (
           <div className="flex flex-col items-center py-6 gap-5">
             <p className="text-slate-300 text-center text-sm max-w-xs">
-              Check your email for a welcome message with your referral link and next steps. We're excited to have you on board.
+              Check your email for a link to <strong>set your portal password</strong>. Once set, you'll have full access to your partner dashboard.
+            </p>
+            <p className="text-slate-500 text-center text-xs max-w-xs">
+              Don't see it? Check your spam or promotions folder.
             </p>
 
             <button onClick={() => handleClose(false)} className="shiny-cta !py-3 !px-8 !text-sm mt-1">

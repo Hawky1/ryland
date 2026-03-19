@@ -33,6 +33,7 @@ import OptIn from "./pages/OptIn";
 import ThankYou from "./pages/ThankYou";
 import MyOrders from "./pages/MyOrders";
 import DownloadRedirect from "./pages/DownloadRedirect";
+import ResetPassword from "./pages/ResetPassword";
 import PortalLogin from "./pages/portal/PortalLogin";
 import PortalLayout from "./components/portal/PortalLayout";
 import PortalDashboard from "./pages/portal/PortalDashboard";
@@ -82,6 +83,7 @@ const AppContent = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/download/:token" element={<DownloadRedirect />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/portal/login" element={<PortalLogin />} />
           <Route path="/portal" element={<PortalLayout />}>
             <Route index element={<PortalDashboard />} />

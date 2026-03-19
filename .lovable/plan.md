@@ -1,60 +1,71 @@
 
 
-## Plan: Auto-Create Partner Account on Signup with Password Reset Email
+## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
 
-### What Happens Today
-Partner fills out signup form → record saved to `partner_submissions` + GHL contact created → nothing else. No auth account, no portal access.
+### What Changes
 
-### New Flow
-1. Partner fills out signup form
-2. New edge function `create-partner-account` runs server-side:
-   - Generates affiliate ID (`JSmith1` format, increments if duplicate)
-   - Creates auth user with no password (`email_confirm: true`)
-   - Inserts `affiliates` record (status: approved)
-   - Inserts `partner_submissions` record
-   - Sends password recovery email via `admin.generateLink({ type: 'recovery' })` — this is the built-in "Set Your Password" email
-   - Syncs to GHL (non-critical)
-3. Success screen tells partner: "Check your email to set your password"
-4. Partner clicks email link → lands on `/reset-password` → sets password
-5. Partner logs in at `/portal/login`
+**1. Move Product Details directly below the price/CTA card (layout optimization)**
 
-### Changes
+Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
 
-**1. New edge function: `supabase/functions/create-partner-account/index.ts`**
-- Public endpoint (no JWT required)
-- Accepts: name, email, phone, business_name, referral_source, message
-- Generates affiliate ID: first initial + last name + "1" (queries `affiliates` table, increments number if duplicate exists)
-- Creates auth user via `admin.createUser()` — no password, `email_confirm: true`
-- Inserts into `affiliates` (status: approved) and `partner_submissions`
-- Calls `admin.generateLink({ type: 'recovery', email, options: { redirectTo: 'https://ryland.lovable.app/reset-password' } })` to trigger the password-set email
-- Calls GHL create-contact inline (non-critical, wrapped in try/catch)
-- Returns `{ success: true }` on success
+The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
 
-**2. Update `supabase/config.toml`**
-- Add `[functions.create-partner-account]` with `verify_jwt = false`
+**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
 
-**3. New page: `src/pages/ResetPassword.tsx`**
-- Simple branded form: "Create Your Password" with password + confirm fields
-- Detects `type=recovery` token from URL hash (Supabase appends this)
-- Calls `supabase.auth.updateUser({ password })` to set the password
-- On success, redirects to `/portal/login` with a toast message
+The two uploaded images will be:
+- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
+- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
+- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
 
-**4. Update `src/App.tsx`**
-- Add `/reset-password` route pointing to the new ResetPassword page
+### Technical Details
 
-**5. Update `src/components/PartnerSignupForm.tsx`**
-- Replace current direct insert + GHL call with single call to `create-partner-account` edge function
-- Success screen shows: "Check your email for a link to set your portal password" with check-spam note
-- Remove the redirect to `/partner-onboarding` (partner needs to set password first)
+**Files to modify:**
 
-**6. Update `src/pages/portal/PortalLogin.tsx`**
-- Add a "Forgot password?" link that calls `supabase.auth.resetPasswordForEmail()` with redirect to `/reset-password`
+1. **`src/data/productContent.ts`**
+   - Add `promoImages?: string[]` to the `ProductContent` interface
+   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
 
-### What the Partner Experiences
-1. Fills out partner signup form on `/partners`
-2. Sees success message: "Check your email to set your portal password"
-3. Opens email, clicks "Reset Password" link (default Supabase email)
-4. Lands on `/reset-password`, creates their password
-5. Redirected to `/portal/login`, logs in
-6. Full portal access
+2. **`src/pages/ProductDetail.tsx`**
+   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
+   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
+   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
+
+3. **New assets:**
+   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
+   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
+
+### Layout Change (Before → After)
+
+```text
+BEFORE:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│             │  Description │
+│             │  Price + CTA │
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  Product Details (full w)  │
+└────────────────────────────┘
+
+AFTER:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│  [promo 1]  │  Description │
+│  [promo 2]  │  Price + CTA │
+│             │  Details     │ ← moved up
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+```
+
+Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
 
