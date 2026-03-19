@@ -51,9 +51,25 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
         },
       });
 
-      if (fnError) throw fnError;
+      // supabase.functions.invoke returns FunctionsHttpError for non-2xx status codes.
+      // Extract the actual error message from the response body when possible.
+      if (fnError) {
+        let message = "Please try again later.";
+        try {
+          // FunctionsHttpError has a context property with the response
+          const context = (fnError as any).context;
+          if (context && typeof context.json === "function") {
+            const body = await context.json();
+            if (body?.error) message = body.error;
+          }
+        } catch {
+          // Couldn't parse — use generic message
+        }
+        toast({ title: "Unable to create account", description: message, variant: "destructive" });
+        return;
+      }
 
-      // Check for application-level errors returned as JSON
+      // Check for application-level errors returned as JSON with 200 status
       if (result?.error) {
         toast({ title: "Unable to create account", description: result.error, variant: "destructive" });
         return;
@@ -61,7 +77,7 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
 
       setSubmitted(true);
     } catch {
-      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
+      toast({ title: "Something went wrong", description: "Please check your connection and try again.", variant: "destructive" });
     } finally {
       setSubmitting(false);
     }
