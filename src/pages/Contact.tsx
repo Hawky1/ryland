@@ -150,7 +150,7 @@ const Contact = () => {
           {/* RIGHT - Contact Form */}
           <div className="lg:col-span-3">
             <div className="rounded-2xl border border-[#004E8C] overflow-hidden relative">
-              <HlsVideoBackground overlay="bg-[#003A70]/90" />
+              <HlsVideoBackground overlay="bg-[#003A70]/90" staticOnly />
               <div className="relative z-10 p-8 md:p-10">
                 {submitted ? (
                   <div className="text-center py-16 animate-fade-in-up">
