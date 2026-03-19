@@ -356,7 +356,7 @@ const Index = () => {
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
-                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." className="size-9 object-cover rounded-full" />
+                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
                       <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Carlos R.</span></div><p className="text-sm text-zinc-400">CEO, Rivera Ventures</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
