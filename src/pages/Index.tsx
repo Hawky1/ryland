@@ -125,7 +125,7 @@ const Index = () => {
                   <span>Take the Free Funding Assessment</span>
                 </button>
               </Link>
-              <p className="text-[10px] text-zinc-500/80 max-w-xs text-center lg:text-left">{DISCLAIMER_TEXT}</p>
+              <p className="text-[10px] text-zinc-500 max-w-xs text-center lg:text-left">{DISCLAIMER_TEXT}</p>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-3 text-[11px] sm:text-sm text-zinc-500">
                 <span>Instant Assessment</span>
                 <span className="text-zinc-600">•</span>
