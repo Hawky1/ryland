@@ -5,7 +5,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Navbar from "@/components/Navbar";
-import SharedHead from "@/components/SharedHead";
+
 
 const WHAT_WE_REMOVE = [
   "Late payments & missed payments",
