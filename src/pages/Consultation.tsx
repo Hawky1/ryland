@@ -4,7 +4,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import ConsultationCalendar from "@/components/funnel/ConsultationCalendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SharedHead from "@/components/SharedHead";
+
 import PageMeta from "@/components/PageMeta";
 import geneRyland from "@/assets/gene-ryland-about.png";
 
