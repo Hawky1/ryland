@@ -117,77 +117,78 @@ serve(async (req) => {
       return json({ error: "Failed to create partner record. Please try again." }, 500);
     }
 
-    // Insert partner_submissions record
-    let ghlContactId: string | null = null;
+    // ── Non-critical tasks: run in parallel, don't block response ──
+    const backgroundTasks = async () => {
+      let ghlContactId: string | null = null;
 
-    // GHL sync (non-critical)
-    try {
-      const ghlApiKey = Deno.env.get("GHL_API_KEY");
-      const ghlLocationId = Deno.env.get("GHL_LOCATION_ID");
+      // GHL sync
+      try {
+        const ghlApiKey = Deno.env.get("GHL_API_KEY");
+        const ghlLocationId = Deno.env.get("GHL_LOCATION_ID");
 
-      if (ghlApiKey && ghlLocationId) {
-        const ghlNameParts = trimmedName.split(/\s+/);
-        const ghlFirstName = ghlNameParts[0] || "";
-        const ghlLastName = ghlNameParts.slice(1).join(" ") || "";
+        if (ghlApiKey && ghlLocationId) {
+          const ghlNameParts = trimmedName.split(/\s+/);
+          const ghlFirstName = ghlNameParts[0] || "";
+          const ghlLastName = ghlNameParts.slice(1).join(" ") || "";
 
-        const ghlPayload: Record<string, unknown> = {
-          firstName: ghlFirstName,
-          lastName: ghlLastName,
-          email: trimmedEmail,
-          locationId: ghlLocationId,
-          source: "Partner Signup Form",
-          tags: ["partner-signup", "referral-partner"],
-        };
+          const ghlPayload: Record<string, unknown> = {
+            firstName: ghlFirstName,
+            lastName: ghlLastName,
+            email: trimmedEmail,
+            locationId: ghlLocationId,
+            source: "Partner Signup Form",
+            tags: ["partner-signup", "referral-partner"],
+          };
 
-        if (phone) ghlPayload.phone = phone;
-        if (business_name) ghlPayload.companyName = business_name;
+          if (phone) ghlPayload.phone = phone;
+          if (business_name) ghlPayload.companyName = business_name;
 
-        const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${ghlApiKey}`,
-            "Content-Type": "application/json",
-            Version: "2021-07-28",
-          },
-          body: JSON.stringify(ghlPayload),
-        });
+          const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${ghlApiKey}`,
+              "Content-Type": "application/json",
+              Version: "2021-07-28",
+            },
+            body: JSON.stringify(ghlPayload),
+          });
 
-        const ghlData = await ghlRes.json();
+          const ghlData = await ghlRes.json();
 
-        if (!ghlRes.ok && ghlRes.status === 400 && ghlData?.meta?.contactId) {
-          ghlContactId = ghlData.meta.contactId;
-        } else if (ghlRes.ok) {
-          ghlContactId = ghlData.contact?.id || ghlData.id;
+          if (!ghlRes.ok && ghlRes.status === 400 && ghlData?.meta?.contactId) {
+            ghlContactId = ghlData.meta.contactId;
+          } else if (ghlRes.ok) {
+            ghlContactId = ghlData.contact?.id || ghlData.id;
+          }
         }
+      } catch (ghlErr) {
+        console.error("GHL sync error (non-critical):", ghlErr);
       }
-    } catch (ghlErr) {
-      console.error("GHL sync error (non-critical):", ghlErr);
-    }
 
-    // Insert partner_submissions
-    await supabase.from("partner_submissions").insert({
-      name: trimmedName,
-      email: trimmedEmail,
-      phone: phone || null,
-      business_name: business_name || null,
-      referral_source: referral_source || null,
-      message: message || null,
-      ghl_contact_id: ghlContactId,
-    });
+      // Partner submissions & recovery email in parallel
+      await Promise.allSettled([
+        supabase.from("partner_submissions").insert({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: phone || null,
+          business_name: business_name || null,
+          referral_source: referral_source || null,
+          message: message || null,
+          ghl_contact_id: ghlContactId,
+        }),
+        supabase.auth.admin.generateLink({
+          type: "recovery",
+          email: trimmedEmail,
+          options: {
+            redirectTo: "https://rylandpartners.com/reset-password",
+          },
+        }),
+      ]);
+    };
 
-    // Send password recovery email (acts as "Set Your Password")
-    const { error: linkError } = await supabase.auth.admin.generateLink({
-      type: "recovery",
-      email: trimmedEmail,
-      options: {
-        redirectTo: "https://rylandpartners.com/reset-password",
-      },
-    });
-
-    if (linkError) {
-      console.error("Recovery link error:", linkError);
-      // Account is created, but email failed — not fatal
-    }
+    // Fire background tasks without awaiting — edge function stays alive
+    // via waitUntil-style pattern (Deno keeps running until all promises settle)
+    backgroundTasks().catch((err) => console.error("Background task error:", err));
 
     return json({ success: true, affiliateId });
   } catch (err) {
