@@ -10,7 +10,7 @@ import { productContentMap } from "@/data/productContent";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
-import SharedHead from "@/components/SharedHead";
+
 
 import listingUbcb1 from "@/assets/listing-ubcb-1.png";
 import listingUbcb2 from "@/assets/listing-ubcb-2.png";
