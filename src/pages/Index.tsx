@@ -270,7 +270,7 @@ const Index = () => {
               { icon: iconConsultation, title: "Schedule A Consultation", desc: "Book a 1-on-1 strategy session with our funding experts to map your personalized capital plan.", cta: "Book Now", href: "/consultation" },
             ].map((card, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: i * 0.08 }} whileHover={{ y: -4 }} className="relative overflow-hidden border border-[#004E8C] rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
-                <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" />
+                <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-2xl" staticOnly />
                 <div className="relative z-10 flex flex-col items-center text-center flex-1">
                   <img src={card.icon} alt={card.title} className="w-28 h-28 mx-auto mb-6 object-contain" />
                   <h3 className="text-xl font-bold text-white mb-3 font-manrope">{card.title}</h3>
