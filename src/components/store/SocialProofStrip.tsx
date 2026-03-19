@@ -42,7 +42,7 @@ const SocialProofStrip = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="text-center text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 mb-5"
+        className="text-center text-xs font-semibold uppercase tracking-[0.15em] text-slate-300 mb-5"
       >
         Real Results From Real Clients
       </motion.p>

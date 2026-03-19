@@ -27,7 +27,7 @@ const TrustStrip = () => {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/90 leading-tight">
                   {item.label}
                 </p>
-                <p className="text-[10px] text-white/40 leading-tight mt-0.5">
+                <p className="text-[10px] text-white/60 leading-tight mt-0.5">
                   {item.desc}
                 </p>
               </div>

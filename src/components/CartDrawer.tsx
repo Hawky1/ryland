@@ -25,7 +25,7 @@ export const CartDrawer = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="relative border-slate-200 hover:bg-slate-50 transition-all duration-200">
+        <Button variant="outline" size="icon" aria-label="Open cart" className="relative border-slate-200 hover:bg-slate-50 transition-all duration-200">
           <ShoppingCart className="h-5 w-5" />
           <AnimatePresence>
             {totalItems > 0 && (
@@ -113,7 +113,7 @@ export const CartDrawer = () => {
                               {item.product.node.title}
                             </h4>
                             {item.selectedOptions.length > 0 && (
-                              <p className="text-xs text-slate-400 mt-0.5">
+                              <p className="text-xs text-slate-500 mt-0.5">
                                 {item.selectedOptions.map(o => o.value).join(' · ')}
                               </p>
                             )}
@@ -125,13 +125,15 @@ export const CartDrawer = () => {
                         <div className="flex flex-col items-end justify-between flex-shrink-0 py-0.5">
                           <button
                             onClick={() => removeItem(item.variantId)}
-                            className="p-1 rounded-md text-slate-300 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
+                            aria-label={`Remove ${item.product.node.title} from cart`}
+                            className="p-1 rounded-md text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
                           <div className="flex items-center gap-0.5 bg-slate-50 rounded-lg border border-slate-100">
                             <button
                               onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                              aria-label="Decrease quantity"
                               className="p-1.5 text-slate-500 hover:text-slate-900 transition-colors"
                             >
                               <Minus className="h-3 w-3" />
@@ -141,6 +143,7 @@ export const CartDrawer = () => {
                             </span>
                             <button
                               onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                              aria-label="Increase quantity"
                               className="p-1.5 text-slate-500 hover:text-slate-900 transition-colors"
                             >
                               <Plus className="h-3 w-3" />
@@ -162,7 +165,7 @@ export const CartDrawer = () => {
                     { icon: ShieldCheck, label: "Secure Checkout" },
                     { icon: Lock, label: "Encrypted" },
                   ].map(({ icon: Icon, label }) => (
-                    <div key={label} className="flex items-center gap-1.5 text-slate-400">
+                    <div key={label} className="flex items-center gap-1.5 text-slate-500">
                       <Icon className="w-3.5 h-3.5" />
                       <span className="text-[10px] font-medium uppercase tracking-wider">{label}</span>
                     </div>
@@ -174,7 +177,7 @@ export const CartDrawer = () => {
                   <span className="text-sm font-medium text-slate-500">Total</span>
                   <div className="text-right">
                     <span className="text-2xl font-bold text-slate-900 tracking-tight">${totalPrice.toFixed(2)}</span>
-                    <span className="text-xs text-slate-400 ml-1.5">USD</span>
+                    <span className="text-xs text-slate-500 ml-1.5">USD</span>
                   </div>
                 </div>
 
@@ -197,7 +200,7 @@ export const CartDrawer = () => {
                   </Button>
                 </motion.div>
 
-                <p className="text-[10px] text-slate-400 text-center mt-3 leading-relaxed">
+                <p className="text-[10px] text-slate-500 text-center mt-3 leading-relaxed">
                   You'll be redirected to Shopify's secure checkout
                 </p>
               </div>

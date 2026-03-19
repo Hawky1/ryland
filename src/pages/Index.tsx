@@ -125,7 +125,7 @@ const Index = () => {
                   <span>Take the Free Funding Assessment</span>
                 </button>
               </Link>
-              <p className="text-[10px] text-zinc-500/80 max-w-xs text-center lg:text-left">{DISCLAIMER_TEXT}</p>
+              <p className="text-[10px] text-zinc-500 max-w-xs text-center lg:text-left">{DISCLAIMER_TEXT}</p>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-3 text-[11px] sm:text-sm text-zinc-500">
                 <span>Instant Assessment</span>
                 <span className="text-zinc-600">•</span>
@@ -150,7 +150,7 @@ const Index = () => {
               </div>
               <div className="relative z-10 flex flex-col items-center mt-1 sm:mt-2">
                 <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Credit Strategist</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/50 mx-1">|</span> Business Credit Strategist</p>
               </div>
               <img src={asSeenOn} alt="As seen on FOX, USA Today, Digital Journal, MarketWatch" width={1584} height={263} loading="lazy" className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-xl brightness-0 invert opacity-60" />
             </div>
@@ -205,15 +205,15 @@ const Index = () => {
                 <p className="text-white/80 leading-relaxed text-base">After experiencing firsthand how traditional banks overlook ambitious entrepreneurs, Gene created a system that bridges the gap — connecting business owners with high-limit lenders, credit-building strategies, and the education needed to secure six- and seven-figure funding packages.</p>
                 <p className="text-white/80 leading-relaxed text-base">Today, Gene leads a growing community of funded founders through the Ryland Partners ecosystem — offering done-for-you services, a private academy, and direct lender access that most entrepreneurs never knew existed.</p>
                 <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/20">
-                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p><p className="text-xs text-white/60 mt-1">Funding Secured</p></div>
-                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p><p className="text-xs text-white/60 mt-1">Entrepreneurs Helped</p></div>
-                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p><p className="text-xs text-white/60 mt-1">Years of Experience</p></div>
+                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">$150M+</p><p className="text-xs text-white/70 mt-1">Funding Secured</p></div>
+                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">10K+</p><p className="text-xs text-white/70 mt-1">Entrepreneurs Helped</p></div>
+                  <div><p className="text-2xl md:text-3xl font-semibold text-white tracking-tight">8+</p><p className="text-xs text-white/70 mt-1">Years of Experience</p></div>
                 </div>
                 <div className="pt-4">
                   <Link to="/contact" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
                     Work With Gene
                   </Link>
-                  <p className="text-[10px] text-white/40 mt-2">{DISCLAIMER_TEXT}</p>
+                  <p className="text-[10px] text-white/60 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </div>
             </div>
@@ -281,7 +281,7 @@ const Index = () => {
                   <Link to={card.href} className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center">
                     {card.cta}
                   </Link>
-                  <p className="text-[9px] text-zinc-400/60 mt-2">{DISCLAIMER_TEXT}</p>
+                  <p className="text-[9px] text-zinc-400 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </motion.div>
             ))}
@@ -317,7 +317,7 @@ const Index = () => {
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src={profileBradley} alt="Bradley A." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Bradley A.</span></div><p className="text-sm text-zinc-400">Business Owner</p></div>
+                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Bradley A.</span></div><p className="text-sm text-zinc-300">Business Owner</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The process was seamless. The team helped me understand my options and guided me every step of the way."</p>
                   </article>
@@ -337,7 +337,7 @@ const Index = () => {
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src={profileMichael} alt="Michael G." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-400">Real Estate Investor</p></div>
+                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-300">Real Estate Investor</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners helped me optimize my credit profile. My score improved significantly and I was able to close on my first investment property."</p>
                   </article>
@@ -357,7 +357,7 @@ const Index = () => {
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=faces" alt="Carlos R." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Carlos R.</span></div><p className="text-sm text-zinc-400">CEO, Rivera Ventures</p></div>
+                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Carlos R.</span></div><p className="text-sm text-zinc-300">CEO, Rivera Ventures</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Switching to Ryland was the best decision this year. Intuitive process, fully transparent, and measurable results from day one."</p>
                   </article>
@@ -378,7 +378,7 @@ const Index = () => {
           <div className="flex items-center gap-3">
             <div>
               <h2 className="sm:text-5xl text-2xl font-medium text-white tracking-tighter text-left pt-6 pb-6" style={{ maskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 0%, black 45%, transparent)' }}>Ryland Partners — Help &amp; FAQs</h2>
-              <p className="mt-1 text-sm text-slate-400">Common questions about funding, credit, and our services.</p>
+              <p className="mt-1 text-sm text-slate-300">Common questions about funding, credit, and our services.</p>
             </div>
           </div>
         </div>
@@ -436,8 +436,8 @@ const Index = () => {
               Explore Products
             </Link>
           </div>
-          <p className="text-[10px] text-zinc-400/70 mt-4 max-w-md mx-auto">{DISCLAIMER_TEXT}</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
+           <p className="text-[10px] text-zinc-400 mt-4 max-w-md mx-auto">{DISCLAIMER_TEXT}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
               No credit check required

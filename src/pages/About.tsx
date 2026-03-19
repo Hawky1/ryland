@@ -61,7 +61,7 @@ const About = () => {
               <img src={geneRylandAbout} alt="Gene Ryland — Founder of Ryland Partners" width={1178} height={1667} loading="lazy" className="relative z-10 w-full max-w-[16rem] sm:max-w-[20rem] md:max-w-[24rem] lg:max-w-[28rem] object-cover drop-shadow-2xl" />
               <div className="relative z-10 flex flex-col items-center mt-1 sm:mt-2">
                 <h3 className="text-base sm:text-lg font-semibold text-white/90" style={{ fontVariant: 'small-caps', letterSpacing: '0.15em' }}>Gene Ryland</h3>
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300/60 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/25 mx-1">|</span> Business Funding Expert</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-blue-300 font-medium mt-0.5">CEO &amp; Founder <span className="text-white/50 mx-1">|</span> Business Funding Expert</p>
               </div>
             </div>
           </div>
@@ -73,10 +73,10 @@ const About = () => {
         <div className="relative overflow-hidden border border-[#004E8C] rounded-3xl p-6 sm:p-8 md:p-10">
           <HlsVideoBackground overlay="bg-[#003A70]/90" />
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight">$<Counter target={150} />M+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Funding Secured</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={10000} prefix="" />+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Entrepreneurs Helped</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={8} />+</p><p className="text-xs sm:text-sm text-white/60 mt-1">Years Experience</p></div>
-            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={0} />%</p><p className="text-xs sm:text-sm text-white/60 mt-1">APR Introductory Rates</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight">$<Counter target={150} />M+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Funding Secured</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={10000} prefix="" />+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Entrepreneurs Helped</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={8} />+</p><p className="text-xs sm:text-sm text-white/70 mt-1">Years Experience</p></div>
+            <div><p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight"><Counter target={0} />%</p><p className="text-xs sm:text-sm text-white/70 mt-1">APR Introductory Rates</p></div>
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ const About = () => {
                   <card.icon className="h-7 w-7 text-blue-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3 text-center">{card.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed text-center">{card.desc}</p>
+                <p className="text-sm text-slate-300 leading-relaxed text-center">{card.desc}</p>
               </div>
             </div>
           ))}
