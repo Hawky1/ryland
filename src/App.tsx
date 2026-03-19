@@ -33,6 +33,7 @@ import OptIn from "./pages/OptIn";
 import ThankYou from "./pages/ThankYou";
 import MyOrders from "./pages/MyOrders";
 import DownloadRedirect from "./pages/DownloadRedirect";
+import ResetPassword from "./pages/ResetPassword";
 import PortalLogin from "./pages/portal/PortalLogin";
 import PortalLayout from "./components/portal/PortalLayout";
 import PortalDashboard from "./pages/portal/PortalDashboard";
