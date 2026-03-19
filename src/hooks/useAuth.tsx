@@ -71,50 +71,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false;
 
-    // Initialize auth state
-    const initAuth = async () => {
+    // Try to restore session from localStorage synchronously first
+    const restoreSessionFromStorage = () => {
       try {
-        // Get initial session FIRST
-        const { data: { session }, error } = await supabase.auth.getSession();
+        // Supabase stores auth in localStorage with key pattern: sb-<project-ref>-auth-token
+        const storageKey = Object.keys(localStorage).find(key => 
+          key.startsWith('sb-') && key.endsWith('-auth-token')
+        );
         
-        if (cancelled) return;
-        
-        if (error) {
-          console.error('getSession error:', error);
-        }
-        
-        const user = session?.user ?? null;
-        console.log('Initial session:', user ? `User ${user.id}` : 'No user');
-        
-        // Set user and loading state
-        setState((prev) => ({ ...prev, user, session, loading: false }));
-        
-        // Fetch affiliate in background
-        if (user) {
-          fetchAffiliate(user.id).then((affiliate) => {
-            if (!cancelled) {
-              setState((prev) => ({ ...prev, affiliate }));
+        if (storageKey) {
+          const stored = localStorage.getItem(storageKey);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed?.user && parsed?.access_token) {
+              console.log('Restored session from localStorage:', parsed.user.id);
+              return { user: parsed.user, session: parsed };
             }
-          }).catch(() => {});
+          }
         }
-      } catch (err) {
-        console.error('Init auth failed:', err);
-        if (!cancelled) {
-          setState((prev) => ({ ...prev, loading: false }));
-        }
+      } catch (e) {
+        console.error('Failed to restore from localStorage:', e);
       }
+      return null;
     };
+
+    // Immediately try to restore from localStorage (synchronous - can't be aborted)
+    const restored = restoreSessionFromStorage();
+    if (restored) {
+      setState((prev) => ({ 
+        ...prev, 
+        user: restored.user, 
+        session: restored.session as Session, 
+        loading: false 
+      }));
+      
+      // Fetch affiliate in background
+      if (restored.user) {
+        fetchAffiliate(restored.user.id).then((affiliate) => {
+          if (!cancelled) {
+            setState((prev) => ({ ...prev, affiliate }));
+          }
+        }).catch(() => {});
+      }
+    } else {
+      // No stored session - set loading to false
+      console.log('No session in localStorage');
+      setState((prev) => ({ ...prev, loading: false }));
+    }
 
     // Set up auth state change listener for login/logout events
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (cancelled) return;
-        
-        // Skip INITIAL_SESSION since we handle it above
-        if (event === 'INITIAL_SESSION') {
-          console.log('INITIAL_SESSION event (handled by getSession)');
-          return;
-        }
         
         console.log('Auth state changed:', event, session?.user?.id || 'no user');
         
@@ -132,9 +140,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
     );
-
-    // Run init
-    initAuth();
 
     return () => {
       cancelled = true;
