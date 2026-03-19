@@ -28,6 +28,8 @@ const ProductCard = ({ product, index, onAddToCart, isLoading }: ProductCardProp
             {image ? (
               <img
                 src={image.url}
+                srcSet={`${image.url}&width=300 300w, ${image.url}&width=400 400w, ${image.url}&width=600 600w, ${image.url}&width=800 800w`}
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 alt={image.altText || product.node.title}
                 width={400}
                 height={500}
