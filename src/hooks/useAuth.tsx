@@ -70,17 +70,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
-    const loadingTimeout = setTimeout(() => {
-      if (!cancelled) {
-        setState((prev) => {
-          if (prev.loading) {
-            console.warn('Auth loading timeout - forcing loading to false');
-            return { ...prev, loading: false };
-          }
-          return prev;
-        });
-      }
-    }, 5000);
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
@@ -103,9 +92,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     );
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    // Initial session check - this is critical for refresh
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
       if (cancelled) return;
+      
+      if (error) {
+        console.error('getSession error:', error);
+      }
+      
       const user = session?.user ?? null;
+      console.log('Initial session check:', user ? 'User found' : 'No user');
 
       // Set user immediately so AuthGuard can pass
       setState((prev) => ({ ...prev, user, session, loading: false }));
@@ -120,11 +116,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           console.error("Failed to fetch affiliate:", err);
         });
       }
+    }).catch((err) => {
+      if (cancelled) return;
+      console.error('getSession failed:', err);
+      // Even on error, stop loading
+      setState((prev) => ({ ...prev, loading: false }));
     });
 
     return () => {
       cancelled = true;
-      clearTimeout(loadingTimeout);
       subscription.unsubscribe();
     };
   }, [fetchAffiliate]);
