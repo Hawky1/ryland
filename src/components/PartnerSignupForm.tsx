@@ -27,7 +27,7 @@ interface PartnerSignupFormProps {
 }
 
 export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupFormProps) {
-  const navigate = useNavigate();
+  
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
