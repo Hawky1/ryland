@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.ghl-affiliate-webhook]
 verify_jwt = false
+
+[functions.create-partner-account]
+verify_jwt = false
