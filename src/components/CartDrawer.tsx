@@ -177,7 +177,7 @@ export const CartDrawer = () => {
                   <span className="text-sm font-medium text-slate-500">Total</span>
                   <div className="text-right">
                     <span className="text-2xl font-bold text-slate-900 tracking-tight">${totalPrice.toFixed(2)}</span>
-                    <span className="text-xs text-slate-400 ml-1.5">USD</span>
+                    <span className="text-xs text-slate-500 ml-1.5">USD</span>
                   </div>
                 </div>
 
