@@ -41,46 +41,26 @@ export default function PartnerSignupForm({ open, onOpenChange }: PartnerSignupF
   const onSubmit = async (data: PartnerFormData) => {
     setSubmitting(true);
     try {
-      // Call GHL first to get affiliate link before inserting
-      let ghlContactId: string | null = null;
-
-      try {
-        const { data: ghlData, error: ghlError } = await supabase.functions.invoke("ghl-create-contact", {
-          body: {
-            name: data.name,
-            email: data.email,
-            phone: data.phone || undefined,
-            businessName: data.business_name || undefined,
-            tags: ["partner-signup", "referral-partner"],
-            source: "Partner Signup Form",
-          },
-        });
-
-        if (!ghlError && ghlData) {
-          ghlContactId = ghlData.contactId || null;
-        }
-      } catch {
-        // GHL sync is non-critical — continue with insert
-      }
-
-      // Insert complete record with GHL data included
-      const { error } = await supabase.from("partner_submissions").insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone || null,
-        business_name: data.business_name || null,
-        referral_source: data.referral_source || null,
-        message: data.message || null,
-        ghl_contact_id: ghlContactId,
+      const { data: result, error: fnError } = await supabase.functions.invoke("create-partner-account", {
+        body: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone || undefined,
+          business_name: data.business_name || undefined,
+          referral_source: data.referral_source || undefined,
+          message: data.message || undefined,
+        },
       });
 
-      if (error) throw error;
+      if (fnError) throw fnError;
+
+      // Check for application-level errors returned as JSON
+      if (result?.error) {
+        toast({ title: "Unable to create account", description: result.error, variant: "destructive" });
+        return;
+      }
 
       setSubmitted(true);
-      setSubmitted(true);
-      // Close dialog and redirect to partner onboarding
-      onOpenChange(false);
-      navigate("/partner-onboarding");
     } catch {
       toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
     } finally {
