@@ -58,9 +58,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
 
         if (user) {
-          const affiliate = await fetchAffiliate(user.id);
-          if (!cancelled) {
-            setState({ user, session, affiliate, loading: false });
+          try {
+            const affiliate = await fetchAffiliate(user.id);
+            if (!cancelled) {
+              setState({ user, session, affiliate, loading: false });
+            }
+          } catch (err) {
+            console.error("Failed to fetch affiliate:", err);
+            if (!cancelled) {
+              setState({ user, session, affiliate: null, loading: false });
+            }
           }
         } else {
           setState({ user: null, session: null, affiliate: null, loading: false });
@@ -75,9 +82,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
 
       if (user) {
-        const affiliate = await fetchAffiliate(user.id);
-        if (!cancelled) {
-          setState({ user, session, affiliate, loading: false });
+        try {
+          const affiliate = await fetchAffiliate(user.id);
+          if (!cancelled) {
+            setState({ user, session, affiliate, loading: false });
+          }
+        } catch (err) {
+          console.error("Failed to fetch affiliate:", err);
+          if (!cancelled) {
+            setState({ user: null, session: null, affiliate: null, loading: false });
+          }
         }
       } else {
         setState({ user: null, session: null, affiliate: null, loading: false });

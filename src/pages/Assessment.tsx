@@ -14,9 +14,9 @@ import {
   User,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import CreditRepairResult from "@/components/assessment/CreditRepairResult";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
@@ -406,9 +406,22 @@ export default function Assessment() {
           )}
 
           {/* ── Results ─────────────────────────────────────── */}
-          {result !== null && (
+          {result === "credit_repair" && (
             <motion.div
-              key="results"
+              key="results-cr"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.4 }}
+            >
+              <CreditRepairResult />
+            </motion.div>
+          )}
+
+          {result === "business_funding" && (
+            <motion.div
+              key="results-bf"
               variants={slideVariants}
               initial="enter"
               animate="center"
@@ -424,73 +437,38 @@ export default function Assessment() {
                 Your Assessment is Complete
               </h2>
 
-              {result === "business_funding" ? (
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 rounded-2xl p-6 sm:p-8 mt-6 text-left">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-slate-900 font-[Geist,sans-serif]">
-                        You Qualify for Business Funding
-                      </h3>
-                      <p className="text-sm text-blue-600 font-medium">Score range: Eligible</p>
-                    </div>
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 rounded-2xl p-6 sm:p-8 mt-6 text-left">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-blue-600" />
                   </div>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                    Based on your credit profile, you're eligible for <strong>$50K – $250K</strong> in 0% APR business credit lines. Our team will create a custom funding strategy tailored to your business goals.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    {["0% APR business credit lines", "No personal collateral required", "Funding in as little as 30 days"].map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => navigate("/consultation")}
-                    className="shiny-cta w-full !text-base !py-4"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      Book Your Funding Strategy Session <ChevronRight className="w-4 h-4" />
-                    </span>
-                  </button>
-                </div>
-              ) : (
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-6 sm:p-8 mt-6 text-left">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
-                      <ShieldCheck className="w-5 h-5 text-amber-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-slate-900 font-[Geist,sans-serif]">
-                        Recommended: Credit Repair First
-                      </h3>
-                      <p className="text-sm text-amber-600 font-medium">Build a stronger foundation</p>
-                    </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-slate-900 font-[Geist,sans-serif]">
+                      You Qualify for Business Funding
+                    </h3>
+                    <p className="text-sm text-blue-600 font-medium">Score range: Eligible</p>
                   </div>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                    To maximize your funding potential, we recommend starting with our <strong>done-for-you credit restoration</strong> program. Most clients see improvements within 35–90 days, unlocking significantly better funding terms.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    {["Professional dispute & restoration", "Results in 35–90 days", "Unlock higher funding limits after repair"].map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => navigate("/consultation")}
-                    className="shiny-cta w-full !text-base !py-4"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      Book Your Credit Strategy Session <ChevronRight className="w-4 h-4" />
-                    </span>
-                  </button>
                 </div>
-              )}
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Based on your credit profile, you're eligible for <strong>$50K – $250K</strong> in 0% APR business credit lines. Our team will create a custom funding strategy tailored to your business goals.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  {["0% APR business credit lines", "No personal collateral required", "Funding in as little as 30 days"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                      <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => navigate("/consultation")}
+                  className="shiny-cta w-full !text-base !py-4"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Book Your Funding Strategy Session <ChevronRight className="w-4 h-4" />
+                  </span>
+                </button>
+              </div>
 
               <p className="text-xs text-slate-400 mt-6">
                 A member of our team may reach out to discuss your results.
