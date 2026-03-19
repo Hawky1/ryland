@@ -92,7 +92,7 @@ export default function PortalSidebar() {
         {/* Affiliate badge */}
         {!collapsed && affiliate && (
           <div className="mx-3 mt-3 rounded-lg bg-sidebar-accent/50 border border-sidebar-border px-3 py-2.5">
-            <p className="text-[11px] text-sidebar-foreground/50 uppercase tracking-wider">Affiliate ID</p>
+            <p className="text-[11px] text-sidebar-foreground/60 uppercase tracking-wider">Affiliate ID</p>
             <p className="text-sm font-mono font-semibold text-sidebar-foreground mt-0.5">{affiliate.affiliate_id}</p>
           </div>
         )}
