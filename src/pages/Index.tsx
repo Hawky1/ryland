@@ -281,7 +281,7 @@ const Index = () => {
                   <Link to={card.href} className="mt-auto inline-flex transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] active:duration-75 text-sm font-semibold text-[#003A70] bg-white rounded-full py-3 px-8 items-center justify-center">
                     {card.cta}
                   </Link>
-                  <p className="text-[9px] text-zinc-400/60 mt-2">{DISCLAIMER_TEXT}</p>
+                  <p className="text-[9px] text-zinc-400 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </motion.div>
             ))}
