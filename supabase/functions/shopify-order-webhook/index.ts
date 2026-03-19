@@ -39,7 +39,7 @@ serve(async (req) => {
     const webhookSecret = Deno.env.get("SHOPIFY_WEBHOOK_SECRET");
     const ghlApiKey = Deno.env.get("GHL_API_KEY");
     const ghlLocationId = Deno.env.get("GHL_LOCATION_ID");
-    const siteUrl = "https://ryland.lovable.app";
+    const siteUrl = "https://rylandpartners.com";
 
     const body = await req.text();
 
