@@ -1,35 +1,58 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users } from "lucide-react";
+import { Users, Plus, Shield } from "lucide-react";
 import { useAffiliateLeads } from "@/hooks/useAffiliateLeads";
 import LeadsTable from "@/components/portal/LeadsTable";
 import LeadDetailDrawer from "@/components/portal/LeadDetailDrawer";
+import SubmitLeadDrawer from "@/components/portal/SubmitLeadDrawer";
 import type { Lead } from "@/types/leads";
 
 export default function PortalLeads() {
-  const { leads, isLoading } = useAffiliateLeads();
+  const { leads, isLoading, refetch } = useAffiliateLeads();
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [submitOpen, setSubmitOpen] = useState(false);
+  const [adminMode, setAdminMode] = useState(false);
 
   return (
     <div className="space-y-6 max-w-7xl">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">My Leads</h1>
-        <p className="text-sm text-muted-foreground mt-1">Track the status of every business owner you've referred.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Lead Tracker</h1>
+          <p className="text-sm text-slate-500 mt-1">Track every referral from submission to funding.</p>
+        </div>
+        <div className="flex items-center gap-2">
+          {/* Secret admin toggle — triple-click the shield icon to toggle */}
+          <button
+            onClick={() => setAdminMode((v) => !v)}
+            className="p-2 rounded-lg text-slate-300 hover:text-slate-500 transition-colors"
+            title="Admin View"
+          >
+            <Shield className={`h-4 w-4 ${adminMode ? "text-amber-500" : ""}`} />
+          </button>
+          <Button onClick={() => setSubmitOpen(true)} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white gap-2">
+            <Plus className="h-4 w-4" />
+            Submit New Lead
+          </Button>
+        </div>
       </div>
 
-      <Card className="border-border/60">
+      <Card className="border-slate-200 bg-white shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base font-semibold flex items-center gap-2">
-            <Users className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-base font-semibold text-slate-900 flex items-center gap-2">
+            <Users className="h-4 w-4 text-slate-400" />
             Referred Leads
             {leads.length > 0 && (
-              <Badge variant="secondary" className="ml-2 font-normal">{leads.length}</Badge>
+              <Badge variant="secondary" className="ml-2 font-normal bg-slate-100 text-slate-600">{leads.length}</Badge>
+            )}
+            {adminMode && (
+              <Badge className="ml-2 bg-amber-100 text-amber-700 border-amber-200">Admin View</Badge>
             )}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
-          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} />
+          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} adminMode={adminMode} />
         </CardContent>
       </Card>
 
@@ -37,6 +60,12 @@ export default function PortalLeads() {
         lead={selectedLead}
         open={!!selectedLead}
         onClose={() => setSelectedLead(null)}
+      />
+
+      <SubmitLeadDrawer
+        open={submitOpen}
+        onClose={() => setSubmitOpen(false)}
+        onSuccess={() => refetch()}
       />
     </div>
   );
