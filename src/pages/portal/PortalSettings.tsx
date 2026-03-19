@@ -102,7 +102,7 @@ export default function PortalSettings() {
     // Save path to affiliates table
     const { error: updateError } = await supabase
       .from("affiliates")
-      .update({ w9_file_url: path } as any)
+      .update({ w9_file_url: path })
       .eq("id", affiliate.id);
 
     setW9Loading(false);

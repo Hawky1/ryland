@@ -1,7 +1,10 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, CheckCircle } from "lucide-react";
+import { Users, CheckCircle, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import type { Lead } from "@/types/leads";
 import { formatDateTime } from "@/utils/formatters";
 
@@ -10,6 +13,7 @@ interface LeadsTableProps {
   isLoading: boolean;
   onSelectLead: (lead: Lead) => void;
   adminMode?: boolean;
+  onRefresh?: () => void;
 }
 
 const stageBadge: Record<string, string> = {
@@ -28,7 +32,25 @@ const invoiceStatusBadge: Record<string, string> = {
   "Pending": "bg-slate-50 text-slate-600 border-slate-200",
 };
 
-export default function LeadsTable({ leads, isLoading, onSelectLead, adminMode }: LeadsTableProps) {
+export default function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: LeadsTableProps) {
+  const { toast } = useToast();
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+
+  const handleApprove = async (leadId: string) => {
+    setApprovingId(leadId);
+    const { error } = await supabase
+      .from("affiliate_leads")
+      .update({ commission_status: "approved" })
+      .eq("id", leadId);
+    setApprovingId(null);
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Approved", description: "Commission status set to approved." });
+      onRefresh?.();
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="p-6 space-y-3">
@@ -98,8 +120,14 @@ export default function LeadsTable({ leads, isLoading, onSelectLead, adminMode }
                 {adminMode && (
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     {invoiceStatus === "Paid" ? (
-                      <Button size="sm" variant="outline" className="gap-1.5 text-xs border-emerald-200 text-emerald-700 hover:bg-emerald-50">
-                        <CheckCircle className="h-3.5 w-3.5" />
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="gap-1.5 text-xs border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                        disabled={approvingId === lead.id}
+                        onClick={() => handleApprove(lead.id)}
+                      >
+                        {approvingId === lead.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle className="h-3.5 w-3.5" />}
                         Approve
                       </Button>
                     ) : (

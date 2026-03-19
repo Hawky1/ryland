@@ -26,6 +26,16 @@ export default function PortalSpeaking() {
     notes: "",
   });
 
+  useEffect(() => {
+    if (affiliate) {
+      setForm((prev) => ({
+        ...prev,
+        full_name: prev.full_name || affiliate.full_name || "",
+        email: prev.email || affiliate.email || "",
+      }));
+    }
+  }, [affiliate]);
+
   const update = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {

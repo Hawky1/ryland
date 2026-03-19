@@ -52,7 +52,7 @@ export default function PortalLeads() {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
-          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} adminMode={adminMode} />
+          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} adminMode={adminMode} onRefresh={refetch} />
         </CardContent>
       </Card>
 
