@@ -68,7 +68,7 @@ serve(async (req) => {
       const endSec = Math.floor(Number(endDate) / 1000);
       url.searchParams.set("startDate", String(startSec));
       url.searchParams.set("endDate", String(endSec));
-      url.searchParams.set("timezone", timezone);
+      url.searchParams.set("timezone", String(timezone));
 
       const res = await fetch(url.toString(), { headers: ghlHeaders });
       const data = await res.json();
