@@ -167,18 +167,18 @@ const Index = () => {
           <div style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
             <div className="flex carousel-wrapper gap-x-10 lg:gap-x-20">
               <div className="flex gap-10 shrink-0 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" width={1622} height={480} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" width={1920} height={1080} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" width={1920} height={558} loading="lazy" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" width={1920} height={1125} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" width={1280} height={297} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex shrink-0 gap-10 lg:gap-x-20 items-center">
-                <img src={logoChase} alt="Chase" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoBoa} alt="Bank of America" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoUsBank} alt="US Bank" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoNavyFed} alt="Navy Federal Credit Union" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                <img src={logoTruist} alt="Truist" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoChase} alt="Chase" width={1622} height={480} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoBoa} alt="Bank of America" width={1920} height={1080} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoUsBank} alt="US Bank" width={1920} height={558} loading="lazy" className="h-[36px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoNavyFed} alt="Navy Federal Credit Union" width={1920} height={1125} loading="lazy" className="h-[40px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <img src={logoTruist} alt="Truist" width={1280} height={297} loading="lazy" className="h-[32px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
