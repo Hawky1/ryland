@@ -165,7 +165,7 @@ export const CartDrawer = () => {
                     { icon: ShieldCheck, label: "Secure Checkout" },
                     { icon: Lock, label: "Encrypted" },
                   ].map(({ icon: Icon, label }) => (
-                    <div key={label} className="flex items-center gap-1.5 text-slate-400">
+                    <div key={label} className="flex items-center gap-1.5 text-slate-500">
                       <Icon className="w-3.5 h-3.5" />
                       <span className="text-[10px] font-medium uppercase tracking-wider">{label}</span>
                     </div>
