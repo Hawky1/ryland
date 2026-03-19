@@ -101,6 +101,9 @@ export default function Assessment() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<"credit_repair" | "business_funding" | null>(null);
 
+  // Capture referral attribution on mount
+  useEffect(() => { captureReferral(); }, []);
+
   const totalSteps = STEPS.length + 1; // quiz steps + contact step
   const progress = result ? 100 : ((step + 1) / (totalSteps + 1)) * 100;
 
