@@ -322,7 +322,7 @@ const Index = () => {
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"The process was seamless. The team helped me understand my options and guided me every step of the way."</p>
                   </article>
                   <article className="rounded-2xl border border-[#004E8C] overflow-hidden">
-                    <img src={proofBoa} alt="Bank of America — approved for business credit card" className="w-full object-cover" />
+                    <img src={proofBoa} alt="Bank of America — approved for business credit card" loading="lazy" width={378} height={368} className="w-full object-cover" />
                   </article>
                 </div>
               ))}
