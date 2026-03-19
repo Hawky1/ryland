@@ -149,7 +149,7 @@ serve(async (req) => {
       }
 
       // Step 2: Create appointment
-      const appointmentPayload = {
+      const appointmentPayload: Record<string, unknown> = {
         calendarId,
         locationId,
         contactId,
@@ -157,9 +157,9 @@ serve(async (req) => {
         endTime,
         title: `Strategy Session — ${name}`,
         appointmentStatus: "new",
-        address: timezone || "America/New_York",
-        notes: notes || "",
+        selectedTimezone: timezone || "America/New_York",
       };
+      if (notes) appointmentPayload.notes = notes;
 
       const apptRes = await fetch(
         "https://services.leadconnectorhq.com/calendars/events/appointments",
