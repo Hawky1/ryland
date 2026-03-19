@@ -337,7 +337,7 @@ const Index = () => {
                   <article className="rounded-2xl border border-[#004E8C] bg-gradient-to-br from-[#0060A9] to-[#003A70] p-6 text-white">
                     <div className="flex items-center gap-3">
                       <img src={profileMichael} alt="Michael G." width={64} height={64} loading="lazy" className="size-9 object-cover rounded-full" />
-                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-400">Real Estate Investor</p></div>
+                      <div><div className="flex items-center gap-1"><span className="text-base font-semibold text-zinc-100">Michael G.</span></div><p className="text-sm text-zinc-300">Real Estate Investor</p></div>
                     </div>
                     <p className="mt-4 text-base text-zinc-300 leading-relaxed">"Ryland Partners helped me optimize my credit profile. My score improved significantly and I was able to close on my first investment property."</p>
                   </article>
