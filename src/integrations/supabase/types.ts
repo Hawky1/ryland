@@ -17,6 +17,10 @@ export type Database = {
       affiliate_leads: {
         Row: {
           affiliate_id: string
+          assigned_rep: string | null
+          commission_amount: number | null
+          commission_status: string | null
+          company_name: string | null
           created_at: string
           deal_amount: number | null
           email: string | null
@@ -24,6 +28,9 @@ export type Database = {
           ghl_contact_id: string | null
           ghl_opportunity_id: string | null
           id: string
+          latest_update: string | null
+          next_appointment_at: string | null
+          next_step: string | null
           notes: string | null
           phone: string | null
           pipeline_stage: string
@@ -33,6 +40,10 @@ export type Database = {
         }
         Insert: {
           affiliate_id: string
+          assigned_rep?: string | null
+          commission_amount?: number | null
+          commission_status?: string | null
+          company_name?: string | null
           created_at?: string
           deal_amount?: number | null
           email?: string | null
@@ -40,6 +51,9 @@ export type Database = {
           ghl_contact_id?: string | null
           ghl_opportunity_id?: string | null
           id?: string
+          latest_update?: string | null
+          next_appointment_at?: string | null
+          next_step?: string | null
           notes?: string | null
           phone?: string | null
           pipeline_stage?: string
@@ -49,6 +63,10 @@ export type Database = {
         }
         Update: {
           affiliate_id?: string
+          assigned_rep?: string | null
+          commission_amount?: number | null
+          commission_status?: string | null
+          company_name?: string | null
           created_at?: string
           deal_amount?: number | null
           email?: string | null
@@ -56,6 +74,9 @@ export type Database = {
           ghl_contact_id?: string | null
           ghl_opportunity_id?: string | null
           id?: string
+          latest_update?: string | null
+          next_appointment_at?: string | null
+          next_step?: string | null
           notes?: string | null
           phone?: string | null
           pipeline_stage?: string
