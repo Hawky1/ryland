@@ -200,7 +200,7 @@ export const CartDrawer = () => {
                   </Button>
                 </motion.div>
 
-                <p className="text-[10px] text-slate-400 text-center mt-3 leading-relaxed">
+                <p className="text-[10px] text-slate-500 text-center mt-3 leading-relaxed">
                   You'll be redirected to Shopify's secure checkout
                 </p>
               </div>

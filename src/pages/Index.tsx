@@ -436,8 +436,8 @@ const Index = () => {
               Explore Products
             </Link>
           </div>
-          <p className="text-[10px] text-zinc-400/70 mt-4 max-w-md mx-auto">{DISCLAIMER_TEXT}</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
+           <p className="text-[10px] text-zinc-400 mt-4 max-w-md mx-auto">{DISCLAIMER_TEXT}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400"><path d="M20 6 9 17l-5-5"/></svg>
               No credit check required
