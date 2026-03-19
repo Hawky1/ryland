@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
@@ -20,7 +20,15 @@ interface AuthState {
   loading: boolean;
 }
 
-export function useAuth() {
+interface AuthContextValue extends AuthState {
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signOut: () => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<{ error: Error | null }>;
+}
+
+const AuthContext = createContext<AuthContextValue | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>({
     user: null,
     session: null,
@@ -38,29 +46,47 @@ export function useAuth() {
   }, []);
 
   useEffect(() => {
-    // Set up auth state listener FIRST
+    let cancelled = false;
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
+        if (cancelled) return;
         const user = session?.user ?? null;
-        let affiliate: Affiliate | null = null;
+
+        // Set user immediately so AuthGuard can pass, fetch affiliate in background
+        setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
+
         if (user) {
-          affiliate = await fetchAffiliate(user.id);
+          const affiliate = await fetchAffiliate(user.id);
+          if (!cancelled) {
+            setState({ user, session, affiliate, loading: false });
+          }
+        } else {
+          setState({ user: null, session: null, affiliate: null, loading: false });
         }
-        setState({ user, session, affiliate, loading: false });
       }
     );
 
-    // Then check existing session
     supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (cancelled) return;
       const user = session?.user ?? null;
-      let affiliate: Affiliate | null = null;
+
+      setState((prev) => ({ ...prev, user, session, loading: !user ? false : prev.loading }));
+
       if (user) {
-        affiliate = await fetchAffiliate(user.id);
+        const affiliate = await fetchAffiliate(user.id);
+        if (!cancelled) {
+          setState({ user, session, affiliate, loading: false });
+        }
+      } else {
+        setState({ user: null, session: null, affiliate: null, loading: false });
       }
-      setState({ user, session, affiliate, loading: false });
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
   }, [fetchAffiliate]);
 
   const signIn = async (email: string, password: string) => {
@@ -78,5 +104,17 @@ export function useAuth() {
     return { error };
   };
 
-  return { ...state, signIn, signOut, updatePassword };
+  return (
+    <AuthContext.Provider value={{ ...state, signIn, signOut, updatePassword }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth(): AuthContextValue {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 }
