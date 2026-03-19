@@ -424,7 +424,7 @@ const Index = () => {
         <div className="relative z-10 text-center mx-auto max-w-3xl py-16 px-6 md:py-24 md:px-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
             Not Sure Where to Start?
-          </h3>
+           </h2>
           <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Learn what business credit options may work for your situation. Education-first approach. No guesswork.
           </p>

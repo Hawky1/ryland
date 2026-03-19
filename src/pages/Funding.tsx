@@ -132,9 +132,9 @@ export default function Funding() {
       <section className="max-w-7xl mx-4 sm:mx-6 lg:mx-auto mb-10 rounded-3xl border border-[#004E8C] overflow-hidden relative">
         <HlsVideoBackground overlay="bg-[#003A70]/90" className="rounded-3xl" />
         <div className="relative z-10 text-center max-w-3xl mx-auto py-16 px-6 md:py-24 md:px-16">
-          <h3 className="text-3xl md:text-5xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-[Geist,sans-serif]">
+           <h2 className="text-3xl md:text-5xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent font-[Geist,sans-serif]">
             Ready to Get Funded?
-          </h3>
+           </h2>
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Take our free 2-minute assessment and discover how much business credit you qualify for — no hard pull, no obligation.
           </p>
