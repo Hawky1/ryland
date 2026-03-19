@@ -138,6 +138,8 @@ export default function FunnelCoreOffer() {
               <img
                 src={bundleImage}
                 alt="Ultimate Business Credit Bundle — 18 Ebooks"
+                width={672}
+                height={448}
                 className="max-w-2xl mx-auto w-full rounded-xl"
               />
             </motion.div>
