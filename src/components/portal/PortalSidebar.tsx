@@ -1,11 +1,10 @@
 import {
   LayoutDashboard, Users, DollarSign, Calculator,
-  BookOpen, CalendarDays, Mic2, Settings, LogOut
+  BookOpen, CalendarDays, Mic2, UserCircle, LogOut
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/hooks/useAuth";
-import logoWhite from "@/assets/logo-white.png";
 import {
   Sidebar,
   SidebarContent,
@@ -21,7 +20,7 @@ import {
 
 const mainNav = [
   { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
-  { title: "My Leads", url: "/portal/leads", icon: Users },
+  { title: "Lead Tracker", url: "/portal/leads", icon: Users },
   { title: "Commissions", url: "/portal/commissions", icon: DollarSign },
   { title: "Calculator", url: "/portal/calculator", icon: Calculator },
 ];
@@ -29,11 +28,11 @@ const mainNav = [
 const supportNav = [
   { title: "Resources", url: "/portal/resources", icon: BookOpen },
   { title: "Events", url: "/portal/events", icon: CalendarDays },
-  { title: "Speaking Request", url: "/portal/speaking", icon: Mic2 },
+  { title: "Speaking", url: "/portal/speaking", icon: Mic2 },
 ];
 
 const accountNav = [
-  { title: "Settings", url: "/portal/settings", icon: Settings },
+  { title: "Profile & Payouts", url: "/portal/settings", icon: UserCircle },
 ];
 
 export default function PortalSidebar() {
@@ -49,7 +48,11 @@ export default function PortalSidebar() {
 
   const renderGroup = (label: string, items: typeof mainNav) => (
     <SidebarGroup>
-      {!collapsed && <SidebarGroupLabel className="text-sidebar-foreground/60 text-[11px] uppercase tracking-widest">{label}</SidebarGroupLabel>}
+      {!collapsed && (
+        <SidebarGroupLabel className="text-xs uppercase tracking-widest text-slate-500 font-medium px-3">
+          {label}
+        </SidebarGroupLabel>
+      )}
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
@@ -62,11 +65,11 @@ export default function PortalSidebar() {
                 <NavLink
                   to={item.url}
                   end={item.url === "/portal"}
-                  className="transition-colors"
-                  activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                  activeClassName="!bg-white/10 !text-white font-medium"
                 >
                   <item.icon className="h-4 w-4 shrink-0" />
-                  {!collapsed && <span>{item.title}</span>}
+                  {!collapsed && <span className="text-sm">{item.title}</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -77,43 +80,50 @@ export default function PortalSidebar() {
   );
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-sidebar-border">
-      <SidebarContent>
+    <Sidebar
+      collapsible="icon"
+      className="!bg-slate-950 !border-r !border-slate-800"
+      style={{ "--sidebar-background": "222.2 84% 4.9%", "--sidebar-foreground": "210 40% 98%", "--sidebar-border": "217.2 32.6% 17.5%" } as React.CSSProperties}
+    >
+      <SidebarContent className="bg-slate-950">
         {/* Logo */}
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-sidebar-border">
-          <img src={logoWhite} alt="Ryland Partners" className="h-7 w-auto" />
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-slate-800">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+            RP
+          </div>
           {!collapsed && (
-            <span className="text-sm font-semibold text-sidebar-foreground tracking-tight">
-              Partner Portal
-            </span>
+            <div>
+              <p className="text-sm font-semibold text-white tracking-tight">Ryland Partners</p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider">Partner Portal</p>
+            </div>
           )}
         </div>
 
         {/* Affiliate badge */}
         {!collapsed && affiliate && (
-          <div className="mx-3 mt-3 rounded-lg bg-sidebar-accent/50 border border-sidebar-border px-3 py-2.5">
-            <p className="text-[11px] text-sidebar-foreground/60 uppercase tracking-wider">Affiliate ID</p>
-            <p className="text-sm font-mono font-semibold text-sidebar-foreground mt-0.5">{affiliate.affiliate_id}</p>
+          <div className="mx-3 mt-3 rounded-lg bg-slate-900 border border-slate-800 px-3 py-2.5">
+            <p className="text-[10px] text-slate-500 uppercase tracking-wider">Affiliate ID</p>
+            <p className="text-xs font-mono font-semibold text-slate-300 mt-0.5">{affiliate.affiliate_id}</p>
           </div>
         )}
 
-        <div className="mt-2">
+        <div className="mt-3 space-y-1">
           {renderGroup("Main", mainNav)}
           {renderGroup("Support", supportNav)}
           {renderGroup("Account", accountNav)}
         </div>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-sidebar-border">
+      <SidebarFooter className="border-t border-slate-800 bg-slate-950">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={signOut}
               tooltip={collapsed ? "Sign Out" : undefined}
-              className="text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+              className="text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-4 w-4 shrink-0" />
-              {!collapsed && <span>Sign Out</span>}
+              {!collapsed && <span className="text-sm">Sign Out</span>}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -103,10 +103,12 @@ export type Database = {
           full_name: string
           ghl_contact_id: string | null
           id: string
+          payment_email: string | null
           phone: string | null
           status: Database["public"]["Enums"]["affiliate_status"]
           updated_at: string
           user_id: string
+          w9_file_url: string | null
           website: string | null
         }
         Insert: {
@@ -117,10 +119,12 @@ export type Database = {
           full_name: string
           ghl_contact_id?: string | null
           id?: string
+          payment_email?: string | null
           phone?: string | null
           status?: Database["public"]["Enums"]["affiliate_status"]
           updated_at?: string
           user_id: string
+          w9_file_url?: string | null
           website?: string | null
         }
         Update: {
@@ -131,10 +135,12 @@ export type Database = {
           full_name?: string
           ghl_contact_id?: string | null
           id?: string
+          payment_email?: string | null
           phone?: string | null
           status?: Database["public"]["Enums"]["affiliate_status"]
           updated_at?: string
           user_id?: string
+          w9_file_url?: string | null
           website?: string | null
         }
         Relationships: []
