@@ -36,8 +36,8 @@ export default function PortalSettings() {
         .maybeSingle()
         .then(({ data }) => {
           if (data) {
-            setPaymentEmail((data as any).payment_email ?? "");
-            setW9Url((data as any).w9_file_url ?? null);
+            setPaymentEmail(data.payment_email ?? "");
+            setW9Url(data.w9_file_url ?? null);
           }
         });
     }
