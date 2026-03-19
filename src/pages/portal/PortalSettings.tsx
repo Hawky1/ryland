@@ -70,7 +70,7 @@ export default function PortalSettings() {
     setPayoutLoading(true);
     const { error } = await supabase
       .from("affiliates")
-      .update({ payment_email: paymentEmail.trim() || null } as any)
+      .update({ payment_email: paymentEmail.trim() || null })
       .eq("id", affiliate.id);
     setPayoutLoading(false);
     if (error) {
