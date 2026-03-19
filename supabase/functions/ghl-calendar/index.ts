@@ -110,7 +110,7 @@ serve(async (req) => {
       }
 
       // Step 1: Create/upsert contact
-      const nameParts = name.trim().split(/\s+/);
+      const nameParts = (name as string).trim().split(/\s+/);
       const firstName = nameParts[0] || "";
       const lastName = nameParts.slice(1).join(" ") || "";
 

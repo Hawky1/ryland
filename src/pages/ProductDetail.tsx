@@ -287,6 +287,12 @@ const ProductDetail = () => {
               {activeImage ? (
                 <img
                   src={activeImage.url}
+                  srcSet={
+                    activeImage.url.includes('shopify.com')
+                      ? `${activeImage.url}&width=400 400w, ${activeImage.url}&width=600 600w, ${activeImage.url}&width=800 800w, ${activeImage.url}&width=1200 1200w`
+                      : undefined
+                  }
+                  sizes={activeImage.url.includes('shopify.com') ? "(max-width: 768px) 90vw, 50vw" : undefined}
                   alt={activeImage.alt}
                   className="w-full h-full object-contain drop-shadow-2xl rounded-2xl"
                 />
