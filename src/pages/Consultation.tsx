@@ -85,7 +85,7 @@ export default function Consultation() {
 
               {/* What to expect */}
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
-                <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4 font-[Geist,sans-serif]">
+                <h2 className="text-white font-semibold text-sm uppercase tracking-wider mb-4 font-[Geist,sans-serif]">
                   What to Expect
                 </h3>
                 <ul className="space-y-3">
