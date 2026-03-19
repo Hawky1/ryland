@@ -33,6 +33,16 @@ import OptIn from "./pages/OptIn";
 import ThankYou from "./pages/ThankYou";
 import MyOrders from "./pages/MyOrders";
 import DownloadRedirect from "./pages/DownloadRedirect";
+import PortalLogin from "./pages/portal/PortalLogin";
+import PortalLayout from "./components/portal/PortalLayout";
+import PortalDashboard from "./pages/portal/PortalDashboard";
+import PortalLeads from "./pages/portal/PortalLeads";
+import PortalCommissions from "./pages/portal/PortalCommissions";
+import PortalCalculator from "./pages/portal/PortalCalculator";
+import PortalResources from "./pages/portal/PortalResources";
+import PortalEvents from "./pages/portal/PortalEvents";
+import PortalSpeaking from "./pages/portal/PortalSpeaking";
+import PortalSettings from "./pages/portal/PortalSettings";
 
 const queryClient = new QueryClient();
 
