@@ -1,72 +1,71 @@
 
 
-# Affiliate Portal Leads Section — Implementation Plan
+## Plan: Optimize Product Page Layout + Add Listing Images for Ultimate Business Credit Blueprint
 
-## Summary
+### What Changes
 
-Create 5 new files to replace the existing monolithic `PortalLeads.tsx` with a modular, premium leads experience featuring a data table and slide-over detail drawer.
+**1. Move Product Details directly below the price/CTA card (layout optimization)**
 
-## Database Migration Required
+Currently the Product Details section (Format, Length, Category) is a separate full-width section far below the fold. Moving it inline right under the price card in the right column keeps all purchase-decision info together — price, details, and CTA in one glanceable area.
 
-The current `affiliate_leads` table is missing several columns requested in the type definition. A migration will add:
+The compact detail pills will sit between the CTA button trust badges and the end of the right column, inside the existing white card or just below it.
 
-- `company_name` (text, nullable)
-- `commission_amount` (numeric, nullable, default 0)
-- `commission_status` (text, nullable)
-- `assigned_rep` (text, nullable)
-- `next_appointment_at` (timestamptz, nullable)
-- `next_step` (text, nullable)
-- `latest_update` (text, nullable)
+**2. Add two promotional listing images for the Ultimate Business Credit Blueprint**
 
-These columns support the detail drawer fields and table display without breaking existing data.
+The two uploaded images will be:
+- Copied to `src/assets/` as `listing-ubcb-1.png` and `listing-ubcb-2.png`
+- Added to the `productContentMap` via a new optional `promoImages` field on the `ProductContent` interface
+- Rendered in a horizontal image gallery below the main product cover image on the product detail page (scrollable thumbnails or stacked)
 
-## Files to Create/Modify
+### Technical Details
 
-### 1. `src/types/leads.ts`
-- Export the `Lead` type as specified with all fields
-- Export `stageColors` and `statusColors` maps for badge styling
+**Files to modify:**
 
-### 2. `src/utils/formatters.ts`
-- `formatCurrency(amount)` — returns `$X,XXX.XX` or `"—"`
-- `formatDateTime(dateStr)` — returns `"MMM d, yyyy"` or `"—"`
-- `formatDateTimeWithTime(dateStr)` — returns `"MMM d, yyyy h:mm a"` or `"—"`
-- `getStatusBadgeClass(status)` — returns Tailwind classes based on pipeline stage
+1. **`src/data/productContent.ts`**
+   - Add `promoImages?: string[]` to the `ProductContent` interface
+   - Add the two imported image paths to the `ultimate-business-credit-blueprint` entry
 
-### 3. `src/hooks/useAffiliateLeads.ts`
-- Uses `useQuery` from TanStack Query (consistent with existing patterns)
-- Fetches from `affiliate_leads` table filtered by `affiliate_id` from `useAuth()`
-- Orders by `updated_at` desc
-- Returns `{ leads, isLoading, error, refetch }`
+2. **`src/pages/ProductDetail.tsx`**
+   - Move the Product Details grid (Format/Length/Category) from its own full-width section into the right column, directly below the price/CTA card
+   - Add an image gallery below the main product image that renders `content.promoImages` if present (thumbnails that can be clicked to view, or stacked images)
+   - Keep the current main Shopify image as the primary, with promo images shown below or as a carousel
 
-### 4. `src/components/portal/LeadsTable.tsx`
-- Receives `leads`, `isLoading` as props
-- Renders the table with columns: full_name, referred_at, status, pipeline_stage, deal_amount, next_appointment_at, next_step, updated_at
-- Each row is clickable → calls `onSelectLead(lead)` prop
-- Loading state: 5 skeleton rows
-- Empty state: icon + message + CTA to share referral link
-- Status/stage badges using colors from `types/leads.ts`
+3. **New assets:**
+   - Copy `user-uploads://3-2.png` → `src/assets/listing-ubcb-1.png`
+   - Copy `user-uploads://4-2.png` → `src/assets/listing-ubcb-2.png`
 
-### 5. `src/components/portal/LeadDetailDrawer.tsx`
-- Uses shadcn `Sheet` component (right side)
-- Receives `lead: Lead | null` and `open: boolean` and `onClose`
-- 4 section cards:
-  - **Contact Info**: full_name, email, phone, company_name
-  - **Deal Status**: status, pipeline_stage, deal_amount, commission_amount, commission_status, assigned_rep
-  - **Next Actions**: next_appointment_at, next_step
-  - **Notes & Updates**: latest_update, notes, referred_at, updated_at
-- Missing values show "—" fallback text
+### Layout Change (Before → After)
 
-### 6. Update `src/pages/portal/PortalLeads.tsx`
-- Refactored to compose `useAffiliateLeads`, `LeadsTable`, and `LeadDetailDrawer`
-- Manages `selectedLead` state to toggle drawer
-- Clean page header with lead count badge
+```text
+BEFORE:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│             │  Description │
+│             │  Price + CTA │
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  Product Details (full w)  │
+└────────────────────────────┘
 
-## Technical Details
+AFTER:
+┌─────────────┬──────────────┐
+│  Cover Img  │  Title       │
+│             │  Headline    │
+│  [promo 1]  │  Description │
+│  [promo 2]  │  Price + CTA │
+│             │  Details     │ ← moved up
+└─────────────┴──────────────┘
+  ... scroll ...
+┌────────────────────────────┐
+│  What You'll Get (full w)  │
+└────────────────────────────┘
+```
 
-- **No fake data** — all queries go to Supabase `affiliate_leads` table via RLS
-- **Existing RLS** already scopes reads to the logged-in affiliate via `get_my_affiliate_id()`
-- **Sheet component** already exists at `src/components/ui/sheet.tsx`
-- **date-fns** already in use for formatting
-- **TanStack Query** already in use for data fetching
-- Mobile responsive: table scrolls horizontally, drawer is full-width on small screens
+Product Details becomes a compact inline row of 3 pills inside the right column, removing the separate full-width section entirely. The promo images stack below the main cover on the left side.
 
