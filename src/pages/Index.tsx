@@ -213,7 +213,7 @@ const Index = () => {
                   <Link to="/contact" className="inline-flex transition-all duration-300 hover:shadow-[0_8px_25px_rgba(0,123,255,0.8)] hover:scale-[1.02] hover:bg-gradient-to-tr hover:from-blue-300 hover:via-blue-500 hover:to-blue-700 active:shadow-inner active:shadow-blue-900/50 active:scale-[0.98] active:duration-75 text-sm font-semibold text-white bg-gradient-to-tr from-blue-400 via-blue-600 to-blue-800 rounded-full py-3.5 px-8 shadow-[0_4px_15px_rgba(0,123,255,0.4)] items-center justify-center">
                     Work With Gene
                   </Link>
-                  <p className="text-[10px] text-white/40 mt-2">{DISCLAIMER_TEXT}</p>
+                  <p className="text-[10px] text-white/60 mt-2">{DISCLAIMER_TEXT}</p>
                 </div>
               </div>
             </div>
