@@ -13,7 +13,19 @@
 - [src/components/NavLink.tsx](file://src/components/NavLink.tsx)
 - [src/components/portal/PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
 - [src/hooks/use-mobile.tsx](file://src/hooks/use-mobile.tsx)
+- [src/pages/Assessment.tsx](file://src/pages/Assessment.tsx)
+- [src/lib/referralTracking.ts](file://src/lib/referralTracking.ts)
+- [src/integrations/supabase/client.ts](file://src/integrations/supabase/client.ts)
+- [supabase/functions/ghl-create-contact/index.ts](file://supabase/functions/ghl-create-contact/index.ts)
+- [supabase/functions/ghl-affiliate-webhook/index.ts](file://supabase/functions/ghl-affiliate-webhook/index.ts)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Updated Assessment page documentation to reflect new GHL integration using direct HTTP fetch
+- Added information about parallel processing capabilities for primary contact creation and affiliate lead tracking
+- Enhanced integration architecture documentation with edge function details
+- Updated troubleshooting section with new error handling patterns
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -82,10 +94,10 @@ Hooks --> UseMobile["use-mobile.tsx"]
 This section outlines the core building blocks for pages and routing in the application.
 
 - Routing and Layout Container
-  - The application’s routes are declared centrally, including nested routes for a portal area and a catch-all fallback route. The router wraps the app with providers for authentication, theming, and data fetching.
+  - The application's routes are declared centrally, including nested routes for a portal area and a catch-all fallback route. The router wraps the app with providers for authentication, theming, and data fetching.
 
 - Navigation Utilities
-  - A custom NavLink wrapper integrates with React Router’s NavLink while allowing explicit active/pending class names and Tailwind utility merging.
+  - A custom NavLink wrapper integrates with React Router's NavLink while allowing explicit active/pending class names and Tailwind utility merging.
   - A ScrollToTop component ensures smooth navigation by resetting scroll position on route changes.
 
 - Responsive Hook
@@ -211,6 +223,95 @@ Providers --> Ready(["Page Ready"])
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/App.tsx:113-123](file://src/App.tsx#L113-L123)
 
+### Assessment Page Integration Architecture
+**Updated** The Assessment page now uses a hybrid integration approach combining Supabase database operations with direct HTTP fetch calls to Supabase Edge Functions for GHL CRM synchronization.
+
+#### Direct HTTP Fetch Implementation
+The Assessment page implements a custom `callEdgeFunction` helper that bypasses the Supabase SDK to avoid AbortError issues:
+
+```typescript
+// Direct fetch helper to bypass Supabase SDK AbortError
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+async function callEdgeFunction(name: string, body: Record<string, unknown>) {
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "apikey": SUPABASE_KEY,
+    },
+    body: JSON.stringify(body),
+  });
+  return res.json();
+}
+```
+
+#### Parallel Processing Architecture
+The Assessment page now implements parallel processing for improved user experience:
+
+```typescript
+// Fire DB insert + GHL sync in background — don't block UI
+try {
+  const insertPromise = supabase.from("assessment_leads").insert({
+    // ... database fields
+  });
+
+  // Fire-and-forget: sync to GHL with affiliate attribution
+  const refId = getReferralAffiliateId();
+  const tags = ["assessment-lead", qualification];
+  if (refId) {
+    tags.push("Affiliate", `Affiliate - ${refId}`);
+  }
+
+  const ghlPromise = callEdgeFunction("ghl-create-contact", {
+    // ... GHL contact data
+  }).then((result) => {
+    if (result?.error) console.error("GHL sync failed:", result.error);
+
+    // If affiliate referral, also record the lead in the portal
+    if (refId) {
+      callEdgeFunction("ghl-affiliate-webhook", {
+        type: "lead_referred",
+        affiliate_id: refId,
+        full_name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+      }).then((r) => {
+        if (r?.error) console.error("Affiliate lead sync failed:", r.error);
+      }).catch(() => {});
+    }
+  }).catch(() => {});
+
+  // Run both in parallel, don't block
+  Promise.allSettled([insertPromise, ghlPromise]).catch(() => {});
+} catch {
+  // Result is already shown — log silently
+  console.error("Assessment background save failed");
+}
+```
+
+#### Edge Function Integration
+The system integrates with two key Supabase Edge Functions:
+
+1. **GHL Contact Creation**: Creates or updates contacts in the LeadConnectorHQ CRM
+2. **Affiliate Webhook**: Records affiliate lead referrals in the portal system
+
+References:
+- [src/pages/Assessment.tsx:25-40](file://src/pages/Assessment.tsx#L25-L40)
+- [src/pages/Assessment.tsx:161-224](file://src/pages/Assessment.tsx#L161-L224)
+- [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
+- [supabase/functions/ghl-create-contact/index.ts:16-133](file://supabase/functions/ghl-create-contact/index.ts#L16-L133)
+- [supabase/functions/ghl-affiliate-webhook/index.ts:31-44](file://supabase/functions/ghl-affiliate-webhook/index.ts#L31-L44)
+
+**Section sources**
+- [src/pages/Assessment.tsx:25-40](file://src/pages/Assessment.tsx#L25-L40)
+- [src/pages/Assessment.tsx:161-224](file://src/pages/Assessment.tsx#L161-L224)
+- [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
+- [supabase/functions/ghl-create-contact/index.ts:16-133](file://supabase/functions/ghl-create-contact/index.ts#L16-L133)
+- [supabase/functions/ghl-affiliate-webhook/index.ts:31-44](file://supabase/functions/ghl-affiliate-webhook/index.ts#L31-L44)
+
 ### Implementing New Static Pages
 To add a new static page (e.g., a new informational page):
 1. Create a new component for the page under src/.
@@ -238,7 +339,7 @@ Reference:
 
 ### SEO Considerations and Meta Tags
 - The HTML template defines essential SEO metadata, including viewport, title, description, author, Open Graph, Twitter Card, and favicon.
-- Keep the title and description aligned with each page’s purpose. For dynamic pages, integrate a head management solution to update meta tags per route.
+- Keep the title and description aligned with each page's purpose. For dynamic pages, integrate a head management solution to update meta tags per route.
 
 References:
 - [index.html:23-39](file://index.html#L23-L39)
@@ -288,15 +389,22 @@ AppTSX --> Providers["Providers"]
 - Image optimization is enabled via a Vite plugin to reduce payload sizes for images.
 - Provider setup occurs once at the shell level, minimizing re-renders across pages.
 
+**Updated** The Assessment page now implements parallel processing for improved performance:
+- Database insertion and GHL synchronization run concurrently using Promise.allSettled
+- Direct HTTP fetch bypasses Supabase SDK AbortError issues
+- Affiliate lead tracking is fire-and-forget for non-blocking user experience
+
 Recommendations:
 - Lazy-load heavy page components using React.lazy and Suspense boundaries around route elements.
 - Defer non-critical resources and leverage browser caching strategies.
 - Monitor Largest Contentful Paint (LCP) and First Input Delay (FID) metrics post-deployment.
+- Consider implementing retry logic for edge function calls in production environments.
 
 **Section sources**
 - [vite.config.ts:31-41](file://vite.config.ts#L31-L41)
 - [vite.config.ts:19-24](file://vite.config.ts#L19-L24)
 - [src/App.tsx:113-123](file://src/App.tsx#L113-L123)
+- [src/pages/Assessment.tsx:161-224](file://src/pages/Assessment.tsx#L161-L224)
 
 ## Troubleshooting Guide
 Common issues and resolutions:
@@ -312,15 +420,30 @@ Common issues and resolutions:
 - SEO metadata not updating per page
   - Integrate a head management solution to dynamically update meta tags for each route.
   - References: [index.html:23-39](file://index.html#L23-L39)
+- **Assessment page GHL integration failures**
+  - **Issue**: GHL synchronization errors or timeouts
+  - **Solution**: Check edge function logs in Supabase dashboard, verify API keys are configured, ensure network connectivity to LeadConnectorHQ
+  - **Reference**: [src/pages/Assessment.tsx:176-214](file://src/pages/Assessment.tsx#L176-L214)
+- **Parallel processing not working**
+  - **Issue**: Database insertion blocking while GHL sync processes
+  - **Solution**: Verify Promise.allSettled implementation and ensure both promises are properly awaited
+  - **Reference**: [src/pages/Assessment.tsx:216-217](file://src/pages/Assessment.tsx#L216-L217)
+- **Affiliate lead tracking not recording**
+  - **Issue**: Affiliate IDs not being captured or processed
+  - **Solution**: Check localStorage for referral data, verify getReferralAffiliateId function, ensure affiliate webhook is configured
+  - **Reference**: [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
 
 **Section sources**
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/components/NavLink.tsx:1-28](file://src/components/NavLink.tsx#L1-L28)
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
 - [index.html:23-39](file://index.html#L23-L39)
+- [src/pages/Assessment.tsx:176-214](file://src/pages/Assessment.tsx#L176-L214)
+- [src/pages/Assessment.tsx:216-217](file://src/pages/Assessment.tsx#L216-L217)
+- [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
 
 ## Conclusion
-The Ryland application employs a clean, centralized routing architecture with shared layouts and navigation utilities. Providers establish a robust foundation for state and UI behavior, while responsive and performance configurations support scalable growth. By following the patterns outlined here—consistent route declarations, shared layouts, and SEO-aware meta management—you can reliably implement new pages, optimize performance, and deliver a seamless user experience across desktop and mobile devices.
+The Ryland application employs a clean, centralized routing architecture with shared layouts and navigation utilities. Providers establish a robust foundation for state and UI behavior, while responsive and performance configurations support scalable growth. The Assessment page demonstrates advanced integration patterns with parallel processing capabilities that improve user experience while maintaining reliable data synchronization. By following the patterns outlined here—consistent route declarations, shared layouts, SEO-aware meta management, and robust integration architectures—you can reliably implement new pages, optimize performance, and deliver a seamless user experience across desktop and mobile devices.
 
 [No sources needed since this section summarizes without analyzing specific files]
 
@@ -330,5 +453,11 @@ The Ryland application employs a clean, centralized routing architecture with sh
   - Register a route before the catch-all.
   - Use the custom NavLink for navigation.
   - Apply responsive utilities from Tailwind and the mobile hook where appropriate.
+- **Assessment page integration checklist**:
+  - Verify Supabase Edge Functions are deployed and configured
+  - Test parallel processing implementation with network throttling
+  - Validate affiliate tracking integration
+  - Monitor GHL API response codes and error handling
+  - Implement proper error boundaries for edge function failures
 
 [No sources needed since this section provides general guidance]

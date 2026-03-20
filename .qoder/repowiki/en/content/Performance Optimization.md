@@ -18,15 +18,17 @@
 - [index.html](file://index.html)
 - [src/components/portal/LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
 - [src/components/store/ProductCard.tsx](file://src/components/store/ProductCard.tsx)
+- [src/pages/ProductDetail.tsx](file://src/pages/ProductDetail.tsx)
+- [src/lib/shopify.ts](file://src/lib/shopify.ts)
+- [src/components/FeaturedBundles.tsx](file://src/components/FeaturedBundles.tsx)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Added comprehensive React Query caching strategies with 5-minute stale time and 10-minute garbage collection time
-- Integrated Supabase preconnect optimization for improved database connection performance
-- Implemented Zustand store selectors for fine-grained re-render control
-- Added component memoization techniques for performance optimization
-- Enhanced caching strategies with separate selectors for better performance
+- Added comprehensive responsive image loading optimizations with srcSet and sizes attributes
+- Integrated conditional Shopify CDN handling for improved loading performance
+- Enhanced image optimization strategies with multiple width breakpoints
+- Updated performance monitoring to include responsive image metrics
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -41,9 +43,9 @@
 10. [Appendices](#appendices)
 
 ## Introduction
-This document focuses on performance optimization techniques and strategies for the Ryland application. It explains how the project leverages modern tooling and React patterns to achieve fast builds, efficient runtime performance, and strong Core Web Vitals. Topics include bundle optimization, code splitting, lazy loading, image optimization, asset compression, caching strategies, performance monitoring, profiling, bottleneck identification, and Progressive Web App readiness.
+This document focuses on performance optimization techniques and strategies for the Ryland application. It explains how the project leverages modern tooling and React patterns to achieve fast builds, efficient runtime performance, and strong Core Web Vitals. Topics include bundle optimization, code splitting, lazy loading, responsive image optimization, asset compression, caching strategies, performance monitoring, profiling, bottleneck identification, and Progressive Web App readiness.
 
-**Updated** The application now includes comprehensive performance optimizations including React Query caching strategies, Supabase preconnect optimization, Zustand store selectors for fine-grained re-render control, and component memoization techniques.
+**Updated** The application now includes comprehensive responsive image loading optimizations with srcSet and sizes attributes, conditional Shopify CDN handling, and enhanced image optimization strategies with multiple width breakpoints for improved loading performance across different device sizes.
 
 ## Project Structure
 The project is a Vite + React + TypeScript application configured with Tailwind CSS and PostCSS. The build pipeline is optimized for production with manual chunking and image compression. The application uses React.lazy for route-level code splitting and Suspense for graceful loading states.
@@ -58,6 +60,8 @@ H["Runtime Entry<br/>src/main.tsx"] --> D
 I["React Query Client<br/>App.tsx"] --> J["Caching Strategy<br/>5min stale, 10min GC"]
 K["Supabase Preconnect<br/>index.html"] --> L["Database Connection<br/>Optimization"]
 M["Zustand Store<br/>cartStore.ts"] --> N["Selector Pattern<br/>Fine-grained Re-renders"]
+O["Responsive Image Loading<br/>srcSet + sizes"] --> P["Multiple Width Breakpoints"]
+Q["Shopify CDN Handling<br/>Conditional Logic"] --> R["Optimized Loading"]
 ```
 
 **Diagram sources**
@@ -65,6 +69,8 @@ M["Zustand Store<br/>cartStore.ts"] --> N["Selector Pattern<br/>Fine-grained Re-
 - [src/App.tsx:53-62](file://src/App.tsx#L53-L62)
 - [index.html:17](file://index.html#L17)
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
 
 **Section sources**
 - [README.md:53-61](file://README.md#L53-L61)
@@ -81,7 +87,9 @@ M["Zustand Store<br/>cartStore.ts"] --> N["Selector Pattern<br/>Fine-grained Re-
 - Routing and lazy loading: Route-level lazy imports with Suspense fallbacks minimize initial JavaScript payload.
 - Styling pipeline: Tailwind scanning and PostCSS autoprefixing streamline CSS delivery.
 - Runtime entry: Minimal root creation with explicit cache-busting comment.
-- **New**: React Query caching: Configured with 5-minute stale time and 10-minute garbage collection time for optimal data freshness and memory management.
+- **New**: Responsive image loading: srcSet and sizes attributes with multiple width breakpoints for optimal image delivery across devices.
+- **New**: Conditional Shopify CDN handling: Dynamic width parameter injection for Shopify-hosted images.
+- **New**: Enhanced caching strategies: React Query caching with 5-minute stale time and 10-minute garbage collection time for optimal data freshness and memory management.
 - **New**: Supabase preconnect: DNS prefetching for database connections reduces latency.
 - **New**: Zustand selectors: Fine-grained re-render control prevents unnecessary component updates.
 - **New**: Component memoization: Strategic memoization of expensive components improves rendering performance.
@@ -92,6 +100,7 @@ Practical implications:
 - Compressed images reduce transfer size and render time.
 - Intelligent caching reduces network requests and improves response times.
 - Selective re-renders minimize CPU usage and improve smoothness.
+- Responsive images reduce bandwidth usage and improve loading performance.
 
 **Section sources**
 - [vite.config.ts:31-41](file://vite.config.ts#L31-L41)
@@ -103,12 +112,15 @@ Practical implications:
 - [src/App.tsx:53-62](file://src/App.tsx#L53-L62)
 - [index.html:17](file://index.html#L17)
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
 
 ## Architecture Overview
 The performance architecture centers on three pillars:
 - Build-time optimization: chunk separation and image compression.
 - Runtime optimization: lazy loading and minimal initial bundle.
 - Asset pipeline: Tailwind scanning and PostCSS processing.
+- **New**: Responsive image optimization: srcSet and sizes attributes with conditional Shopify CDN handling.
 - **New**: Data layer optimization: React Query caching and intelligent data management.
 - **New**: Network optimization: Preconnect strategies and selective re-renders.
 
@@ -134,11 +146,16 @@ end
 subgraph "Styling"
 TW["tailwind.config.ts"] --> PC["postcss.config.js"]
 end
+subgraph "Responsive Images"
+RI["srcSet + sizes<br/>Multiple Width Breakpoints"] --> CDN["Conditional Shopify CDN<br/>Width Parameter Injection"]
+RI --> OPT["Optimized Loading<br/>Across Device Sizes"]
+end
 RC --> |Split bundles| LAZY
 IO --> |Optimized assets| LAZY
 RQ --> |Caching| API
 PRE --> |DNS Prefetch| DB
 ZS --> |Selective Updates| LAZY
+CDN --> |Enhanced Performance| OPT
 ```
 
 **Diagram sources**
@@ -149,6 +166,8 @@ ZS --> |Selective Updates| LAZY
 - [src/stores/cartStore.ts:37-48](file://src/stores/cartStore.ts#L37-L48)
 - [src/hooks/useCartSync.ts:1-15](file://src/hooks/useCartSync.ts#L1-L15)
 - [index.html:17](file://index.html#L17)
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
 
 ## Detailed Component Analysis
 
@@ -200,6 +219,68 @@ S-->>U : Show page
 **Section sources**
 - [src/App.tsx:11-50](file://src/App.tsx#L11-L50)
 - [src/App.tsx:63-107](file://src/App.tsx#L63-L107)
+
+### Responsive Image Loading and Optimization
+**Updated** The application now implements comprehensive responsive image loading with srcSet and sizes attributes for optimal performance across different device sizes.
+
+#### ProductCard Component Implementation
+The ProductCard component demonstrates advanced responsive image optimization with:
+- Multiple width breakpoints: 300w, 400w, 600w, 800w
+- Device-specific sizing: 50vw for mobile, 33vw for tablets, 25vw for desktop
+- Conditional Shopify CDN handling with width parameter injection
+- Lazy loading for improved performance
+
+```mermaid
+flowchart TD
+A["ProductCard Image"] --> B["srcSet Attribute"]
+B --> C["300w, 400w, 600w, 800w"]
+C --> D["sizes Attribute"]
+D --> E["(max-width: 640px) 50vw"]
+E --> F["(max-width: 1024px) 33vw"]
+F --> G["25vw"]
+G --> H["Conditional CDN Logic"]
+H --> I["width=300, 400, 600, 800"]
+I --> J["Optimal Image Delivery"]
+```
+
+**Diagram sources**
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+
+#### ProductDetail Component Implementation
+The ProductDetail component provides sophisticated conditional image optimization:
+- Shopify CDN detection using URL pattern matching
+- Dynamic width parameter injection for Shopify-hosted images
+- Device-specific sizing for optimal loading performance
+- Graceful fallback for non-Shopify images
+
+```mermaid
+sequenceDiagram
+participant User as "User Device"
+participant Component as "ProductDetail"
+participant CDN as "Shopify CDN"
+participant Browser as "Browser"
+User->>Component : Request Product Detail
+Component->>Component : Check Image URL
+Component->>CDN : Request Optimized Image
+CDN-->>Component : Return Optimized Image
+Component->>Browser : Render with srcSet
+Browser->>Browser : Choose Optimal Width
+Browser-->>User : Display Optimized Image
+```
+
+**Diagram sources**
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
+
+#### FeaturedBundles Component Implementation
+The FeaturedBundles component demonstrates standard responsive image optimization:
+- Fixed width and height attributes for aspect ratio preservation
+- Lazy loading for improved initial page performance
+- Optimized image dimensions for bundle showcase
+
+**Section sources**
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
+- [src/components/FeaturedBundles.tsx:101-108](file://src/components/FeaturedBundles.tsx#L101-L108)
 
 ### Image Optimization and Asset Compression
 - ViteImageOptimizer compresses PNG/JPEG/WebP assets with configurable quality settings during build.
@@ -341,17 +422,20 @@ Recommended practices aligned with the project stack:
 - Measure Core Web Vitals in real browsers and headless environments.
 - Monitor bundle sizes and transfer sizes with Vite's build analyzer.
 - Track runtime metrics such as TTFB, LCP, FID, and CLS in production.
+- **New**: Monitor responsive image loading performance and srcSet effectiveness.
+- **New**: Track Shopify CDN optimization metrics and conditional logic performance.
 - **New**: Monitor React Query cache hit rates and garbage collection effectiveness.
 - **New**: Track Zustand selector performance and re-render frequency.
 
 ### Bottleneck Identification
 Common bottlenecks and mitigations:
 - Heavy initial bundle: addressed by manual chunking and lazy routes.
-- Large images: addressed by ViteImageOptimizer and lazy loading attributes.
+- Large images: addressed by ViteImageOptimizer and responsive image loading with srcSet.
 - Excessive re-renders: addressed with React.memo, useMemo, and useCallback where appropriate.
 - Unoptimized CSS: rely on Tailwind scanning and PostCSS to ship only used styles.
-- **New**: Network latency: addressed with preconnect optimization and caching strategies.
+- **New**: Network latency: addressed with preconnect optimization and responsive image delivery.
 - **New**: State synchronization: addressed with selective re-render patterns.
+- **New**: Image bandwidth usage: addressed with conditional Shopify CDN handling and optimal width selection.
 
 ### Practical Examples
 - Optimizing React component rendering:
@@ -366,19 +450,24 @@ Common bottlenecks and mitigations:
   - Minimize layout thrashing by batching DOM reads/writes.
   - Implement caching strategies with appropriate stale and garbage collection times.
   - Use preconnect optimization for critical third-party resources.
+  - **New**: Implement srcSet and sizes attributes for responsive image optimization.
+  - **New**: Use conditional Shopify CDN handling for optimal image delivery.
 
 ### Mobile Performance Considerations
 - Lazy-load offscreen images and videos.
 - Prefer responsive images and modern formats.
 - Minimize main-thread work during critical interactions.
 - Use reduced-motion preferences and throttle animations on low-power devices.
-- **New**: Leverage caching strategies for offline scenarios and reduced network usage.
+- **New**: Leverage responsive image loading with multiple width breakpoints for optimal mobile performance.
+- **New**: Implement conditional Shopify CDN handling for improved mobile loading speeds.
+- **New**: Use device-specific sizing strategies for different viewport widths.
 
 ### Core Web Vitals Optimization
 - Largest Contentful Paint (LCP): prioritize above-the-fold content, defer non-critical assets, and optimize images.
 - First Input Delay (FID): reduce main-thread blocking, split bundles, and keep initial JS small.
 - Cumulative Layout Shift (CLS): reserve space for images, avoid dynamic injected content above the fold, and pre-allocate layout areas.
 - **New**: Optimize cache hit rates to improve LCP and FID performance.
+- **New**: Implement responsive image loading to reduce CLS and improve LCP performance.
 
 ### Progressive Web App Features
 - Add a service worker for offline caching and background sync.
@@ -386,6 +475,7 @@ Common bottlenecks and mitigations:
 - Use HTTP caching headers and immutable caching for static assets.
 - Ensure HTTPS and reliable network handling.
 - **New**: Leverage React Query caching for offline-first experiences.
+- **New**: Implement responsive image caching strategies for offline scenarios.
 
 ## Dependency Analysis
 The project's performance depends on a tight coupling between build configuration and runtime behavior. The following diagram highlights key relationships.
@@ -401,6 +491,12 @@ Lazy --> Rollup
 ImgOpt --> Assets["Optimized assets"]
 Assets --> Pages["Pages & Components"]
 RQ --> Cache["5min Stale, 10min GC"]
+subgraph "Responsive Images"
+ProductCard["ProductCard.tsx"] --> SrcSet["srcSet + sizes"]
+ProductDetail["ProductDetail.tsx"] --> CDN["Conditional Shopify CDN"]
+SrcSet --> Optimize["Optimized Image Delivery"]
+CDN --> Optimize
+end
 ```
 
 **Diagram sources**
@@ -408,6 +504,8 @@ RQ --> Cache["5min Stale, 10min GC"]
 - [vite.config.ts:31-41](file://vite.config.ts#L31-L41)
 - [src/App.tsx:11-50](file://src/App.tsx#L11-L50)
 - [src/App.tsx:53-62](file://src/App.tsx#L53-L62)
+- [src/components/store/ProductCard.tsx:29-37](file://src/components/store/ProductCard.tsx#L29-L37)
+- [src/pages/ProductDetail.tsx:288-298](file://src/pages/ProductDetail.tsx#L288-L298)
 
 **Section sources**
 - [package.json:15-69](file://package.json#L15-L69)
@@ -422,6 +520,8 @@ RQ --> Cache["5min Stale, 10min GC"]
 - **New**: React Query cache monitoring: track cache hit rates and adjust stale/gc times.
 - **New**: State management optimization: monitor selector performance and re-render frequency.
 - **New**: Network optimization: measure preconnect benefits and connection latency improvements.
+- **New**: Responsive image performance: monitor srcSet effectiveness and conditional CDN handling.
+- **New**: Image bandwidth optimization: track reduction in data transfer through responsive image delivery.
 
 ## Troubleshooting Guide
 - Slow initial load:
@@ -438,9 +538,14 @@ RQ --> Cache["5min Stale, 10min GC"]
 - Network latency:
   - **New**: Verify preconnect optimization is working correctly.
   - **New**: Monitor database connection establishment times.
+- **New**: Responsive image issues:
+  - Verify srcSet attributes are properly formatted with width descriptors.
+  - Check conditional Shopify CDN logic for URL pattern matching.
+  - Monitor image loading performance across different device sizes.
+  - Ensure sizes attributes match actual viewport calculations.
 
 ## Conclusion
-Ryland's performance foundation combines strategic bundling, route-level lazy loading, and image compression. The recent additions of React Query caching strategies, Supabase preconnect optimization, Zustand store selectors, and component memoization techniques significantly enhance application responsiveness and reduce unnecessary network requests. By maintaining clean chunk boundaries, leveraging Suspense, optimizing assets, and implementing intelligent caching patterns, the application achieves faster initial loads, smoother interactions, and improved user experience. Extending this baseline with robust monitoring, budgets, and PWA features will further strengthen runtime performance and user experience.
+Ryland's performance foundation combines strategic bundling, route-level lazy loading, and image compression. The recent additions of responsive image loading optimizations with srcSet and sizes attributes, conditional Shopify CDN handling, React Query caching strategies, Supabase preconnect optimization, Zustand store selectors, and component memoization techniques significantly enhance application responsiveness and reduce unnecessary network requests. By implementing multiple width breakpoints, device-specific sizing strategies, and conditional image optimization, the application delivers optimal performance across different device sizes and network conditions. The combination of these optimizations, along with intelligent caching patterns and preconnect strategies, achieves faster initial loads, smoother interactions, and improved user experience. Extending this baseline with robust monitoring, budgets, and PWA features will further strengthen runtime performance and user experience.
 
 ## Appendices
 - Build scripts and toolchain:

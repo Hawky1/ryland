@@ -23,12 +23,11 @@
 
 ## Update Summary
 **Changes Made**
-- Added comprehensive documentation for GHL calendar API integration with timestamp conversion fix
-- Updated architecture overview to include calendar booking workflow
-- Enhanced external API integration section with GHL-specific details
-- Added timestamp conversion documentation for external API compatibility
-- Updated troubleshooting guide with GHL calendar integration specifics
-- Enhanced performance considerations with calendar API optimization strategies
+- Enhanced Supabase edge function integration documentation with direct fetch implementation details
+- Updated GHL calendar API integration section to reflect improved timestamp handling and timezone corrections
+- Added comprehensive documentation for the new direct HTTP request approach for better reliability
+- Updated troubleshooting guide with direct fetch implementation specifics
+- Enhanced performance considerations with direct fetch optimization strategies
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -408,13 +407,50 @@ ORDERS ||--o{ ORDER_ITEMS : "contains"
 ### GHL Calendar API Integration
 The application integrates with GHL (LeadConnectorHQ) services for comprehensive calendar management and appointment booking. The integration handles two distinct calendar types: consultation bookings and partner onboarding appointments.
 
+#### Direct Fetch Implementation Enhancement
+**Updated**: The ConsultationCalendar component now uses a direct fetch implementation instead of `supabase.functions.invoke()` to avoid SDK AbortError issues. This approach provides better reliability and eliminates the need for complex SDK-based error handling.
+
+The direct fetch implementation offers several advantages:
+- **Eliminates SDK AbortError**: Direct HTTP requests bypass the Supabase SDK's internal error handling that could cause AbortError exceptions
+- **Better error control**: Custom error handling allows for more precise error recovery and user feedback
+- **Reduced complexity**: Simplified implementation reduces the potential for SDK-related bugs
+- **Improved debugging**: Direct HTTP requests enable better logging and debugging capabilities
+
+```mermaid
+sequenceDiagram
+participant UI as "ConsultationCalendar.tsx"
+participant Supabase as "Supabase Functions"
+participant GHL as "GHL Services"
+UI->>Supabase : Direct fetch to /functions/v1/ghl-calendar
+Note over UI : Using custom invokeEdgeFunction
+Supabase->>Supabase : Convert milliseconds to seconds
+Supabase->>GHL : GET free-slots with timestamp conversion
+GHL-->>Supabase : Available slots data
+Supabase-->>UI : Calendar availability
+UI->>Supabase : Direct fetch to book appointment
+Supabase->>GHL : POST appointment with contact
+GHL-->>Supabase : Appointment confirmation
+Supabase-->>UI : Booking success
+```
+
+**Diagram sources**
+- [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
+- [ConsultationCalendar.tsx:82-96](file://src/components/funnel/ConsultationCalendar.tsx#L82-L96)
+- [ConsultationCalendar.tsx:141-150](file://src/components/funnel/ConsultationCalendar.tsx#L141-L150)
+- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+
 #### Calendar Management Workflow
 The GHL calendar integration consists of two primary actions:
 - **Free Slots Retrieval**: Fetches available appointment slots within a specified date range
 - **Appointment Booking**: Creates appointments with contact management and timezone handling
 
-#### Timestamp Conversion Fix
+#### Timestamp Conversion and Timezone Handling
 **Updated**: The integration now properly converts JavaScript timestamps from milliseconds to seconds for GHL API compatibility. This critical fix addresses external API compatibility issues where GHL expects timestamps in seconds rather than milliseconds.
+
+The implementation includes comprehensive timezone handling:
+- **Automatic timezone detection**: Uses `Intl.DateTimeFormat().resolvedOptions().timeZone` for accurate timezone detection
+- **Proper timestamp formatting**: Converts JavaScript Date objects to ISO strings for API compatibility
+- **Timezone parameter passing**: Passes timezone information to GHL API for accurate slot calculation
 
 ```mermaid
 sequenceDiagram
@@ -452,7 +488,9 @@ The calendar function seamlessly integrates with GHL's contact management system
 - Phone number normalization and validation
 
 **Section sources**
-- [ConsultationCalendar.tsx:48-71](file://src/components/funnel/ConsultationCalendar.tsx#L48-L71)
+- [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
+- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
+- [ConsultationCalendar.tsx:131-169](file://src/components/funnel/ConsultationCalendar.tsx#L131-L169)
 - [PartnerOnboardingCalendar.tsx:40-63](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L40-L63)
 - [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
 
@@ -473,15 +511,24 @@ The application implements proactive network optimization through HTML preconnec
 - Improved real-time feature performance (subscriptions, live updates)
 - Better user experience during peak traffic periods
 
+### Direct Fetch Implementation Performance
+**Updated**: The new direct fetch implementation provides several performance benefits:
+- **Reduced overhead**: Eliminates Supabase SDK wrapper overhead
+- **Better error handling**: Enables more efficient error recovery and retry logic
+- **Improved debugging**: Direct HTTP requests allow for better performance monitoring
+- **Consistent behavior**: Eliminates SDK-specific quirks and inconsistencies
+
 ### External API Performance Optimization
 **Updated**: The GHL calendar integration includes several performance optimizations:
 - **Timestamp Conversion Caching**: Results are cached locally to avoid repeated conversions
 - **Batch Request Handling**: Multiple calendar operations are batched when possible
 - **Connection Pooling**: Reuses connections for multiple GHL API calls
 - **Timeout Management**: Implements appropriate timeout values for external API calls
+- **Direct HTTP Requests**: Eliminates SDK overhead for better performance
 
 **Section sources**
 - [index.html:17](file://index.html#L17)
+- [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
 - [index.ts:66-68](file://supabase/functions/ghl-calendar/index.ts#L66-L68)
 
 ### Network Optimization Best Practices
@@ -491,6 +538,7 @@ The application implements proactive network optimization through HTML preconnec
 - Implement connection pooling and keep-alive settings
 - Monitor network performance metrics and adjust optimization strategies
 - **Updated**: Cache external API responses when appropriate to reduce latency
+- **Updated**: Use direct HTTP requests for better performance and error control
 
 **Section sources**
 - [index.html:15-18](file://index.html#L15-L18)
@@ -554,6 +602,7 @@ Client --> GHL
 - **Updated**: Consider connection pooling and keep-alive settings for optimal database performance.
 - **Updated**: Implement timestamp conversion caching for external API integrations to reduce computational overhead.
 - **Updated**: Optimize external API call frequency and implement appropriate retry mechanisms.
+- **Updated**: Use direct HTTP requests instead of SDK-based calls for better performance and error control.
 
 ## Troubleshooting Guide
 Common issues and strategies:
@@ -565,6 +614,8 @@ Common issues and strategies:
 - **Updated**: GHL calendar integration failures: Check environment variables (GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID) and verify timestamp conversion logic.
 - **Updated**: External API timeout errors: Implement proper error handling and consider implementing exponential backoff for retry mechanisms.
 - **Updated**: Calendar booking conflicts: Verify timezone handling and ensure proper timestamp formatting for GHL API compatibility.
+- **Updated**: Direct fetch implementation issues: Check that the SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY environment variables are correctly configured and accessible to the frontend.
+- **Updated**: SDK AbortError exceptions: The new direct fetch implementation eliminates these issues by bypassing the Supabase SDK's internal error handling.
 
 **Section sources**
 - [client.ts:5-17](file://src/integrations/supabase/client.ts#L5-L17)
@@ -575,7 +626,7 @@ Common issues and strategies:
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
 ## Conclusion
-The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
+The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility. **Updated**: The new direct fetch implementation eliminates SDK-related issues and provides better performance and error control. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
 
 ## Appendices
 
@@ -599,3 +650,16 @@ Representative row shapes for key tables (descriptive only):
 **Section sources**
 - [index.ts:63-81](file://supabase/functions/ghl-calendar/index.ts#L63-L81)
 - [index.ts:164-178](file://supabase/functions/ghl-calendar/index.ts#L164-L178)
+
+### Direct Fetch Implementation Details
+**Updated**: The ConsultationCalendar component uses a custom `invokeEdgeFunction` that:
+- Constructs URLs using `SUPABASE_URL` and `/functions/v1/ghl-calendar`
+- Sends requests with proper authorization headers including `Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+- Handles error responses with proper error messages
+- Logs detailed debug information for troubleshooting
+- Eliminates SDK overhead and potential AbortError exceptions
+
+**Section sources**
+- [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
+- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
+- [ConsultationCalendar.tsx:131-169](file://src/components/funnel/ConsultationCalendar.tsx#L131-L169)
