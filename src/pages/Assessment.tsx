@@ -17,22 +17,19 @@ import {
   TrendingUp,
 } from "lucide-react";
 import CreditRepairResult from "@/components/assessment/CreditRepairResult";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import logoDark from "@/assets/logo-dark.png";
 import PageMeta from "@/components/PageMeta";
 
 // Direct fetch helper to bypass Supabase SDK AbortError
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
-
 async function callEdgeFunction(name: string, body: Record<string, unknown>) {
   const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${SUPABASE_KEY}`,
-      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+      "apikey": SUPABASE_PUBLISHABLE_KEY,
     },
     body: JSON.stringify(body),
   });
