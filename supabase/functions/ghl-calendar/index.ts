@@ -29,12 +29,18 @@ serve(async (req) => {
     return json({ error: "Invalid request body" }, 400);
   }
 
-  const calendarId = body.calendarType === "partner"
+  const isPartner = body.calendarType === "partner";
+  const calendarId = isPartner
     ? Deno.env.get("GHL_PARTNER_CALENDAR_ID")
     : Deno.env.get("GHL_CALENDAR_ID");
 
   if (!apiKey || !locationId || !calendarId) {
-    console.error("Missing GHL env vars");
+    console.error("Missing GHL env vars:", {
+      hasApiKey: !!apiKey,
+      hasLocationId: !!locationId,
+      hasCalendarId: !!calendarId,
+      calendarType: body.calendarType ?? "consultation (default)",
+    });
     return json({ error: "Server configuration error" }, 500);
   }
 
@@ -68,17 +74,63 @@ serve(async (req) => {
       url.searchParams.set("endDate", String(endDate as number));
       url.searchParams.set("timezone", String(timezone));
 
+      // userId is optional but required for round-robin / collective calendar types
+      const userId = Deno.env.get("GHL_USER_ID");
+      if (userId) {
+        url.searchParams.set("userId", userId);
+      }
+
+      console.log("GHL free-slots request:", {
+        calendarId,
+        calendarType: isPartner ? "partner" : "consultation",
+        startDate,
+        endDate,
+        timezone,
+        userId: userId || "(not set)",
+        url: url.toString(),
+      });
+
       const res = await fetch(url.toString(), { headers: ghlHeaders });
       const data = await res.json();
 
       if (!res.ok) {
-        console.error("GHL free-slots error:", JSON.stringify(data));
+        console.error("GHL free-slots error:", {
+          status: res.status,
+          body: JSON.stringify(data),
+        });
         return json({ error: "Unable to fetch available slots. Please try again." }, 500);
       }
 
-      console.log("GHL free-slots response keys:", Object.keys(data));
-      console.log("GHL free-slots raw (first 500 chars):", JSON.stringify(data).slice(0, 500));
-      return json(data);
+      // GHL response contains date-keyed slot objects + a traceId field
+      // Strip traceId before returning to keep the response clean for the frontend
+      const { traceId, ...slotsByDate } = data as Record<string, unknown>;
+
+      const dateKeys = Object.keys(slotsByDate);
+      const totalSlots = dateKeys.reduce((sum, key) => {
+        const entry = slotsByDate[key] as { slots?: string[] } | undefined;
+        return sum + (entry?.slots?.length ?? 0);
+      }, 0);
+
+      console.log("GHL free-slots response:", {
+        traceId,
+        datesWithSlots: dateKeys.length,
+        totalSlots,
+        sampleDates: dateKeys.slice(0, 3),
+      });
+
+      // If GHL returned zero slot dates, log a diagnostic warning
+      if (dateKeys.length === 0) {
+        console.warn(
+          "GHL returned NO free slots. Check GHL dashboard: " +
+          "1) Calendar has a team member assigned, " +
+          "2) Availability hours are configured, " +
+          "3) No external calendar is blocking all slots, " +
+          "4) Slot capacity is not exhausted. " +
+          `CalendarId: ${calendarId}, Range: ${new Date(startDate as number).toISOString()} – ${new Date(endDate as number).toISOString()}`
+        );
+      }
+
+      return json(slotsByDate);
     }
 
     // ── BOOK APPOINTMENT ──
@@ -114,7 +166,6 @@ serve(async (req) => {
       const firstName = nameParts[0] || "";
       const lastName = nameParts.slice(1).join(" ") || "";
 
-      const isPartner = body.calendarType === "partner";
       const contactPayload: Record<string, unknown> = {
         firstName,
         lastName,
