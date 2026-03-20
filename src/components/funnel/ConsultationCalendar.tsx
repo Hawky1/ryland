@@ -11,18 +11,30 @@ import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/integrations/supabase/
 
 // Use direct fetch instead of supabase.functions.invoke() to avoid SDK AbortError
 async function invokeEdgeFunction(name: string, body: Record<string, unknown>) {
-  const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-      "apikey": SUPABASE_PUBLISHABLE_KEY,
-    },
-    body: JSON.stringify(body),
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
-  return data;
+  const url = `${SUPABASE_URL}/functions/v1/${name}`;
+  console.log("[GHL Debug] Fetching:", url);
+  console.log("[GHL Debug] SUPABASE_URL:", SUPABASE_URL);
+  console.log("[GHL Debug] Body:", body);
+  
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        "apikey": SUPABASE_PUBLISHABLE_KEY,
+      },
+      body: JSON.stringify(body),
+    });
+    console.log("[GHL Debug] Response status:", res.status);
+    const data = await res.json();
+    console.log("[GHL Debug] Response data:", data);
+    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+    return data;
+  } catch (err) {
+    console.error("[GHL Debug] Fetch error:", err);
+    throw err;
+  }
 }
 import { ArrowLeft, CheckCircle2, Loader2, Clock, CalendarDays, User } from "lucide-react";
 import { cn } from "@/lib/utils";
