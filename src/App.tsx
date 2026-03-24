@@ -106,7 +106,7 @@ const AppContent = () => {
             <Route path="/credit-intake" element={<CreditIntake />} />
             <Route path="/portal/login" element={<PortalLogin />} />
             <Route path="/portal" element={<PortalLayout />}>
-              <Route index element={<PortalDashboard />} />
+              <Route index element={<DashboardRouter />} />
               <Route path="leads" element={<PortalLeads />} />
               <Route path="commissions" element={<PortalCommissions />} />
               <Route path="calculator" element={<PortalCalculator />} />
