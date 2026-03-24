@@ -103,6 +103,9 @@ export default function AdminDashboard() {
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 10);
 
+      // Latest leads (most recent 10) — already sorted desc from query
+      const latestLeads = leads.slice(0, 10);
+
       return {
         totalRevenue,
         totalOwed,
