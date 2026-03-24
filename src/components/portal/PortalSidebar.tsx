@@ -1,8 +1,9 @@
 import {
   LayoutDashboard, Users, DollarSign, Calculator,
-  BookOpen, CalendarDays, Mic2, UserCircle, LogOut
+  BookOpen, CalendarDays, Mic2, UserCircle, LogOut, ShieldCheck
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { useAdminRole } from "@/hooks/useAdminRole";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/hooks/useAuth";
 import {
