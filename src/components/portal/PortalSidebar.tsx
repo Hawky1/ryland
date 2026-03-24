@@ -19,25 +19,26 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const mainNav = [
+const affiliateMainNav = [
   { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
   { title: "Lead Tracker", url: "/portal/leads", icon: Users },
   { title: "Commissions", url: "/portal/commissions", icon: DollarSign },
   { title: "Calculator", url: "/portal/calculator", icon: Calculator },
 ];
 
-const supportNav = [
+const affiliateSupportNav = [
   { title: "Resources", url: "/portal/resources", icon: BookOpen },
   { title: "Events", url: "/portal/events", icon: CalendarDays },
   { title: "Speaking", url: "/portal/speaking", icon: Mic2 },
 ];
 
-const accountNav = [
+const affiliateAccountNav = [
   { title: "Profile & Payouts", url: "/portal/settings", icon: UserCircle },
 ];
 
-const adminNav = [
-  { title: "All Affiliates", url: "/portal/admin", icon: ShieldCheck },
+const adminMainNav = [
+  { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
+  { title: "All Affiliates", url: "/portal/admin", icon: Users },
 ];
 
 export default function PortalSidebar() {
