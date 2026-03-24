@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Users, DollarSign, Calculator,
-  BookOpen, CalendarDays, Mic2, UserCircle, LogOut, ShieldCheck
+  BookOpen, CalendarDays, Mic2, UserCircle, LogOut
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useAdminRole } from "@/hooks/useAdminRole";
@@ -19,25 +19,26 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const mainNav = [
+const affiliateMainNav = [
   { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
   { title: "Lead Tracker", url: "/portal/leads", icon: Users },
   { title: "Commissions", url: "/portal/commissions", icon: DollarSign },
   { title: "Calculator", url: "/portal/calculator", icon: Calculator },
 ];
 
-const supportNav = [
+const affiliateSupportNav = [
   { title: "Resources", url: "/portal/resources", icon: BookOpen },
   { title: "Events", url: "/portal/events", icon: CalendarDays },
   { title: "Speaking", url: "/portal/speaking", icon: Mic2 },
 ];
 
-const accountNav = [
+const affiliateAccountNav = [
   { title: "Profile & Payouts", url: "/portal/settings", icon: UserCircle },
 ];
 
-const adminNav = [
-  { title: "All Affiliates", url: "/portal/admin", icon: ShieldCheck },
+const adminMainNav = [
+  { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
+  { title: "All Affiliates", url: "/portal/admin", icon: Users },
 ];
 
 export default function PortalSidebar() {
@@ -52,7 +53,7 @@ export default function PortalSidebar() {
     return location.pathname.startsWith(path);
   };
 
-  const renderGroup = (label: string, items: typeof mainNav) => (
+  const renderGroup = (label: string, items: typeof affiliateMainNav) => (
     <SidebarGroup>
       {!collapsed && (
         <SidebarGroupLabel className="text-xs uppercase tracking-widest text-slate-500 font-medium px-3">
@@ -114,10 +115,17 @@ export default function PortalSidebar() {
         )}
 
         <div className="mt-3 space-y-1">
-          {renderGroup("Main", mainNav)}
-          {renderGroup("Support", supportNav)}
-          {renderGroup("Account", accountNav)}
-          {isAdmin && renderGroup("Admin", adminNav)}
+          {isAdmin ? (
+            <>
+              {renderGroup("Main", adminMainNav)}
+            </>
+          ) : (
+            <>
+              {renderGroup("Main", affiliateMainNav)}
+              {renderGroup("Support", affiliateSupportNav)}
+              {renderGroup("Account", affiliateAccountNav)}
+            </>
+          )}
         </div>
       </SidebarContent>
 

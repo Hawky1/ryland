@@ -41,7 +41,7 @@ const CreditIntake = lazy(() => import("./pages/CreditIntake"));
 const PortalLogin = lazy(() => import("./pages/portal/PortalLogin"));
 // PortalLayout is NOT lazy-loaded to keep sidebar persistent
 import PortalLayout from "./components/portal/PortalLayout";
-const PortalDashboard = lazy(() => import("./pages/portal/PortalDashboard"));
+const DashboardRouter = lazy(() => import("./pages/portal/DashboardRouter"));
 const PortalLeads = lazy(() => import("./pages/portal/PortalLeads"));
 const PortalCommissions = lazy(() => import("./pages/portal/PortalCommissions"));
 const PortalCalculator = lazy(() => import("./pages/portal/PortalCalculator"));
@@ -106,7 +106,7 @@ const AppContent = () => {
             <Route path="/credit-intake" element={<CreditIntake />} />
             <Route path="/portal/login" element={<PortalLogin />} />
             <Route path="/portal" element={<PortalLayout />}>
-              <Route index element={<PortalDashboard />} />
+              <Route index element={<DashboardRouter />} />
               <Route path="leads" element={<PortalLeads />} />
               <Route path="commissions" element={<PortalCommissions />} />
               <Route path="calculator" element={<PortalCalculator />} />
