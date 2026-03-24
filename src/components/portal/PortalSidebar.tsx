@@ -53,7 +53,7 @@ export default function PortalSidebar() {
     return location.pathname.startsWith(path);
   };
 
-  const renderGroup = (label: string, items: typeof mainNav) => (
+  const renderGroup = (label: string, items: typeof affiliateMainNav) => (
     <SidebarGroup>
       {!collapsed && (
         <SidebarGroupLabel className="text-xs uppercase tracking-widest text-slate-500 font-medium px-3">
