@@ -28,6 +28,16 @@ const affiliateStatusBadge: Record<string, string> = {
   suspended: "bg-red-50 text-red-700 border-red-200",
 };
 
+const stageBadge: Record<string, string> = {
+  "New Lead": "bg-blue-50 text-blue-700 border-blue-200",
+  "Contacted": "bg-sky-50 text-sky-700 border-sky-200",
+  "Credit Optimization": "bg-violet-50 text-violet-700 border-violet-200",
+  "Funding": "bg-amber-50 text-amber-700 border-amber-200",
+  "Approved": "bg-emerald-50 text-emerald-700 border-emerald-200",
+  "Funded": "bg-green-50 text-green-700 border-green-200",
+  "Closed Lost": "bg-red-50 text-red-700 border-red-200",
+};
+
 const chartConfig: ChartConfig = {
   leads: { label: "Leads", color: "hsl(221, 83%, 53%)" },
 };
@@ -40,7 +50,7 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const [affiliatesRes, leadsRes, commissionsRes, payoutsRes] = await Promise.all([
         supabase.from("affiliates").select("id, full_name, email, company_name, status, created_at"),
-        supabase.from("affiliate_leads").select("id, affiliate_id, pipeline_stage, created_at, full_name, email"),
+        supabase.from("affiliate_leads").select("id, affiliate_id, pipeline_stage, created_at, full_name, email, status, next_step, affiliates(full_name)").order("created_at", { ascending: false }),
         supabase.from("commissions").select("id, affiliate_id, commission_amount, commission_status, commission_type, created_at, affiliate_leads(full_name)"),
         supabase.from("payouts").select("id, amount, status"),
       ]);
@@ -103,6 +113,9 @@ export default function AdminDashboard() {
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 10);
 
+      // Latest leads (most recent 10) — already sorted desc from query
+      const latestLeads = leads.slice(0, 10);
+
       return {
         totalRevenue,
         totalOwed,
@@ -115,6 +128,7 @@ export default function AdminDashboard() {
         topAffiliates,
         latestCommissions,
         latestAffiliates,
+        latestLeads,
       };
     },
   });
@@ -278,6 +292,12 @@ export default function AdminDashboard() {
               >
                 Latest Affiliates
               </TabsTrigger>
+              <TabsTrigger
+                value="leads"
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-0 pb-3 text-sm font-medium"
+              >
+                Latest Leads
+              </TabsTrigger>
             </TabsList>
           </CardHeader>
 
@@ -368,6 +388,55 @@ export default function AdminDashboard() {
                           </TableCell>
                         </TableRow>
                       ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </CardContent>
+          </TabsContent>
+
+          <TabsContent value="leads" className="mt-0">
+            <CardContent className="p-0">
+              {isLoading ? (
+                <div className="p-6 space-y-3">
+                  {[1, 2, 3].map((i) => <Skeleton key={i} className="h-10 w-full" />)}
+                </div>
+              ) : !data?.latestLeads?.length ? (
+                <div className="py-12 text-center text-sm text-slate-500">No leads yet.</div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent border-slate-100">
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Lead Name</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Submitted By</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Stage</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Status</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Next Step</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Submitted</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.latestLeads.map((l) => {
+                        const affiliateName = (l as any).affiliates?.full_name ?? "Unknown";
+                        const stageClass = stageBadge[l.pipeline_stage] ?? stageBadge["New Lead"];
+                        return (
+                          <TableRow key={l.id} className="border-slate-100 hover:bg-slate-50">
+                            <TableCell className="font-medium text-sm text-slate-900">{l.full_name}</TableCell>
+                            <TableCell className="text-sm text-slate-700">{affiliateName}</TableCell>
+                            <TableCell>
+                              <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${stageClass}`}>
+                                {l.pipeline_stage}
+                              </span>
+                            </TableCell>
+                            <TableCell className="text-sm text-slate-500">{l.status}</TableCell>
+                            <TableCell className="text-sm text-slate-500">{l.next_step ?? "—"}</TableCell>
+                            <TableCell className="text-sm text-slate-500">
+                              {format(new Date(l.created_at), "MMM d, yyyy")}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                     </TableBody>
                   </Table>
                 </div>
