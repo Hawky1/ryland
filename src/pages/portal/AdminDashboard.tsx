@@ -118,6 +118,7 @@ export default function AdminDashboard() {
         topAffiliates,
         latestCommissions,
         latestAffiliates,
+        latestLeads,
       };
     },
   });
