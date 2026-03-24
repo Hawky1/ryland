@@ -4,14 +4,13 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AdminSidebar from "./AdminSidebar";
 import AdminGuard from "./AdminGuard";
 import PortalContentLoader from "@/components/portal/PortalContentLoader";
-import { Menu, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
 
 export default function AdminLayout() {
   return (
     <AdminGuard>
       <SidebarProvider>
-        <div className="min-h-screen flex w-full bg-slate-50">
+        <div className="min-h-screen flex w-full bg-slate-100">
           <AdminSidebar />
           <div className="flex-1 flex flex-col min-w-0">
             {/* Top bar */}
@@ -24,15 +23,6 @@ export default function AdminLayout() {
                 <span className="text-sm text-slate-500 hidden sm:block">
                   Admin Dashboard
                 </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Button variant="ghost" size="icon" className="relative text-slate-500">
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500" />
-                </Button>
-                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xs font-semibold text-white">
-                  A
-                </div>
               </div>
             </header>
 
