@@ -42,6 +42,7 @@ const PortalLogin = lazy(() => import("./pages/portal/PortalLogin"));
 // PortalLayout is NOT lazy-loaded to keep sidebar persistent
 import PortalLayout from "./components/portal/PortalLayout";
 const PortalDashboard = lazy(() => import("./pages/portal/PortalDashboard"));
+const AdminDashboard = lazy(() => import("./pages/portal/AdminDashboard"));
 const PortalLeads = lazy(() => import("./pages/portal/PortalLeads"));
 const PortalCommissions = lazy(() => import("./pages/portal/PortalCommissions"));
 const PortalCalculator = lazy(() => import("./pages/portal/PortalCalculator"));
