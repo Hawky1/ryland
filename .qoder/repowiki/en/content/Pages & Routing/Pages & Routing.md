@@ -12,20 +12,26 @@
 - [src/components/ScrollToTop.tsx](file://src/components/ScrollToTop.tsx)
 - [src/components/NavLink.tsx](file://src/components/NavLink.tsx)
 - [src/components/portal/PortalLayout.tsx](file://src/components/portal/PortalLayout.tsx)
+- [src/components/portal/PortalSidebar.tsx](file://src/components/portal/PortalSidebar.tsx)
+- [src/components/admin/AdminLayout.tsx](file://src/components/admin/AdminLayout.tsx)
+- [src/components/admin/AdminSidebar.tsx](file://src/components/admin/AdminSidebar.tsx)
 - [src/hooks/use-mobile.tsx](file://src/hooks/use-mobile.tsx)
 - [src/pages/Assessment.tsx](file://src/pages/Assessment.tsx)
+- [src/pages/CreditIntake.tsx](file://src/pages/CreditIntake.tsx)
 - [src/lib/referralTracking.ts](file://src/lib/referralTracking.ts)
 - [src/integrations/supabase/client.ts](file://src/integrations/supabase/client.ts)
 - [supabase/functions/ghl-create-contact/index.ts](file://supabase/functions/ghl-create-contact/index.ts)
 - [supabase/functions/ghl-affiliate-webhook/index.ts](file://supabase/functions/ghl-affiliate-webhook/index.ts)
+- [supabase/functions/scorexer-intake/index.ts](file://supabase/functions/scorexer-intake/index.ts)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Updated Assessment page documentation to reflect new GHL integration using direct HTTP fetch
-- Added information about parallel processing capabilities for primary contact creation and affiliate lead tracking
-- Enhanced integration architecture documentation with edge function details
-- Updated troubleshooting section with new error handling patterns
+- Added comprehensive documentation for the new `/credit-intake` route and client intake form
+- Updated routing architecture to include admin portal routes with dedicated admin layout and sidebar
+- Enhanced portal navigation documentation with partner portal routes and authentication guards
+- Added security considerations for sensitive data handling in the credit intake process
+- Updated integration architecture to include Scorexer webhook integration and GHL CRM synchronization
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -68,6 +74,7 @@ Src --> Comps["components/"]
 Comps --> ScrollToTop["ScrollToTop.tsx"]
 Comps --> NavLink["NavLink.tsx"]
 Comps --> PortalLayout["portal/PortalLayout.tsx"]
+Comps --> AdminLayout["admin/AdminLayout.tsx"]
 Src --> Hooks["hooks/"]
 Hooks --> UseMobile["use-mobile.tsx"]
 ```
@@ -81,6 +88,7 @@ Hooks --> UseMobile["use-mobile.tsx"]
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/components/NavLink.tsx:1-28](file://src/components/NavLink.tsx#L1-L28)
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 - [src/hooks/use-mobile.tsx:1-19](file://src/hooks/use-mobile.tsx#L1-L19)
 
 **Section sources**
@@ -94,7 +102,7 @@ Hooks --> UseMobile["use-mobile.tsx"]
 This section outlines the core building blocks for pages and routing in the application.
 
 - Routing and Layout Container
-  - The application's routes are declared centrally, including nested routes for a portal area and a catch-all fallback route. The router wraps the app with providers for authentication, theming, and data fetching.
+  - The application's routes are declared centrally, including nested routes for portal areas and admin sections. The router wraps the app with providers for authentication, theming, and data fetching.
 
 - Navigation Utilities
   - A custom NavLink wrapper integrates with React Router's NavLink while allowing explicit active/pending class names and Tailwind utility merging.
@@ -106,12 +114,16 @@ This section outlines the core building blocks for pages and routing in the appl
 - Portal Layout
   - A dedicated layout composes a sidebar, top bar, and outlet for authenticated portal routes.
 
+- Admin Layout
+  - A dedicated admin layout provides secure access to administrative functions with role-based access control.
+
 Implementation references:
 - [src/App.tsx:90-123](file://src/App.tsx#L90-L123)
 - [src/components/NavLink.tsx:1-28](file://src/components/NavLink.tsx#L1-L28)
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/hooks/use-mobile.tsx:1-19](file://src/hooks/use-mobile.tsx#L1-L19)
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 
 **Section sources**
 - [src/App.tsx:90-123](file://src/App.tsx#L90-L123)
@@ -119,6 +131,7 @@ Implementation references:
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/hooks/use-mobile.tsx:1-19](file://src/hooks/use-mobile.tsx#L1-L19)
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 
 ## Architecture Overview
 The routing architecture centers around React Router DOM with a provider-based setup. Static pages are mapped to routes, and nested routes encapsulate portal-related functionality. Providers manage global state and UI behavior.
@@ -136,6 +149,7 @@ Routes --> Store["Store Page Route"]
 Routes --> About["About Page Route"]
 Routes --> Contact["Contact Page Route"]
 Routes --> Partners["Partners Page Route"]
+Routes --> CreditIntake["Credit Intake Route"]
 Routes --> Portal["Portal Layout Route"]
 Portal --> PortalIndex["Portal Dashboard"]
 Portal --> PortalLeads["Portal Leads"]
@@ -145,6 +159,13 @@ Portal --> PortalResources["Portal Resources"]
 Portal --> PortalEvents["Portal Events"]
 Portal --> PortalSpeaking["Portal Speaking"]
 Portal --> PortalSettings["Portal Settings"]
+Routes --> Admin["Admin Layout Route"]
+Admin --> AdminIndex["Admin Dashboard"]
+Admin --> AdminAffiliates["Admin Affiliates"]
+Admin --> AdminLeads["Admin Leads"]
+Admin --> AdminCommissions["Admin Commissions"]
+Admin --> AdminPayouts["Admin Payouts"]
+Admin --> AdminReports["Admin Reports"]
 Routes --> NotFound["Catch-all Not Found"]
 ```
 
@@ -158,7 +179,7 @@ Routes --> NotFound["Catch-all Not Found"]
 
 ### Routing and Navigation Patterns
 - Centralized Route Declaration
-  - Routes are declared in a single location, enabling clear visibility of all pages and nested areas. Nested routes under a portal layout demonstrate structured access control and consistent UI scaffolding.
+  - Routes are declared in a single location, enabling clear visibility of all pages and nested areas. Nested routes under portal and admin layouts demonstrate structured access control and consistent UI scaffolding.
 - Active/Pending States
   - The custom NavLink wrapper allows explicit styling for active and pending states, improving UX during navigation.
 - Scroll Behavior
@@ -197,11 +218,14 @@ P-->>U : Display updated page content
 ### Shared Layouts and Page Lifecycle
 - Portal Layout
   - The portal layout composes a sidebar, top bar, and outlet. It is protected by an authentication guard and provides a consistent header and navigation for authenticated routes.
+- Admin Layout
+  - The admin layout provides secure access to administrative functions with role-based access control and comprehensive navigation for admin operations.
 - Page Lifecycle Management
   - The ScrollToTop component runs on route changes, resetting scroll position. Providers set up global state and UI behavior, influencing how pages mount and update.
 
 References:
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/App.tsx:113-123](file://src/App.tsx#L113-L123)
 
@@ -220,8 +244,62 @@ Providers --> Ready(["Page Ready"])
 
 **Section sources**
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/App.tsx:113-123](file://src/App.tsx#L113-L123)
+
+### Credit Intake Form Implementation
+**Updated** The new `/credit-intake` route provides a comprehensive client intake form for Scorexer integration with multi-step validation and secure data handling.
+
+#### Multi-Step Form Architecture
+The credit intake form implements a sophisticated three-step process with progressive disclosure and real-time validation:
+
+```mermaid
+graph TB
+Step1["Step 1: Personal Information<br/>Name, Email, Phone, DOB"]
+Step2["Step 2: Sensitive Information<br/>SSN, Credit Monitoring"]
+Step3["Step 3: Address Information<br/>Street, City, State, ZIP"]
+Success["Success State<br/>Submission Confirmation"]
+Step1 --> Step2
+Step2 --> Step3
+Step3 --> Success
+```
+
+**Diagram sources**
+- [src/pages/CreditIntake.tsx:75-163](file://src/pages/CreditIntake.tsx#L75-L163)
+
+#### Security and Data Protection
+The form implements strict security measures for handling sensitive information:
+
+- **SSN Masking**: Secure Social Security Number input with toggle visibility and automatic formatting
+- **Encrypted Transmission**: All sensitive data is transmitted over HTTPS to edge functions
+- **No Database Storage**: SSN data is never stored in the database, only sent to Scorexer webhook
+- **Input Validation**: Comprehensive Zod validation on both client and server side
+
+#### Edge Function Integration
+The credit intake form integrates with a dedicated Supabase Edge Function that handles the complete workflow:
+
+```typescript
+const result = await callEdgeFunction("scorexer-intake", {
+  firstName: form.firstName,
+  middleName: form.middleName || "",
+  lastName: form.lastName,
+  email: form.email,
+  phone: form.phone,
+  dob: form.dob,
+  ssn: ssnDigits,
+  creditMonitoring: form.creditMonitoring,
+  street: form.street,
+  city: form.city,
+  state: form.state,
+  zip: form.zip,
+});
+```
+
+**Section sources**
+- [src/pages/CreditIntake.tsx:75-163](file://src/pages/CreditIntake.tsx#L75-L163)
+- [src/pages/CreditIntake.tsx:137-150](file://src/pages/CreditIntake.tsx#L137-L150)
+- [supabase/functions/scorexer-intake/index.ts:72-110](file://supabase/functions/scorexer-intake/index.ts#L72-L110)
 
 ### Assessment Page Integration Architecture
 **Updated** The Assessment page now uses a hybrid integration approach combining Supabase database operations with direct HTTP fetch calls to Supabase Edge Functions for GHL CRM synchronization.
@@ -359,6 +437,53 @@ References:
 - [tailwind.config.ts:4-96](file://tailwind.config.ts#L4-L96)
 - [src/hooks/use-mobile.tsx:1-19](file://src/hooks/use-mobile.tsx#L1-L19)
 
+### Authentication and Access Control
+**Updated** The application now includes comprehensive authentication and access control mechanisms for different user types.
+
+#### Portal Authentication
+The portal system uses an AuthGuard component to protect authenticated routes:
+
+```typescript
+export default function AuthGuard({ children }: AuthGuardProps) {
+  const { user, loading } = useAuth();
+  
+  if (loading) {
+    return <div>Loading portal…</div>;
+  }
+  
+  if (!user) {
+    return <Navigate to="/portal/login" replace />;
+  }
+  
+  return <>{children}</>;
+}
+```
+
+#### Admin Access Control
+The admin system provides role-based access with AdminGuard:
+
+```typescript
+export default function AdminGuard({ children }: AdminGuardProps) {
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin, isLoading: roleLoading } = useAdminRole();
+  const loading = authLoading || (user ? roleLoading : false);
+
+  if (!user) {
+    return <Navigate to="/portal/login" replace />;
+  }
+
+  if (!isAdmin) {
+    return <Navigate to="/portal/login" replace />;
+  }
+
+  return <>{children}</>;
+}
+```
+
+**Section sources**
+- [src/components/portal/AuthGuard.tsx:1-28](file://src/components/portal/AuthGuard.tsx#L1-L28)
+- [src/components/admin/AdminGuard.tsx:1-35](file://src/components/admin/AdminGuard.tsx#L1-L35)
+
 ## Dependency Analysis
 The routing and page system relies on a small set of core dependencies and build-time optimizations.
 
@@ -394,6 +519,11 @@ AppTSX --> Providers["Providers"]
 - Direct HTTP fetch bypasses Supabase SDK AbortError issues
 - Affiliate lead tracking is fire-and-forget for non-blocking user experience
 
+**Updated** The Credit Intake form implements efficient state management and validation:
+- Zod schemas provide immediate client-side validation feedback
+- Progressive disclosure reduces cognitive load and improves conversion rates
+- Edge function integration minimizes server-side processing time
+
 Recommendations:
 - Lazy-load heavy page components using React.lazy and Suspense boundaries around route elements.
 - Defer non-critical resources and leverage browser caching strategies.
@@ -405,6 +535,7 @@ Recommendations:
 - [vite.config.ts:19-24](file://vite.config.ts#L19-L24)
 - [src/App.tsx:113-123](file://src/App.tsx#L113-L123)
 - [src/pages/Assessment.tsx:161-224](file://src/pages/Assessment.tsx#L161-L224)
+- [src/pages/CreditIntake.tsx:102-122](file://src/pages/CreditIntake.tsx#L102-L122)
 
 ## Troubleshooting Guide
 Common issues and resolutions:
@@ -417,33 +548,42 @@ Common issues and resolutions:
 - Portal layout not rendering for authenticated routes
   - Confirm the portal layout route is nested and guarded by an authentication mechanism.
   - Reference: [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- Admin layout not rendering for authorized users
+  - Verify the admin layout route is properly nested and guarded by AdminGuard.
+  - Reference: [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 - SEO metadata not updating per page
   - Integrate a head management solution to dynamically update meta tags for each route.
   - References: [index.html:23-39](file://index.html#L23-L39)
 - **Assessment page GHL integration failures**
   - **Issue**: GHL synchronization errors or timeouts
   - **Solution**: Check edge function logs in Supabase dashboard, verify API keys are configured, ensure network connectivity to LeadConnectorHQ
-  - **Reference**: [src/pages/Assessment.tsx:176-214](file://src/pages/Assessment.tsx#L176-L214)
+  - Reference: [src/pages/Assessment.tsx:176-214](file://src/pages/Assessment.tsx#L176-L214)
+- **Credit Intake form submission failures**
+  - **Issue**: Scorexer webhook integration errors or SSN validation failures
+  - **Solution**: Verify SCOREXER_ZAPIER_WEBHOOK_URL environment variable, check SSN formatting, ensure GHL API credentials are configured
+  - Reference: [supabase/functions/scorexer-intake/index.ts:22-26](file://supabase/functions/scorexer-intake/index.ts#L22-L26)
 - **Parallel processing not working**
   - **Issue**: Database insertion blocking while GHL sync processes
   - **Solution**: Verify Promise.allSettled implementation and ensure both promises are properly awaited
-  - **Reference**: [src/pages/Assessment.tsx:216-217](file://src/pages/Assessment.tsx#L216-L217)
+  - Reference: [src/pages/Assessment.tsx:216-217](file://src/pages/Assessment.tsx#L216-L217)
 - **Affiliate lead tracking not recording**
   - **Issue**: Affiliate IDs not being captured or processed
   - **Solution**: Check localStorage for referral data, verify getReferralAffiliateId function, ensure affiliate webhook is configured
-  - **Reference**: [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
+  - Reference: [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
 
 **Section sources**
 - [src/components/ScrollToTop.tsx:1-14](file://src/components/ScrollToTop.tsx#L1-L14)
 - [src/components/NavLink.tsx:1-28](file://src/components/NavLink.tsx#L1-L28)
 - [src/components/portal/PortalLayout.tsx:1-28](file://src/components/portal/PortalLayout.tsx#L1-L28)
+- [src/components/admin/AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
 - [index.html:23-39](file://index.html#L23-L39)
 - [src/pages/Assessment.tsx:176-214](file://src/pages/Assessment.tsx#L176-L214)
 - [src/pages/Assessment.tsx:216-217](file://src/pages/Assessment.tsx#L216-L217)
 - [src/lib/referralTracking.ts:28-44](file://src/lib/referralTracking.ts#L28-L44)
+- [supabase/functions/scorexer-intake/index.ts:22-26](file://supabase/functions/scorexer-intake/index.ts#L22-L26)
 
 ## Conclusion
-The Ryland application employs a clean, centralized routing architecture with shared layouts and navigation utilities. Providers establish a robust foundation for state and UI behavior, while responsive and performance configurations support scalable growth. The Assessment page demonstrates advanced integration patterns with parallel processing capabilities that improve user experience while maintaining reliable data synchronization. By following the patterns outlined here—consistent route declarations, shared layouts, SEO-aware meta management, and robust integration architectures—you can reliably implement new pages, optimize performance, and deliver a seamless user experience across desktop and mobile devices.
+The Ryland application employs a clean, centralized routing architecture with shared layouts and navigation utilities. Providers establish a robust foundation for state and UI behavior, while responsive and performance configurations support scalable growth. The Assessment page demonstrates advanced integration patterns with parallel processing capabilities that improve user experience while maintaining reliable data synchronization. The new Credit Intake form showcases comprehensive security measures and edge function integration for Scorexer webhook processing. The addition of admin portal functionality provides secure access control and comprehensive administrative capabilities. By following the patterns outlined here—consistent route declarations, shared layouts, SEO-aware meta management, robust integration architectures, and strong security practices—you can reliably implement new pages, optimize performance, and deliver a seamless user experience across desktop and mobile devices.
 
 [No sources needed since this section summarizes without analyzing specific files]
 
@@ -459,5 +599,12 @@ The Ryland application employs a clean, centralized routing architecture with sh
   - Validate affiliate tracking integration
   - Monitor GHL API response codes and error handling
   - Implement proper error boundaries for edge function failures
+- **Credit Intake form integration checklist**:
+  - Verify SCOREXER_ZAPIER_WEBHOOK_URL environment variable is configured
+  - Test SSN validation and formatting logic
+  - Validate GHL API credentials for contact synchronization
+  - Test multi-step form navigation and validation
+  - Verify edge function error handling and logging
+  - Test success state and user feedback mechanisms
 
 [No sources needed since this section provides general guidance]

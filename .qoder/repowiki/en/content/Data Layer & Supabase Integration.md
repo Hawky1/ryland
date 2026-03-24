@@ -8,8 +8,18 @@
 - [types.ts](file://src/integrations/supabase/types.ts)
 - [useAuth.tsx](file://src/hooks/useAuth.tsx)
 - [useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
+- [useAdminRole.ts](file://src/hooks/useAdminRole.ts)
 - [ResetPassword.tsx](file://src/pages/ResetPassword.tsx)
 - [PortalLogin.tsx](file://src/pages/portal/PortalLogin.tsx)
+- [AdminGuard.tsx](file://src/components/admin/AdminGuard.tsx)
+- [AdminLayout.tsx](file://src/components/admin/AdminLayout.tsx)
+- [AdminSidebar.tsx](file://src/components/admin/AdminSidebar.tsx)
+- [AdminDashboard.tsx](file://src/pages/admin/AdminDashboard.tsx)
+- [AdminLeads.tsx](file://src/pages/admin/AdminLeads.tsx)
+- [AdminCommissions.tsx](file://src/pages/admin/AdminCommissions.tsx)
+- [AdminAffiliates.tsx](file://src/pages/admin/AdminAffiliates.tsx)
+- [AdminPayouts.tsx](file://src/pages/admin/AdminPayouts.tsx)
+- [AdminReports.tsx](file://src/pages/admin/AdminReports.tsx)
 - [index.ts](file://supabase/functions/ghl-affiliate-webhook/index.ts)
 - [index.ts](file://supabase/functions/ghl-calendar/index.ts)
 - [ConsultationCalendar.tsx](file://src/components/funnel/ConsultationCalendar.tsx)
@@ -17,18 +27,20 @@
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql)
+- [20260320000000_admin_policies.sql](file://supabase/migrations/20260320000000_admin_policies.sql)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql)
 - [index.html](file://index.html)
 - [config.toml](file://supabase/config.toml)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Enhanced GHL calendar Edge Function with improved environment variable validation and comprehensive operational logging
-- Added optional user ID support for round-robin and collective calendar types
-- Implemented sophisticated data transformation capabilities for contact management and appointment booking
-- Updated ConsultationCalendar component with direct fetch implementation for better reliability
-- Expanded calendar types support with dual calendar configurations (consultation and partner)
-- Enhanced input validation and error handling for improved debugging and monitoring
+- Enhanced database infrastructure with new type definitions including user_roles table, has_role function, and app_role enum
+- Added comprehensive administrative framework with proper Row Level Security policies
+- Updated Supabase integration with improved type safety and role-based access control
+- Implemented new admin guard components with role-based navigation and access control
+- Added comprehensive admin dashboard with affiliate management, lead tracking, commission monitoring, and reporting capabilities
+- Enhanced authentication with role-based access control for administrative functions
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -36,32 +48,39 @@
 3. [Core Components](#core-components)
 4. [Architecture Overview](#architecture-overview)
 5. [Detailed Component Analysis](#detailed-component-analysis)
-6. [External API Integration](#external-api-integration)
-7. [Network Optimization & Performance](#network-optimization--performance)
-8. [Dependency Analysis](#dependency-analysis)
-9. [Performance Considerations](#performance-considerations)
-10. [Troubleshooting Guide](#troubleshooting-guide)
-11. [Conclusion](#conclusion)
-12. [Appendices](#appendices)
+6. [Administrative Framework](#administrative-framework)
+7. [External API Integration](#external-api-integration)
+8. [Network Optimization & Performance](#network-optimization--performance)
+9. [Dependency Analysis](#dependency-analysis)
+10. [Performance Considerations](#performance-considerations)
+11. [Troubleshooting Guide](#troubleshooting-guide)
+12. [Conclusion](#conclusion)
+13. [Appendices](#appendices)
 
 ## Introduction
 This document describes the data model and Supabase integration for the project. It focuses on the database schema design, entity relationships, field definitions for user accounts, affiliate leads, and application data. It also documents authentication setup, real-time features, data validation rules, data access patterns, caching strategies, performance considerations, data lifecycle, security measures, access control mechanisms, synchronization, offline capabilities, and error handling strategies for database operations.
 
+**Updated**: The system now includes a comprehensive administrative framework with role-based access control, enabling granular permissions for different user roles beyond simple authentication.
+
 ## Project Structure
 The project is a frontend-first React application that integrates with Supabase for authentication and data persistence. Key integration points include:
 - Supabase client initialization and configuration
-- Strongly typed database schema definitions
-- Authentication hooks and pages
+- Strongly typed database schema definitions with enhanced role-based access control
+- Authentication hooks and pages with admin guard components
 - Data access hooks for affiliate leads
 - Supabase functions for webhook-driven data updates
 - Database migrations defining RLS policies and schema evolution
 - Network optimization through preconnect hints for reduced latency
 - External API integration with GHL for calendar management and appointment booking
+- Administrative dashboard with comprehensive management capabilities
 
 ```mermaid
 graph TB
 subgraph "Frontend"
 Auth["Auth Provider<br/>useAuth.tsx"]
+AdminGuard["Admin Guard<br/>AdminGuard.tsx"]
+AdminLayout["Admin Layout<br/>AdminLayout.tsx"]
+AdminSidebar["Admin Sidebar<br/>AdminSidebar.tsx"]
 LeadsHook["Leads Query Hook<br/>useAffiliateLeads.ts"]
 LoginPage["Portal Login Page<br/>PortalLogin.tsx"]
 ResetPage["Reset Password Page<br/>ResetPassword.tsx"]
@@ -77,13 +96,17 @@ CalFunc["Calendar Function<br/>ghl-calendar/index.ts"]
 end
 subgraph "Database"
 Migs["Migrations<br/>RLS Policies"]
-Tables["Tables<br/>affiliates, affiliate_leads, commissions, payouts, speaker_requests, orders, order_items"]
+AdminMig["Admin Policies<br/>20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql"]
+Tables["Tables<br/>affiliates, affiliate_leads, commissions, payouts, speaker_requests, orders, order_items, user_roles"]
 end
 subgraph "External APIs"
 GHL["GHL Services<br/>LeadConnectorHQ"]
 end
 HTML --> Client
 Auth --> Client
+AdminGuard --> Client
+AdminLayout --> Client
+AdminSidebar --> Client
 LeadsHook --> Client
 LoginPage --> Client
 ResetPage --> Client
@@ -94,6 +117,7 @@ Func --> Client
 CalFunc --> Client
 Client --> Tables
 Migs --> Tables
+AdminMig --> Tables
 Client --> GHL
 ```
 
@@ -101,6 +125,9 @@ Client --> GHL
 - [client.ts:1-17](file://src/integrations/supabase/client.ts#L1-L17)
 - [types.ts:9-657](file://src/integrations/supabase/types.ts#L9-L657)
 - [useAuth.tsx:1-143](file://src/hooks/useAuth.tsx#L1-L143)
+- [AdminGuard.tsx:1-35](file://src/components/admin/AdminGuard.tsx#L1-L35)
+- [AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
+- [AdminSidebar.tsx:1-67](file://src/components/admin/AdminSidebar.tsx#L1-L67)
 - [useAffiliateLeads.ts:1-31](file://src/hooks/useAffiliateLeads.ts#L1-L31)
 - [PortalLogin.tsx:95-125](file://src/pages/portal/PortalLogin.tsx#L95-L125)
 - [ResetPassword.tsx:1-60](file://src/pages/ResetPassword.tsx#L1-L60)
@@ -111,6 +138,7 @@ Client --> GHL
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql:1-8](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql#L1-L8)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:1-82](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L1-L82)
 - [index.html:17](file://index.html#L17)
 
 **Section sources**
@@ -126,25 +154,35 @@ Client --> GHL
 - Calendar management function integrating with GHL services for appointment scheduling and availability checking.
 - Database migrations establishing row-level security (RLS) policies for data isolation.
 - Network optimization through preconnect hints for reduced database connection latency.
+- **Updated**: Role-based access control system with user_roles table and has_role function.
+- **Updated**: Admin guard components providing role-based navigation and access control.
+- **Updated**: Comprehensive admin dashboard with affiliate management, lead tracking, commission monitoring, and reporting capabilities.
 
 **Section sources**
 - [client.ts:1-17](file://src/integrations/supabase/client.ts#L1-L17)
 - [types.ts:9-657](file://src/integrations/supabase/types.ts#L9-L657)
 - [useAuth.tsx:1-143](file://src/hooks/useAuth.tsx#L1-L143)
+- [AdminGuard.tsx:1-35](file://src/components/admin/AdminGuard.tsx#L1-L35)
+- [AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
+- [AdminSidebar.tsx:1-67](file://src/components/admin/AdminSidebar.tsx#L1-L67)
 - [useAffiliateLeads.ts:1-31](file://src/hooks/useAffiliateLeads.ts#L1-L31)
 - [index.ts:41-174](file://supabase/functions/ghl-affiliate-webhook/index.ts#L41-L174)
 - [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:1-82](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L1-L82)
 
 ## Architecture Overview
 The data layer architecture centers on a typed Supabase client, React Query for caching and reactivity, and Supabase RLS for access control. Authentication events drive state updates, while external webhooks synchronize data into affiliate leads. The architecture now includes comprehensive external API integration with GHL services for calendar management and appointment booking. Network optimization through preconnect hints reduces latency for database operations and improves real-time feature responsiveness.
+
+**Updated**: The architecture now incorporates a comprehensive administrative framework with role-based access control, enabling granular permissions for different user roles.
 
 ```mermaid
 sequenceDiagram
 participant HTML as "HTML Entry Point<br/>index.html"
 participant UI as "UI Components"
 participant Auth as "Auth Provider<br/>useAuth.tsx"
+participant AdminGuard as "Admin Guard<br/>AdminGuard.tsx"
 participant Client as "Supabase Client<br/>client.ts"
 participant CalComp as "Calendar Components<br/>ConsultationCalendar.tsx"
 participant DB as "PostgreSQL Tables<br/>types.ts"
@@ -159,6 +197,11 @@ Auth->>Client : Lookup affiliate profile
 Client->>DB : SELECT affiliates WHERE user_id
 DB-->>Client : Affiliate record
 Client-->>Auth : Affiliate data
+UI->>AdminGuard : Check admin permissions
+AdminGuard->>Client : Check has_role(auth.uid(), 'admin')
+Client->>DB : SELECT user_roles WHERE user_id
+DB-->>Client : Role check result
+Client-->>AdminGuard : Permission granted/denied
 UI->>Client : Query affiliate_leads
 Client->>DB : SELECT affiliate_leads WHERE affiliate_id
 DB-->>Client : Lead rows
@@ -177,6 +220,7 @@ Client-->>UI : Calendar availability
 **Diagram sources**
 - [index.html:17](file://index.html#L17)
 - [useAuth.tsx:68-106](file://src/hooks/useAuth.tsx#L68-L106)
+- [AdminGuard.tsx:10-35](file://src/components/admin/AdminGuard.tsx#L10-L35)
 - [client.ts:11-17](file://src/integrations/supabase/client.ts#L11-L17)
 - [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
 - [types.ts:16-147](file://src/integrations/supabase/types.ts#L16-L147)
@@ -196,6 +240,7 @@ Client-->>UI : Calendar availability
 - Authentication provider subscribes to auth state changes and loads affiliate data after session resolution.
 - Uses a helper function to resolve the current affiliate ID for row-level security enforcement.
 - Provides sign-in, sign-out, and password update operations.
+- **Updated**: Integrated with role-based access control system for administrative permissions.
 
 ```mermaid
 sequenceDiagram
@@ -277,6 +322,8 @@ Func-->>Ext : JSON response
 ### Database Schema and Entity Relationships
 The schema defines core tables and enums used by the application. Below is a focused ER diagram for the most relevant entities in the data layer.
 
+**Updated**: Enhanced with user_roles table for comprehensive role-based access control.
+
 ```mermaid
 erDiagram
 AFFILIATES {
@@ -294,6 +341,11 @@ string user_id
 enum status
 timestamp created_at
 timestamp updated_at
+}
+USER_ROLES {
+uuid id PK
+uuid user_id FK
+enum role
 }
 AFFILIATE_LEADS {
 string id PK
@@ -375,33 +427,156 @@ AFFILIATE_LEADS ||--o{ COMMISSIONS : "triggers"
 AFFILIATES ||--o{ PAYOUTS : "receives"
 AFFILIATES ||--o{ SPEAKER_REQUESTS : "submits"
 ORDERS ||--o{ ORDER_ITEMS : "contains"
+USER_ROLES ||--|| AFFILIATES : "grants"
 ```
 
 **Diagram sources**
 - [types.ts:97-640](file://src/integrations/supabase/types.ts#L97-L640)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:5-11](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L5-L11)
 
 **Section sources**
 - [types.ts:9-657](file://src/integrations/supabase/types.ts#L9-L657)
 
 ### Field Definitions and Validation Rules
 - Enumerations define constrained statuses for affiliates, commissions, payouts, and speaker requests.
+- **Updated**: Added app_role enumeration with 'admin' and 'user' values for role-based access control.
 - Strong typing ensures compile-time safety for inserts and updates.
 - Migrations add columns and default values to support evolving business needs.
 
 **Section sources**
 - [types.ts:647-652](file://src/integrations/supabase/types.ts#L647-L652)
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql:1-8](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql#L1-L8)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:2-3](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L2-L3)
 
 ### Real-Time Features and Data Lifecycle
 - Auth state changes trigger immediate UI updates and background affiliate profile loading.
 - Webhooks continuously synchronize external opportunities into affiliate leads.
 - RLS policies enforce per-affiliate data isolation for inserts and updates.
+- **Updated**: Role-based access control enforces administrative permissions across all tables.
 
 **Section sources**
 - [useAuth.tsx:68-106](file://src/hooks/useAuth.tsx#L68-L106)
 - [index.ts:74-105](file://supabase/functions/ghl-affiliate-webhook/index.ts#L74-L105)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:37-51](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L37-L51)
+
+## Administrative Framework
+
+### Role-Based Access Control System
+**New**: The system now implements a comprehensive role-based access control framework using the user_roles table and has_role function.
+
+#### User Roles Table
+The user_roles table serves as the central authority for role assignments:
+- Stores unique combinations of user_id and role
+- Enforces referential integrity with auth.users table
+- Supports CASCADE deletion for cleanup
+- Enabled Row Level Security for fine-grained access control
+
+#### Has Role Function
+The has_role function provides efficient role checking:
+- Security definer function for elevated privileges
+- Stable function signature for consistent caching
+- Uses EXISTS clause for optimal performance
+- Supports dynamic role checking with app_role enum
+
+#### App Role Enumeration
+The app_role enum defines available roles:
+- 'admin': Full administrative access across all tables
+- 'user': Standard user access with affiliate-specific restrictions
+
+```mermaid
+sequenceDiagram
+participant User as "Authenticated User"
+participant Client as "Supabase Client"
+participant DB as "PostgreSQL Database"
+User->>Client : has_role(auth.uid(), 'admin')
+Client->>DB : SELECT user_roles WHERE user_id AND role
+DB-->>Client : EXISTS check result
+Client-->>User : Boolean permission result
+```
+
+**Diagram sources**
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:15-29](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L15-L29)
+- [types.ts:662-671](file://src/integrations/supabase/types.ts#L662-L671)
+
+**Section sources**
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:2-29](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L2-L29)
+- [types.ts:640-657](file://src/integrations/supabase/types.ts#L640-L657)
+
+### Admin Guard Components
+**New**: Role-based navigation and access control through admin guard components.
+
+#### AdminGuard Component
+Provides comprehensive role-based access control:
+- Checks both authentication and administrative permissions
+- Handles loading states with spinner animations
+- Redirects unauthorized users to portal login
+- Integrates with useAuth and useAdminRole hooks
+
+#### AdminLayout Component
+Manages administrative interface layout:
+- Wraps protected routes with admin guard
+- Provides responsive sidebar navigation
+- Includes top navigation bar with menu controls
+- Supports lazy loading with content loader
+
+#### AdminSidebar Component
+Delivers comprehensive administrative navigation:
+- Dynamic menu items for all admin sections
+- Active state highlighting for current route
+- Responsive sidebar with collapsible icons
+- Integration with Lucide React icons
+
+**Section sources**
+- [AdminGuard.tsx:1-35](file://src/components/admin/AdminGuard.tsx#L1-L35)
+- [AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
+- [AdminSidebar.tsx:1-67](file://src/components/admin/AdminSidebar.tsx#L1-L67)
+
+### Admin Dashboard and Management Pages
+**New**: Comprehensive administrative interface with multiple management capabilities.
+
+#### AdminDashboard
+Provides overview statistics and recent activity:
+- Total affiliates, pending approvals, leads, and commissions
+- Revenue tracking and trend analysis
+- Recent affiliate registrations and pending commissions
+- Interactive cards with trend indicators
+
+#### AdminLeads
+Manages and tracks affiliate leads:
+- Comprehensive lead listing with filtering
+- Status-based filtering and search functionality
+- Statistics cards for pipeline value and conversion rates
+- Detailed lead information with affiliate associations
+
+#### AdminCommissions
+Handles commission management:
+- Commission tracking with status filtering
+- Bulk operations and status updates
+- Affiliate and lead associations
+- Payment processing capabilities
+
+#### AdminAffiliates
+Manages affiliate relationships:
+- Affiliate listing with performance metrics
+- Commission rate management
+- Status updates and approval workflows
+- Performance analytics and reporting
+
+#### AdminPayouts and Reports
+Provides financial oversight:
+- Payout management and tracking
+- Comprehensive reporting dashboards
+- Performance analytics and trend analysis
+- Export capabilities for financial records
+
+**Section sources**
+- [AdminDashboard.tsx:1-206](file://src/pages/admin/AdminDashboard.tsx#L1-L206)
+- [AdminLeads.tsx:53-205](file://src/pages/admin/AdminLeads.tsx#L53-L205)
+- [AdminCommissions.tsx:49-99](file://src/pages/admin/AdminCommissions.tsx#L49-L99)
+- [AdminAffiliates.tsx:54-96](file://src/pages/admin/AdminAffiliates.tsx#L54-L96)
+- [AdminReports.tsx:76-114](file://src/pages/admin/AdminReports.tsx#L76-L114)
 
 ## External API Integration
 
@@ -571,6 +746,7 @@ The application implements proactive network optimization through HTML preconnec
 - **Updated**: Cache external API responses when appropriate to reduce latency
 - **Updated**: Use direct HTTP requests for better performance and error control
 - **Updated**: Implement comprehensive logging for network debugging and monitoring
+- **Updated**: Optimize role-based access control queries with proper indexing
 
 **Section sources**
 - [index.html:15-18](file://index.html#L15-L18)
@@ -578,12 +754,17 @@ The application implements proactive network optimization through HTML preconnec
 ## Dependency Analysis
 The frontend depends on Supabase for identity and data, React Query for caching, and TypeScript for type safety. Supabase functions depend on the Supabase runtime and service role credentials. External API integrations depend on GHL services and proper environment configuration. Network optimization through preconnect hints provides transparent performance benefits across all Supabase operations.
 
+**Updated**: Enhanced dependency graph includes role-based access control components and administrative framework.
+
 ```mermaid
 graph LR
 Package["package.json deps"]
 Client["client.ts"]
 Types["types.ts"]
 Auth["useAuth.tsx"]
+AdminGuard["AdminGuard.tsx"]
+AdminLayout["AdminLayout.tsx"]
+AdminSidebar["AdminSidebar.tsx"]
 Leads["useAffiliateLeads.ts"]
 Func["ghl-affiliate-webhook/index.ts"]
 CalFunc["ghl-calendar/index.ts"]
@@ -591,19 +772,29 @@ ConsultCal["ConsultationCalendar.tsx"]
 PartnerCal["PartnerOnboardingCalendar.tsx"]
 HTML["index.html"]
 GHL["GHL Services"]
+AdminPages["Admin Pages<br/>AdminDashboard.tsx, AdminLeads.tsx, etc."]
+AdminMig["Admin Policies<br/>20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql"]
 Package --> Client
 Package --> Auth
+Package --> AdminGuard
+Package --> AdminLayout
+Package --> AdminSidebar
 Package --> Leads
 Package --> ConsultCal
 Package --> PartnerCal
 HTML --> Client
 Client --> Types
 Auth --> Client
+AdminGuard --> Client
+AdminLayout --> Client
+AdminSidebar --> Client
 Leads --> Client
 Func --> Client
 CalFunc --> Client
 ConsultCal --> Client
 PartnerCal --> Client
+Client --> AdminPages
+Client --> AdminMig
 Client --> GHL
 ```
 
@@ -612,12 +803,16 @@ Client --> GHL
 - [client.ts:1-17](file://src/integrations/supabase/client.ts#L1-L17)
 - [types.ts:1-14](file://src/integrations/supabase/types.ts#L1-L14)
 - [useAuth.tsx:1-4](file://src/hooks/useAuth.tsx#L1-L4)
+- [AdminGuard.tsx:1-4](file://src/components/admin/AdminGuard.tsx#L1-L4)
+- [AdminLayout.tsx:1-4](file://src/components/admin/AdminLayout.tsx#L1-L4)
+- [AdminSidebar.tsx:1-4](file://src/components/admin/AdminSidebar.tsx#L1-L4)
 - [useAffiliateLeads.ts:1-4](file://src/hooks/useAffiliateLeads.ts#L1-L4)
 - [ConsultationCalendar.tsx:1-14](file://src/components/funnel/ConsultationCalendar.tsx#L1-L14)
 - [PartnerOnboardingCalendar.tsx:1-14](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L1-L14)
 - [index.ts:42-44](file://supabase/functions/ghl-affiliate-webhook/index.ts#L42-L44)
 - [index.ts:21-51](file://supabase/functions/ghl-calendar/index.ts#L21-L51)
 - [index.html:17](file://index.html#L17)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:1-82](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L1-L82)
 
 **Section sources**
 - [package.json:15-69](file://package.json#L15-L69)
@@ -637,6 +832,8 @@ Client --> GHL
 - **Updated**: Use direct HTTP requests instead of SDK-based calls for better performance and error control.
 - **Updated**: Implement comprehensive logging for performance monitoring and debugging.
 - **Updated**: Validate environment variables thoroughly to prevent runtime configuration errors.
+- **Updated**: Optimize role-based access control queries with proper indexing on user_id and role columns.
+- **Updated**: Implement caching strategies for role check results to reduce database load.
 
 ## Troubleshooting Guide
 Common issues and strategies:
@@ -644,6 +841,8 @@ Common issues and strategies:
 - Affiliate profile not loading: Confirm the user_id-to-affiliate mapping and check for timeouts during background fetch.
 - Webhook not updating leads: Inspect the external payload fields and ensure the function has service role access to write to affiliate_leads.
 - RLS policy errors: Validate that the authenticated user's affiliate_id matches the record being inserted/updated.
+- **Updated**: Role-based access control failures: Check user_roles table entries and has_role function execution.
+- **Updated**: Admin guard not redirecting properly: Verify AdminGuard component integration and useAdminRole hook implementation.
 - **Updated**: Preconnect optimization not taking effect: Verify the preconnect link is present in the HTML head and check browser developer tools for connection establishment timing improvements.
 - **Updated**: GHL calendar integration failures: Check environment variables (GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID, GHL_PARTNER_CALENDAR_ID, GHL_USER_ID) and verify timestamp conversion logic.
 - **Updated**: External API timeout errors: Implement proper error handling and consider implementing exponential backoff for retry mechanisms.
@@ -654,17 +853,20 @@ Common issues and strategies:
 - **Updated**: Calendar type routing issues: Verify calendarType parameter and corresponding environment variable configuration.
 - **Updated**: Contact management errors: Review duplicate contact handling and GHL API response processing.
 - **Updated**: Data transformation failures: Check input validation and transformation logic for edge cases.
+- **Updated**: Admin dashboard not loading: Verify role-based access control and ensure admin users have proper user_roles entries.
 
 **Section sources**
 - [client.ts:5-17](file://src/integrations/supabase/client.ts#L5-L17)
 - [useAuth.tsx:40-63](file://src/hooks/useAuth.tsx#L40-L63)
+- [AdminGuard.tsx:10-35](file://src/components/admin/AdminGuard.tsx#L10-L35)
 - [index.ts:74-105](file://supabase/functions/ghl-affiliate-webhook/index.ts#L74-L105)
 - [index.ts:37-45](file://supabase/functions/ghl-calendar/index.ts#L37-L45)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:31-82](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L31-L82)
 
 ## Conclusion
-The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility and enhanced environment variable validation. **Updated**: The new direct fetch implementation eliminates SDK-related issues and provides better performance and error control. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. **Updated**: Enhanced logging and monitoring capabilities provide comprehensive operational visibility and debugging support. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
+The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility and enhanced environment variable validation. **Updated**: The new direct fetch implementation eliminates SDK-related issues and provides better performance and error control. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. **Updated**: Enhanced logging and monitoring capabilities provide comprehensive operational visibility and debugging support. **Updated**: The comprehensive administrative framework with role-based access control provides granular permissions and secure management capabilities. **Updated**: The new admin guard components and dashboard provide intuitive management interfaces with proper access control enforcement. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
 
 ## Appendices
 
@@ -675,9 +877,11 @@ Representative row shapes for key tables (descriptive only):
 - Commission: affiliate and optional lead linkage, amounts, status, timestamps, payout date
 - Payout: affiliate linkage, amount, period, method, status, timestamps
 - Speaker Request: affiliate linkage, event details, status, timestamps
+- **Updated**: User Role: unique combination of user_id and role for access control
 
 **Section sources**
 - [types.ts:97-640](file://src/integrations/supabase/types.ts#L97-L640)
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:5-11](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L5-L11)
 
 ### GHL Calendar API Endpoints
 **Updated**: The GHL calendar integration exposes the following endpoints:
@@ -717,3 +921,17 @@ Representative row shapes for key tables (descriptive only):
 - [index.ts:21-51](file://supabase/functions/ghl-calendar/index.ts#L21-L51)
 - [index.ts:32-35](file://supabase/functions/ghl-calendar/index.ts#L32-L35)
 - [index.ts:78-81](file://supabase/functions/ghl-calendar/index.ts#L78-L81)
+
+### Role-Based Access Control Configuration
+**New**: The role-based access control system requires the following setup:
+- User roles table with unique constraints on (user_id, role)
+- has_role function for efficient role checking
+- RLS policies on all tables using has_role(auth.uid(), 'admin')
+- Admin guard components for route protection
+- Admin dashboard pages with role-aware data access
+
+**Section sources**
+- [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:2-82](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L2-L82)
+- [AdminGuard.tsx:1-35](file://src/components/admin/AdminGuard.tsx#L1-L35)
+- [AdminLayout.tsx:1-40](file://src/components/admin/AdminLayout.tsx#L1-L40)
+- [AdminSidebar.tsx:1-67](file://src/components/admin/AdminSidebar.tsx#L1-L67)
