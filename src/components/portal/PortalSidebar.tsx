@@ -115,10 +115,17 @@ export default function PortalSidebar() {
         )}
 
         <div className="mt-3 space-y-1">
-          {renderGroup("Main", mainNav)}
-          {renderGroup("Support", supportNav)}
-          {renderGroup("Account", accountNav)}
-          {isAdmin && renderGroup("Admin", adminNav)}
+          {isAdmin ? (
+            <>
+              {renderGroup("Main", adminMainNav)}
+            </>
+          ) : (
+            <>
+              {renderGroup("Main", affiliateMainNav)}
+              {renderGroup("Support", affiliateSupportNav)}
+              {renderGroup("Account", affiliateAccountNav)}
+            </>
+          )}
         </div>
       </SidebarContent>
 
