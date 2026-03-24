@@ -117,6 +117,7 @@ export default function PortalSidebar() {
           {renderGroup("Main", mainNav)}
           {renderGroup("Support", supportNav)}
           {renderGroup("Account", accountNav)}
+          {isAdmin && renderGroup("Admin", adminNav)}
         </div>
       </SidebarContent>
 
