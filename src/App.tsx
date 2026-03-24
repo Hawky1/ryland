@@ -114,6 +114,8 @@ const AppContent = () => {
               <Route path="events" element={<PortalEvents />} />
               <Route path="speaking" element={<PortalSpeaking />} />
               <Route path="settings" element={<PortalSettings />} />
+              <Route path="admin" element={<AdminAffiliates />} />
+              <Route path="admin/affiliate/:id" element={<AdminAffiliateDetail />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
