@@ -3,7 +3,6 @@ import {
   BookOpen, CalendarDays, Mic2, UserCircle, LogOut
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import { useAdminRole } from "@/hooks/useAdminRole";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -36,17 +35,11 @@ const affiliateAccountNav = [
   { title: "Profile & Payouts", url: "/portal/settings", icon: UserCircle },
 ];
 
-const adminMainNav = [
-  { title: "Dashboard", url: "/portal", icon: LayoutDashboard },
-  { title: "All Affiliates", url: "/portal/admin", icon: Users },
-];
-
 export default function PortalSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
   const { signOut, affiliate } = useAuth();
-  const { isAdmin } = useAdminRole();
 
   const isActive = (path: string) => {
     if (path === "/portal") return location.pathname === "/portal";
@@ -115,17 +108,9 @@ export default function PortalSidebar() {
         )}
 
         <div className="mt-3 space-y-1">
-          {isAdmin ? (
-            <>
-              {renderGroup("Main", adminMainNav)}
-            </>
-          ) : (
-            <>
-              {renderGroup("Main", affiliateMainNav)}
-              {renderGroup("Support", affiliateSupportNav)}
-              {renderGroup("Account", affiliateAccountNav)}
-            </>
-          )}
+          {renderGroup("Main", affiliateMainNav)}
+          {renderGroup("Support", affiliateSupportNav)}
+          {renderGroup("Account", affiliateAccountNav)}
         </div>
       </SidebarContent>
 
