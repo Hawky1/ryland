@@ -49,6 +49,8 @@ const PortalResources = lazy(() => import("./pages/portal/PortalResources"));
 const PortalEvents = lazy(() => import("./pages/portal/PortalEvents"));
 const PortalSpeaking = lazy(() => import("./pages/portal/PortalSpeaking"));
 const PortalSettings = lazy(() => import("./pages/portal/PortalSettings"));
+const AdminAffiliates = lazy(() => import("./pages/portal/AdminAffiliates"));
+const AdminAffiliateDetail = lazy(() => import("./pages/portal/AdminAffiliateDetail"));
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -112,6 +114,8 @@ const AppContent = () => {
               <Route path="events" element={<PortalEvents />} />
               <Route path="speaking" element={<PortalSpeaking />} />
               <Route path="settings" element={<PortalSettings />} />
+              <Route path="admin" element={<AdminAffiliates />} />
+              <Route path="admin/affiliate/:id" element={<AdminAffiliateDetail />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
