@@ -49,6 +49,15 @@ const PortalEvents = lazy(() => import("./pages/portal/PortalEvents"));
 const PortalSpeaking = lazy(() => import("./pages/portal/PortalSpeaking"));
 const PortalSettings = lazy(() => import("./pages/portal/PortalSettings"));
 
+// Admin routes
+import AdminLayout from "./components/admin/AdminLayout";
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminAffiliates = lazy(() => import("./pages/admin/AdminAffiliates"));
+const AdminLeads = lazy(() => import("./pages/admin/AdminLeads"));
+const AdminCommissions = lazy(() => import("./pages/admin/AdminCommissions"));
+const AdminPayouts = lazy(() => import("./pages/admin/AdminPayouts"));
+const AdminReports = lazy(() => import("./pages/admin/AdminReports"));
+
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient({
@@ -110,6 +119,15 @@ const AppContent = () => {
               <Route path="events" element={<PortalEvents />} />
               <Route path="speaking" element={<PortalSpeaking />} />
               <Route path="settings" element={<PortalSettings />} />
+            </Route>
+            {/* Admin routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="affiliates" element={<AdminAffiliates />} />
+              <Route path="leads" element={<AdminLeads />} />
+              <Route path="commissions" element={<AdminCommissions />} />
+              <Route path="payouts" element={<AdminPayouts />} />
+              <Route path="reports" element={<AdminReports />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

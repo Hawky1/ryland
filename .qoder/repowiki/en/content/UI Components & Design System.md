@@ -16,14 +16,21 @@
 - [src/pages/portal/PortalLeads.tsx](file://src/pages/portal/PortalLeads.tsx)
 - [src/hooks/useAffiliateLeads.ts](file://src/hooks/useAffiliateLeads.ts)
 - [src/types/leads.ts](file://src/types/leads.ts)
+- [src/components/funnel/ConsultationCalendar.tsx](file://src/components/funnel/ConsultationCalendar.tsx)
+- [src/components/funnel/PartnerOnboardingCalendar.tsx](file://src/components/funnel/PartnerOnboardingCalendar.tsx)
+- [src/components/ui/calendar.tsx](file://src/components/ui/calendar.tsx)
+- [src/integrations/supabase/client.ts](file://src/integrations/supabase/client.ts)
+- [supabase/functions/ghl-calendar/index.ts](file://supabase/functions/ghl-calendar/index.ts)
+- [src/pages/funnel/FunnelConsultation.tsx](file://src/pages/funnel/FunnelConsultation.tsx)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Updated Performance Considerations section to include component-level memoization optimization
-- Added detailed analysis of LeadsTable component optimization techniques
-- Enhanced Component Composition Patterns section with performance best practices
-- Updated Troubleshooting Guide with memoization-related guidance
+- Enhanced ConsultationCalendar component documentation with comprehensive logging and debugging capabilities
+- Added detailed analysis of edge function integration improvements
+- Updated troubleshooting guide with calendar integration debugging procedures
+- Expanded error handling documentation for calendar components
+- Added performance considerations for calendar data fetching
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -106,6 +113,7 @@ SHAD["shadcn/ui Components<br/>styled variants"]
 end
 subgraph "App"
 APP["React Components<br/>usage of SHAD + RUI"]
+END["Edge Functions<br/>Supabase Functions"]
 end
 TW --> CSSV
 TW --> TWT
@@ -115,6 +123,7 @@ TWT --> SHAD
 SP --> SHAD
 SHAD --> APP
 RUI --> SHAD
+APP --> END
 ```
 
 **Diagram sources**
@@ -124,6 +133,49 @@ RUI --> SHAD
 
 ## Detailed Component Analysis
 This section outlines the component categories and their roles in the design system. While specific component APIs are not present in the repository snapshot, the integration pattern and customization approach are defined by the configuration and dependencies.
+
+### Calendar Components and Integration
+**Updated** The ConsultationCalendar component demonstrates advanced integration patterns with external calendar services through Supabase Edge Functions.
+
+#### ConsultationCalendar Component
+The ConsultationCalendar component provides a sophisticated booking interface with comprehensive logging and debugging capabilities:
+
+- **Enhanced Logging System**: Implements detailed console logging with "[GHL Debug]" prefix for all API interactions
+- **Direct Edge Function Integration**: Uses custom `invokeEdgeFunction` instead of Supabase SDK to avoid AbortError issues
+- **Comprehensive Error Handling**: Structured try-catch blocks with detailed error messages and fallback mechanisms
+- **Real-time Debugging**: Console logs for fetch requests, responses, and error conditions
+- **Environment Variable Management**: Secure handling of Supabase credentials and API endpoints
+
+Key features:
+- **Multi-step Booking Process**: Three-step process (select date/time, enter details, confirmation)
+- **Dynamic Slot Availability**: Real-time slot fetching with caching and retry mechanisms
+- **Timezone Awareness**: Automatic timezone detection and handling
+- **Session Storage Integration**: Persists lead information across component lifecycle
+- **Animation Transitions**: Smooth transitions between booking steps using Framer Motion
+
+#### Calendar UI Component
+The Calendar component serves as the foundation for both consultation and partner onboarding calendars:
+
+- **Shadcn/ui Integration**: Built on top of react-day-picker with Tailwind styling
+- **Custom Styling**: Extensive customization of day selection, navigation, and appearance
+- **Accessibility Compliance**: Full keyboard navigation and screen reader support
+- **Responsive Design**: Adapts to different screen sizes and orientations
+
+#### Edge Function Integration
+The calendar system integrates with GHL (Get Human Life) calendar services through Supabase Edge Functions:
+
+- **Dual Calendar Support**: Separate configurations for consultation and partner onboarding
+- **Environment-based Routing**: Different calendar IDs based on calendar type
+- **Comprehensive Logging**: Detailed request/response logging for debugging
+- **Input Validation**: Strict validation of all incoming parameters
+- **Error Propagation**: Proper error handling and user-friendly error messages
+
+**Section sources**
+- [src/components/funnel/ConsultationCalendar.tsx:13-38](file://src/components/funnel/ConsultationCalendar.tsx#L13-L38)
+- [src/components/funnel/ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
+- [src/components/funnel/ConsultationCalendar.tsx:131-169](file://src/components/funnel/ConsultationCalendar.tsx#L131-L169)
+- [src/components/ui/calendar.tsx:10-51](file://src/components/ui/calendar.tsx#L10-L51)
+- [supabase/functions/ghl-calendar/index.ts:16-145](file://supabase/functions/ghl-calendar/index.ts#L16-L145)
 
 ### Dialogs and Overlays
 - Radix UI dialog and alert dialog provide accessible overlay patterns.
@@ -239,16 +291,25 @@ P --> TS["TypeScript"]
 P --> VITE["Vite"]
 P --> REACT["React"]
 P --> UTILS["Utilities<br/>class-variance-authority, clsx,<br/>tailwind-merge, lucide-react,<br/>next-themes, framer-motion, etc."]
+P --> EDGE["Supabase Edge Functions"]
+EDGE --> GHL["GHL Calendar API"]
 ```
 
 **Diagram sources**
 - [package.json:15-69](file://package.json#L15-L69)
+- [supabase/functions/ghl-calendar/index.ts:16-145](file://supabase/functions/ghl-calendar/index.ts#L16-L145)
 
 **Section sources**
 - [package.json:15-69](file://package.json#L15-L69)
 
 ## Performance Considerations
 **Updated** The application implements comprehensive performance optimization strategies across multiple layers:
+
+### Calendar Component Performance
+- **Edge Function Optimization**: Direct fetch implementation avoids SDK AbortError and improves reliability
+- **Caching Strategies**: Slot data caching prevents redundant API calls during month navigation
+- **Loading States**: Skeleton loaders provide visual feedback during data fetching
+- **Error Recovery**: Retry mechanisms and user-friendly error messages improve user experience
 
 ### Component-Level Optimizations
 - **React.memo implementation**: The LeadsTable component uses `React.memo()` wrapper to prevent unnecessary re-renders when props remain unchanged
@@ -277,17 +338,30 @@ Best practices:
 - Consider code splitting for large feature modules
 
 **Section sources**
+- [src/components/funnel/ConsultationCalendar.tsx:13-38](file://src/components/funnel/ConsultationCalendar.tsx#L13-L38)
 - [src/components/portal/LeadsTable.tsx:5](file://src/components/portal/LeadsTable.tsx#L5)
 - [src/components/portal/LeadsTable.tsx:147](file://src/components/portal/LeadsTable.tsx#L147)
 - [src/hooks/useAffiliateLeads.ts:6-30](file://src/hooks/useAffiliateLeads.ts#L6-L30)
 
 ## Troubleshooting Guide
-**Updated** Common issues and resolutions with performance-related guidance:
+**Updated** Common issues and resolutions with enhanced calendar integration debugging:
+
+### Calendar Integration Issues
+- **Edge Function Failures**: Check Supabase Edge Function logs for "[GHL Debug]" prefixed entries
+- **API Authentication Errors**: Verify SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY environment variables
+- **Calendar Service Connectivity**: Monitor GHL API responses and error codes in edge function logs
+- **Slot Availability Problems**: Review calendar service configuration and timezone settings
 
 ### Component Performance Issues
 - **Excessive re-renders**: Verify that components are properly memoized using React.memo wrapper
 - **Large dataset lag**: Implement pagination or virtualization for tables with more than 100 records
 - **Memory leaks**: Ensure proper cleanup of subscriptions and event listeners in useEffect hooks
+
+### Calendar Component Debugging
+- **Logging Verification**: Look for "[GHL Debug]" console messages in browser developer tools
+- **Network Requests**: Check fetch requests to `/functions/v1/ghl-calendar` endpoint
+- **Response Analysis**: Examine slot availability data structure and error responses
+- **Timezone Issues**: Verify timezone parameter matches user's local timezone
 
 ### Component-Level Memoization Problems
 - **Missing memoization**: Check that components using React.memo are exported as named functions
@@ -299,18 +373,27 @@ Best practices:
 - Theme inconsistencies: ensure CSS variables are applied and Tailwind is generating utilities for the configured base color
 - Accessibility regressions: confirm Radix UI ARIA attributes and focus management are intact when customizing components
 
+### Edge Function Troubleshooting
+- **Environment Variables**: Verify GHL_API_KEY, GHL_LOCATION_ID, and calendar ID environment variables
+- **Request Validation**: Check that startDate, endDate, and timezone parameters are properly formatted
+- **Response Processing**: Monitor slot data structure and error propagation from GHL API
+- **Rate Limiting**: Implement retry logic for temporary GHL API errors
+
 ### Performance Debugging
 - Use React DevTools Profiler to identify components causing excessive re-renders
 - Monitor bundle size using webpack-bundle-analyzer for optimization opportunities
 - Implement performance monitoring in production using tools like Sentry or LogRocket
+- Analyze network performance for calendar API calls and edge function responses
 
 **Section sources**
+- [src/components/funnel/ConsultationCalendar.tsx:13-38](file://src/components/funnel/ConsultationCalendar.tsx#L13-L38)
+- [supabase/functions/ghl-calendar/index.ts:83-131](file://supabase/functions/ghl-calendar/index.ts#L83-L131)
 - [components.json:1-20](file://components.json#L1-L20)
 - [tailwind.config.ts](file://tailwind.config.ts)
 - [src/components/portal/LeadsTable.tsx:147](file://src/components/portal/LeadsTable.tsx#L147)
 
 ## Conclusion
-The Ryland application employs a robust UI design system that combines Radix UI primitives with shadcn/ui components and Tailwind CSS. The system emphasizes accessibility, customization, and consistency through a centralized configuration that defines color tokens, typography, and spacing. Recent optimizations demonstrate a commitment to performance, particularly evident in the LeadsTable component's implementation of React.memo wrapper and named function exports. By leveraging the provided aliases, CSS variables, and performance optimization patterns, developers can compose accessible, responsive interfaces that align with the design system's guidelines while maintaining optimal performance characteristics.
+The Ryland application employs a robust UI design system that combines Radix UI primitives with shadcn/ui components and Tailwind CSS. The system emphasizes accessibility, customization, and consistency through a centralized configuration that defines color tokens, typography, and spacing. Recent enhancements to the ConsultationCalendar component demonstrate a commitment to comprehensive debugging and troubleshooting capabilities, particularly evident in the implementation of detailed logging, improved error handling, and enhanced edge function integration. These improvements significantly enhance the development experience and provide better visibility into calendar integration issues. By leveraging the provided aliases, CSS variables, performance optimization patterns, and comprehensive logging infrastructure, developers can compose accessible, responsive interfaces that align with the design system's guidelines while maintaining optimal performance characteristics and reliable calendar integration.
 
 ## Appendices
 - Global styles and app-level styling are defined in the CSS files referenced below.
