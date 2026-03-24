@@ -1,121 +1,60 @@
 
 
-# Partner Portal — Full Diagnostic Report & Fix Plan
+# Client Intake Form for Scorexer (via Zapier)
 
-## How to Test
+## Summary
 
-**Login URL:** `/portal/login`
+Build a new **Client Intake** page where existing GHL clients fill out their personal details (name, DOB, SSN, address, credit monitoring selection). On submit, the data is sent to a **Zapier webhook** which pushes it into Scorexer. The form also syncs back to GHL as a contact update.
 
-You can log in with any of these existing test accounts (all status `approved`):
-- `geno.ryland@outlook.com` — has no leads attached to their affiliate record
-- `testpartner@rylandpartners.com` — has 6 leads and commission data (best for testing)
-- `geenoo007@gmail.com` / `testportal2@mailinator.com` — no leads
-
-All accounts were created via the `create-partner-account` edge function with a recovery email. If you don't know the password, use "Forgot password?" on the login page to trigger a reset link.
-
----
-
-## Architecture Summary
+## How It Works
 
 ```text
-/partners (signup form) 
-  → create-partner-account edge function
-    → creates auth user (no password)
-    → creates affiliates row (status: approved)
-    → fires recovery email → /reset-password
-    → syncs to GHL
-
-/portal/login → AuthGuard (checks useAuth session)
-  → /portal (PortalLayout wraps all child routes)
-    ├── Dashboard (KPI cards, referral link)
-    ├── Lead Tracker (table + submit drawer + detail drawer)
-    ├── Commissions (earnings table)
-    ├── Calculator (placeholder)
-    ├── Resources (from resources table)
-    ├── Events (from partner_events table)
-    ├── Speaking (submit form)
-    └── Settings (profile, payment email, W-9, password)
+Client visits /credit-intake
+  → Fills out multi-step intake form
+  → On submit:
+      1. POST to Zapier webhook → Scorexer creates client profile
+      2. POST to ghl-create-contact → Updates/creates GHL contact with intake tags
+      3. Show success confirmation
 ```
 
----
+## What Gets Built
 
-## Bugs Found
+### 1. New page: `/credit-intake`
 
-### BUG 1: `ghl-affiliate-webhook` duplicates the `create-partner-account` flow (Critical)
+A branded, multi-step intake form matching the existing site design (similar stepped UI to the Assessment page). Fields based on the Scorexer form:
 
-The `ghl-affiliate-webhook` has its own affiliate creation path (type `ContactTagAdded` / `affiliate_approve`) that generates random `AFF12345`-style IDs and creates users **with a temp password** instead of using the recovery email flow. This conflicts with the `create-partner-account` function which uses name-based IDs (`GRyland1`) and the passwordless recovery pattern. If both fire for the same partner, the second will fail or create a duplicate.
+- **Step 1 — Personal Info**: First name, middle name, last name, email, cell phone, date of birth
+- **Step 2 — Sensitive Info**: SSN (last 4 or full, with masking), credit monitoring service selection (IdentityIQ, SmartCredit, Privacy Guard, etc.)
+- **Step 3 — Address**: Street, city, state, zip
 
-**Fix:** Remove the affiliate creation logic from `ghl-affiliate-webhook` (or guard it so it only runs when the partner was NOT created via the signup form). The webhook should only handle `lead_referred` and `OpportunityStageChanged`.
+All fields validated with Zod.
 
-### BUG 2: `affiliate_leads` UPDATE policy missing (High)
+### 2. New edge function: `scorexer-intake`
 
-The `affiliate_leads` table has no UPDATE RLS policy. The `ghl-affiliate-webhook` uses the service role key so it bypasses RLS, but:
-- The admin "Approve" button in `LeadsTable.tsx` does nothing — it renders but has no `onClick` handler
-- If you add an approve handler that updates `commission_status` via the client, it will fail because there's no UPDATE policy
+Receives the validated form data and:
+- Sends it to a **Zapier webhook URL** (stored as a secret `SCOREXER_ZAPIER_WEBHOOK_URL`)
+- Calls the existing `ghl-create-contact` logic to tag the client in GHL (tag: `credit-intake-complete`)
+- SSN is only sent to Zapier, never stored in the database
 
-**Fix:** Add an UPDATE RLS policy for `affiliate_leads` scoped to `affiliate_id = get_my_affiliate_id()` and wire the Approve button to actually call `supabase.from('affiliate_leads').update(...)`.
+### 3. Route + navigation
 
-### BUG 3: `PortalSettings` uses `as any` casts for `payment_email` / `w9_file_url` (Medium)
+- Add `/credit-intake` route in `App.tsx`
+- Link from the Credit Repair page CTA or share as a standalone URL
 
-The auto-generated types may not include the new columns yet, forcing `as any` casts at lines 39-40 and 73/105. This won't cause runtime errors but hides type-safety issues.
+## Security
 
-**Fix:** The types file should auto-regenerate after the migration. No code change needed unless it hasn't synced — verify the types include the new columns.
+- SSN is transmitted to the edge function over HTTPS, forwarded to Zapier, and **never persisted** in the database
+- Edge function validates all inputs server-side
+- Form uses input masking for SSN field
 
-### BUG 4: Password reset page spinner issue (Medium)
+## Secret Needed
 
-The `ResetPassword.tsx` was previously fixed, but the recovery email `redirectTo` in `create-partner-account` points to `https://rylandpartners.com/reset-password`. In the preview/dev environment, the domain mismatch means the recovery link won't work at the preview URL. This is expected for production but will block testing in the preview.
+- `SCOREXER_ZAPIER_WEBHOOK_URL` — the Zapier webhook URL that triggers the Scorexer zap
 
-**Fix:** For testing, you can trigger a password reset from the login page's "Forgot password?" button, which uses `window.location.origin` and will work in any environment.
+## Technical Details
 
-### BUG 5: `PortalSpeaking` initializes form with potentially null affiliate values (Low)
-
-The `useState` initializer for `full_name` and `email` runs once on mount. If `affiliate` is still `null` at mount (loading state), the form fields will be empty and won't update when affiliate data loads.
-
-**Fix:** Add a `useEffect` that updates form fields when `affiliate` becomes available, or use controlled defaults from the affiliate object.
-
-### BUG 6: Admin Approve button is non-functional (Medium)
-
-In `LeadsTable.tsx` line 101-104, the Approve button renders but has no `onClick` handler — clicking it does nothing.
-
-**Fix:** Add an onClick that updates `commission_status` to `'approved'` on the `affiliate_leads` table (requires the UPDATE RLS policy from Bug 2).
-
----
-
-## What's Working Well
-
-- **Signup flow**: Form validation, edge function, affiliate record creation, GHL sync, recovery email trigger — all correct
-- **Auth system**: `AuthProvider` with `onAuthStateChange` + `getSession` fallback is solid
-- **AuthGuard**: Correctly redirects unauthenticated users to `/portal/login`
-- **Dashboard KPIs**: Queries commissions, leads, payouts correctly with proper RLS
-- **Lead Tracker**: Pulls from `affiliate_leads` scoped by `get_my_affiliate_id()`, renders table with color-coded badges
-- **Submit Lead Drawer**: Inserts into `affiliate_leads` with correct `affiliate_id` — INSERT RLS policy exists
-- **Lead Detail Drawer**: Shows all fields with proper formatting
-- **Commissions page**: Joins commissions with lead names, displays summary cards
-- **Resources / Events / Speaking**: All query correctly with appropriate RLS
-- **Settings page**: Profile display, payment email save, W-9 upload, password change all functional
-- **Sidebar navigation**: Dark theme, collapsible, proper active states
-
----
-
-## Implementation Plan
-
-### Step 1: Fix `ghl-affiliate-webhook` — remove duplicate signup path
-Strip the `ContactTagAdded` / `affiliate_approve` handler or convert it to a simple lookup-and-return. Partners are only created via the signup form.
-
-### Step 2: Add UPDATE RLS policy for `affiliate_leads`
-```sql
-CREATE POLICY "Affiliates can update own leads"
-ON public.affiliate_leads FOR UPDATE
-TO authenticated
-USING (affiliate_id = get_my_affiliate_id());
-```
-
-### Step 3: Wire Admin Approve button
-Add `onClick` to the Approve button in `LeadsTable.tsx` that calls `supabase.from('affiliate_leads').update({ commission_status: 'approved' }).eq('id', lead.id)` with a confirmation toast.
-
-### Step 4: Fix PortalSpeaking form initialization
-Add `useEffect` to sync `full_name` and `email` from `affiliate` when it loads.
-
-### Step 5: Clean up `as any` casts in PortalSettings
-Once the Supabase types regenerate with the new columns, remove the `as any` casts.
+- Page component: `src/pages/CreditIntake.tsx`
+- Edge function: `supabase/functions/scorexer-intake/index.ts`
+- Reuses existing design patterns from Assessment page (stepped form, animations, Zod validation)
+- Credit monitoring options: IdentityIQ, SmartCredit, Privacy Guard, My Score IQ (matching Scorexer's list)
 
