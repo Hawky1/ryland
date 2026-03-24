@@ -293,7 +293,10 @@ export default function AdminCommissions() {
         <CardHeader className="pb-3">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <CardTitle>All Commissions</CardTitle>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select
+              value={statusFilter}
+              onValueChange={(value) => setStatusFilter(value as 'all' | CommissionStatus)}
+            >
               <SelectTrigger className="w-40">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
