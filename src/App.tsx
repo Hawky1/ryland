@@ -37,6 +37,7 @@ const ThankYou = lazy(() => import("./pages/ThankYou"));
 const MyOrders = lazy(() => import("./pages/MyOrders"));
 const DownloadRedirect = lazy(() => import("./pages/DownloadRedirect"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const CreditIntake = lazy(() => import("./pages/CreditIntake"));
 const PortalLogin = lazy(() => import("./pages/portal/PortalLogin"));
 // PortalLayout is NOT lazy-loaded to keep sidebar persistent
 import PortalLayout from "./components/portal/PortalLayout";
@@ -100,6 +101,7 @@ const AppContent = () => {
             <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/download/:token" element={<DownloadRedirect />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/credit-intake" element={<CreditIntake />} />
             <Route path="/portal/login" element={<PortalLogin />} />
             <Route path="/portal" element={<PortalLayout />}>
               <Route index element={<PortalDashboard />} />

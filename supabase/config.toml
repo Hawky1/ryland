@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.create-partner-account]
 verify_jwt = false
+
+[functions.scorexer-intake]
+verify_jwt = false
