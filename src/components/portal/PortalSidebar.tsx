@@ -36,11 +36,16 @@ const accountNav = [
   { title: "Profile & Payouts", url: "/portal/settings", icon: UserCircle },
 ];
 
+const adminNav = [
+  { title: "All Affiliates", url: "/portal/admin", icon: ShieldCheck },
+];
+
 export default function PortalSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
   const { signOut, affiliate } = useAuth();
+  const { isAdmin } = useAdminRole();
 
   const isActive = (path: string) => {
     if (path === "/portal") return location.pathname === "/portal";
