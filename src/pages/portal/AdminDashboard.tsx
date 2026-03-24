@@ -28,6 +28,16 @@ const affiliateStatusBadge: Record<string, string> = {
   suspended: "bg-red-50 text-red-700 border-red-200",
 };
 
+const stageBadge: Record<string, string> = {
+  "New Lead": "bg-blue-50 text-blue-700 border-blue-200",
+  "Contacted": "bg-sky-50 text-sky-700 border-sky-200",
+  "Credit Optimization": "bg-violet-50 text-violet-700 border-violet-200",
+  "Funding": "bg-amber-50 text-amber-700 border-amber-200",
+  "Approved": "bg-emerald-50 text-emerald-700 border-emerald-200",
+  "Funded": "bg-green-50 text-green-700 border-green-200",
+  "Closed Lost": "bg-red-50 text-red-700 border-red-200",
+};
+
 const chartConfig: ChartConfig = {
   leads: { label: "Leads", color: "hsl(221, 83%, 53%)" },
 };
