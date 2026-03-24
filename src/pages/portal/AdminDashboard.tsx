@@ -292,6 +292,12 @@ export default function AdminDashboard() {
               >
                 Latest Affiliates
               </TabsTrigger>
+              <TabsTrigger
+                value="leads"
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-0 pb-3 text-sm font-medium"
+              >
+                Latest Leads
+              </TabsTrigger>
             </TabsList>
           </CardHeader>
 
