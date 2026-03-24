@@ -31,13 +31,15 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { format } from "date-fns";
 
+type CommissionStatus = 'pending' | 'approved' | 'paid';
+
 interface Commission {
   id: string;
   affiliate_id: string;
   lead_id: string | null;
   commission_type: string;
   commission_amount: number;
-  commission_status: 'pending' | 'approved' | 'paid';
+  commission_status: CommissionStatus;
   payout_date: string | null;
   created_at: string;
   affiliate: {
@@ -53,7 +55,7 @@ interface Commission {
 export default function AdminCommissions() {
   const [commissions, setCommissions] = useState<Commission[]>([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | CommissionStatus>('all');
   const [selectedCommissions, setSelectedCommissions] = useState<string[]>([]);
   const [stats, setStats] = useState({
     totalPending: 0,
@@ -101,7 +103,7 @@ export default function AdminCommissions() {
         lead_id: string | null;
         commission_type: string;
         commission_amount: number;
-        commission_status: 'pending' | 'approved' | 'paid';
+        commission_status: CommissionStatus;
         payout_date: string | null;
         created_at: string;
         affiliates: { full_name: string; email: string } | null;
