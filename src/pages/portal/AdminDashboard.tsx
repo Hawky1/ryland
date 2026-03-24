@@ -40,7 +40,7 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const [affiliatesRes, leadsRes, commissionsRes, payoutsRes] = await Promise.all([
         supabase.from("affiliates").select("id, full_name, email, company_name, status, created_at"),
-        supabase.from("affiliate_leads").select("id, affiliate_id, pipeline_stage, created_at, full_name, email"),
+        supabase.from("affiliate_leads").select("id, affiliate_id, pipeline_stage, created_at, full_name, email, status, next_step, affiliates(full_name)").order("created_at", { ascending: false }),
         supabase.from("commissions").select("id, affiliate_id, commission_amount, commission_status, commission_type, created_at, affiliate_leads(full_name)"),
         supabase.from("payouts").select("id, amount, status"),
       ]);
