@@ -1,41 +1,16 @@
-import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
+import { useAdminRole } from "@/hooks/useAdminRole";
+import { useAuth } from "@/hooks/useAuth";
 
 interface AdminGuardProps {
   children: React.ReactNode;
 }
 
 export default function AdminGuard({ children }: AdminGuardProps) {
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const checkAdmin = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        
-        if (!user) {
-          setIsAdmin(false);
-          setLoading(false);
-          return;
-        }
-
-        // Check if user has admin role in app_metadata
-        const isUserAdmin = user.app_metadata?.role === 'admin' || 
-                           user.user_metadata?.role === 'admin';
-        
-        setIsAdmin(isUserAdmin);
-      } catch {
-        setIsAdmin(false);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAdmin();
-  }, []);
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin, isLoading: roleLoading } = useAdminRole();
+  const loading = authLoading || (user ? roleLoading : false);
 
   if (loading) {
     return (
@@ -46,6 +21,10 @@ export default function AdminGuard({ children }: AdminGuardProps) {
         </div>
       </div>
     );
+  }
+
+  if (!user) {
+    return <Navigate to="/portal/login" replace />;
   }
 
   if (!isAdmin) {
