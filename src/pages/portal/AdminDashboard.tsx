@@ -394,6 +394,55 @@ export default function AdminDashboard() {
               )}
             </CardContent>
           </TabsContent>
+
+          <TabsContent value="leads" className="mt-0">
+            <CardContent className="p-0">
+              {isLoading ? (
+                <div className="p-6 space-y-3">
+                  {[1, 2, 3].map((i) => <Skeleton key={i} className="h-10 w-full" />)}
+                </div>
+              ) : !data?.latestLeads?.length ? (
+                <div className="py-12 text-center text-sm text-slate-500">No leads yet.</div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent border-slate-100">
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Lead Name</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Submitted By</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Stage</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Status</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Next Step</TableHead>
+                        <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Submitted</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.latestLeads.map((l) => {
+                        const affiliateName = (l as any).affiliates?.full_name ?? "Unknown";
+                        const stageClass = stageBadge[l.pipeline_stage] ?? stageBadge["New Lead"];
+                        return (
+                          <TableRow key={l.id} className="border-slate-100 hover:bg-slate-50">
+                            <TableCell className="font-medium text-sm text-slate-900">{l.full_name}</TableCell>
+                            <TableCell className="text-sm text-slate-700">{affiliateName}</TableCell>
+                            <TableCell>
+                              <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${stageClass}`}>
+                                {l.pipeline_stage}
+                              </span>
+                            </TableCell>
+                            <TableCell className="text-sm text-slate-500">{l.status}</TableCell>
+                            <TableCell className="text-sm text-slate-500">{l.next_step ?? "—"}</TableCell>
+                            <TableCell className="text-sm text-slate-500">
+                              {format(new Date(l.created_at), "MMM d, yyyy")}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </CardContent>
+          </TabsContent>
         </Tabs>
       </Card>
     </div>
