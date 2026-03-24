@@ -41,7 +41,7 @@ const CreditIntake = lazy(() => import("./pages/CreditIntake"));
 const PortalLogin = lazy(() => import("./pages/portal/PortalLogin"));
 // PortalLayout is NOT lazy-loaded to keep sidebar persistent
 import PortalLayout from "./components/portal/PortalLayout";
-const DashboardRouter = lazy(() => import("./pages/portal/DashboardRouter"));
+const PortalDashboard = lazy(() => import("./pages/portal/PortalDashboard"));
 const PortalLeads = lazy(() => import("./pages/portal/PortalLeads"));
 const PortalCommissions = lazy(() => import("./pages/portal/PortalCommissions"));
 const PortalCalculator = lazy(() => import("./pages/portal/PortalCalculator"));
@@ -49,8 +49,6 @@ const PortalResources = lazy(() => import("./pages/portal/PortalResources"));
 const PortalEvents = lazy(() => import("./pages/portal/PortalEvents"));
 const PortalSpeaking = lazy(() => import("./pages/portal/PortalSpeaking"));
 const PortalSettings = lazy(() => import("./pages/portal/PortalSettings"));
-const PortalAdminAffiliates = lazy(() => import("./pages/portal/AdminAffiliates"));
-const AdminAffiliateDetail = lazy(() => import("./pages/portal/AdminAffiliateDetail"));
 
 // Admin routes
 import AdminLayout from "./components/admin/AdminLayout";
@@ -115,7 +113,7 @@ const AppContent = () => {
             <Route path="/credit-intake" element={<CreditIntake />} />
             <Route path="/portal/login" element={<PortalLogin />} />
             <Route path="/portal" element={<PortalLayout />}>
-              <Route index element={<DashboardRouter />} />
+              <Route index element={<PortalDashboard />} />
               <Route path="leads" element={<PortalLeads />} />
               <Route path="commissions" element={<PortalCommissions />} />
               <Route path="calculator" element={<PortalCalculator />} />
@@ -123,8 +121,6 @@ const AppContent = () => {
               <Route path="events" element={<PortalEvents />} />
               <Route path="speaking" element={<PortalSpeaking />} />
               <Route path="settings" element={<PortalSettings />} />
-              <Route path="admin" element={<PortalAdminAffiliates />} />
-              <Route path="admin/affiliate/:id" element={<AdminAffiliateDetail />} />
             </Route>
             {/* Admin routes */}
             <Route path="/admin" element={<AdminLayout />}>
