@@ -23,11 +23,12 @@
 
 ## Update Summary
 **Changes Made**
-- Enhanced Supabase edge function integration documentation with direct fetch implementation details
-- Updated GHL calendar API integration section to reflect improved timestamp handling and timezone corrections
-- Added comprehensive documentation for the new direct HTTP request approach for better reliability
-- Updated troubleshooting guide with direct fetch implementation specifics
-- Enhanced performance considerations with direct fetch optimization strategies
+- Enhanced GHL calendar Edge Function with improved environment variable validation and comprehensive operational logging
+- Added optional user ID support for round-robin and collective calendar types
+- Implemented sophisticated data transformation capabilities for contact management and appointment booking
+- Updated ConsultationCalendar component with direct fetch implementation for better reliability
+- Expanded calendar types support with dual calendar configurations (consultation and partner)
+- Enhanced input validation and error handling for improved debugging and monitoring
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -103,10 +104,10 @@ Client --> GHL
 - [useAffiliateLeads.ts:1-31](file://src/hooks/useAffiliateLeads.ts#L1-L31)
 - [PortalLogin.tsx:95-125](file://src/pages/portal/PortalLogin.tsx#L95-L125)
 - [ResetPassword.tsx:1-60](file://src/pages/ResetPassword.tsx#L1-L60)
-- [ConsultationCalendar.tsx:1-439](file://src/components/funnel/ConsultationCalendar.tsx#L1-L439)
+- [ConsultationCalendar.tsx:1-461](file://src/components/funnel/ConsultationCalendar.tsx#L1-L461)
 - [PartnerOnboardingCalendar.tsx:1-357](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L1-L357)
 - [index.ts:41-174](file://supabase/functions/ghl-affiliate-webhook/index.ts#L41-L174)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 - [20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql:1-8](file://supabase/migrations/20260319010259_635fecdc-5214-464e-93b5-b88f56743424.sql#L1-L8)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
@@ -132,7 +133,7 @@ Client --> GHL
 - [useAuth.tsx:1-143](file://src/hooks/useAuth.tsx#L1-L143)
 - [useAffiliateLeads.ts:1-31](file://src/hooks/useAffiliateLeads.ts#L1-L31)
 - [index.ts:41-174](file://supabase/functions/ghl-affiliate-webhook/index.ts#L41-L174)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
@@ -177,10 +178,10 @@ Client-->>UI : Calendar availability
 - [index.html:17](file://index.html#L17)
 - [useAuth.tsx:68-106](file://src/hooks/useAuth.tsx#L68-L106)
 - [client.ts:11-17](file://src/integrations/supabase/client.ts#L11-L17)
-- [ConsultationCalendar.tsx:48-71](file://src/components/funnel/ConsultationCalendar.tsx#L48-L71)
+- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
 - [types.ts:16-147](file://src/integrations/supabase/types.ts#L16-L147)
 - [index.ts:155-166](file://supabase/functions/ghl-affiliate-webhook/index.ts#L155-L166)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 
 ## Detailed Component Analysis
 
@@ -407,14 +408,38 @@ ORDERS ||--o{ ORDER_ITEMS : "contains"
 ### GHL Calendar API Integration
 The application integrates with GHL (LeadConnectorHQ) services for comprehensive calendar management and appointment booking. The integration handles two distinct calendar types: consultation bookings and partner onboarding appointments.
 
-#### Direct Fetch Implementation Enhancement
-**Updated**: The ConsultationCalendar component now uses a direct fetch implementation instead of `supabase.functions.invoke()` to avoid SDK AbortError issues. This approach provides better reliability and eliminates the need for complex SDK-based error handling.
+#### Enhanced GHL Calendar Edge Function
+**Updated**: The GHL calendar Edge Function has been significantly enhanced with improved environment variable validation, optional user ID support, sophisticated data transformation capabilities, and comprehensive operational logging for better monitoring and debugging.
 
-The direct fetch implementation offers several advantages:
-- **Eliminates SDK AbortError**: Direct HTTP requests bypass the Supabase SDK's internal error handling that could cause AbortError exceptions
-- **Better error control**: Custom error handling allows for more precise error recovery and user feedback
-- **Reduced complexity**: Simplified implementation reduces the potential for SDK-related bugs
-- **Improved debugging**: Direct HTTP requests enable better logging and debugging capabilities
+##### Environment Variable Validation and Configuration
+The function now implements robust environment variable validation with detailed logging:
+- Validates presence of GHL_API_KEY, GHL_LOCATION_ID, and GHL_CALENDAR_ID/GHL_PARTNER_CALENDAR_ID
+- Supports dual calendar configurations through calendarType parameter
+- Implements comprehensive error logging with context information
+- Provides detailed diagnostic information for troubleshooting
+
+##### Optional User ID Support
+**New**: The function now supports optional user ID for round-robin and collective calendar types:
+- Automatically detects calendar type (consultation vs partner)
+- Sets appropriate calendar ID based on calendarType
+- Conditionally includes user ID in GHL API requests when configured
+- Enables advanced calendar routing and assignment scenarios
+
+##### Sophisticated Data Transformation Capabilities
+**Enhanced**: The function implements comprehensive data transformation for contact management and appointment booking:
+- Advanced contact creation/upsert with duplicate detection
+- Intelligent name parsing and normalization
+- Tag-based lead attribution for funnel tracking
+- Source attribution for reporting and analytics
+- Phone number normalization and validation
+
+##### Comprehensive Operational Logging
+**New**: Enhanced logging provides detailed operational insights:
+- Request/response logging with sanitized data
+- Diagnostic warnings for common configuration issues
+- Performance metrics and trace information
+- Error categorization and recovery guidance
+- Real-time monitoring and debugging capabilities
 
 ```mermaid
 sequenceDiagram
@@ -437,7 +462,7 @@ Supabase-->>UI : Booking success
 - [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
 - [ConsultationCalendar.tsx:82-96](file://src/components/funnel/ConsultationCalendar.tsx#L82-L96)
 - [ConsultationCalendar.tsx:141-150](file://src/components/funnel/ConsultationCalendar.tsx#L141-L150)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 
 #### Calendar Management Workflow
 The GHL calendar integration consists of two primary actions:
@@ -469,30 +494,33 @@ Supabase-->>UI : Booking success
 ```
 
 **Diagram sources**
-- [ConsultationCalendar.tsx:48-71](file://src/components/funnel/ConsultationCalendar.tsx#L48-L71)
+- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
 - [PartnerOnboardingCalendar.tsx:40-63](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L40-L63)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 
 #### Calendar Types and Configuration
-The system supports dual calendar configurations:
+**Enhanced**: The system now supports dual calendar configurations with sophisticated routing:
 - **Consultation Calendar**: Standard client consultation appointments
 - **Partner Calendar**: Partner onboarding and partnership meetings
+- **Dynamic Calendar Selection**: Automatic calendar ID selection based on calendarType
+- **Environment Variable Management**: Separate configuration for each calendar type
 
 Each calendar type uses separate environment variables for configuration and maintains distinct availability patterns.
 
 #### Contact Management Integration
-The calendar function seamlessly integrates with GHL's contact management system:
+**Enhanced**: The calendar function seamlessly integrates with GHL's contact management system:
 - Automatic contact creation/upsert for new users
-- Duplicate contact detection and handling
-- Tagging and source attribution for lead tracking
+- Duplicate contact detection and handling with intelligent recovery
+- Tagging and source attribution for lead tracking and analytics
 - Phone number normalization and validation
+- Advanced name parsing and organization
 
 **Section sources**
 - [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
-- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
-- [ConsultationCalendar.tsx:131-169](file://src/components/funnel/ConsultationCalendar.tsx#L131-L169)
+- [ConsultationCalendar.tsx:82-96](file://src/components/funnel/ConsultationCalendar.tsx#L82-L96)
+- [ConsultationCalendar.tsx:141-150](file://src/components/funnel/ConsultationCalendar.tsx#L141-L150)
 - [PartnerOnboardingCalendar.tsx:40-63](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L40-L63)
-- [index.ts:16-189](file://supabase/functions/ghl-calendar/index.ts#L16-L189)
+- [index.ts:16-240](file://supabase/functions/ghl-calendar/index.ts#L16-L240)
 
 ## Network Optimization & Performance
 
@@ -517,6 +545,7 @@ The application implements proactive network optimization through HTML preconnec
 - **Better error handling**: Enables more efficient error recovery and retry logic
 - **Improved debugging**: Direct HTTP requests allow for better performance monitoring
 - **Consistent behavior**: Eliminates SDK-specific quirks and inconsistencies
+- **Enhanced reliability**: Eliminates SDK AbortError exceptions that plagued previous implementations
 
 ### External API Performance Optimization
 **Updated**: The GHL calendar integration includes several performance optimizations:
@@ -525,11 +554,13 @@ The application implements proactive network optimization through HTML preconnec
 - **Connection Pooling**: Reuses connections for multiple GHL API calls
 - **Timeout Management**: Implements appropriate timeout values for external API calls
 - **Direct HTTP Requests**: Eliminates SDK overhead for better performance
+- **Enhanced Error Recovery**: Comprehensive error handling with detailed logging
+- **Input Validation**: Robust input sanitization and validation prevents API errors
 
 **Section sources**
 - [index.html:17](file://index.html#L17)
 - [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
-- [index.ts:66-68](file://supabase/functions/ghl-calendar/index.ts#L66-L68)
+- [index.ts:37-45](file://supabase/functions/ghl-calendar/index.ts#L37-L45)
 
 ### Network Optimization Best Practices
 - Implement preconnect for critical third-party domains (Supabase, external APIs)
@@ -539,6 +570,7 @@ The application implements proactive network optimization through HTML preconnec
 - Monitor network performance metrics and adjust optimization strategies
 - **Updated**: Cache external API responses when appropriate to reduce latency
 - **Updated**: Use direct HTTP requests for better performance and error control
+- **Updated**: Implement comprehensive logging for network debugging and monitoring
 
 **Section sources**
 - [index.html:15-18](file://index.html#L15-L18)
@@ -584,7 +616,7 @@ Client --> GHL
 - [ConsultationCalendar.tsx:1-14](file://src/components/funnel/ConsultationCalendar.tsx#L1-L14)
 - [PartnerOnboardingCalendar.tsx:1-14](file://src/components/funnel/PartnerOnboardingCalendar.tsx#L1-L14)
 - [index.ts:42-44](file://supabase/functions/ghl-affiliate-webhook/index.ts#L42-L44)
-- [index.ts:21-45](file://supabase/functions/ghl-calendar/index.ts#L21-L45)
+- [index.ts:21-51](file://supabase/functions/ghl-calendar/index.ts#L21-L51)
 - [index.html:17](file://index.html#L17)
 
 **Section sources**
@@ -603,6 +635,8 @@ Client --> GHL
 - **Updated**: Implement timestamp conversion caching for external API integrations to reduce computational overhead.
 - **Updated**: Optimize external API call frequency and implement appropriate retry mechanisms.
 - **Updated**: Use direct HTTP requests instead of SDK-based calls for better performance and error control.
+- **Updated**: Implement comprehensive logging for performance monitoring and debugging.
+- **Updated**: Validate environment variables thoroughly to prevent runtime configuration errors.
 
 ## Troubleshooting Guide
 Common issues and strategies:
@@ -611,22 +645,26 @@ Common issues and strategies:
 - Webhook not updating leads: Inspect the external payload fields and ensure the function has service role access to write to affiliate_leads.
 - RLS policy errors: Validate that the authenticated user's affiliate_id matches the record being inserted/updated.
 - **Updated**: Preconnect optimization not taking effect: Verify the preconnect link is present in the HTML head and check browser developer tools for connection establishment timing improvements.
-- **Updated**: GHL calendar integration failures: Check environment variables (GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID) and verify timestamp conversion logic.
+- **Updated**: GHL calendar integration failures: Check environment variables (GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID, GHL_PARTNER_CALENDAR_ID, GHL_USER_ID) and verify timestamp conversion logic.
 - **Updated**: External API timeout errors: Implement proper error handling and consider implementing exponential backoff for retry mechanisms.
 - **Updated**: Calendar booking conflicts: Verify timezone handling and ensure proper timestamp formatting for GHL API compatibility.
 - **Updated**: Direct fetch implementation issues: Check that the SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY environment variables are correctly configured and accessible to the frontend.
 - **Updated**: SDK AbortError exceptions: The new direct fetch implementation eliminates these issues by bypassing the Supabase SDK's internal error handling.
+- **Updated**: Environment variable validation failures: Check the enhanced logging output for detailed error context and configuration verification.
+- **Updated**: Calendar type routing issues: Verify calendarType parameter and corresponding environment variable configuration.
+- **Updated**: Contact management errors: Review duplicate contact handling and GHL API response processing.
+- **Updated**: Data transformation failures: Check input validation and transformation logic for edge cases.
 
 **Section sources**
 - [client.ts:5-17](file://src/integrations/supabase/client.ts#L5-L17)
 - [useAuth.tsx:40-63](file://src/hooks/useAuth.tsx#L40-L63)
 - [index.ts:74-105](file://supabase/functions/ghl-affiliate-webhook/index.ts#L74-L105)
-- [index.ts:36-39](file://supabase/functions/ghl-calendar/index.ts#L36-L39)
+- [index.ts:37-45](file://supabase/functions/ghl-calendar/index.ts#L37-L45)
 - [20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql:1-5](file://supabase/migrations/20260319185554_6f53c4fa-7f98-496d-afe9-1bf39f92ae3a.sql#L1-L5)
 - [20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql:1-5](file://supabase/migrations/20260319194628_4e5f50a6-8cb3-40d1-b56d-a5bacde2a132.sql#L1-L5)
 
 ## Conclusion
-The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility. **Updated**: The new direct fetch implementation eliminates SDK-related issues and provides better performance and error control. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
+The data layer leverages a strongly typed Supabase client, robust authentication, and RLS policies to provide secure, scalable data access. React Query enables efficient caching and reactivity, while Supabase functions facilitate reliable synchronization from external systems. **Updated**: The GHL calendar integration provides comprehensive appointment management with proper timestamp conversion for external API compatibility and enhanced environment variable validation. **Updated**: The new direct fetch implementation eliminates SDK-related issues and provides better performance and error control. **Updated**: Network optimization through preconnect hints significantly reduces database connection latency and improves real-time feature responsiveness. **Updated**: External API integration patterns ensure reliable communication with third-party services while maintaining performance and error resilience. **Updated**: Enhanced logging and monitoring capabilities provide comprehensive operational visibility and debugging support. Adhering to the outlined patterns and safeguards ensures predictable performance, maintainability, and security.
 
 ## Appendices
 
@@ -648,8 +686,8 @@ Representative row shapes for key tables (descriptive only):
 - `POST /contacts`: Manages contact records for users
 
 **Section sources**
-- [index.ts:63-81](file://supabase/functions/ghl-calendar/index.ts#L63-L81)
-- [index.ts:164-178](file://supabase/functions/ghl-calendar/index.ts#L164-L178)
+- [index.ts:69-81](file://supabase/functions/ghl-calendar/index.ts#L69-L81)
+- [index.ts:215-231](file://supabase/functions/ghl-calendar/index.ts#L215-L231)
 
 ### Direct Fetch Implementation Details
 **Updated**: The ConsultationCalendar component uses a custom `invokeEdgeFunction` that:
@@ -658,8 +696,24 @@ Representative row shapes for key tables (descriptive only):
 - Handles error responses with proper error messages
 - Logs detailed debug information for troubleshooting
 - Eliminates SDK overhead and potential AbortError exceptions
+- Provides comprehensive error handling and user feedback
 
 **Section sources**
 - [ConsultationCalendar.tsx:12-38](file://src/components/funnel/ConsultationCalendar.tsx#L12-L38)
-- [ConsultationCalendar.tsx:76-96](file://src/components/funnel/ConsultationCalendar.tsx#L76-L96)
-- [ConsultationCalendar.tsx:131-169](file://src/components/funnel/ConsultationCalendar.tsx#L131-L169)
+- [ConsultationCalendar.tsx:82-96](file://src/components/funnel/ConsultationCalendar.tsx#L82-L96)
+- [ConsultationCalendar.tsx:141-150](file://src/components/funnel/ConsultationCalendar.tsx#L141-L150)
+
+### Enhanced Environment Variable Configuration
+**New**: The GHL calendar function supports the following environment variables:
+- `GHL_API_KEY`: API key for GHL authentication
+- `GHL_LOCATION_ID`: Location identifier for GHL operations
+- `GHL_CALENDAR_ID`: Default calendar identifier for consultation bookings
+- `GHL_PARTNER_CALENDAR_ID`: Calendar identifier for partner onboarding
+- `GHL_USER_ID`: Optional user identifier for round-robin assignments
+- `SUPABASE_URL`: Supabase project URL
+- `SUPABASE_PUBLISHABLE_KEY`: Supabase publishable key
+
+**Section sources**
+- [index.ts:21-51](file://supabase/functions/ghl-calendar/index.ts#L21-L51)
+- [index.ts:32-35](file://supabase/functions/ghl-calendar/index.ts#L32-L35)
+- [index.ts:78-81](file://supabase/functions/ghl-calendar/index.ts#L78-L81)
