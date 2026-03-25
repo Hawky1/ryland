@@ -53,6 +53,7 @@ const PortalSettings = lazy(() => import("./pages/portal/PortalSettings"));
 
 // Admin routes
 import AdminLayout from "./components/admin/AdminLayout";
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminAffiliates = lazy(() => import("./pages/admin/AdminAffiliates"));
 const AdminLeads = lazy(() => import("./pages/admin/AdminLeads"));
@@ -125,6 +126,7 @@ const AppContent = () => {
               <Route path="settings" element={<PortalSettings />} />
             </Route>
             {/* Admin routes */}
+            <Route path="/portal/admin/login" element={<AdminLogin />} />
             <Route path="/portal/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="affiliates" element={<AdminAffiliates />} />
