@@ -5,6 +5,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Navbar from "@/components/Navbar";
+import PageMeta from "@/components/PageMeta";
 
 
 const FUNDING_TIERS = [
