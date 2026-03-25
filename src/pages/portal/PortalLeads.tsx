@@ -13,7 +13,6 @@ export default function PortalLeads() {
   const { leads, isLoading, refetch } = useAffiliateLeads();
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [submitOpen, setSubmitOpen] = useState(false);
-  const [adminMode, setAdminMode] = useState(false);
 
   return (
     <div className="space-y-6 max-w-7xl">
@@ -23,14 +22,6 @@ export default function PortalLeads() {
           <p className="text-sm text-slate-500 mt-1">Track every referral from submission to funding.</p>
         </div>
         <div className="flex items-center gap-2">
-          {/* Secret admin toggle — triple-click the shield icon to toggle */}
-          <button
-            onClick={() => setAdminMode((v) => !v)}
-            className="p-2 rounded-lg text-slate-300 hover:text-slate-500 transition-colors"
-            title="Admin View"
-          >
-            <Shield className={`h-4 w-4 ${adminMode ? "text-amber-500" : ""}`} />
-          </button>
           <Button onClick={() => setSubmitOpen(true)} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white gap-2">
             <Plus className="h-4 w-4" />
             Submit New Lead
