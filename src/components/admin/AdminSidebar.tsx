@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +17,7 @@ import {
   BarChart3,
   LogOut,
 } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
+
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/portal/admin" },
@@ -29,7 +30,14 @@ const menuItems = [
 
 export default function AdminSidebar() {
   const location = useLocation();
-  const { signOut } = useAuth();
+
+  const handleAdminSignOut = () => {
+    try {
+      localStorage.removeItem('sb-gkowxzoadsljkpdzrlue-auth-token');
+    } catch {}
+    window.location.href = '/portal/admin/login';
+    supabase.auth.signOut().catch(() => {});
+  };
 
   return (
     <Sidebar
@@ -78,7 +86,7 @@ export default function AdminSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              onClick={signOut}
+              onClick={handleAdminSignOut}
               className="text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-4 w-4 shrink-0" />
