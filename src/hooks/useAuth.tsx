@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (stored) {
             const parsed = JSON.parse(stored);
             if (parsed?.user && parsed?.access_token) {
-              console.log('Restored session from localStorage:', parsed.user.id);
+              
               return { user: parsed.user, session: parsed };
             }
           }
