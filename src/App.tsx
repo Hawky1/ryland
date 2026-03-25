@@ -126,6 +126,7 @@ const AppContent = () => {
               <Route path="settings" element={<PortalSettings />} />
             </Route>
             {/* Admin routes */}
+            <Route path="/portal/admin/login" element={<AdminLogin />} />
             <Route path="/portal/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="affiliates" element={<AdminAffiliates />} />

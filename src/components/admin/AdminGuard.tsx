@@ -24,7 +24,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   }
 
   if (!user) {
-    return <Navigate to="/portal/login" replace />;
+    return <Navigate to="/portal/admin/login" replace />;
   }
 
   // TEMPORARY BYPASS: skip admin role check for testing
