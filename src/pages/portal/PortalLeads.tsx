@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, Plus, Shield } from "lucide-react";
+import { Users, Plus } from "lucide-react";
 import { useAffiliateLeads } from "@/hooks/useAffiliateLeads";
 import LeadsTable from "@/components/portal/LeadsTable";
 import LeadDetailDrawer from "@/components/portal/LeadDetailDrawer";
