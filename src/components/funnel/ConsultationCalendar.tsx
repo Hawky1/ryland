@@ -23,9 +23,7 @@ async function invokeEdgeFunction(name: string, body: Record<string, unknown>) {
       },
       body: JSON.stringify(body),
     });
-    console.log("[GHL Debug] Response status:", res.status);
     const data = await res.json();
-    console.log("[GHL Debug] Response data:", data);
     if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
     return data;
   } catch (err) {
