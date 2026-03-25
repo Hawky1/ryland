@@ -113,7 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     } else {
       // No stored session - set loading to false
-      console.log('No session in localStorage');
+      
       setState((prev) => ({ ...prev, loading: false }));
     }
 
