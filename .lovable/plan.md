@@ -1,46 +1,41 @@
 
 
-# Bundle Download Delivery Plan
+# Send Download Links Email Directly from Webhook
 
-## The Problem
+## Summary
 
-When a customer buys a bundle (e.g., "Ultimate Credit Business Vault"), Shopify sends **one line item** with the bundle's product handle. The current webhook creates a single `order_item` row and tries to find `ultimate-credit-business-vault.pdf` in storage — which doesn't exist. The customer gets nothing.
+When a customer purchases an ebook or bundle, the webhook will send a branded email with all download links directly — no GHL workflow needed. We'll use Lovable's built-in email infrastructure.
 
-This affects all 5 bundles, not just the vault.
+## Steps
 
-## The Solution
+### 1. Set up email infrastructure
+Run the email infrastructure setup tool to create the database tables (pgmq queues, email_send_log, etc.) and the `process-email-queue` cron job.
 
-Create a **bundle-to-ebooks mapping** in the webhook so that when a bundle handle is detected, the webhook expands it into individual `order_item` rows — one per included ebook, each with its own download token.
+### 2. Scaffold transactional email system
+Scaffold the transactional email Edge Functions (`send-transactional-email`, `handle-email-unsubscribe`, `handle-email-suppression`) and create the registry/template structure.
 
-## Implementation
+### 3. Create "order-download-links" email template
+A branded React Email template in `_shared/transactional-email-templates/` that accepts:
+- `customerName` — greeting
+- `orderNumber` — order reference
+- `downloadLinks` — array of `{ title, url }` rendered as individual download buttons
+- `libraryUrl` — link to the My Downloads page
 
-### 1. Add bundle map to the webhook (`supabase/functions/shopify-order-webhook/index.ts`)
+Styled to match the Ryland brand (dark primary `hsl(222, 47%, 11%)`, clean white background).
 
-Add a `BUNDLE_MAP` constant that maps each bundle handle to its array of constituent ebook handles and titles. This data already exists in `src/data/productContent.ts` under `bundleIncludes` — we'll replicate it in the edge function since edge functions can't import from `src/`.
+### 4. Update the webhook to invoke `send-transactional-email`
+In `shopify-order-webhook/index.ts`, after generating download links, call `send-transactional-email` via `supabase.functions.invoke()` instead of (or in addition to) the GHL email. This sends the download links email directly to the customer.
 
-### 2. Modify the line item processing loop
+### 5. Create unsubscribe page
+A simple `/unsubscribe` page in the app (required by the transactional email system for compliance).
 
-In the existing `for (const item of lineItems)` loop, after resolving the product handle:
-- Check if the handle exists in `BUNDLE_MAP`
-- If yes: loop through each included ebook, inserting a separate `order_item` row with the individual ebook's handle and title
-- If no: proceed as-is (single ebook)
-
-### 3. No database or frontend changes needed
-
-- The `order_items` table already supports multiple items per order
-- The ThankYou page and MyOrders page already render all `order_items` as a list with individual download buttons
-- The `download-ebook` function already works per-token, looking up the handle and fetching the matching PDF from storage
-
-## Bundle Handles to Map
-
-Five bundles from `productContent.ts`:
-1. `entrepreneur-quickstart-bundle` — 3 ebooks
-2. `business-funding-essentials-bundle` — 4 ebooks  
-3. `entrepreneur-accelerator-bundle` — 6 ebooks
-4. `business-authority-bundle` — 5 ebooks
-5. `ultimate-credit-business-vault` — 18 ebooks
+### 6. Deploy all Edge Functions
+Deploy `send-transactional-email`, `handle-email-unsubscribe`, `handle-email-suppression`, `process-email-queue`, and the updated `shopify-order-webhook`.
 
 ## Technical Details
 
-The only file changed is `supabase/functions/shopify-order-webhook/index.ts`. The bundle map is approximately 40 lines of data. The loop modification is roughly 15 lines replacing the current single-insert logic with a conditional expand-or-single-insert pattern.
+- Email sent from: `noreply@rylandpartners.com` (via verified `notify.rylandpartners.com`)
+- The GHL contact update logic stays in place (for CRM tracking), but email delivery no longer depends on a GHL workflow
+- Idempotency key: `order-downloads-${shopify_order_id}` to prevent duplicate emails on webhook retries
+- The template renders each ebook as a styled download button with the direct token URL
 
