@@ -19,12 +19,12 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
-  { icon: Users, label: "Affiliates", path: "/admin/affiliates" },
-  { icon: UserCheck, label: "Leads", path: "/admin/leads" },
-  { icon: DollarSign, label: "Commissions", path: "/admin/commissions" },
-  { icon: CreditCard, label: "Payouts", path: "/admin/payouts" },
-  { icon: BarChart3, label: "Reports", path: "/admin/reports" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/portal/admin" },
+  { icon: Users, label: "Affiliates", path: "/portal/admin/affiliates" },
+  { icon: UserCheck, label: "Leads", path: "/portal/admin/leads" },
+  { icon: DollarSign, label: "Commissions", path: "/portal/admin/commissions" },
+  { icon: CreditCard, label: "Payouts", path: "/portal/admin/payouts" },
+  { icon: BarChart3, label: "Reports", path: "/portal/admin/reports" },
 ];
 
 export default function AdminSidebar() {
