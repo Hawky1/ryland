@@ -30,6 +30,13 @@ const menuItems = [
 export default function AdminSidebar() {
   const location = useLocation();
   const { signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAdminSignOut = async () => {
+    await signOut();
+    // signOut redirects to /portal/login by default; override to admin login
+    window.location.href = '/portal/admin/login';
+  };
 
   return (
     <Sidebar
