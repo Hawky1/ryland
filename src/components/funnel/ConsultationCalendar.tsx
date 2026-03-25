@@ -12,9 +12,6 @@ import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/integrations/supabase/
 // Use direct fetch instead of supabase.functions.invoke() to avoid SDK AbortError
 async function invokeEdgeFunction(name: string, body: Record<string, unknown>) {
   const url = `${SUPABASE_URL}/functions/v1/${name}`;
-  console.log("[GHL Debug] Fetching:", url);
-  console.log("[GHL Debug] SUPABASE_URL:", SUPABASE_URL);
-  console.log("[GHL Debug] Body:", body);
   
   try {
     const res = await fetch(url, {
