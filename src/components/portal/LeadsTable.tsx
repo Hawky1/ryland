@@ -1,10 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, CheckCircle, Loader2 } from "lucide-react";
-import { useState, memo } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { Users } from "lucide-react";
+import { memo } from "react";
 import type { Lead } from "@/types/leads";
 import { formatDateTime } from "@/utils/formatters";
 
@@ -12,7 +9,6 @@ interface LeadsTableProps {
   leads: Lead[];
   isLoading: boolean;
   onSelectLead: (lead: Lead) => void;
-  adminMode?: boolean;
   onRefresh?: () => void;
 }
 
@@ -32,25 +28,7 @@ const invoiceStatusBadge: Record<string, string> = {
   "Pending": "bg-slate-50 text-slate-600 border-slate-200",
 };
 
-function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: LeadsTableProps) {
-  const { toast } = useToast();
-  const [approvingId, setApprovingId] = useState<string | null>(null);
-
-  const handleApprove = async (leadId: string) => {
-    setApprovingId(leadId);
-    const { error } = await supabase
-      .from("affiliate_leads")
-      .update({ commission_status: "approved" })
-      .eq("id", leadId);
-    setApprovingId(null);
-    if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: "Approved", description: "Commission status set to approved." });
-      onRefresh?.();
-    }
-  };
-
+function LeadsTable({ leads, isLoading, onSelectLead }: LeadsTableProps) {
   if (isLoading) {
     return (
       <div className="p-6 space-y-3">
@@ -86,7 +64,6 @@ function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: Le
             <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Invoice</TableHead>
             <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Referred</TableHead>
             <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider hidden lg:table-cell">Next Step</TableHead>
-            {adminMode && <TableHead className="text-xs font-medium text-slate-500 uppercase tracking-wider">Action</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -117,24 +94,6 @@ function LeadsTable({ leads, isLoading, onSelectLead, adminMode, onRefresh }: Le
                 <TableCell className="text-sm text-slate-500 hidden lg:table-cell max-w-[160px] truncate">
                   {lead.next_step ?? "—"}
                 </TableCell>
-                {adminMode && (
-                  <TableCell onClick={(e) => e.stopPropagation()}>
-                    {invoiceStatus === "Paid" ? (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="gap-1.5 text-xs border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-                        disabled={approvingId === lead.id}
-                        onClick={() => handleApprove(lead.id)}
-                      >
-                        {approvingId === lead.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle className="h-3.5 w-3.5" />}
-                        Approve
-                      </Button>
-                    ) : (
-                      <span className="text-xs text-slate-400">—</span>
-                    )}
-                  </TableCell>
-                )}
               </TableRow>
             );
           })}
