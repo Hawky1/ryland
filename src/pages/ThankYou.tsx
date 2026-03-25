@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
@@ -23,12 +23,17 @@ interface Order {
   order_items: OrderItem[];
 }
 
+const MAX_POLL_ATTEMPTS = 10;
+const POLL_INTERVAL_MS = 3000;
+
 const ThankYou = () => {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("order");
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const pollCount = useRef(0);
+  const pollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!orderId) {
@@ -38,36 +43,40 @@ const ThankYou = () => {
 
     const fetchOrder = async () => {
       try {
-        const { data, error: fetchErr } = await supabase
-          .from("orders")
-          .select(`
-            id,
-            shopify_order_number,
-            customer_name,
-            created_at,
-            order_items (
-              id,
-              product_title,
-              download_token,
-              downloaded_at
-            )
-          `)
-          .eq("shopify_order_id", orderId)
-          .single();
+        const { data, error: fetchErr } = await supabase.functions.invoke(
+          "fetch-order",
+          { body: { shopify_order_id: orderId } }
+        );
 
-        if (fetchErr || !data) {
-          setError("Order not found. Check your email for download links.");
+        if (fetchErr) throw fetchErr;
+
+        if (data?.found && data.order) {
+          setOrder(data.order as Order);
+          setLoading(false);
+          return;
+        }
+
+        // Order not found yet — webhook may still be processing
+        pollCount.current += 1;
+        if (pollCount.current < MAX_POLL_ATTEMPTS) {
+          pollTimer.current = setTimeout(fetchOrder, POLL_INTERVAL_MS);
         } else {
-          setOrder(data as unknown as Order);
+          setError(
+            "Your order is still being processed. Check your email shortly for download links."
+          );
+          setLoading(false);
         }
       } catch {
         setError("Something went wrong. Check your email for download links.");
-      } finally {
         setLoading(false);
       }
     };
 
     fetchOrder();
+
+    return () => {
+      if (pollTimer.current) clearTimeout(pollTimer.current);
+    };
   }, [orderId]);
 
   const downloadUrl = (token: string) =>
@@ -93,13 +102,18 @@ const ThankYou = () => {
               Thank You for Your Purchase!
             </h1>
             <p className="text-muted-foreground text-lg">
-              Your e-books are ready to download. We've also sent download links to your email.
+              {loading
+                ? "Loading your downloads…"
+                : "Your e-books are ready to download. We've also sent download links to your email."}
             </p>
           </motion.div>
 
           {loading ? (
-            <div className="flex justify-center py-12">
+            <div className="flex flex-col items-center justify-center py-12 gap-3">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">
+                Preparing your downloads…
+              </p>
             </div>
           ) : error ? (
             <div className="bg-muted rounded-xl p-8 text-center">
@@ -139,7 +153,11 @@ const ThankYou = () => {
                         {item.product_title}
                       </span>
                     </div>
-                    <a href={downloadUrl(item.download_token)} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={downloadUrl(item.download_token)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Button size="sm" className="gap-2 flex-shrink-0">
                         <Download className="h-4 w-4" />
                         Download
@@ -161,7 +179,10 @@ const ThankYou = () => {
           )}
 
           <div className="text-center mt-8">
-            <Link to="/my-orders" className="text-sm text-muted-foreground hover:text-foreground transition-colors underline">
+            <Link
+              to="/my-orders"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors underline"
+            >
               Access your download library anytime →
             </Link>
           </div>
