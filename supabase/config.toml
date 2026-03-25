@@ -14,3 +14,12 @@ verify_jwt = false
 
 [functions.scorexer-intake]
 verify_jwt = false
+
+[functions.shopify-order-webhook]
+verify_jwt = false
+
+[functions.download-ebook]
+verify_jwt = false
+
+[functions.lookup-orders]
+verify_jwt = false
