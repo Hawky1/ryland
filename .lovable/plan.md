@@ -1,60 +1,57 @@
 
 
-# Client Intake Form for Scorexer (via Zapier)
+## Digital Product Delivery — Current State & What's Needed
 
-## Summary
+### What's Already Built (Code is Done)
 
-Build a new **Client Intake** page where existing GHL clients fill out their personal details (name, DOB, SSN, address, credit monitoring selection). On submit, the data is sent to a **Zapier webhook** which pushes it into Scorexer. The form also syncs back to GHL as a contact update.
+The full system is implemented across these pieces:
 
-## How It Works
+1. **`shopify-order-webhook` edge function** — Receives Shopify "Order payment" webhooks, creates order + order_items records with unique download tokens, triggers a GHL contact update with download links
+2. **`download-ebook` edge function** — Validates a download token, fetches the PDF from the private `ebooks` storage bucket, streams it to the buyer
+3. **`lookup-orders` edge function** — Powers the `/my-orders` download library with email + verification code flow
+4. **`/thank-you` page** — Instant download page shown after purchase (receives `?order=SHOPIFY_ORDER_ID`)
+5. **`/download/:token` page** — Direct download link (used in emails)
+6. **`/my-orders` page** — Persistent download library (email verification, no account needed)
+7. **Database tables** — `orders`, `order_items` (with `download_token`), `email_verifications`
+8. **Storage bucket** — Private `ebooks` bucket exists
 
-```text
-Client visits /credit-intake
-  → Fills out multi-step intake form
-  → On submit:
-      1. POST to Zapier webhook → Scorexer creates client profile
-      2. POST to ghl-create-contact → Updates/creates GHL contact with intake tags
-      3. Show success confirmation
-```
+### What Needs to Be Done (Config + Deployment)
 
-## What Gets Built
+#### Step 1: Add missing `verify_jwt = false` to `config.toml`
 
-### 1. New page: `/credit-intake`
+Three edge functions that receive external requests are missing JWT bypass config. Without this, Shopify webhooks and download links will return 401 errors:
 
-A branded, multi-step intake form matching the existing site design (similar stepped UI to the Assessment page). Fields based on the Scorexer form:
+- `shopify-order-webhook` (called by Shopify, no JWT)
+- `download-ebook` (called via direct URL, no JWT)
+- `lookup-orders` (called from client with anon key, but needs explicit config)
 
-- **Step 1 — Personal Info**: First name, middle name, last name, email, cell phone, date of birth
-- **Step 2 — Sensitive Info**: SSN (last 4 or full, with masking), credit monitoring service selection (IdentityIQ, SmartCredit, Privacy Guard, etc.)
-- **Step 3 — Address**: Street, city, state, zip
+#### Step 2: Deploy all edge functions
 
-All fields validated with Zod.
+Deploy `shopify-order-webhook`, `download-ebook`, and `lookup-orders` so the latest code is live.
 
-### 2. New edge function: `scorexer-intake`
+#### Step 3: Upload PDF files to `ebooks` bucket
 
-Receives the validated form data and:
-- Sends it to a **Zapier webhook URL** (stored as a secret `SCOREXER_ZAPIER_WEBHOOK_URL`)
-- Calls the existing `ghl-create-contact` logic to tag the client in GHL (tag: `credit-intake-complete`)
-- SSN is only sent to Zapier, never stored in the database
+Each PDF must be named exactly matching its Shopify product handle. For example, if the product handle is `business-credit-blueprint`, the file must be `business-credit-blueprint.pdf` in the `ebooks` bucket.
 
-### 3. Route + navigation
+#### Step 4: Configure Shopify webhook (external)
 
-- Add `/credit-intake` route in `App.tsx`
-- Link from the Credit Repair page CTA or share as a standalone URL
+In Shopify Admin → Settings → Notifications → Webhooks:
+- Event: **Order payment**
+- Format: **JSON**
+- URL: `https://gkowxzoadsljkpdzrlue.supabase.co/functions/v1/shopify-order-webhook`
+- The `SHOPIFY_WEBHOOK_SECRET` is already stored as a secret
 
-## Security
+#### Step 5: Configure GHL email workflows (external)
 
-- SSN is transmitted to the edge function over HTTPS, forwarded to Zapier, and **never persisted** in the database
-- Edge function validates all inputs server-side
-- Form uses input masking for SSN field
+Two GHL workflows are needed:
+1. **Order delivery email** — Triggered by the `ebook-purchase` tag. The workflow sends an email using the custom fields `latest_download_links` and `download_library_url` that the webhook populates.
+2. **Verification code email** — Triggered by the `verification-request` tag. The workflow sends an email using the custom field `verification_code`.
 
-## Secret Needed
+#### Step 6: Set Shopify checkout redirect
 
-- `SCOREXER_ZAPIER_WEBHOOK_URL` — the Zapier webhook URL that triggers the Scorexer zap
+After checkout, Shopify needs to redirect to `https://rylandpartners.com/thank-you?order={{order.id}}` so buyers land on the instant download page. This is configured in Shopify Admin → Settings → Checkout → Order status page additional scripts, or via a post-purchase redirect.
 
-## Technical Details
+### Summary
 
-- Page component: `src/pages/CreditIntake.tsx`
-- Edge function: `supabase/functions/scorexer-intake/index.ts`
-- Reuses existing design patterns from Assessment page (stepped form, animations, Zod validation)
-- Credit monitoring options: IdentityIQ, SmartCredit, Privacy Guard, My Score IQ (matching Scorexer's list)
+The only code change needed is adding the three missing `verify_jwt = false` entries to `config.toml` and deploying the functions. Everything else is external configuration (uploading PDFs, Shopify webhook, GHL workflows, checkout redirect).
 
