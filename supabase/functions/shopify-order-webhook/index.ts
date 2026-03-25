@@ -148,26 +148,35 @@ serve(async (req) => {
         ? await getProductHandle(item.product_id)
         : slugify(item.title);
 
-      const { data: itemRow, error: itemErr } = await supabase
-        .from("order_items")
-        .insert({
-          order_id: orderRow.id,
-          shopify_product_handle: handle,
-          product_title: item.title,
-        })
-        .select("download_token")
-        .single();
+      // Check if this is a bundle — if so, expand into individual ebooks
+      const ebooksToInsert = BUNDLE_MAP[handle]
+        ? BUNDLE_MAP[handle].map((eb) => ({ handle: eb.handle, title: eb.title }))
+        : [{ handle, title: item.title }];
 
-      if (itemErr) {
-        console.error("Order item insert error:", itemErr);
-        continue;
+      console.log(`Processing "${item.title}" → ${ebooksToInsert.length} ebook(s)`);
+
+      for (const ebook of ebooksToInsert) {
+        const { data: itemRow, error: itemErr } = await supabase
+          .from("order_items")
+          .insert({
+            order_id: orderRow.id,
+            shopify_product_handle: ebook.handle,
+            product_title: ebook.title,
+          })
+          .select("download_token")
+          .single();
+
+        if (itemErr) {
+          console.error("Order item insert error:", itemErr);
+          continue;
+        }
+
+        downloadLinks.push({
+          title: ebook.title,
+          url: `${siteUrl}/download/${itemRow.download_token}`,
+          token: itemRow.download_token,
+        });
       }
-
-      downloadLinks.push({
-        title: item.title,
-        url: `${siteUrl}/download/${itemRow.download_token}`,
-        token: itemRow.download_token,
-      });
     }
 
     console.log("Download links generated:", downloadLinks.length);
