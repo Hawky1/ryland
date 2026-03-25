@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -7,7 +7,8 @@ import { useCartStore } from "@/stores/cartStore";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const CartDrawer = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useCartStore(state => state.isCartOpen);
+  const setCartOpen = useCartStore(state => state.setCartOpen);
   const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
@@ -18,12 +19,12 @@ export const CartDrawer = () => {
     const checkoutUrl = getCheckoutUrl();
     if (checkoutUrl) {
       window.open(checkoutUrl, '_blank');
-      setIsOpen(false);
+      setCartOpen(false);
     }
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpen} onOpenChange={setCartOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" aria-label="Open cart" className="relative border-slate-200 hover:bg-slate-50 transition-all duration-200">
           <ShoppingCart className="h-5 w-5" />
