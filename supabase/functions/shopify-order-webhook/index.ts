@@ -181,7 +181,33 @@ serve(async (req) => {
 
     console.log("Download links generated:", downloadLinks.length);
 
-    // Send GHL email with download links
+    // Send download links email directly via transactional email system
+    if (downloadLinks.length > 0) {
+      try {
+        const { error: emailErr } = await supabase.functions.invoke("send-transactional-email", {
+          body: {
+            templateName: "order-download-links",
+            recipientEmail: email.toLowerCase(),
+            idempotencyKey: `order-downloads-${order.id}`,
+            templateData: {
+              customerName,
+              orderNumber: order.name || String(order.order_number),
+              downloadLinks,
+              libraryUrl: `${siteUrl}/my-orders`,
+            },
+          },
+        });
+        if (emailErr) {
+          console.error("Transactional email error:", emailErr);
+        } else {
+          console.log("Download email queued for:", email);
+        }
+      } catch (emailErr) {
+        console.error("Download email invocation error:", emailErr);
+      }
+    }
+
+    // Still update GHL contact for CRM tracking (but no email dependency)
     if (ghlApiKey && ghlLocationId && downloadLinks.length > 0) {
       try {
         await sendGhlOrderEmail({
@@ -193,10 +219,9 @@ serve(async (req) => {
           downloadLinks,
           libraryUrl: `${siteUrl}/my-orders`,
         });
-        console.log("GHL email triggered for:", email);
+        console.log("GHL contact updated for:", email);
       } catch (ghlErr) {
-        console.error("GHL email error:", ghlErr);
-        // Don't fail the webhook for GHL errors
+        console.error("GHL contact update error:", ghlErr);
       }
     }
 
