@@ -220,6 +220,7 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || [],
     });
     toast.success("Added to cart", { description: product.title });
+    useCartStore.getState().openCart();
   };
 
   if (loading) {

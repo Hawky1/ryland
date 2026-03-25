@@ -66,6 +66,7 @@ const Store = () => {
       selectedOptions: variant.selectedOptions || [],
     });
     toast.success("Added to cart", { description: product.node.title });
+    openCart();
   };
 
   const scrollToBundle = (bundleId: string) => {
