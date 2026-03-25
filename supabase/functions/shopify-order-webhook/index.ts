@@ -184,22 +184,36 @@ serve(async (req) => {
     // Send download links email directly via transactional email system
     if (downloadLinks.length > 0) {
       try {
-        const { error: emailErr } = await supabase.functions.invoke("send-transactional-email", {
-          body: {
-            templateName: "order-download-links",
-            recipientEmail: email.toLowerCase(),
-            idempotencyKey: `order-downloads-${order.id}`,
-            templateData: {
-              customerName,
-              orderNumber: order.name || String(order.order_number),
-              downloadLinks,
-              libraryUrl: `${siteUrl}/my-orders`,
-            },
+        const emailPayload = {
+          templateName: "order-download-links",
+          recipientEmail: email.toLowerCase(),
+          idempotencyKey: `order-downloads-${order.id}`,
+          templateData: {
+            customerName,
+            orderNumber: order.name || String(order.order_number),
+            downloadLinks,
+            libraryUrl: `${siteUrl}/my-orders`,
           },
-        });
-        if (emailErr) {
-          console.error("Transactional email error:", emailErr);
+        };
+
+        const emailRes = await fetch(
+          `${supabaseUrl}/functions/v1/send-transactional-email`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${supabaseServiceKey}`,
+              apikey: supabaseServiceKey,
+            },
+            body: JSON.stringify(emailPayload),
+          }
+        );
+
+        if (!emailRes.ok) {
+          const errText = await emailRes.text();
+          console.error("Transactional email error:", emailRes.status, errText);
         } else {
+          await emailRes.text();
           console.log("Download email queued for:", email);
         }
       } catch (emailErr) {
