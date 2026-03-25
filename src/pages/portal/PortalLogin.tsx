@@ -26,19 +26,12 @@ export default function PortalLogin() {
     setError("");
     setLoading(true);
     const { error: authError } = await signIn(email, password);
+    setLoading(false);
     if (authError) {
-      setLoading(false);
       setError("Invalid email or password. Please try again.");
     } else {
-      // Get user data to check admin role
-      const { data: { user } } = await supabase.auth.getUser();
-      setLoading(false);
-      const userRole = user?.user_metadata?.role || user?.app_metadata?.role;
-      if (userRole === 'admin') {
-        navigate("/admin", { replace: true });
-      } else {
-        navigate("/portal", { replace: true });
-      }
+      // Always navigate to portal — AdminGuard handles admin routing separately
+      navigate("/portal", { replace: true });
     }
   };
 

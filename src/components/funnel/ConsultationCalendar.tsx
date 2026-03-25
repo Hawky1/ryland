@@ -27,7 +27,7 @@ async function invokeEdgeFunction(name: string, body: Record<string, unknown>) {
     if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
     return data;
   } catch (err) {
-    console.error("[GHL Debug] Fetch error:", err);
+    console.error("Edge function error:", err);
     throw err;
   }
 }

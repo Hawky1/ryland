@@ -122,7 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async (event, session) => {
         if (cancelled) return;
         
-        console.log('Auth state changed:', event, session?.user?.id || 'no user');
+        
         
         const user = session?.user ?? null;
         setState((prev) => ({ ...prev, user, session, loading: false }));
