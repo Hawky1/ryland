@@ -29,13 +29,13 @@ const menuItems = [
 
 export default function AdminSidebar() {
   const location = useLocation();
-  const { signOut } = useAuth();
-  const navigate = useNavigate();
 
-  const handleAdminSignOut = async () => {
-    await signOut();
-    // signOut redirects to /portal/login by default; override to admin login
+  const handleAdminSignOut = () => {
+    try {
+      localStorage.removeItem('sb-gkowxzoadsljkpdzrlue-auth-token');
+    } catch {}
     window.location.href = '/portal/admin/login';
+    supabase.auth.signOut().catch(() => {});
   };
 
   return (
