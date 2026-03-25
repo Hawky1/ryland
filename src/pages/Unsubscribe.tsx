@@ -82,7 +82,7 @@ const Unsubscribe = () => {
           )}
           {status === "success" && (
             <div className="py-16 space-y-4">
-              <CheckCircle className="h-12 w-12 text-green-500 mx-auto" />
+              <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto" />
               <h1 className="text-2xl font-bold text-foreground">You've been unsubscribed</h1>
               <p className="text-muted-foreground">You will no longer receive emails from us.</p>
             </div>
