@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw error;
       }
       
-      console.log("Affiliate data found:", data ? "YES" : "NO", data?.affiliate_id);
+      
       return data as Affiliate | null;
     } catch (err) {
       const errorMessage = (err as Error)?.message || String(err);
