@@ -1,4 +1,5 @@
 import { Shield, DollarSign, Users } from "lucide-react";
+import PageMeta from "@/components/PageMeta";
 import heroPortrait from "@/assets/hero-portrait.png";
 import asSeenOn from "@/assets/as-seen-on.png";
 import geneRylandAbout from "@/assets/gene-ryland-about.png";
