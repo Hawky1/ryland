@@ -85,7 +85,7 @@ export default function AdminSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              onClick={signOut}
+              onClick={handleAdminSignOut}
               className="text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-4 w-4 shrink-0" />
