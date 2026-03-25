@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const fetchAffiliate = useCallback(async (userId: string) => {
-    console.log("Fetching affiliate for user:", userId);
+    
     
     try {
       // Remove timeout - let Supabase handle it, but add abort controller for cleanup
