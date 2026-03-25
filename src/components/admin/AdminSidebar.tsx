@@ -1,5 +1,5 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import {
+import { NavLink, useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
   Sidebar,
   SidebarContent,
   SidebarMenu,
