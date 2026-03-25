@@ -58,7 +58,7 @@ export default function AdminSidebar() {
               
               return (
                 <SidebarMenuItem key={item.path}>
-                  <NavLink to={item.path} end={item.path === "/admin"}>
+                  <NavLink to={item.path} end={item.path === "/portal/admin"}>
                     <SidebarMenuButton
                       isActive={isActive}
                       className="w-full justify-start gap-3 px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors data-[active=true]:bg-white/10 data-[active=true]:text-white"
