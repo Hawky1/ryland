@@ -17,7 +17,7 @@ import {
   BarChart3,
   LogOut,
 } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
+
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/portal/admin" },
