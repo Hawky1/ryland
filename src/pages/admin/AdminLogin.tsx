@@ -26,12 +26,29 @@ export default function AdminLogin() {
     setError("");
     setLoading(true);
     const { error: authError } = await signIn(email, password);
-    setLoading(false);
     if (authError) {
+      setLoading(false);
       setError("Invalid email or password. Please try again.");
-    } else {
-      navigate("/portal/admin", { replace: true });
+      return;
     }
+
+    // Check admin role before allowing access
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    if (currentUser) {
+      const { data: hasAdmin } = await supabase.rpc("has_role", {
+        _user_id: currentUser.id,
+        _role: "admin",
+      });
+      if (!hasAdmin) {
+        await supabase.auth.signOut();
+        setLoading(false);
+        setError("Access denied. This portal is restricted to administrators only.");
+        return;
+      }
+    }
+
+    setLoading(false);
+    navigate("/portal/admin", { replace: true });
   };
 
   return (
