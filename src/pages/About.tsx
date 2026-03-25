@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 const About = () => {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
+      <PageMeta title="About Gene Ryland | Ryland Partners" description="Learn about Gene Ryland and Ryland Partners — helping entrepreneurs secure business funding and build credit since day one." />
       
       <style dangerouslySetInnerHTML={{__html: `
         .gradient-blur {
