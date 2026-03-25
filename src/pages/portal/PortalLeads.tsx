@@ -37,13 +37,10 @@ export default function PortalLeads() {
             {leads.length > 0 && (
               <Badge variant="secondary" className="ml-2 font-normal bg-slate-100 text-slate-600">{leads.length}</Badge>
             )}
-            {adminMode && (
-              <Badge className="ml-2 bg-amber-100 text-amber-700 border-amber-200">Admin View</Badge>
-            )}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
-          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} adminMode={adminMode} onRefresh={refetch} />
+          <LeadsTable leads={leads} isLoading={isLoading} onSelectLead={setSelectedLead} onRefresh={refetch} />
         </CardContent>
       </Card>
 
