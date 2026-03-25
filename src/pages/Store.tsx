@@ -34,6 +34,7 @@ const Store = () => {
   const [activeBundle, setActiveBundle] = useState(BUNDLES[0].id);
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
+  const openCart = useCartStore(state => state.openCart);
   const cartItems = useCartStore(state => state.items);
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
