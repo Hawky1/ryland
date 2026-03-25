@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const fetchAffiliate = useCallback(async (userId: string) => {
-    console.log("Fetching affiliate for user:", userId);
+    
     
     try {
       // Remove timeout - let Supabase handle it, but add abort controller for cleanup
@@ -49,20 +49,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
       
       if (error) {
-        console.error("Supabase error fetching affiliate:", error.message, error.code, error.details);
+        
         throw error;
       }
       
-      console.log("Affiliate data found:", data ? "YES" : "NO", data?.affiliate_id);
+      
       return data as Affiliate | null;
     } catch (err) {
       const errorMessage = (err as Error)?.message || String(err);
       // Ignore abort errors from component unmounting
       if (errorMessage.includes('aborted') || errorMessage.includes('AbortError')) {
-        console.log('Affiliate fetch aborted (component unmounted or refreshed)');
         return null;
       }
-      console.error("Fetch affiliate exception:", errorMessage);
       // Return null instead of throwing - allows portal to work without affiliate data
       return null;
     }
@@ -84,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (stored) {
             const parsed = JSON.parse(stored);
             if (parsed?.user && parsed?.access_token) {
-              console.log('Restored session from localStorage:', parsed.user.id);
+              
               return { user: parsed.user, session: parsed };
             }
           }
@@ -115,7 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     } else {
       // No stored session - set loading to false
-      console.log('No session in localStorage');
+      
       setState((prev) => ({ ...prev, loading: false }));
     }
 
@@ -124,7 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async (event, session) => {
         if (cancelled) return;
         
-        console.log('Auth state changed:', event, session?.user?.id || 'no user');
+        
         
         const user = session?.user ?? null;
         setState((prev) => ({ ...prev, user, session, loading: false }));

@@ -35,7 +35,9 @@ serve(async (req) => {
     // If no code, send a verification code via GHL
     if (!code) {
       // Generate a 6-digit code
-      const verificationCode = String(Math.floor(100000 + Math.random() * 900000));
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+      const verificationCode = String(100000 + (array[0] % 900000));
 
       // Store code in orders table metadata or a simple approach: use GHL custom field
       // For simplicity, store in a temp record

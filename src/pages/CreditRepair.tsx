@@ -5,6 +5,7 @@ import HlsVideoBackground from "@/components/HlsVideoBackground";
 import Footer from "@/components/Footer";
 import InfiniteGrid from "@/components/ui/infinite-grid";
 import Navbar from "@/components/Navbar";
+import PageMeta from "@/components/PageMeta";
 
 
 const WHAT_WE_REMOVE = [
@@ -32,7 +33,7 @@ const STATS = [
 export default function CreditRepair() {
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-white antialiased text-slate-900">
-      
+      <PageMeta title="Credit Restoration | Ryland Partners" description="Professional credit repair services. We dispute and remove negative items from all three bureaus — 85% removal rate." />
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-white pointer-events-none">
         <InfiniteGrid baseGridColor="rgba(148, 163, 184, 0.5)" activeGridColor="rgba(59, 130, 246, 0.8)" />

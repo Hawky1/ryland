@@ -22,16 +22,7 @@ export function useAdminRole() {
       return;
     }
 
-    // First, check user_metadata for quick local check (no RPC needed)
-    const metadataRole = user.user_metadata?.role || user.app_metadata?.role;
-    if (metadataRole === 'admin') {
-      setIsAdmin(true);
-      setIsLoading(false);
-      checkedUserIdRef.current = user.id;
-      return;
-    }
-
-    // Fallback to RPC check for role in user_roles table
+    // Always use server-side RPC check — never trust client-side metadata
     const checkRole = async () => {
       setIsLoading(true);
       try {
