@@ -59,10 +59,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const errorMessage = (err as Error)?.message || String(err);
       // Ignore abort errors from component unmounting
       if (errorMessage.includes('aborted') || errorMessage.includes('AbortError')) {
-        console.log('Affiliate fetch aborted (component unmounted or refreshed)');
         return null;
       }
-      console.error("Fetch affiliate exception:", errorMessage);
       // Return null instead of throwing - allows portal to work without affiliate data
       return null;
     }
