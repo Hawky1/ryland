@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
       
       if (error) {
-        console.error("Supabase error fetching affiliate:", error.message, error.code, error.details);
+        
         throw error;
       }
       
