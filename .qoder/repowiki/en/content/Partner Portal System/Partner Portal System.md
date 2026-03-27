@@ -32,17 +32,17 @@
 - [20260319003239_bed3153f-8413-4f10-80d1-273b1c1bb805.sql](file://supabase/migrations/20260319003239_bed3153f-8413-4f10-80d1-273b1c1bb805.sql)
 - [20260320000000_admin_policies.sql](file://supabase/migrations/20260320000000_admin_policies.sql)
 - [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql)
+- [20260319185313_dca7f1ac-2647-4ed9-857f-2c536367875e.sql](file://supabase/migrations/20260319185313_dca7f1ac-2647-4ed9-857f-2c536367875e.sql)
 - [sidebar.tsx](file://src/components/ui/sidebar.tsx)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- **Removed** PortalCalculator functionality as part of portal navigation restructuring
-- **Added** New Partner Store with shelf corporation ordering capabilities in PortalResources
-- **Enhanced** lead management with improved validation and error handling
-- **Updated** portal navigation structure with categorized navigation groups (Main, Support, Account)
-- **Improved** dashboard reliability with enhanced fallback mechanisms
-- **Enhanced** authentication flow with faster logout responses and better error handling
+- **Enhanced** PortalSettings page with comprehensive profile editing capabilities allowing users to edit full name, email, and phone number directly from the portal settings interface with form validation and real-time feedback
+- **Added** Real-time form validation with immediate error feedback for profile updates
+- **Enhanced** Profile editing workflow with loading states and success/error notifications
+- **Updated** Authentication flow with improved error handling and component unmounting detection
+- **Enhanced** Dashboard reliability with improved fallback mechanisms and error handling
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -191,6 +191,11 @@ SUPABASE_CLIENT --> ADMIN_POLICIES
   - **New** Shelf corporation ordering system with three tiers (1 Year, 2 Years, 3+ Years)
   - **New** Static product catalog with detailed pricing and features
   - **New** Order submission system that creates partner_submissions with referral tracking
+- **Enhanced** Profile Management System
+  - **New** Comprehensive profile editing capabilities in PortalSettings
+  - **New** Real-time form validation with immediate error feedback for full name, email, and phone number
+  - **New** Loading states and success/error notifications for profile updates
+  - **New** Integration with affiliate data model for seamless profile synchronization
 - Data Access and Security
   - Supabase client configured for database operations
   - Row Level Security policy on partner_submissions table allows anonymous inserts for lead submissions
@@ -209,6 +214,7 @@ SUPABASE_CLIENT --> ADMIN_POLICIES
 - [LeadsTable.tsx](file://src/components/portal/LeadsTable.tsx)
 - [SubmitLeadDrawer.tsx](file://src/components/portal/SubmitLeadDrawer.tsx)
 - [LeadDetailDrawer.tsx](file://src/components/portal/LeadDetailDrawer.tsx)
+- [PortalSettings.tsx:21-75](file://src/pages/portal/PortalSettings.tsx#L21-L75)
 - [PortalResources.tsx:35-64](file://src/pages/portal/PortalResources.tsx#L35-L64)
 - [PortalResources.tsx:96-123](file://src/pages/portal/PortalResources.tsx#L96-L123)
 - [client.ts](file://src/integrations/supabase/client.ts)
@@ -217,7 +223,7 @@ SUPABASE_CLIENT --> ADMIN_POLICIES
 - [20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql:1-81](file://supabase/migrations/20260324201245_4681ef67-2bf0-4686-a4b6-1ae6c54189f9.sql#L1-L81)
 
 ## Architecture Overview
-The portal follows a layered architecture with enhanced role-based access control and new partner store functionality:
+The portal follows a layered architecture with enhanced role-based access control, new partner store functionality, and comprehensive profile management:
 - Presentation Layer: React components organized by feature (portal, admin, UI primitives, pages)
 - Routing and Navigation: React Router DOM with nested routes under /portal and /admin
 - Authentication and State: Supabase Auth with AuthProvider and useAuth hook
@@ -225,6 +231,7 @@ The portal follows a layered architecture with enhanced role-based access contro
 - Security: Supabase Row Level Security policies with comprehensive admin role management
 - Role-Based Access Control: Dual protection system with AuthGuard for portal and AdminGuard for admin routes
 - Partner Store Integration: Direct integration with partner_submissions table for order processing
+- **Enhanced** Profile Management: Real-time validation and seamless integration with affiliate data model
 
 ```mermaid
 graph TB
@@ -255,6 +262,7 @@ RLS["Row Level Security Policies"]
 ADMIN_POLICIES["Admin RLS Policies"]
 STORE["Partner Store Integration"]
 ORDER_SUB["Order Submission"]
+PROFILE_EDIT["Profile Management"]
 CLIENT --> ROUTER
 ROUTER --> AUTH
 ROUTER --> LAYOUT
@@ -284,6 +292,7 @@ ORDER_SUB --> SUPA
 VIEW_EVT --> SUPA
 VIEW_SPEAK --> SUPA
 VIEW_SET --> SUPA
+VIEW_SET --> PROFILE_EDIT
 ADMIN_AFF --> SUPA
 ADMIN_LEADS --> SUPA
 ADMIN_COMMS --> SUPA
@@ -301,6 +310,7 @@ DB --> ADMIN_POLICIES
 - [types.ts](file://src/integrations/supabase/types.ts)
 - [AdminGuard.tsx:10-35](file://src/components/admin/AdminGuard.tsx#L10-L35)
 - [PortalResources.tsx:96-123](file://src/pages/portal/PortalResources.tsx#L96-L123)
+- [PortalSettings.tsx:54-75](file://src/pages/portal/PortalSettings.tsx#L54-L75)
 
 ## Detailed Component Analysis
 
@@ -518,6 +528,61 @@ OD->>PR : Close dialog and reset form
 - [PortalResources.tsx:217-264](file://src/pages/portal/PortalResources.tsx#L217-L264)
 - [PortalResources.tsx:268-328](file://src/pages/portal/PortalResources.tsx#L268-L328)
 
+### Enhanced Profile Management System
+- **New** Comprehensive Profile Editing Interface
+  - **New** PortalSettings component provides centralized profile management
+  - **New** Real-time form validation with immediate error feedback for full name, email, and phone number
+  - **New** Loading states and success/error notifications for profile updates
+  - **New** Integration with affiliate data model for seamless profile synchronization
+- **New** Form Validation and User Experience
+  - **New** Full name validation requiring non-empty values
+  - **New** Email validation with proper format checking
+  - **New** Phone number validation with optional field support
+  - **New** Real-time validation feedback with toast notifications
+  - **New** Loading indicators during profile update operations
+- **New** Data Persistence and Error Handling
+  - **New** Direct updates to affiliate table via Supabase client
+  - **New** Error handling with user-friendly toast notifications
+  - **New** Success feedback confirming profile updates
+  - **New** Integration with useAuth hook for session management
+- **New** Profile Data Synchronization
+  - **New** Initial profile data loading from affiliate records
+  - **New** Real-time updates to profile form fields
+  - **New** Bidirectional synchronization between UI and database
+
+**Updated** The profile management system now provides comprehensive editing capabilities with real-time validation, loading states, and seamless integration with the affiliate data model for a superior user experience.
+
+```mermaid
+sequenceDiagram
+participant P as "Partner"
+participant PS as "PortalSettings"
+participant AF as "Affiliate Data"
+participant SC as "Supabase Client"
+P->>PS : Open Profile Settings
+PS->>AF : Load profile data
+AF-->>PS : Return affiliate information
+PS->>P : Display editable form fields
+P->>PS : Edit full name, email, phone
+PS->>PS : Validate form inputs
+PS->>SC : Update affiliate record
+SC-->>PS : Confirm update
+PS-->>P : Show success notification
+PS->>AF : Refresh profile data
+AF-->>PS : Return updated information
+PS-->>P : Display updated form
+```
+
+**Diagram sources**
+- [PortalSettings.tsx:33-52](file://src/pages/portal/PortalSettings.tsx#L33-L52)
+- [PortalSettings.tsx:54-75](file://src/pages/portal/PortalSettings.tsx#L54-L75)
+- [useAuth.tsx](file://src/hooks/useAuth.tsx)
+
+**Section sources**
+- [PortalSettings.tsx:21-75](file://src/pages/portal/PortalSettings.tsx#L21-L75)
+- [PortalSettings.tsx:170-220](file://src/pages/portal/PortalSettings.tsx#L170-L220)
+- [PortalSettings.tsx:33-52](file://src/pages/portal/PortalSettings.tsx#L33-L52)
+- [PortalSettings.tsx:54-75](file://src/pages/portal/PortalSettings.tsx#L54-L75)
+
 ### Lead Management System
 - Data Model
   - partner_submissions table captures lead entries with timestamps and metadata
@@ -642,18 +707,21 @@ REACT --> UTILS
   - **Enhanced** Faster logout responses reduce perceived latency and improve user experience
   - **Enhanced** Role-based redirection eliminates redundant authentication checks
   - **Enhanced** Partner store uses static product data to minimize database queries
+  - **Enhanced** Profile editing operations are optimized with real-time validation to prevent unnecessary server calls
 - Data Fetching
   - Configure React Query cache policies for optimal freshness vs. performance
   - Use background refetching for frequently changing metrics
   - **Enhanced** Improved error handling prevents unnecessary retries and memory leaks
   - **Enhanced** Component unmounting detection prevents memory leaks during network failures
   - **Enhanced** Partner store implements efficient resource filtering and caching
+  - **Enhanced** Profile data is cached locally to reduce database queries
 - UI Responsiveness
   - Defer non-critical computations to Web Workers if needed
   - Optimize charts and tables with virtualization for large datasets
   - **Enhanced** Persistent sidebar state maintained across route changes without performance degradation
   - **Enhanced** Categorized navigation groups improve cognitive load and navigation speed
   - **Enhanced** Partner store tabs provide organized content presentation
+  - **Enhanced** Real-time form validation provides immediate feedback without blocking UI
 - Network Efficiency
   - Batch requests where possible
   - Implement retry and exponential backoff for transient failures
@@ -661,8 +729,9 @@ REACT --> UTILS
   - **Enhanced** Immediate localStorage cleanup during logout prevents race conditions
   - **Enhanced** Role-based redirection reduces unnecessary API calls for unauthorized users
   - **Enhanced** Order submission uses single mutation with immediate feedback
+  - **Enhanced** Profile updates are debounced to prevent excessive API calls
 
-**Updated** Enhanced performance considerations now include improved error handling, component lifecycle management, optimized loading states, faster logout responses, efficient partner store operations, and streamlined order processing workflows.
+**Updated** Enhanced performance considerations now include improved error handling, component lifecycle management, optimized loading states, faster logout responses, efficient partner store operations, streamlined order processing workflows, and optimized profile editing with real-time validation.
 
 ## Security and Compliance
 - Authentication and Authorization
@@ -679,20 +748,24 @@ REACT --> UTILS
   - **Enhanced** Fallback mechanisms ensure functionality without compromising security
   - **Enhanced** Role-based data access limits information exposure
   - **Enhanced** Partner store data is limited to essential order information
+  - **Enhanced** Profile data validation prevents injection attacks
 - Compliance
   - GDPR: Right to erasure, data portability, and consent management
   - Tax Compliance: W-9 and 1099-MISC generation for payouts
   - PCI-DSS: Avoid storing sensitive payment data; use third-party processors
   - **Enhanced** Admin RLS policies ensure proper audit trails for admin actions
   - **Enhanced** Order processing includes proper referral tracking for compliance
+  - **Enhanced** Profile editing maintains data integrity and validation standards
 - Secure Navigation
   - Enforce HTTPS and secure cookies
   - Implement CSRF protection for forms
   - Sanitize user inputs and escape outputs
   - **Enhanced** Role-based navigation prevents unauthorized route access
   - **Enhanced** Partner store validation prevents invalid order submissions
+  - **Enhanced** Profile form validation prevents malicious input injection
+  - **Enhanced** Real-time validation provides immediate feedback for security compliance
 
-**Updated** Enhanced security measures now include comprehensive admin role detection, dedicated admin guards, extensive RLS policies, improved error handling, faster logout responses, role-based navigation that prevents unauthorized access, and secure partner store operations with input validation.
+**Updated** Enhanced security measures now include comprehensive admin role detection, dedicated admin guards, extensive RLS policies, improved error handling, faster logout responses, role-based navigation that prevents unauthorized access, secure partner store operations with input validation, comprehensive profile editing security, and real-time validation for input sanitization.
 
 **Section sources**
 - [AuthGuard.tsx](file://src/components/portal/AuthGuard.tsx)
@@ -729,12 +802,19 @@ REACT --> UTILS
   - **Enhanced** Monitor for component unmounting errors during network failures
   - **Enhanced** Verify admin RLS policies allow proper data access
   - **New** Check partner store data loading and caching
+  - **New** Verify profile data loading and synchronization
 - Lead Submission Failures
   - Inspect insert mutations and error handling
   - Review RLS policy for anonymous inserts
   - **New** Check affiliate data availability for lead submission
   - **New** Verify role-based access to lead management features
   - **New** Verify partner store order validation and submission
+- **New** Profile Management Issues
+  - Verify profile form validation logic
+  - Check affiliate data synchronization
+  - Monitor profile update mutations for errors
+  - Verify real-time validation feedback
+  - Check loading states and success/error notifications
 - **New** Partner Store Issues
   - Verify shelf corporation products are properly loaded
   - Check order dialog validation and submission
@@ -749,6 +829,7 @@ REACT --> UTILS
   - **New** Verify PortalContentLoader is properly configured as Suspense fallback
   - **New** Check that PortalLayout wraps Outlet with Suspense boundary
   - **New** Monitor partner store loading states and skeleton displays
+  - **New** Verify profile editing loading states and skeleton displays
 - **New** Logout Performance Issues
   - **New** Verify immediate localStorage cleanup occurs before navigation
   - **New** Check that Supabase signOut is called in background without blocking UI
@@ -757,7 +838,7 @@ REACT --> UTILS
   - **New** Check AdminGuard component for role verification logic
   - **New** Verify admin RLS policies are properly configured in database
 
-**Updated** Added troubleshooting guidance for enhanced portal navigation features, loading states, authentication improvements, faster logout responses, role-based redirection, comprehensive admin access control, and new partner store functionality including order processing and validation.
+**Updated** Added troubleshooting guidance for enhanced portal navigation features, loading states, authentication improvements, faster logout responses, role-based redirection, comprehensive admin access control, new partner store functionality including order processing and validation, comprehensive profile management system with real-time validation, and enhanced dashboard reliability.
 
 **Section sources**
 - [PortalLogin.tsx:24-43](file://src/pages/portal/PortalLogin.tsx#L24-L43)
@@ -785,5 +866,6 @@ The Partner Portal System leverages a modern React stack with Supabase for authe
 - **New Partner Store**: Shelf corporation ordering system with three-tier product offerings
 - **Enhanced Lead Management**: Improved validation and error handling throughout the system
 - **Integrated Order Processing**: Seamless partner_submissions integration for order tracking
+- **Enhanced Profile Management**: Comprehensive profile editing capabilities with real-time validation and user feedback
 
-These enhancements ensure a more responsive and reliable partner portal experience while maintaining security and performance standards. The addition of the partner store with shelf corporation ordering capabilities provides partners with valuable business tools, while the enhanced lead management system offers improved validation and reliability. The system continues to provide a robust foundation for affiliate marketing integrations and reporting with improved navigation, authentication, role-based access control, comprehensive admin capabilities, and new commerce functionality.
+These enhancements ensure a more responsive and reliable partner portal experience while maintaining security and performance standards. The addition of the partner store with shelf corporation ordering capabilities provides partners with valuable business tools, while the enhanced lead management system offers improved validation and reliability. The comprehensive profile management system with real-time validation and user feedback significantly improves the user experience for profile updates. The system continues to provide a robust foundation for affiliate marketing integrations and reporting with improved navigation, authentication, role-based access control, comprehensive admin capabilities, and new commerce functionality.
